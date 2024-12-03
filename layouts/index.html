@@ -1,25 +1,26 @@
 {{ define "main" }}
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-btcz-black to-btcz-gray-800 text-btcz-white">
-    <div class="container mx-auto py-20 md:py-32">
+<section class="relative bg-gradient-to-br from-btcz-gray-100 to-white overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-btcz-gold/5 to-transparent"></div>
+    <div class="container mx-auto py-20 md:py-32 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
-                <h1 class="font-heading font-bold">
+                <h1 class="font-heading font-bold text-gradient animate-fade-in">
                     {{ i18n "heroTitle" | default "Empowering Decentralization with BitcoinZ" }}
                 </h1>
-                <p class="text-xl text-btcz-gray-200">
+                <p class="text-xl text-btcz-gray-800">
                     {{ i18n "heroSubtitle" | default "A Community-Driven Cryptocurrency for Everyone" }}
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
-                    <a href="/en/wallets/" class="btn-primary">
+                    <a href="/en/wallets/" class="btn-primary transform hover:-translate-y-1 transition-all duration-200">
                         {{ i18n "downloadWallet" | default "Download Wallet" }}
                     </a>
-                    <a href="/en/why-bitcoinz/" class="btn-secondary">
+                    <a href="/en/why-bitcoinz/" class="btn-secondary transform hover:-translate-y-1 transition-all duration-200">
                         {{ i18n "learnMore" | default "Learn More" }}
                     </a>
                 </div>
             </div>
-            <div class="hidden lg:block">
+            <div class="hidden lg:block transform hover:scale-105 transition-transform duration-500">
                 <img src="/images/hero-illustration.svg" alt="BitcoinZ Illustration" class="w-full h-auto">
             </div>
         </div>
@@ -27,49 +28,49 @@
 </section>
 
 <!-- Features Section -->
-<section class="section bg-btcz-white">
-    <div class="container mx-auto">
-        <h2 class="text-center mb-12">{{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}</h2>
+<section class="section bg-white py-20">
+    <div class="container mx-auto px-4">
+        <h2 class="text-center mb-12 text-gradient font-bold text-4xl">{{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Decentralization -->
-            <div class="p-6 rounded-lg bg-btcz-gray-100">
-                <div class="w-12 h-12 mb-4">
+            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/decentralization.svg" alt="Decentralization Icon">
                 </div>
-                <h3 class="text-xl font-bold mb-2">{{ i18n "decentralization" | default "Decentralization" }}</h3>
+                <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "decentralization" | default "Decentralization" }}</h3>
                 <p class="text-btcz-gray-800">
                     {{ i18n "decentralizationDesc" | default "True decentralization with community-driven development and fair launch." }}
                 </p>
             </div>
 
             <!-- Privacy -->
-            <div class="p-6 rounded-lg bg-btcz-gray-100">
-                <div class="w-12 h-12 mb-4">
+            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/privacy.svg" alt="Privacy Icon">
                 </div>
-                <h3 class="text-xl font-bold mb-2">{{ i18n "privacy" | default "Privacy" }}</h3>
+                <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "privacy" | default "Privacy" }}</h3>
                 <p class="text-btcz-gray-800">
                     {{ i18n "privacyDesc" | default "Enhanced privacy features to protect your financial transactions." }}
                 </p>
             </div>
 
             <!-- Community -->
-            <div class="p-6 rounded-lg bg-btcz-gray-100">
-                <div class="w-12 h-12 mb-4">
+            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/community.svg" alt="Community Icon">
                 </div>
-                <h3 class="text-xl font-bold mb-2">{{ i18n "community" | default "Community" }}</h3>
+                <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "community" | default "Community" }}</h3>
                 <p class="text-btcz-gray-800">
                     {{ i18n "communityDesc" | default "Active community of developers, miners, and enthusiasts." }}
                 </p>
             </div>
 
             <!-- Scalability -->
-            <div class="p-6 rounded-lg bg-btcz-gray-100">
-                <div class="w-12 h-12 mb-4">
+            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/scalability.svg" alt="Scalability Icon">
                 </div>
-                <h3 class="text-xl font-bold mb-2">{{ i18n "scalability" | default "Scalability" }}</h3>
+                <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "scalability" | default "Scalability" }}</h3>
                 <p class="text-btcz-gray-800">
                     {{ i18n "scalabilityDesc" | default "Designed for efficient and scalable transactions." }}
                 </p>
@@ -79,38 +80,38 @@
 </section>
 
 <!-- Get Started Section -->
-<section class="section bg-btcz-gray-100">
-    <div class="container mx-auto">
+<section class="section bg-gradient-to-br from-btcz-gray-100 to-white py-20">
+    <div class="container mx-auto px-4">
         <div class="text-center max-w-3xl mx-auto">
-            <h2 class="mb-6">{{ i18n "getStartedTitle" | default "Get Started with BitcoinZ" }}</h2>
-            <p class="text-lg mb-8 text-btcz-gray-800">
+            <h2 class="text-gradient font-bold text-4xl mb-6">{{ i18n "getStartedTitle" | default "Get Started with BitcoinZ" }}</h2>
+            <p class="text-lg mb-12 text-btcz-gray-800">
                 {{ i18n "getStartedDesc" | default "Join the BitcoinZ community and start using the cryptocurrency that puts privacy and decentralization first." }}
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Download Wallet -->
-                <a href="/en/wallets/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
-                    <div class="w-12 h-12 mx-auto mb-4">
+                <a href="/en/wallets/" class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-16 h-16 mx-auto mb-6">
                         <img src="/images/icons/wallet.svg" alt="Wallet Icon">
                     </div>
-                    <h3 class="text-xl font-bold mb-2">{{ i18n "downloadWallet" | default "Download Wallet" }}</h3>
+                    <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "downloadWallet" | default "Download Wallet" }}</h3>
                     <p class="text-btcz-gray-800">{{ i18n "downloadWalletDesc" | default "Get your BitcoinZ wallet" }}</p>
                 </a>
 
                 <!-- Buy BitcoinZ -->
-                <a href="/en/buy/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
-                    <div class="w-12 h-12 mx-auto mb-4">
+                <a href="/en/buy/" class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-16 h-16 mx-auto mb-6">
                         <img src="/images/icons/exchange.svg" alt="Exchange Icon">
                     </div>
-                    <h3 class="text-xl font-bold mb-2">{{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }}</h3>
+                    <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }}</h3>
                     <p class="text-btcz-gray-800">{{ i18n "buyBitcoinZDesc" | default "Purchase from exchanges" }}</p>
                 </a>
 
                 <!-- Join Community -->
-                <a href="#community" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
-                    <div class="w-12 h-12 mx-auto mb-4">
+                <a href="#community" class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-16 h-16 mx-auto mb-6">
                         <img src="/images/icons/join.svg" alt="Join Icon">
                     </div>
-                    <h3 class="text-xl font-bold mb-2">{{ i18n "joinCommunity" | default "Join Community" }}</h3>
+                    <h3 class="text-xl font-bold mb-4 text-btcz-gold">{{ i18n "joinCommunity" | default "Join Community" }}</h3>
                     <p class="text-btcz-gray-800">{{ i18n "joinCommunityDesc" | default "Connect with others" }}</p>
                 </a>
             </div>
@@ -119,22 +120,22 @@
 </section>
 
 <!-- Latest News Section -->
-<section class="section bg-btcz-white">
-    <div class="container mx-auto">
-        <div class="flex justify-between items-center mb-8">
-            <h2>{{ i18n "latestNews" | default "Latest News" }}</h2>
+<section class="section bg-white py-20">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-gradient font-bold text-4xl">{{ i18n "latestNews" | default "Latest News" }}</h2>
             <a href="/en/news/" class="btn-secondary">{{ i18n "viewAll" | default "View All" }}</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {{ range first 3 (where .Site.RegularPages "Section" "news") }}
-            <article class="bg-btcz-gray-100 rounded-lg overflow-hidden">
+            <article class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
                 {{ with .Params.image }}
                 <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-48 object-cover">
                 {{ end }}
-                <div class="p-6">
-                    <time class="text-sm text-btcz-gray-800">{{ .Date.Format "January 2, 2006" }}</time>
-                    <h3 class="text-xl font-bold mt-2 mb-3">
-                        <a href="{{ .RelPermalink }}" class="hover:text-btcz-gold">{{ .Title }}</a>
+                <div class="p-8">
+                    <time class="text-sm text-btcz-gray-600">{{ .Date.Format "January 2, 2006" }}</time>
+                    <h3 class="text-xl font-bold mt-2 mb-4">
+                        <a href="{{ .RelPermalink }}" class="hover:text-btcz-gold transition-colors duration-200">{{ .Title }}</a>
                     </h3>
                     <p class="text-btcz-gray-800">{{ .Summary }}</p>
                 </div>
@@ -145,36 +146,44 @@
 </section>
 
 <!-- Community Section -->
-<section id="community" class="section bg-btcz-black text-btcz-white">
-    <div class="container mx-auto text-center">
-        <h2 class="mb-12">{{ i18n "joinOurCommunity" | default "Join Our Community" }}</h2>
+<section id="community" class="section bg-gradient-to-br from-btcz-gray-100 to-white py-20">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-gradient font-bold text-4xl mb-12">{{ i18n "joinOurCommunity" | default "Join Our Community" }}</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             <!-- GitHub -->
             <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer" 
-               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
-                <img src="/images/social/github.svg" alt="GitHub" class="w-12 h-12 mx-auto mb-4">
-                <span class="font-bold">GitHub</span>
+               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                    <img src="/images/social/github.svg" alt="GitHub" class="w-full h-full">
+                </div>
+                <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">GitHub</span>
             </a>
 
             <!-- Twitter -->
             <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer"
-               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
-                <img src="/images/social/twitter.svg" alt="Twitter" class="w-12 h-12 mx-auto mb-4">
-                <span class="font-bold">Twitter</span>
+               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                    <img src="/images/social/twitter.svg" alt="Twitter" class="w-full h-full">
+                </div>
+                <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">Twitter</span>
             </a>
 
             <!-- Telegram -->
             <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer"
-               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
-                <img src="/images/social/telegram.svg" alt="Telegram" class="w-12 h-12 mx-auto mb-4">
-                <span class="font-bold">Telegram</span>
+               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                    <img src="/images/social/telegram.svg" alt="Telegram" class="w-full h-full">
+                </div>
+                <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">Telegram</span>
             </a>
 
             <!-- Discord -->
             <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener noreferrer"
-               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
-                <img src="/images/social/discord.svg" alt="Discord" class="w-12 h-12 mx-auto mb-4">
-                <span class="font-bold">Discord</span>
+               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                    <img src="/images/social/discord.svg" alt="Discord" class="w-full h-full">
+                </div>
+                <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">Discord</span>
             </a>
         </div>
     </div>
