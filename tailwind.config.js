@@ -39,11 +39,45 @@ module.exports = {
       },
       perspective: {
         '1000': '1000px'
-      }
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#E5E7EB', // btcz-gray-200
+            h1: {
+              color: '#FFD700', // btcz-gold
+            },
+            h2: {
+              color: '#FFD700', // btcz-gold
+            },
+            h3: {
+              color: '#FFD700', // btcz-gold
+            },
+            strong: {
+              color: '#E5E7EB', // btcz-gray-200
+            },
+            a: {
+              color: '#FFD700', // btcz-gold
+              '&:hover': {
+                color: '#FFFFFF',
+              },
+            },
+            code: {
+              color: '#FFD700', // btcz-gold
+            },
+            blockquote: {
+              color: '#E5E7EB', // btcz-gray-200
+              borderLeftColor: '#FFD700', // btcz-gold
+            },
+          },
+        },
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

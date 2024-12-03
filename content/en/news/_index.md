@@ -1,6 +1,8 @@
 ---
 title: "Latest News & Updates"
 description: "Stay up to date with the latest BitcoinZ developments, community updates, and announcements"
+type: "section"
+layout: "news"
 ---
 
 Welcome to the BitcoinZ News Center. Here you'll find the latest updates about:
