@@ -78,14 +78,24 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Wallet Name", name: "title", widget: "string", hint: "Enter the name of the wallet"}
-      - {label: "Description", name: "description", widget: "text", hint: "Brief description of the wallet features"}
+      - {
+          label: "Wallet Name", 
+          name: "title", 
+          widget: "string", 
+          hint: "Enter the name of the wallet (e.g., 'BitcoinZ Desktop Wallet')"
+        }
+      - {
+          label: "Description", 
+          name: "description", 
+          widget: "text", 
+          hint: "Brief overview of the wallet's main features (2-3 sentences)"
+        }
       - {label: "Date Added", name: "date", widget: "datetime"}
       - {
           label: "Wallet Logo", 
           name: "image", 
           widget: "image", 
-          hint: "Upload a PNG logo with transparent background (recommended size: 200x200px)",
+          hint: "Upload a PNG logo with transparent background (recommended size: 200x200px). This will be displayed at the top of the wallet page.",
           media_library: {
             config: {
               multiple: false
@@ -93,45 +103,72 @@ collections:
           }
         }
       - {
-          label: "Gallery Images", 
+          label: "Screenshots", 
           name: "gallery", 
           widget: "list",
-          field: {label: Image, name: image, widget: image},
-          hint: "Add screenshots or additional images (recommended size: 1200x675px)",
+          field: {
+            label: "Screenshot", 
+            name: "image", 
+            widget: "image",
+            hint: "Upload wallet screenshots (recommended size: 1200x675px)"
+          },
+          hint: "Add screenshots showing key features of the wallet",
           required: false
         }
       - {label: "Type", name: "type", widget: "hidden", default: "wallet"}
       - {
-          label: "Features", 
+          label: "Key Features", 
           name: "features", 
           widget: "list", 
-          hint: "Add key features of the wallet",
+          hint: "Add main features of the wallet (e.g., 'Secure Key Management', 'Multi-Address Support')",
           min: 2,
           max: 6
         }
       - {
-          label: "Platforms", 
+          label: "Download Links", 
           name: "platforms", 
           widget: "list",
           hint: "Add download information for each supported platform",
           fields:
-            - {label: "Platform Name", name: "name", widget: "select", options: ["Windows", "macOS", "Linux", "Android", "iOS", "Web"]}
-            - {label: "Download URL", name: "download_url", widget: "string"}
-            - {label: "Version", name: "version", widget: "string"}
+            - {
+                label: "Platform", 
+                name: "name", 
+                widget: "select", 
+                options: ["Windows", "macOS", "Linux", "Android", "iOS", "Web"],
+                hint: "Select the operating system"
+              }
+            - {
+                label: "Download URL", 
+                name: "download_url", 
+                widget: "string",
+                hint: "Full URL to download the wallet (e.g., GitHub release link)"
+              }
+            - {
+                label: "Version", 
+                name: "version", 
+                widget: "string",
+                hint: "Current version number (e.g., '2.1.0')"
+              }
         }
       - {
           label: "System Requirements", 
           name: "requirements", 
           widget: "list",
-          hint: "Add system requirements for the wallet",
+          hint: "List minimum system requirements (e.g., '4GB RAM minimum', '2GB free disk space')",
           required: false
         }
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {
+          label: "Draft", 
+          name: "draft", 
+          widget: "boolean", 
+          default: false,
+          hint: "Set to Yes to hide this wallet from the website"
+        }
       - {
           label: "Detailed Description", 
           name: "body", 
           widget: "markdown", 
-          hint: "Add detailed information about the wallet",
+          hint: "Add detailed information about the wallet. Use markdown headings (## and ###) to organize content into sections.",
           required: false
         }
 
