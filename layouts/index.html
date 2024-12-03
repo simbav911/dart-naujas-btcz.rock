@@ -1,6 +1,6 @@
 {{ define "main" }}
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-btcz-gray-100 to-white overflow-hidden">
+<section class="relative bg-gradient-to-br from-btcz-gray-200 to-white overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-r from-btcz-gold/5 to-transparent"></div>
     <div class="container mx-auto py-20 md:py-32 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -33,7 +33,7 @@
         <h2 class="text-center mb-12 text-gradient font-bold text-4xl">{{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Decentralization -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                 <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/decentralization.svg" alt="Decentralization Icon">
                 </div>
@@ -44,7 +44,7 @@
             </div>
 
             <!-- Privacy -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                 <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/privacy.svg" alt="Privacy Icon">
                 </div>
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Community -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                 <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/community.svg" alt="Community Icon">
                 </div>
@@ -66,7 +66,7 @@
             </div>
 
             <!-- Scalability -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                 <div class="w-16 h-16 mb-6">
                     <img src="/images/icons/scalability.svg" alt="Scalability Icon">
                 </div>
@@ -80,7 +80,7 @@
 </section>
 
 <!-- Get Started Section -->
-<section class="section bg-gradient-to-br from-btcz-gray-100 to-white py-20">
+<section class="section bg-gradient-to-br from-btcz-gray-200 to-white py-20">
     <div class="container mx-auto px-4">
         <div class="text-center max-w-3xl mx-auto">
             <h2 class="text-gradient font-bold text-4xl mb-6">{{ i18n "getStartedTitle" | default "Get Started with BitcoinZ" }}</h2>
@@ -89,7 +89,7 @@
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Download Wallet -->
-                <a href="/en/wallets/" class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <a href="/en/wallets/" class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                     <div class="w-16 h-16 mx-auto mb-6">
                         <img src="/images/icons/wallet.svg" alt="Wallet Icon">
                     </div>
@@ -98,7 +98,7 @@
                 </a>
 
                 <!-- Buy BitcoinZ -->
-                <a href="/en/buy/" class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <a href="/en/buy/" class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                     <div class="w-16 h-16 mx-auto mb-6">
                         <img src="/images/icons/exchange.svg" alt="Exchange Icon">
                     </div>
@@ -107,7 +107,7 @@
                 </a>
 
                 <!-- Join Community -->
-                <a href="#community" class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <a href="#community" class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                     <div class="w-16 h-16 mx-auto mb-6">
                         <img src="/images/icons/join.svg" alt="Join Icon">
                     </div>
@@ -128,7 +128,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {{ range first 3 (where .Site.RegularPages "Section" "news") }}
-            <article class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+            <article class="bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
                 {{ with .Params.image }}
                 <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-48 object-cover">
                 {{ end }}
@@ -146,14 +146,14 @@
 </section>
 
 <!-- Community Section -->
-<section id="community" class="section bg-gradient-to-br from-btcz-gray-100 to-white py-20">
+<section id="community" class="section bg-gradient-to-br from-btcz-gray-200 to-white py-16">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-gradient font-bold text-4xl mb-12">{{ i18n "joinOurCommunity" | default "Join Our Community" }}</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <h2 class="text-btcz-gray-800 font-bold text-3xl mb-8">{{ i18n "joinOurCommunity" | default "Join Our Community" }}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <!-- GitHub -->
             <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer" 
-               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+               class="group bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto mb-4 p-2.5 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
                     <img src="/images/social/github.svg" alt="GitHub" class="w-full h-full">
                 </div>
                 <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">GitHub</span>
@@ -161,8 +161,8 @@
 
             <!-- Twitter -->
             <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer"
-               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+               class="group bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto mb-4 p-2.5 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
                     <img src="/images/social/twitter.svg" alt="Twitter" class="w-full h-full">
                 </div>
                 <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">Twitter</span>
@@ -170,8 +170,8 @@
 
             <!-- Telegram -->
             <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer"
-               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+               class="group bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto mb-4 p-2.5 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
                     <img src="/images/social/telegram.svg" alt="Telegram" class="w-full h-full">
                 </div>
                 <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">Telegram</span>
@@ -179,8 +179,8 @@
 
             <!-- Discord -->
             <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener noreferrer"
-               class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-16 h-16 mx-auto mb-6 p-3 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
+               class="group bg-gradient-to-br from-btcz-gray-200 to-btcz-gray-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto mb-4 p-2.5 bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow duration-200">
                     <img src="/images/social/discord.svg" alt="Discord" class="w-full h-full">
                 </div>
                 <span class="font-bold text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-200">Discord</span>
