@@ -32,26 +32,30 @@
                 <ul class="space-y-2">
                     <li>
                         <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer" 
-                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
-                            GitHub
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200 flex items-center space-x-2">
+                            <img src="/images/social/github.svg" alt="GitHub" class="w-5 h-5">
+                            <span>GitHub</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer"
-                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
-                            Twitter
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200 flex items-center space-x-2">
+                            <img src="/images/social/twitter.svg" alt="Twitter" class="w-5 h-5">
+                            <span>Twitter</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer"
-                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
-                            Telegram
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200 flex items-center space-x-2">
+                            <img src="/images/social/telegram.svg" alt="Telegram" class="w-5 h-5">
+                            <span>Telegram</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener noreferrer"
-                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
-                            Discord
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200 flex items-center space-x-2">
+                            <img src="/images/social/discord.svg" alt="Discord" class="w-5 h-5">
+                            <span>Discord</span>
                         </a>
                     </li>
                 </ul>
@@ -60,15 +64,14 @@
             <!-- Language Selector -->
             <div>
                 <h4 class="font-heading font-bold text-lg mb-4">{{ i18n "language" | default "Language" }}</h4>
-                <ul class="space-y-2">
-                    {{ range .Site.Languages }}
-                    <li>
-                        <a href="{{ . }}" class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
-                            {{ .LanguageName }}
-                        </a>
-                    </li>
+                <div class="bg-btcz-gray-800 rounded-lg p-4">
+                    {{ range .Site.Home.AllTranslations }}
+                    <a href="{{ .Permalink }}" 
+                       class="block py-2 px-4 mb-2 rounded-md {{ if eq .Language $.Site.Language }}bg-btcz-gold text-btcz-black{{ else }}text-btcz-gray-200 hover:bg-btcz-gray-700{{ end }} transition-colors duration-200">
+                        {{ .Language.LanguageName }}
+                    </a>
                     {{ end }}
-                </ul>
+                </div>
             </div>
         </div>
 

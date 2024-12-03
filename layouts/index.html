@@ -11,10 +11,10 @@
                     {{ i18n "heroSubtitle" | default "A Community-Driven Cryptocurrency for Everyone" }}
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
-                    <a href="/wallets/" class="btn-primary">
+                    <a href="/en/wallets/" class="btn-primary">
                         {{ i18n "downloadWallet" | default "Download Wallet" }}
                     </a>
-                    <a href="/why-bitcoinz/" class="btn-secondary">
+                    <a href="/en/why-bitcoinz/" class="btn-secondary">
                         {{ i18n "learnMore" | default "Learn More" }}
                     </a>
                 </div>
@@ -88,7 +88,7 @@
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Download Wallet -->
-                <a href="/wallets/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
+                <a href="/en/wallets/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
                     <div class="w-12 h-12 mx-auto mb-4">
                         <img src="/images/icons/wallet.svg" alt="Wallet Icon">
                     </div>
@@ -97,7 +97,7 @@
                 </a>
 
                 <!-- Buy BitcoinZ -->
-                <a href="/buy/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
+                <a href="/en/buy/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
                     <div class="w-12 h-12 mx-auto mb-4">
                         <img src="/images/icons/exchange.svg" alt="Exchange Icon">
                     </div>
@@ -123,7 +123,7 @@
     <div class="container mx-auto">
         <div class="flex justify-between items-center mb-8">
             <h2>{{ i18n "latestNews" | default "Latest News" }}</h2>
-            <a href="/news/" class="btn-secondary">{{ i18n "viewAll" | default "View All" }}</a>
+            <a href="/en/news/" class="btn-secondary">{{ i18n "viewAll" | default "View All" }}</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {{ range first 3 (where .Site.RegularPages "Section" "news") }}

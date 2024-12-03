@@ -1,121 +1,158 @@
-# BitcoinZ Website Configuration
-
-baseURL = "/"
+baseURL = "https://bitcoinz.org/"
 languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
-
-# Language settings
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = true
-
-# Theme settings
-# We'll create a custom theme later
 theme = ""
 
-# Site parameters
+# Site Settings
 [params]
-  description = "BitcoinZ - A Community-Driven Cryptocurrency for Everyone"
-  keywords = "BitcoinZ, cryptocurrency, blockchain, community, mining, privacy"
+  description = "A decentralized cryptocurrency focused on privacy, security, and community governance"
+  keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
-  
-  # Social media links
-  github = "https://github.com/btcz"
-  twitter = "https://twitter.com/BitcoinZOfficial"
-  telegram = "https://t.me/btcz_community"
-  discord = "https://discord.gg/btcz"
 
-  # Theme colors
-  [params.colors]
-    primary = "#FFD700"    # Gold
-    secondary = "#000000"  # Black
-    accent = "#FFFFFF"     # White
+  # Social Media Links
+  github = "https://github.com/bitcoinz-site/bitcoinz"
+  twitter = "https://twitter.com/bitcoinz_team"
+  telegram = "https://t.me/bitcoinzcommunity"
+  discord = "https://discord.gg/bitcoinz"
 
-# Menu configuration
-[menu]
-  [[menu.main]]
-    identifier = "home"
-    name = "Home"
-    url = "/"
-    weight = 1
-  [[menu.main]]
-    identifier = "why-bitcoinz"
-    name = "Why BitcoinZ"
-    url = "/why-bitcoinz/"
-    weight = 2
-  [[menu.main]]
-    identifier = "wallets"
-    name = "Wallets"
-    url = "/wallets/"
-    weight = 3
-  [[menu.main]]
-    identifier = "buy"
-    name = "Where to Buy"
-    url = "/buy/"
-    weight = 4
-  [[menu.main]]
-    identifier = "news"
-    name = "News"
-    url = "/news/"
-    weight = 5
-  [[menu.main]]
-    identifier = "roadmap"
-    name = "Roadmap"
-    url = "/roadmap/"
-    weight = 6
-
-# Privacy settings
-[privacy]
-  [privacy.disqus]
-    disable = true
-  [privacy.googleAnalytics]
-    disable = true
-  [privacy.instagram]
-    disable = true
-  [privacy.twitter]
-    disable = true
-  [privacy.vimeo]
-    disable = true
-  [privacy.youtube]
-    disable = true
-
-# Output formats
-[outputs]
-  home = ["HTML", "RSS"]
-  section = ["HTML", "RSS"]
-  taxonomy = ["HTML"]
-  term = ["HTML"]
-
-# Markup configuration
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true  # Allow HTML in markdown
-  [markup.highlight]
-    codeFences = true
-    guessSyntax = true
-    lineNos = true
-    style = "monokai"
-
-# Module configuration
-[module]
-  [module.hugoVersion]
-    extended = true
-    min = "0.80.0"
-
-# Multilingual settings
+# Language Configuration
 [languages]
   [languages.en]
     languageName = "English"
     weight = 1
-    [languages.en.params]
-      description = "BitcoinZ - A Community-Driven Cryptocurrency for Everyone"
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "home"
+        name = "Home"
+        url = "/"
+        weight = 1
+      [[languages.en.menu.main]]
+        identifier = "why-bitcoinz"
+        name = "Why BitcoinZ"
+        url = "/en/why-bitcoinz/"
+        weight = 2
+      [[languages.en.menu.main]]
+        identifier = "wallets"
+        name = "Wallets"
+        url = "/en/wallets/"
+        weight = 3
+      [[languages.en.menu.main]]
+        identifier = "buy"
+        name = "Where to Buy"
+        url = "/en/buy/"
+        weight = 4
+      [[languages.en.menu.main]]
+        identifier = "news"
+        name = "News"
+        url = "/en/news/"
+        weight = 5
+      [[languages.en.menu.main]]
+        identifier = "roadmap"
+        name = "Roadmap"
+        url = "/en/roadmap/"
+        weight = 6
+
   [languages.es]
     languageName = "Español"
     weight = 2
-    [languages.es.params]
-      description = "BitcoinZ - Una Criptomoneda Impulsada por la Comunidad para Todos"
+    [languages.es.menu]
+      [[languages.es.menu.main]]
+        identifier = "home"
+        name = "Inicio"
+        url = "/es/"
+        weight = 1
+      [[languages.es.menu.main]]
+        identifier = "why-bitcoinz"
+        name = "Por qué BitcoinZ"
+        url = "/es/why-bitcoinz/"
+        weight = 2
+      [[languages.es.menu.main]]
+        identifier = "wallets"
+        name = "Billeteras"
+        url = "/es/wallets/"
+        weight = 3
+      [[languages.es.menu.main]]
+        identifier = "buy"
+        name = "Dónde Comprar"
+        url = "/es/buy/"
+        weight = 4
+      [[languages.es.menu.main]]
+        identifier = "news"
+        name = "Noticias"
+        url = "/es/news/"
+        weight = 5
+      [[languages.es.menu.main]]
+        identifier = "roadmap"
+        name = "Hoja de Ruta"
+        url = "/es/roadmap/"
+        weight = 6
+
   [languages.zh]
     languageName = "中文"
     weight = 3
-    [languages.zh.params]
-      description = "BitcoinZ - 社区驱动的加密货币，为所有人服务"
+    [languages.zh.menu]
+      [[languages.zh.menu.main]]
+        identifier = "home"
+        name = "首页"
+        url = "/zh/"
+        weight = 1
+      [[languages.zh.menu.main]]
+        identifier = "why-bitcoinz"
+        name = "为什么选择BitcoinZ"
+        url = "/zh/why-bitcoinz/"
+        weight = 2
+      [[languages.zh.menu.main]]
+        identifier = "wallets"
+        name = "钱包"
+        url = "/zh/wallets/"
+        weight = 3
+      [[languages.zh.menu.main]]
+        identifier = "buy"
+        name = "购买"
+        url = "/zh/buy/"
+        weight = 4
+      [[languages.zh.menu.main]]
+        identifier = "news"
+        name = "新闻"
+        url = "/zh/news/"
+        weight = 5
+      [[languages.zh.menu.main]]
+        identifier = "roadmap"
+        name = "路线图"
+        url = "/zh/roadmap/"
+        weight = 6
+
+# Build Settings
+[build]
+  writeStats = true
+
+# Markup Settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Performance Optimization
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableSVG = false
+  minifyOutput = true
+
+# SEO Settings
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# Deployment Settings
+[deployment]
+  [[deployment.targets]]
+    name = "production"
+    URL = "https://bitcoinz.org"
+
+# Sitemap Configuration
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"

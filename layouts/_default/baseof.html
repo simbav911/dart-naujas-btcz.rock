@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     
+    <!-- Critical CSS -->
+    <style>
+        :root{--btcz-gold:#FFD700;--btcz-black:#000000;--btcz-white:#FFFFFF}
+        *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Open Sans',ui-sans-serif,system-ui;color:var(--btcz-black);background-color:var(--btcz-white)}
+    </style>
+    
+    <!-- Preload and Prefetch -->
+    <link rel="preload" href="/images/hero-illustration.svg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- Meta tags -->
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <meta name="keywords" content="{{ .Site.Params.keywords }}">
@@ -25,28 +38,54 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <!-- Styles -->
     {{ $styles := resources.Get "css/main.css" | resources.PostCSS }}
     {{ if hugo.IsProduction }}
         {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
     {{ end }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="print" onload="this.media='all'">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BitcoinZ",
+        "description": "A decentralized, community-driven cryptocurrency focused on privacy and security",
+        "url": "{{ .Permalink }}",
+        "logo": "{{ .Site.BaseURL }}/images/bitcoinz-logo.svg",
+        "foundingDate": "2017",
+        "founders": [
+            {
+                "@type": "Person",
+                "name": "Community Contributors"
+            }
+        ],
+        "sameAs": [
+            "{{ .Site.Params.twitter }}",
+            "{{ .Site.Params.telegram }}",
+            "{{ .Site.Params.discord }}",
+            "{{ .Site.Params.github }}"
+        ]
+    }
+    </script>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col" x-data="{ darkMode: false }">
     <!-- Header -->
     {{ partial "header.html" . }}
     
     <!-- Main content -->
-    <main class="flex-grow">
+    <main class="flex-grow" role="main">
         {{ block "main" . }}{{ end }}
     </main>
     
     <!-- Footer -->
     {{ partial "footer.html" . }}
+    
+    <!-- Performance Optimization: Defer non-critical scripts -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Scripts -->
     {{ block "scripts" . }}{{ end }}

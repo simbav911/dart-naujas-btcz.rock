@@ -1,0 +1,42 @@
+# Navigation
+getStarted: "Get Started"
+downloadWallet: "Download Wallet"
+learnMore: "Learn More"
+
+# Hero Section
+heroTitle: "Empowering Decentralization with BitcoinZ"
+heroSubtitle: "A Community-Driven Cryptocurrency for Everyone"
+
+# Features Section
+whyBitcoinZ: "Why BitcoinZ?"
+decentralization: "Decentralization"
+decentralizationDesc: "True decentralization with community-driven development and fair launch."
+privacy: "Privacy"
+privacyDesc: "Enhanced privacy features to protect your financial transactions."
+community: "Community"
+communityDesc: "Active community of developers, miners, and enthusiasts."
+scalability: "Scalability"
+scalabilityDesc: "Designed for efficient and scalable transactions."
+
+# Get Started Section
+getStartedTitle: "Get Started with BitcoinZ"
+getStartedDesc: "Join the BitcoinZ community and start using the cryptocurrency that puts privacy and decentralization first."
+buyBitcoinZ: "Buy BitcoinZ"
+buyBitcoinZDesc: "Purchase from exchanges"
+joinCommunity: "Join Community"
+joinCommunityDesc: "Connect with others"
+
+# News Section
+latestNews: "Latest News"
+viewAll: "View All"
+
+# Community Section
+joinOurCommunity: "Join Our Community"
+
+# Footer
+footerAbout: "A community-driven cryptocurrency focused on decentralization, privacy, and accessibility for everyone."
+quickLinks: "Quick Links"
+language: "Language"
+allRightsReserved: "All Rights Reserved"
+privacyPolicy: "Privacy Policy"
+termsOfService: "Terms of Service"

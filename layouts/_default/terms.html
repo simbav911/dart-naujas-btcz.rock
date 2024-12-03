@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="bg-btcz-black text-btcz-white py-20">
+    <div class="container mx-auto">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{{ .Title }}</h1>
+        <p class="text-xl text-btcz-gray-200">{{ i18n "allTerms" | default "All" }} {{ .Data.Plural }}</p>
+    </div>
+</div>
+
+<div class="container mx-auto py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {{ range .Data.Terms.ByCount }}
+        <div class="bg-btcz-gray-100 rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-2">
+                <a href="{{ .Page.RelPermalink }}" class="hover:text-btcz-gold">
+                    {{ .Page.Title }}
+                </a>
+            </h2>
+            <span class="text-btcz-gray-800">
+                {{ .Count }} {{ if eq .Count 1 }}
+                    {{ i18n "entry" | default "entry" }}
+                {{ else }}
+                    {{ i18n "entries" | default "entries" }}
+                {{ end }}
+            </span>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

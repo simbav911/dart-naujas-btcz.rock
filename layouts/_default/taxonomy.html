@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="bg-btcz-black text-btcz-white py-20">
+    <div class="container mx-auto">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{{ .Title }}</h1>
+        <p class="text-xl text-btcz-gray-200">{{ i18n "browseBy" | default "Browse by" }} {{ .Data.Singular }}</p>
+    </div>
+</div>
+
+<div class="container mx-auto py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {{ range .Pages }}
+        <article class="bg-btcz-gray-100 rounded-lg overflow-hidden">
+            {{ with .Params.image }}
+            <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-48 object-cover">
+            {{ end }}
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">
+                    <a href="{{ .RelPermalink }}" class="hover:text-btcz-gold">{{ .Title }}</a>
+                </h2>
+                {{ with .Description }}
+                <p class="text-btcz-gray-800 mb-4">{{ . }}</p>
+                {{ end }}
+                <a href="{{ .RelPermalink }}" class="text-btcz-gold hover:text-opacity-80">
+                    {{ i18n "readMore" | default "Read More" }} →
+                </a>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

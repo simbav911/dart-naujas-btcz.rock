@@ -2,106 +2,126 @@
 
 ## Technology Stack
 - Static Site Generator: Hugo
-- CMS: Netlify CMS
-- CSS Framework: Tailwind CSS (selected for utility-first approach and lightweight nature)
+- CSS Framework: Tailwind CSS
+- Frontend Framework: Alpine.js (for lightweight interactivity)
+- CMS: Netlify CMS (planned)
 - Deployment: Netlify
 
-## Project Structure
-```
-bitcoinz-homepage/
-├── archetypes/
-├── assets/
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── content/
-│   ├── _index.md
-│   ├── news/
-│   └── wallets/
-├── layouts/
-│   ├── _default/
-│   ├── partials/
-│   └── index.html
-├── static/
-│   ├── admin/
-│   └── images/
-└── config.toml
+## Navigation Configuration
+
+### Menu Structure
+- Multilingual support
+- Responsive design
+- Accessibility-focused implementation
+
+#### Menu Configuration Approach
+```toml
+[languages]
+  [languages.en.menu]
+    [[languages.en.menu.main]]
+      identifier = "home"
+      name = "Home"
+      url = "/"
+      weight = 1
+    # Additional menu items...
 ```
 
-## Development Requirements
-- Node.js v16+
-- Hugo Extended version
-- Git for version control
-- npm/yarn for package management
+### Navigation Features
+- Dynamic menu generation
+- Language-specific menu items
+- Weighted menu ordering
+- Active page highlighting
 
-## Build & Development
-- Development server: `hugo server -D`
-- Production build: `hugo --minify`
-- CMS access: `/admin`
-
-## Performance Targets
-- Lighthouse Score targets:
-  - Performance: 90+
-  - Accessibility: 95+
-  - Best Practices: 95+
-  - SEO: 95+
-- Page load time: < 3s
-- First Contentful Paint: < 1.5s
-
-## Browser Support
-- Chrome (latest 2 versions)
-- Firefox (latest 2 versions)
-- Safari (latest 2 versions)
-- Edge (latest 2 versions)
-- Mobile browsers (iOS Safari, Chrome for Android)
-
-## Responsive Breakpoints
-- Mobile: 320px - 639px
-- Tablet: 640px - 1023px
-- Desktop: 1024px+
-
-## Color Scheme
-```css
-:root {
-  --btcz-gold: #FFD700;
-  --btcz-black: #000000;
-  --btcz-white: #FFFFFF;
-  --btcz-gray-100: #F7F7F7;
-  --btcz-gray-200: #E5E5E5;
-  --btcz-gray-800: #1F1F1F;
+## Responsive Navigation Breakpoints
+```javascript
+screens: {
+  'sm': '640px',   // Mobile
+  'md': '768px',   // Tablet
+  'lg': '1024px',  // Desktop
+  'xl': '1280px',  // Large screens
+  '2xl': '1536px'  // Extra large screens
 }
 ```
 
-## Typography
-- Headings: Montserrat
-- Body: Open Sans
-- Base size: 16px
-- Scale ratio: 1.25
+### Mobile Navigation
+- Hamburger menu for small screens
+- Smooth slide-in/out transitions
+- Touch-friendly interactions
+
+### Accessibility Considerations
+- ARIA labels
+- Keyboard navigation support
+- Screen reader compatibility
+- Focus management
+
+## Performance Optimization Strategies
+### Menu Rendering
+- Minimal JavaScript overhead
+- Server-side menu generation
+- Efficient class toggling
+- Preload navigation resources
+
+## Cross-Browser Compatibility
+- Consistent menu behavior across:
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - Mobile browsers
+
+## Internationalization (i18n)
+- Language-specific menu translations
+- Automatic language detection
+- Seamless language switching
+- Localized URL handling
+
+## Technical Implementation Details
+```go
+// Hugo menu rendering example
+{{ range .Site.Menus.main }}
+  <a href="{{ .URL }}" 
+     class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}"
+  >
+    {{ .Name }}
+  </a>
+{{ end }}
+```
+
+## Future Enhancements
+- Dynamic menu item generation
+- Nested menu support
+- Advanced accessibility features
+- Performance monitoring
+
+## Menu Configuration Best Practices
+- Use semantic HTML
+- Implement proper heading hierarchy
+- Ensure clear visual feedback
+- Optimize for screen readers
+
+## Tracking and Analytics
+- Menu interaction tracking
+- User navigation path analysis
+- Performance metrics collection
 
 ## Security Considerations
-- HTTPS enforced
-- CSP headers configured
-- Regular dependency updates
-- XSS prevention measures
-- CORS policy implementation
+- Sanitize menu item URLs
+- Implement proper escaping
+- Prevent XSS vulnerabilities
+- Secure menu configuration
 
-## SEO Implementation
-- Structured data for:
-  - Organization
-  - WebSite
-  - Article (news section)
-- Meta tags implementation
-- Sitemap generation
-- Robots.txt configuration
+## Development Tools
+- Hugo CLI
+- Tailwind CSS
+- Browser developer tools
+- Accessibility testing tools
 
-## Monitoring & Analytics
-- Google Analytics 4
-- Error tracking
-- Performance monitoring
-- User behavior tracking
+## Monitoring and Logging
+- Track menu interaction events
+- Log navigation patterns
+- Identify potential usability issues
 
-## Backup Strategy
-- Git repository
-- Regular content exports
-- Database backups (if applicable)
-- Asset storage backup
+## Deployment Considerations
+- Prerender navigation
+- Cache menu configurations
+- Minimize runtime overhead

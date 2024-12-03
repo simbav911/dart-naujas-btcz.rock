@@ -19,11 +19,26 @@
                 {{ end }}
             </div>
 
-            <!-- CTA Button -->
-            <div class="hidden md:block">
-                <a href="/wallets/" class="btn-primary">
-                    {{ i18n "getStarted" | default "Get Started" }}
-                </a>
+            <!-- Language Selector -->
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Language Selector -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 text-btcz-black hover:text-btcz-gold transition-colors duration-200">
+                        <span>{{ .Site.Language.LanguageName }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute right-0 mt-2 py-2 w-40 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        {{ range .Site.Home.AllTranslations }}
+                        <a href="{{ .Permalink }}" 
+                           class="block px-4 py-2 text-sm text-btcz-black hover:text-btcz-gold hover:bg-btcz-gray-100 {{ if eq .Language $.Site.Language }}text-btcz-gold{{ end }}"
+                        >
+                            {{ .Language.LanguageName }}
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -46,10 +61,17 @@
                     {{ .Name }}
                 </a>
                 {{ end }}
-                <div class="pt-2 px-4">
-                    <a href="/wallets/" class="btn-primary w-full text-center">
-                        {{ i18n "getStarted" | default "Get Started" }}
+
+                <!-- Mobile Language Selector -->
+                <div class="px-4 py-2 border-t border-btcz-gray-200">
+                    <div class="text-sm text-btcz-gray-600 mb-2">{{ i18n "language" | default "Language" }}</div>
+                    {{ range .Site.Home.AllTranslations }}
+                    <a href="{{ .Permalink }}" 
+                       class="block py-1 text-btcz-black hover:text-btcz-gold {{ if eq .Language $.Site.Language }}text-btcz-gold{{ end }}"
+                    >
+                        {{ .Language.LanguageName }}
                     </a>
+                    {{ end }}
                 </div>
             </div>
         </div>
