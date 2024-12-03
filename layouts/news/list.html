@@ -1,0 +1,121 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">{{ .Title }}</h1>
+    
+    <!-- News Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {{ $paginator := .Paginate (where .Pages "Type" "news") 9 }}
+        {{ range $paginator.Pages }}
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+            {{ if .Params.image }}
+            <div class="relative h-48 overflow-hidden">
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover">
+            </div>
+            {{ else }}
+            <div class="relative h-48 bg-gradient-to-r from-blue-500 to-purple-600">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+            </div>
+            {{ end }}
+            
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <time class="text-sm text-gray-500" datetime="{{ .Date.Format "2006-01-02" }}">
+                        {{ .Date.Format "January 2, 2006" }}
+                    </time>
+                    {{ if .Params.categories }}
+                    <span class="mx-2 text-gray-300">•</span>
+                    <span class="text-sm text-blue-600">{{ index .Params.categories 0 }}</span>
+                    {{ end }}
+                </div>
+                
+                <h2 class="text-xl font-semibold mb-3 text-gray-800 hover:text-blue-600 transition duration-300">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                
+                <p class="text-gray-600 mb-4 line-clamp-3">{{ .Description }}</p>
+                
+                <div class="flex items-center justify-between">
+                    {{ if .Params.author }}
+                    <span class="text-sm text-gray-500">By {{ .Params.author }}</span>
+                    {{ end }}
+                    
+                    <a href="{{ .RelPermalink }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition duration-300">
+                        Read More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                {{ if .Params.tags }}
+                <div class="mt-4 flex flex-wrap gap-2">
+                    {{ range .Params.tags }}
+                    <span class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded-full">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </article>
+        {{ end }}
+    </div>
+    
+    <!-- Pagination -->
+    {{ if gt $paginator.TotalPages 1 }}
+    <div class="mt-12 flex justify-center">
+        <nav class="inline-flex rounded-md shadow">
+            {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Previous
+            </a>
+            {{ end }}
+            
+            {{ range $paginator.Pagers }}
+            <a href="{{ .URL }}" class="px-3 py-2 border border-gray-300 bg-white text-sm font-medium {{ if eq . $paginator }}text-blue-600 bg-blue-50{{ else }}text-gray-700 hover:bg-gray-50{{ end }}">
+                {{ .PageNumber }}
+            </a>
+            {{ end }}
+            
+            {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Next
+            </a>
+            {{ end }}
+        </nav>
+    </div>
+    {{ end }}
+</div>
+
+<!-- Add custom styles -->
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /* Smooth hover animations */
+    article {
+        transition: all 0.3s ease;
+    }
+    
+    article:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Gradient overlay for images */
+    .relative img::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+    }
+</style>
+{{ end }}
