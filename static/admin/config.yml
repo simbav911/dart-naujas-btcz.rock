@@ -19,3 +19,22 @@ collections:
       - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Summary", name: "summary", widget: "text", required: false}
+
+  - name: "exchanges"
+    label: "Exchanges"
+    folder: "content/en/buy/exchanges"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Date Added", name: "date", widget: "datetime"}
+      - {label: "Exchange Logo", name: "image", widget: "image"}
+      - {label: "Type", name: "type", widget: "hidden", default: "exchange"}
+      - {label: "Categories", name: "categories", widget: "hidden", default: ["Exchange"]}
+      - {label: "Features", name: "features", widget: "list", allow_add: true, min: 2, max: 6}
+      - {label: "Trading Pairs", name: "trading_pairs", widget: "list", allow_add: true, min: 1}
+      - {label: "Website URL", name: "website", widget: "string"}
+      - {label: "KYC Required", name: "kyc_required", widget: "boolean", default: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Additional Information", name: "body", widget: "markdown", required: false}
