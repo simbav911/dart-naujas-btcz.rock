@@ -1,123 +1,21 @@
 backend:
-  name: proxy
-  proxy_url: http://localhost:8081/api/v1
+  name: git-gateway
   branch: main
-  
+
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  # English Content
-  - name: "pages-en"
-    label: "Pages (English)"
-    files:
-      - file: "content/en/_index.md"
-        label: "Homepage"
-        name: "homepage-en"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Description", name: "description", widget: "text"}
-          - {label: "Hero Title", name: "hero_title", widget: "string"}
-          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
-          - label: "Features"
-            name: "features"
-            widget: "list"
-            fields:
-              - {label: "Title", name: "title", widget: "string"}
-              - {label: "Description", name: "description", widget: "text"}
-              - {label: "Icon", name: "icon", widget: "image"}
-
-  - name: "why-bitcoinz-en"
-    label: "Why BitcoinZ (English)"
-    folder: "content/en/why-bitcoinz"
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Order", name: "weight", widget: "number"}
-
-  - name: "wallets-en"
-    label: "Wallets (English)"
-    folder: "content/en/wallets"
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"}
-      - label: "Download Links"
-        name: "downloads"
-        widget: "list"
-        fields:
-          - {label: "Platform", name: "platform", widget: "string"}
-          - {label: "URL", name: "url", widget: "string"}
-
-  - name: "buy-en"
-    label: "Where to Buy (English)"
-    folder: "content/en/buy"
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"}
-      - label: "Exchanges"
-        name: "exchanges"
-        widget: "list"
-        fields:
-          - {label: "Name", name: "name", widget: "string"}
-          - {label: "URL", name: "url", widget: "string"}
-          - {label: "Logo", name: "logo", widget: "image"}
-
-  - name: "news-en"
-    label: "News (English)"
+  - name: "news"
+    label: "News"
     folder: "content/en/news"
     create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Subject", name: "subject", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Author", name: "author", widget: "string"}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Categories", name: "categories", widget: "select", options: ["Development", "Community", "Events", "Updates"], required: false}
-
-  - name: "roadmap-en"
-    label: "Roadmap (English)"
-    folder: "content/en/roadmap"
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Status", name: "status", widget: "select", options: ["Planned", "In Progress", "Completed"]}
       - {label: "Body", name: "body", widget: "markdown"}
-
-  # Spanish Content
-  - name: "pages-es"
-    label: "Pages (Spanish)"
-    files:
-      - file: "content/es/_index.md"
-        label: "Homepage"
-        name: "homepage-es"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Description", name: "description", widget: "text"}
-          - {label: "Hero Title", name: "hero_title", widget: "string"}
-          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
-
-  # Chinese Content
-  - name: "pages-zh"
-    label: "Pages (Chinese)"
-    files:
-      - file: "content/zh/_index.md"
-        label: "Homepage"
-        name: "homepage-zh"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Description", name: "description", widget: "text"}
-          - {label: "Hero Title", name: "hero_title", widget: "string"}
-          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Summary", name: "summary", widget: "text", required: false}
