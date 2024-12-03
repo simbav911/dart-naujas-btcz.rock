@@ -1,0 +1,95 @@
+<footer class="bg-btcz-black text-btcz-white py-12">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- About BitcoinZ -->
+            <div class="space-y-4">
+                <div class="flex items-center space-x-2">
+                    <img src="/images/bitcoinz-logo.svg" alt="BitcoinZ Logo" class="h-8 w-auto">
+                    <span class="font-heading font-bold text-xl">BitcoinZ</span>
+                </div>
+                <p class="text-btcz-gray-200">
+                    {{ i18n "footerAbout" | default "A community-driven cryptocurrency focused on decentralization, privacy, and accessibility for everyone." }}
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-heading font-bold text-lg mb-4">{{ i18n "quickLinks" | default "Quick Links" }}</h4>
+                <ul class="space-y-2">
+                    {{ range .Site.Menus.main }}
+                    <li>
+                        <a href="{{ .URL }}" class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                            {{ .Name }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <!-- Community -->
+            <div>
+                <h4 class="font-heading font-bold text-lg mb-4">{{ i18n "community" | default "Community" }}</h4>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer" 
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                            GitHub
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer"
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                            Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer"
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                            Telegram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener noreferrer"
+                           class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                            Discord
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Language Selector -->
+            <div>
+                <h4 class="font-heading font-bold text-lg mb-4">{{ i18n "language" | default "Language" }}</h4>
+                <ul class="space-y-2">
+                    {{ range .Site.Languages }}
+                    <li>
+                        <a href="{{ . }}" class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                            {{ .LanguageName }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="mt-12 pt-8 border-t border-btcz-gray-800">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <!-- Copyright -->
+                <div class="text-btcz-gray-200">
+                    &copy; {{ now.Format "2006" }} BitcoinZ. {{ i18n "allRightsReserved" | default "All Rights Reserved" }}.
+                </div>
+
+                <!-- Legal Links -->
+                <div class="flex space-x-6">
+                    <a href="/privacy-policy/" class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                        {{ i18n "privacyPolicy" | default "Privacy Policy" }}
+                    </a>
+                    <a href="/terms-of-service/" class="text-btcz-gray-200 hover:text-btcz-gold transition-colors duration-200">
+                        {{ i18n "termsOfService" | default "Terms of Service" }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

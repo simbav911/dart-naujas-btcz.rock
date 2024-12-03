@@ -1,0 +1,27 @@
+{
+  "name": "bitcoinz-website",
+  "version": "1.0.0",
+  "description": "Official BitcoinZ cryptocurrency website",
+  "scripts": {
+    "dev": "hugo server -D",
+    "build": "hugo --minify",
+    "clean": "rm -rf public resources",
+    "start": "hugo server --disableFastRender",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bitcoinz",
+    "cryptocurrency",
+    "blockchain",
+    "hugo",
+    "website"
+  ],
+  "author": "BitcoinZ Community",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.5"
+  }
+}

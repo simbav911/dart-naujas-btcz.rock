@@ -1,0 +1,182 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-btcz-black to-btcz-gray-800 text-btcz-white">
+    <div class="container mx-auto py-20 md:py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h1 class="font-heading font-bold">
+                    {{ i18n "heroTitle" | default "Empowering Decentralization with BitcoinZ" }}
+                </h1>
+                <p class="text-xl text-btcz-gray-200">
+                    {{ i18n "heroSubtitle" | default "A Community-Driven Cryptocurrency for Everyone" }}
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                    <a href="/wallets/" class="btn-primary">
+                        {{ i18n "downloadWallet" | default "Download Wallet" }}
+                    </a>
+                    <a href="/why-bitcoinz/" class="btn-secondary">
+                        {{ i18n "learnMore" | default "Learn More" }}
+                    </a>
+                </div>
+            </div>
+            <div class="hidden lg:block">
+                <img src="/images/hero-illustration.svg" alt="BitcoinZ Illustration" class="w-full h-auto">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section bg-btcz-white">
+    <div class="container mx-auto">
+        <h2 class="text-center mb-12">{{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Decentralization -->
+            <div class="p-6 rounded-lg bg-btcz-gray-100">
+                <div class="w-12 h-12 mb-4">
+                    <img src="/images/icons/decentralization.svg" alt="Decentralization Icon">
+                </div>
+                <h3 class="text-xl font-bold mb-2">{{ i18n "decentralization" | default "Decentralization" }}</h3>
+                <p class="text-btcz-gray-800">
+                    {{ i18n "decentralizationDesc" | default "True decentralization with community-driven development and fair launch." }}
+                </p>
+            </div>
+
+            <!-- Privacy -->
+            <div class="p-6 rounded-lg bg-btcz-gray-100">
+                <div class="w-12 h-12 mb-4">
+                    <img src="/images/icons/privacy.svg" alt="Privacy Icon">
+                </div>
+                <h3 class="text-xl font-bold mb-2">{{ i18n "privacy" | default "Privacy" }}</h3>
+                <p class="text-btcz-gray-800">
+                    {{ i18n "privacyDesc" | default "Enhanced privacy features to protect your financial transactions." }}
+                </p>
+            </div>
+
+            <!-- Community -->
+            <div class="p-6 rounded-lg bg-btcz-gray-100">
+                <div class="w-12 h-12 mb-4">
+                    <img src="/images/icons/community.svg" alt="Community Icon">
+                </div>
+                <h3 class="text-xl font-bold mb-2">{{ i18n "community" | default "Community" }}</h3>
+                <p class="text-btcz-gray-800">
+                    {{ i18n "communityDesc" | default "Active community of developers, miners, and enthusiasts." }}
+                </p>
+            </div>
+
+            <!-- Scalability -->
+            <div class="p-6 rounded-lg bg-btcz-gray-100">
+                <div class="w-12 h-12 mb-4">
+                    <img src="/images/icons/scalability.svg" alt="Scalability Icon">
+                </div>
+                <h3 class="text-xl font-bold mb-2">{{ i18n "scalability" | default "Scalability" }}</h3>
+                <p class="text-btcz-gray-800">
+                    {{ i18n "scalabilityDesc" | default "Designed for efficient and scalable transactions." }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Get Started Section -->
+<section class="section bg-btcz-gray-100">
+    <div class="container mx-auto">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="mb-6">{{ i18n "getStartedTitle" | default "Get Started with BitcoinZ" }}</h2>
+            <p class="text-lg mb-8 text-btcz-gray-800">
+                {{ i18n "getStartedDesc" | default "Join the BitcoinZ community and start using the cryptocurrency that puts privacy and decentralization first." }}
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Download Wallet -->
+                <a href="/wallets/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
+                    <div class="w-12 h-12 mx-auto mb-4">
+                        <img src="/images/icons/wallet.svg" alt="Wallet Icon">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">{{ i18n "downloadWallet" | default "Download Wallet" }}</h3>
+                    <p class="text-btcz-gray-800">{{ i18n "downloadWalletDesc" | default "Get your BitcoinZ wallet" }}</p>
+                </a>
+
+                <!-- Buy BitcoinZ -->
+                <a href="/buy/" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
+                    <div class="w-12 h-12 mx-auto mb-4">
+                        <img src="/images/icons/exchange.svg" alt="Exchange Icon">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">{{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }}</h3>
+                    <p class="text-btcz-gray-800">{{ i18n "buyBitcoinZDesc" | default "Purchase from exchanges" }}</p>
+                </a>
+
+                <!-- Join Community -->
+                <a href="#community" class="p-6 bg-btcz-white rounded-lg hover:shadow-lg transition-shadow duration-200">
+                    <div class="w-12 h-12 mx-auto mb-4">
+                        <img src="/images/icons/join.svg" alt="Join Icon">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">{{ i18n "joinCommunity" | default "Join Community" }}</h3>
+                    <p class="text-btcz-gray-800">{{ i18n "joinCommunityDesc" | default "Connect with others" }}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest News Section -->
+<section class="section bg-btcz-white">
+    <div class="container mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h2>{{ i18n "latestNews" | default "Latest News" }}</h2>
+            <a href="/news/" class="btn-secondary">{{ i18n "viewAll" | default "View All" }}</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {{ range first 3 (where .Site.RegularPages "Section" "news") }}
+            <article class="bg-btcz-gray-100 rounded-lg overflow-hidden">
+                {{ with .Params.image }}
+                <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-48 object-cover">
+                {{ end }}
+                <div class="p-6">
+                    <time class="text-sm text-btcz-gray-800">{{ .Date.Format "January 2, 2006" }}</time>
+                    <h3 class="text-xl font-bold mt-2 mb-3">
+                        <a href="{{ .RelPermalink }}" class="hover:text-btcz-gold">{{ .Title }}</a>
+                    </h3>
+                    <p class="text-btcz-gray-800">{{ .Summary }}</p>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Community Section -->
+<section id="community" class="section bg-btcz-black text-btcz-white">
+    <div class="container mx-auto text-center">
+        <h2 class="mb-12">{{ i18n "joinOurCommunity" | default "Join Our Community" }}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <!-- GitHub -->
+            <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer" 
+               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
+                <img src="/images/social/github.svg" alt="GitHub" class="w-12 h-12 mx-auto mb-4">
+                <span class="font-bold">GitHub</span>
+            </a>
+
+            <!-- Twitter -->
+            <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer"
+               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
+                <img src="/images/social/twitter.svg" alt="Twitter" class="w-12 h-12 mx-auto mb-4">
+                <span class="font-bold">Twitter</span>
+            </a>
+
+            <!-- Telegram -->
+            <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer"
+               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
+                <img src="/images/social/telegram.svg" alt="Telegram" class="w-12 h-12 mx-auto mb-4">
+                <span class="font-bold">Telegram</span>
+            </a>
+
+            <!-- Discord -->
+            <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener noreferrer"
+               class="p-6 rounded-lg bg-btcz-gray-800 hover:bg-btcz-gray-700 transition-colors duration-200">
+                <img src="/images/social/discord.svg" alt="Discord" class="w-12 h-12 mx-auto mb-4">
+                <span class="font-bold">Discord</span>
+            </a>
+        </div>
+    </div>
+</section>
+{{ end }}

@@ -1,0 +1,57 @@
+<header class="sticky top-0 z-50 w-full bg-btcz-white/95 backdrop-blur-sm border-b border-btcz-gray-200">
+    <div class="container mx-auto">
+        <nav class="flex items-center justify-between py-4">
+            <!-- Logo -->
+            <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center space-x-2">
+                <img src="/images/bitcoinz-logo.svg" alt="BitcoinZ Logo" class="h-8 w-auto">
+                <span class="font-heading font-bold text-xl text-btcz-black">BitcoinZ</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                {{ $currentPage := . }}
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL }}" 
+                   class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                >
+                    {{ .Name }}
+                </a>
+                {{ end }}
+            </div>
+
+            <!-- CTA Button -->
+            <div class="hidden md:block">
+                <a href="/wallets/" class="btn-primary">
+                    {{ i18n "getStarted" | default "Get Started" }}
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden p-2 text-btcz-black hover:text-btcz-gold" 
+                    aria-label="Toggle Menu"
+                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4">
+            <div class="flex flex-col space-y-4">
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL }}" 
+                   class="nav-link px-4 py-2 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                >
+                    {{ .Name }}
+                </a>
+                {{ end }}
+                <div class="pt-2 px-4">
+                    <a href="/wallets/" class="btn-primary w-full text-center">
+                        {{ i18n "getStarted" | default "Get Started" }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

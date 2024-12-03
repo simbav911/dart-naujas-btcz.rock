@@ -1,0 +1,77 @@
+/* Import Tailwind CSS base styles */
+@tailwind base;
+
+/* Import Tailwind CSS component classes */
+@tailwind components;
+
+/* Import Tailwind CSS utility classes */
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply font-sans text-btcz-black bg-btcz-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+
+  a {
+    @apply text-btcz-gold hover:text-opacity-80 transition-colors duration-200;
+  }
+}
+
+/* Custom components */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-btcz-gold text-btcz-black hover:bg-opacity-90;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-black;
+  }
+
+  .nav-link {
+    @apply text-btcz-black hover:text-btcz-gold transition-colors duration-200;
+  }
+
+  .section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-btcz-gold to-yellow-500;
+  }
+}
