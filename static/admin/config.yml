@@ -46,7 +46,7 @@ collections:
           label: "Exchange Features", 
           name: "features", 
           widget: "list", 
-          hint: "Add key features of the exchange (e.g., 'Low Trading Fees', '24/7 Support')",
+          hint: "Add key features of the exchange",
           min: 2,
           max: 6
         }
@@ -54,53 +54,103 @@ collections:
           label: "Trading Pairs", 
           name: "trading_pairs", 
           widget: "list",
-          hint: "Add available trading pairs (e.g., 'BTCZ/BTC', 'BTCZ/USDT')",
+          hint: "Add available trading pairs (e.g., 'BTCZ/BTC')",
           min: 1
         }
       - {
           label: "Exchange Website URL", 
           name: "website", 
           widget: "string",
-          hint: "Full URL including https:// (e.g., https://exchange.com)"
+          hint: "Full URL including https://"
         }
       - {
           label: "KYC Required?", 
           name: "kyc_required", 
           widget: "boolean", 
           default: false,
-          hint: "Select Yes if the exchange requires KYC verification"
+          hint: "Select Yes if KYC verification is required"
+        }
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+
+  - name: "wallets"
+    label: "Wallet Listings"
+    folder: "content/en/wallets"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Wallet Name", name: "title", widget: "string", hint: "Enter the name of the wallet"}
+      - {label: "Description", name: "description", widget: "text", hint: "Brief description of the wallet features"}
+      - {label: "Date Added", name: "date", widget: "datetime"}
+      - {
+          label: "Wallet Logo", 
+          name: "image", 
+          widget: "image", 
+          hint: "Upload a PNG logo with transparent background (recommended size: 200x200px)",
+          media_library: {
+            config: {
+              multiple: false
+            }
+          }
         }
       - {
-          label: "Draft", 
-          name: "draft", 
-          widget: "boolean", 
-          default: false,
-          hint: "Set to Yes to hide this exchange from the website"
+          label: "Gallery Images", 
+          name: "gallery", 
+          widget: "list",
+          field: {label: Image, name: image, widget: image},
+          hint: "Add screenshots or additional images (recommended size: 1200x675px)",
+          required: false
+        }
+      - {label: "Type", name: "type", widget: "hidden", default: "wallet"}
+      - {
+          label: "Features", 
+          name: "features", 
+          widget: "list", 
+          hint: "Add key features of the wallet",
+          min: 2,
+          max: 6
         }
       - {
-          label: "Additional Information", 
+          label: "Platforms", 
+          name: "platforms", 
+          widget: "list",
+          hint: "Add download information for each supported platform",
+          fields:
+            - {label: "Platform Name", name: "name", widget: "select", options: ["Windows", "macOS", "Linux", "Android", "iOS", "Web"]}
+            - {label: "Download URL", name: "download_url", widget: "string"}
+            - {label: "Version", name: "version", widget: "string"}
+        }
+      - {
+          label: "System Requirements", 
+          name: "requirements", 
+          widget: "list",
+          hint: "Add system requirements for the wallet",
+          required: false
+        }
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {
+          label: "Detailed Description", 
           name: "body", 
           widget: "markdown", 
-          required: false,
-          hint: "Optional: Add any additional details about the exchange"
+          hint: "Add detailed information about the wallet",
+          required: false
         }
 
-  - name: "buy-page"
-    label: "Buy Page Settings"
+  - name: "pages"
+    label: "Page Settings"
     files:
-      - name: "buy-index"
-        label: "Buy Page Content"
-        file: "content/en/buy/_index.md"
+      - name: "wallets-index"
+        label: "Wallets Page Content"
+        file: "content/en/wallets/_index.md"
         fields:
-          - {label: "Title", name: "title", widget: "string", hint: "Main title of the buy page"}
-          - {label: "Description", name: "description", widget: "text", hint: "Brief description shown under the title"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
           - {label: "Type", name: "type", widget: "hidden", default: "section"}
-          - {label: "Layout", name: "layout", widget: "hidden", default: "buy"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "wallets"}
           - {
               label: "Safety Tips", 
               name: "safety_tips", 
               widget: "list",
-              hint: "Add safety tips for users (displayed at bottom of page)",
+              hint: "Add wallet safety tips for users",
               min: 2,
               max: 5
             }
