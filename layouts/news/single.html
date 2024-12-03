@@ -1,157 +1,39 @@
 {{ define "main" }}
-{{ if eq .Section "news" }}
-<article class="max-w-4xl mx-auto px-4 py-8">
-    <!-- Hero Section -->
-    <div class="mb-8">
-        {{ if .Params.image }}
-        <div class="relative h-96 mb-8 rounded-xl overflow-hidden">
-            <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<article class="section bg-btcz-gray-950 py-24">
+    <div class="container mx-auto px-4 max-w-4xl">
+        {{ with .Params.image }}
+        <div class="mb-12 relative overflow-hidden rounded-2xl shadow-2xl">
+            <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-96 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/80"></div>
         </div>
         {{ end }}
-        
-        <h1 class="text-4xl font-bold mb-4 {{ if .Params.image }}text-gray-900{{ else }}text-gray-900{{ end }}">
-            {{ .Title }}
-        </h1>
-        
-        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-8">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ .Date.Format "January 2, 2006" }}
-            </time>
+
+        <header class="text-center mb-12">
+            <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-4xl md:text-5xl mb-4">
+                {{ .Title }}
+            </h1>
             
-            {{ if .Params.author }}
-            <span>•</span>
-            <span>By {{ .Params.author }}</span>
-            {{ end }}
-            
-            {{ if .Params.categories }}
-            <span>•</span>
-            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs">
-                {{ index .Params.categories 0 }}
-            </span>
-            {{ end }}
+            <div class="flex justify-center items-center space-x-4 text-btcz-gray-400">
+                <time>{{ .Date.Format "January 2, 2006" }}</time>
+                {{ with .Params.tags }}
+                <div class="flex space-x-2">
+                    {{ range . }}
+                    <span class="px-2 py-1 bg-btcz-gray-800 text-btcz-gray-300 text-xs rounded-full">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </header>
+
+        <div class="prose prose-invert max-w-none text-btcz-gray-300 leading-relaxed">
+            {{ .Content }}
         </div>
 
-        {{ if .Description }}
-        <p class="text-xl text-gray-600 mb-8">{{ .Description }}</p>
-        {{ end }}
-    </div>
-
-    <!-- Content -->
-    <div class="prose prose-lg max-w-none mb-12">
-        {{ .Content }}
-    </div>
-
-    <!-- Tags -->
-    {{ if .Params.tags }}
-    <div class="mt-8 pt-8 border-t border-gray-200">
-        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4">Related Topics</h3>
-        <div class="flex flex-wrap gap-2">
-            {{ range .Params.tags }}
-            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                #{{ . }}
-            </span>
-            {{ end }}
-        </div>
-    </div>
-    {{ end }}
-
-    <!-- Navigation -->
-    <div class="mt-12 pt-8 border-t border-gray-200">
-        <div class="flex justify-between items-center">
-            {{ with .PrevInSection }}
-            <a href="{{ .RelPermalink }}" class="group flex items-center text-sm font-medium text-gray-500 hover:text-blue-600">
-                <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-                Previous Article
+        <div class="mt-12 border-t border-btcz-gray-800 pt-8 text-center">
+            <a href="/en/news/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 transition-all duration-300 transform hover:scale-105 shadow-md">
+                Back to News
             </a>
-            {{ end }}
-            
-            {{ with .NextInSection }}
-            <a href="{{ .RelPermalink }}" class="group flex items-center text-sm font-medium text-gray-500 hover:text-blue-600">
-                Next Article
-                <svg class="ml-3 h-5 w-5 text-gray-400 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </a>
-            {{ end }}
         </div>
-    </div>
-
-    <!-- Share buttons -->
-    <div class="mt-8 flex items-center justify-center space-x-4">
-        <a href="https://twitter.com/intent/tweet?text={{ .Title }}&url={{ .Permalink }}" 
-           target="_blank" 
-           class="text-gray-400 hover:text-blue-500 transition-colors">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-            </svg>
-        </a>
-        <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title }}" 
-           target="_blank" 
-           class="text-gray-400 hover:text-blue-500 transition-colors">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.308-.346-.11l-6.4 4.02-2.76-.918c-.6-.187-.612-.6.125-.89l10.782-4.156c.5-.187.943.112.78.89z"/>
-            </svg>
-        </a>
     </div>
 </article>
-{{ end }}
-
-<!-- Add Tailwind Typography styles -->
-<style>
-    .prose {
-        max-width: 65ch;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .prose h1, .prose h2, .prose h3 {
-        color: #1a1a1a;
-        font-weight: 600;
-        margin-top: 2em;
-        margin-bottom: 1em;
-    }
-    
-    .prose p {
-        margin-top: 1.25em;
-        margin-bottom: 1.25em;
-        line-height: 1.75;
-    }
-    
-    .prose ul {
-        margin-top: 1.25em;
-        margin-bottom: 1.25em;
-        padding-left: 1.625em;
-        list-style-type: disc;
-    }
-    
-    .prose li {
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
-    }
-    
-    .prose a {
-        color: #2563eb;
-        text-decoration: none;
-        font-weight: 500;
-    }
-    
-    .prose a:hover {
-        text-decoration: underline;
-    }
-
-    .prose strong {
-        font-weight: 600;
-        color: #1a1a1a;
-    }
-
-    .prose blockquote {
-        border-left: 4px solid #e5e7eb;
-        padding-left: 1rem;
-        margin-left: 0;
-        color: #4b5563;
-    }
-</style>
 {{ end }}
