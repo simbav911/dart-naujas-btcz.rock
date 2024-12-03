@@ -1,41 +1,29 @@
 {{ define "main" }}
+{{ if eq .Section "news" }}
 <article class="max-w-4xl mx-auto px-4 py-8">
     <!-- Hero Section -->
-    {{ if .Params.image }}
-    <div class="relative h-96 mb-8 rounded-xl overflow-hidden">
-        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-        <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <h1 class="text-4xl font-bold mb-4">{{ .Title }}</h1>
-            <div class="flex items-center space-x-4 text-sm">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">
-                    {{ .Date.Format "January 2, 2006" }}
-                </time>
-                {{ if .Params.author }}
-                <span>•</span>
-                <span>By {{ .Params.author }}</span>
-                {{ end }}
-                {{ if .Params.categories }}
-                <span>•</span>
-                <span class="bg-blue-600 px-3 py-1 rounded-full text-xs">
-                    {{ index .Params.categories 0 }}
-                </span>
-                {{ end }}
-            </div>
-        </div>
-    </div>
-    {{ else }}
-    <!-- Title section without image -->
     <div class="mb-8">
-        <h1 class="text-4xl font-bold mb-4 text-gray-900">{{ .Title }}</h1>
-        <div class="flex items-center space-x-4 text-sm text-gray-600">
+        {{ if .Params.image }}
+        <div class="relative h-96 mb-8 rounded-xl overflow-hidden">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        </div>
+        {{ end }}
+        
+        <h1 class="text-4xl font-bold mb-4 {{ if .Params.image }}text-gray-900{{ else }}text-gray-900{{ end }}">
+            {{ .Title }}
+        </h1>
+        
+        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-8">
             <time datetime="{{ .Date.Format "2006-01-02" }}">
                 {{ .Date.Format "January 2, 2006" }}
             </time>
+            
             {{ if .Params.author }}
             <span>•</span>
             <span>By {{ .Params.author }}</span>
             {{ end }}
+            
             {{ if .Params.categories }}
             <span>•</span>
             <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs">
@@ -43,18 +31,21 @@
             </span>
             {{ end }}
         </div>
+
+        {{ if .Description }}
+        <p class="text-xl text-gray-600 mb-8">{{ .Description }}</p>
+        {{ end }}
     </div>
-    {{ end }}
 
     <!-- Content -->
-    <div class="prose prose-lg max-w-none">
+    <div class="prose prose-lg max-w-none mb-12">
         {{ .Content }}
     </div>
 
     <!-- Tags -->
     {{ if .Params.tags }}
     <div class="mt-8 pt-8 border-t border-gray-200">
-        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4">Tags</h3>
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4">Related Topics</h3>
         <div class="flex flex-wrap gap-2">
             {{ range .Params.tags }}
             <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
@@ -106,34 +97,61 @@
         </a>
     </div>
 </article>
+{{ end }}
 
+<!-- Add Tailwind Typography styles -->
 <style>
-    /* Custom styles for content */
-    .prose img {
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    .prose {
+        max-width: 65ch;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .prose h1, .prose h2, .prose h3 {
+        color: #1a1a1a;
+        font-weight: 600;
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
+    
+    .prose p {
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        line-height: 1.75;
+    }
+    
+    .prose ul {
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        padding-left: 1.625em;
+        list-style-type: disc;
+    }
+    
+    .prose li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }
     
     .prose a {
         color: #2563eb;
         text-decoration: none;
-        transition: color 0.2s ease;
+        font-weight: 500;
     }
     
     .prose a:hover {
-        color: #1d4ed8;
         text-decoration: underline;
     }
-    
-    /* Responsive typography */
-    @media (max-width: 768px) {
-        .prose {
-            font-size: 1rem;
-        }
-        
-        h1 {
-            font-size: 2rem;
-        }
+
+    .prose strong {
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+
+    .prose blockquote {
+        border-left: 4px solid #e5e7eb;
+        padding-left: 1rem;
+        margin-left: 0;
+        color: #4b5563;
     }
 </style>
 {{ end }}

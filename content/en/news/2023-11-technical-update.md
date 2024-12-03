@@ -4,8 +4,10 @@ description: "Significant protocol improvements and technical updates to enhance
 date: 2023-11-15T10:00:00Z
 author: "BitcoinZ Dev Team"
 image: "/images/uploads/technical-update.svg"
+type: "news"
 categories: ["Development"]
 tags: ["Protocol", "Security", "Network"]
+layout: "single"
 ---
 
 # Major Technical Updates and Protocol Improvements

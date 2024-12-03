@@ -4,8 +4,10 @@ description: "BitcoinZ forms strategic partnership to enhance cross-chain capabi
 date: 2023-12-02T11:00:00Z
 author: "BitcoinZ Team"
 image: "/images/uploads/partnership.svg"
+type: "news"
 categories: ["Updates"]
 tags: ["Partnership", "Development", "Ecosystem"]
+layout: "single"
 ---
 
 # Strategic Partnership Announcement

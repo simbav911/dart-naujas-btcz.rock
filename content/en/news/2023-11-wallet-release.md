@@ -4,8 +4,10 @@ description: "BitcoinZ launches new mobile wallet with enhanced features and imp
 date: 2023-11-20T16:00:00Z
 author: "BitcoinZ Mobile Team"
 image: "/images/uploads/wallet-release.svg"
+type: "news"
 categories: ["Development"]
 tags: ["Mobile", "Wallet", "Release"]
+layout: "single"
 ---
 
 # New Mobile Wallet Release

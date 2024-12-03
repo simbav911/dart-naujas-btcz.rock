@@ -4,8 +4,10 @@ description: "Major developments and community achievements in the BitcoinZ ecos
 date: 2023-12-01T09:00:00Z
 author: "BitcoinZ Team"
 image: "/images/uploads/community-update.svg"
+type: "news"
 categories: ["Community"]
 tags: ["Development", "Community", "Updates"]
+layout: "single"
 ---
 
 # BitcoinZ Community Update - December 2023
