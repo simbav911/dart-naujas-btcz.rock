@@ -67,6 +67,18 @@
   .card {
     @apply bg-white rounded-xl shadow-sm p-8 hover:shadow-md transition-all duration-300 transform hover:-translate-y-1;
   }
+
+  .feature-card {
+    @apply bg-gradient-to-br from-white to-btcz-gray-100 rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2;
+  }
+
+  .feature-icon {
+    @apply w-20 h-20 mr-8 bg-btcz-gold/10 rounded-2xl p-4 transition-all duration-500;
+  }
+
+  .feature-title {
+    @apply text-3xl font-bold bg-gradient-to-r from-btcz-gold to-yellow-500 bg-clip-text text-transparent;
+  }
 }
 
 /* Custom utilities */
@@ -79,14 +91,35 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-btcz-gold to-yellow-500;
   }
 
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
+  .animate-fade-up {
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out forwards;
   }
 
-  @keyframes fadeIn {
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .delay-800 {
+    animation-delay: 800ms;
+  }
+
+  .delay-1000 {
+    animation-delay: 1000ms;
+  }
+
+  @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;

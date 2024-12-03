@@ -1,106 +1,120 @@
 {{ define "main" }}
-<div class="bg-gradient-to-br from-btcz-gray-100 to-white py-24 relative overflow-hidden">
+<!-- Hero Section -->
+<div class="bg-gradient-to-br from-btcz-gray-100 to-white py-32 relative overflow-hidden">
     <div class="container mx-auto px-4 relative z-10">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gradient animate-fade-in">{{ .Title }}</h1>
-        <p class="text-xl text-btcz-gray-800 mb-8 max-w-3xl">{{ .Description }}</p>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-gradient animate-fade-up">{{ .Title }}</h1>
+        <p class="text-xl md:text-2xl text-btcz-gray-800 mb-8 max-w-3xl animate-fade-up delay-200">{{ .Description }}</p>
     </div>
     <div class="absolute inset-0 bg-gradient-to-r from-btcz-gold/5 to-transparent"></div>
 </div>
 
-<div class="container mx-auto px-4">
+{{ if in .RelPermalink "why-bitcoinz" }}
+<div class="container mx-auto px-4 py-16">
     <!-- Mission Section -->
-    <div class="bg-white rounded-xl shadow-sm p-8 mb-16">
-        <h2 class="text-3xl font-bold text-gradient mb-6">Our Mission</h2>
-        <p class="text-lg text-btcz-gray-800">BitcoinZ is a community-driven cryptocurrency that embodies the true spirit of decentralization, privacy, and financial empowerment.</p>
+    <div class="max-w-4xl mx-auto mb-32">
+        <div class="feature-card animate-fade-up delay-400">
+            <h2 class="text-4xl md:text-5xl font-bold text-gradient mb-10 text-center">Our Mission</h2>
+            <p class="text-xl md:text-2xl text-btcz-gray-800 leading-relaxed text-center">
+                BitcoinZ is a community-driven cryptocurrency that embodies the true spirit of decentralization, privacy, and financial empowerment.
+            </p>
+        </div>
     </div>
 
     <!-- Core Features Section -->
-    <div class="mb-16">
-        <h2 class="text-3xl font-bold text-gradient mb-12 text-center">Core Features</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="mb-32">
+        <h2 class="text-4xl md:text-5xl font-bold text-gradient mb-20 text-center animate-fade-up delay-600">Core Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <!-- Decentralization -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="flex items-start mb-6">
-                    <img src="/images/icons/decentralization.svg" alt="Decentralization" class="w-12 h-12 mr-4">
-                    <h3 class="text-2xl font-bold text-btcz-gold">True Decentralization</h3>
+            <div class="feature-card animate-fade-up delay-800">
+                <div class="flex items-center mb-10">
+                    <div class="feature-icon">
+                        <img src="/images/icons/decentralization.svg" alt="Decentralization" class="w-full h-full">
+                    </div>
+                    <h3 class="feature-title">True Decentralization</h3>
                 </div>
-                <ul class="space-y-4 text-btcz-gray-800">
+                <ul class="space-y-6 text-lg text-btcz-gray-800">
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Every BTCZ coin is fairly mined</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>No initial coin offering to centralize control</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Community-driven governance</span>
                     </li>
                 </ul>
             </div>
 
             <!-- Privacy -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="flex items-start mb-6">
-                    <img src="/images/icons/privacy.svg" alt="Privacy" class="w-12 h-12 mr-4">
-                    <h3 class="text-2xl font-bold text-btcz-gold">Enhanced Privacy</h3>
+            <div class="feature-card animate-fade-up delay-800">
+                <div class="flex items-center mb-10">
+                    <div class="feature-icon">
+                        <img src="/images/icons/privacy.svg" alt="Privacy" class="w-full h-full">
+                    </div>
+                    <h3 class="feature-title">Enhanced Privacy</h3>
                 </div>
-                <ul class="space-y-4 text-btcz-gray-800">
+                <ul class="space-y-6 text-lg text-btcz-gray-800">
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Advanced encryption protection</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Anonymous transactions</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Multiple security layers</span>
                     </li>
                 </ul>
             </div>
 
             <!-- Community -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="flex items-start mb-6">
-                    <img src="/images/icons/community.svg" alt="Community" class="w-12 h-12 mr-4">
-                    <h3 class="text-2xl font-bold text-btcz-gold">Community Governance</h3>
+            <div class="feature-card animate-fade-up delay-1000">
+                <div class="flex items-center mb-10">
+                    <div class="feature-icon">
+                        <img src="/images/icons/community.svg" alt="Community" class="w-full h-full">
+                    </div>
+                    <h3 class="feature-title">Community Governance</h3>
                 </div>
-                <ul class="space-y-4 text-btcz-gray-800">
+                <ul class="space-y-6 text-lg text-btcz-gray-800">
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Transparent decision making</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Open contribution system</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Regular community updates</span>
                     </li>
                 </ul>
             </div>
 
             <!-- Scalability -->
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                <div class="flex items-start mb-6">
-                    <img src="/images/icons/scalability.svg" alt="Scalability" class="w-12 h-12 mr-4">
-                    <h3 class="text-2xl font-bold text-btcz-gold">Scalable Solution</h3>
+            <div class="feature-card animate-fade-up delay-1000">
+                <div class="flex items-center mb-10">
+                    <div class="feature-icon">
+                        <img src="/images/icons/scalability.svg" alt="Scalability" class="w-full h-full">
+                    </div>
+                    <h3 class="feature-title">Scalable Solution</h3>
                 </div>
-                <ul class="space-y-4 text-btcz-gray-800">
+                <ul class="space-y-6 text-lg text-btcz-gray-800">
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Fast and efficient transactions</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Adaptive network scaling</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
                         <span>Future-proof architecture</span>
                     </li>
                 </ul>
@@ -108,76 +122,45 @@
         </div>
     </div>
 
-    <!-- Technical Advantages Section -->
-    <div class="mb-16">
-        <h2 class="text-3xl font-bold text-gradient mb-12 text-center">Technical Advantages</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
-                <h3 class="text-2xl font-bold text-btcz-gold mb-6">Network Security</h3>
-                <ul class="space-y-4 text-btcz-gray-800">
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
-                        <span>Robust mining algorithm</span>
-                    </li>
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
-                        <span>Distributed infrastructure</span>
-                    </li>
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
-                        <span>Regular security audits</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
-                <h3 class="text-2xl font-bold text-btcz-gold mb-6">Economic Model</h3>
-                <ul class="space-y-4 text-btcz-gray-800">
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
-                        <span>Fair distribution system</span>
-                    </li>
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
-                        <span>Transparent monetary policy</span>
-                    </li>
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-btcz-gold rounded-full mr-3 flex-shrink-0"></span>
-                        <span>Network participation rewards</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <!-- Get Involved Section -->
-    <div class="bg-gradient-to-br from-white to-btcz-gray-100 rounded-xl p-8 shadow-sm mb-16">
-        <h2 class="text-3xl font-bold text-gradient mb-8 text-center">Get Involved</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <a href="https://github.com/btcz" class="flex items-center space-x-4 text-btcz-gray-800 hover:text-btcz-gold transition-all duration-200 group">
-                <div class="w-12 h-12 rounded-full bg-white shadow-sm p-2.5 group-hover:shadow-md transition-shadow duration-200">
-                    <img src="/images/social/github.svg" alt="GitHub" class="w-full h-full">
-                </div>
-                <span class="font-semibold">Contribute Code</span>
-            </a>
-            <a href="https://discord.gg/btcz" class="flex items-center space-x-4 text-btcz-gray-800 hover:text-btcz-gold transition-all duration-200 group">
-                <div class="w-12 h-12 rounded-full bg-white shadow-sm p-2.5 group-hover:shadow-md transition-shadow duration-200">
-                    <img src="/images/social/discord.svg" alt="Discord" class="w-full h-full">
-                </div>
-                <span class="font-semibold">Join Community</span>
-            </a>
-            <a href="https://t.me/btcz_community" class="flex items-center space-x-4 text-btcz-gray-800 hover:text-btcz-gold transition-all duration-200 group">
-                <div class="w-12 h-12 rounded-full bg-white shadow-sm p-2.5 group-hover:shadow-md transition-shadow duration-200">
-                    <img src="/images/social/telegram.svg" alt="Telegram" class="w-full h-full">
-                </div>
-                <span class="font-semibold">Stay Informed</span>
-            </a>
-            <a href="https://twitter.com/BTCZOfficial" class="flex items-center space-x-4 text-btcz-gray-800 hover:text-btcz-gold transition-all duration-200 group">
-                <div class="w-12 h-12 rounded-full bg-white shadow-sm p-2.5 group-hover:shadow-md transition-shadow duration-200">
-                    <img src="/images/social/twitter.svg" alt="Twitter" class="w-full h-full">
-                </div>
-                <span class="font-semibold">Follow Updates</span>
-            </a>
+    <div class="max-w-6xl mx-auto mb-32">
+        <div class="feature-card">
+            <h2 class="text-4xl md:text-5xl font-bold text-gradient mb-16 text-center">Get Involved</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <a href="https://github.com/btcz" class="group flex flex-col items-center text-center space-y-6 p-8 rounded-2xl hover:bg-white transition-all duration-500">
+                    <div class="w-20 h-20 bg-white rounded-2xl shadow-sm p-4 group-hover:shadow-md transition-all duration-500">
+                        <img src="/images/social/github.svg" alt="GitHub" class="w-full h-full">
+                    </div>
+                    <span class="font-bold text-xl text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-500">Contribute Code</span>
+                </a>
+                <a href="https://discord.gg/btcz" class="group flex flex-col items-center text-center space-y-6 p-8 rounded-2xl hover:bg-white transition-all duration-500">
+                    <div class="w-20 h-20 bg-white rounded-2xl shadow-sm p-4 group-hover:shadow-md transition-all duration-500">
+                        <img src="/images/social/discord.svg" alt="Discord" class="w-full h-full">
+                    </div>
+                    <span class="font-bold text-xl text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-500">Join Community</span>
+                </a>
+                <a href="https://t.me/btcz_community" class="group flex flex-col items-center text-center space-y-6 p-8 rounded-2xl hover:bg-white transition-all duration-500">
+                    <div class="w-20 h-20 bg-white rounded-2xl shadow-sm p-4 group-hover:shadow-md transition-all duration-500">
+                        <img src="/images/social/telegram.svg" alt="Telegram" class="w-full h-full">
+                    </div>
+                    <span class="font-bold text-xl text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-500">Stay Informed</span>
+                </a>
+                <a href="https://twitter.com/BTCZOfficial" class="group flex flex-col items-center text-center space-y-6 p-8 rounded-2xl hover:bg-white transition-all duration-500">
+                    <div class="w-20 h-20 bg-white rounded-2xl shadow-sm p-4 group-hover:shadow-md transition-all duration-500">
+                        <img src="/images/social/twitter.svg" alt="Twitter" class="w-full h-full">
+                    </div>
+                    <span class="font-bold text-xl text-btcz-gray-800 group-hover:text-btcz-gold transition-colors duration-500">Follow Updates</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
+{{ else }}
+<!-- Main Content for other sections -->
+<div class="container mx-auto px-4 py-16">
+    <div class="prose prose-lg max-w-none">
+        {{ .Content }}
+    </div>
+</div>
+{{ end }}
 {{ end }}

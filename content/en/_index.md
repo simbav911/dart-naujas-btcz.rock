@@ -1,8 +1,17 @@
 ---
-title: "BitcoinZ - Community-Driven Cryptocurrency"
-description: "A decentralized cryptocurrency focused on privacy, security, and community governance"
+title: BitcoinZ - Community-Driven Cryptocurrency
+description: In a world where financial freedom is paramount, BitcoinZ (BTCZ)
+  emerges as a beacon of hope—a revolutionary digital currency built on the
+  principles of decentralization and community empowerment. Established in 2017,
+  BitcoinZ isn't just another cryptocurrency; it's a movement aimed at
+  democratizing finance and providing individuals with the tools they need to
+  take control of their financial destiny. BitcoinZ is not another token or
+  coin; it has its own blockchain, ensuring independence and resilience in the
+  ever-evolving landscape of digital currencies.
 date: 2023-12-03
 draft: false
+hero_title: test
+hero_subtitle: test2
 ---
 
 # Empowering Decentralization with BitcoinZ
