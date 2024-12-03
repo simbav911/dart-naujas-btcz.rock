@@ -6,10 +6,12 @@ module.exports = {
         btcz: {
           gold: '#FFD700',
           gray: {
-            300: '#D1D5DB',
-            800: '#1F2937',
-            900: '#111827',
-            950: '#030712'
+            200: '#E5E7EB',  // Lighter text color
+            400: '#9CA3AF',  // Muted text color
+            700: '#374151',  // Darker background
+            800: '#1F2937',  // Dark background
+            900: '#111827',  // Darker background
+            950: '#030712'   // Darkest background
           }
         }
       },
