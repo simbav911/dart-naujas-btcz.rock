@@ -19,7 +19,7 @@
             <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-4xl md:text-5xl mb-6">
                 {{ .Title }}
             </h1>
-            <p class="text-btcz-gray-400 text-lg max-w-2xl mx-auto">
+            <p class="text-btcz-gray-400 text-lg">
                 {{ .Description }}
             </p>
         </header>
@@ -41,30 +41,30 @@
 
         <!-- Main Content -->
         <div class="prose prose-invert prose-lg max-w-none">
-            <div class="text-btcz-gray-200 leading-relaxed space-y-6">
+            <div class="text-btcz-gray-200 leading-relaxed space-y-6 text-center">
                 {{ .Content }}
             </div>
         </div>
 
         <!-- Features -->
         <div class="mt-16 bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl p-8">
-            <h2 class="text-2xl font-bold text-btcz-gold mb-6">Key Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 class="text-2xl font-bold text-btcz-gold mb-6 text-center">Key Features</h2>
+            <ul class="space-y-4 max-w-2xl mx-auto">
                 {{ range .Params.features }}
-                <div class="flex items-center text-btcz-gray-200">
+                <li class="flex items-center text-btcz-gray-200 justify-center">
                     <svg class="w-5 h-5 mr-3 text-btcz-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                     <span>{{ . }}</span>
-                </div>
+                </li>
                 {{ end }}
-            </div>
+            </ul>
         </div>
 
         <!-- Gallery -->
         {{ with .Params.gallery }}
         <div class="mt-16">
-            <h2 class="text-2xl font-bold text-btcz-gold mb-6">Screenshots</h2>
+            <h2 class="text-2xl font-bold text-btcz-gold mb-6 text-center">Screenshots</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {{ range . }}
                 <div class="relative aspect-video bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl overflow-hidden group">
@@ -82,11 +82,11 @@
         <!-- System Requirements -->
         {{ with .Params.requirements }}
         <div class="mt-16 bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl p-8">
-            <h2 class="text-2xl font-bold text-btcz-gold mb-6">System Requirements</h2>
-            <ul class="space-y-4">
+            <h2 class="text-2xl font-bold text-btcz-gold mb-6 text-center">System Requirements</h2>
+            <ul class="space-y-4 max-w-2xl mx-auto">
                 {{ range . }}
-                <li class="flex items-start text-btcz-gray-200">
-                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <li class="flex items-center text-btcz-gray-200 justify-center">
+                    <svg class="w-5 h-5 mr-3 text-btcz-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
                     <span>{{ . }}</span>
@@ -96,15 +96,40 @@
         </div>
         {{ end }}
 
-        <!-- Back Button -->
-        <div class="mt-16 text-center">
-            <a href="/en/wallets/" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300">
+        <!-- Navigation -->
+        <div class="mt-16 border-t border-btcz-gray-800 pt-8 flex justify-between items-center">
+            <a href="/en/wallets/" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
                 Back to Wallets
             </a>
+            
+            {{ if .PrevInSection }}
+            <a href="{{ .PrevInSection.RelPermalink }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:translate-x-1">
+                Next Wallet
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+            {{ end }}
         </div>
     </div>
 </article>
+
+<style>
+.prose h1, .prose h2, .prose h3, .prose p, .prose ul, .prose ol {
+    text-align: center;
+}
+.prose ul, .prose ol {
+    list-style-type: none;
+    padding: 0;
+}
+.prose li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+</style>
 {{ end }}
