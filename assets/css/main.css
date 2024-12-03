@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-btcz-gray-950 text-white;
+    @apply bg-btcz-gray-950 text-btcz-gray-200;
   }
 
   .feature-card {
@@ -24,6 +24,13 @@
   .animate-gradient-x {
     background-size: 200% 200%;
     animation: gradient-x 5s ease infinite;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   @keyframes gradient-x {
