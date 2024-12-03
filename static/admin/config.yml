@@ -21,20 +21,86 @@ collections:
       - {label: "Summary", name: "summary", widget: "text", required: false}
 
   - name: "exchanges"
-    label: "Exchanges"
+    label: "Exchange Listings"
     folder: "content/en/buy/exchanges"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Exchange Name", name: "title", widget: "string", hint: "Enter the name of the exchange"}
+      - {label: "Description", name: "description", widget: "text", hint: "Brief description of the exchange (2-3 sentences)"}
       - {label: "Date Added", name: "date", widget: "datetime"}
-      - {label: "Exchange Logo", name: "image", widget: "image"}
-      - {label: "Type", name: "type", widget: "hidden", default: "exchange"}
+      - {
+          label: "Exchange Logo", 
+          name: "image", 
+          widget: "image", 
+          hint: "Upload a PNG logo with transparent background (recommended size: 200x200px)",
+          media_library: {
+            config: {
+              multiple: false
+            }
+          }
+        }
+      - {label: "Exchange Type", name: "type", widget: "hidden", default: "exchange"}
       - {label: "Categories", name: "categories", widget: "hidden", default: ["Exchange"]}
-      - {label: "Features", name: "features", widget: "list", allow_add: true, min: 2, max: 6}
-      - {label: "Trading Pairs", name: "trading_pairs", widget: "list", allow_add: true, min: 1}
-      - {label: "Website URL", name: "website", widget: "string"}
-      - {label: "KYC Required", name: "kyc_required", widget: "boolean", default: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Additional Information", name: "body", widget: "markdown", required: false}
+      - {
+          label: "Exchange Features", 
+          name: "features", 
+          widget: "list", 
+          hint: "Add key features of the exchange (e.g., 'Low Trading Fees', '24/7 Support')",
+          min: 2,
+          max: 6
+        }
+      - {
+          label: "Trading Pairs", 
+          name: "trading_pairs", 
+          widget: "list",
+          hint: "Add available trading pairs (e.g., 'BTCZ/BTC', 'BTCZ/USDT')",
+          min: 1
+        }
+      - {
+          label: "Exchange Website URL", 
+          name: "website", 
+          widget: "string",
+          hint: "Full URL including https:// (e.g., https://exchange.com)"
+        }
+      - {
+          label: "KYC Required?", 
+          name: "kyc_required", 
+          widget: "boolean", 
+          default: false,
+          hint: "Select Yes if the exchange requires KYC verification"
+        }
+      - {
+          label: "Draft", 
+          name: "draft", 
+          widget: "boolean", 
+          default: false,
+          hint: "Set to Yes to hide this exchange from the website"
+        }
+      - {
+          label: "Additional Information", 
+          name: "body", 
+          widget: "markdown", 
+          required: false,
+          hint: "Optional: Add any additional details about the exchange"
+        }
+
+  - name: "buy-page"
+    label: "Buy Page Settings"
+    files:
+      - name: "buy-index"
+        label: "Buy Page Content"
+        file: "content/en/buy/_index.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string", hint: "Main title of the buy page"}
+          - {label: "Description", name: "description", widget: "text", hint: "Brief description shown under the title"}
+          - {label: "Type", name: "type", widget: "hidden", default: "section"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "buy"}
+          - {
+              label: "Safety Tips", 
+              name: "safety_tips", 
+              widget: "list",
+              hint: "Add safety tips for users (displayed at bottom of page)",
+              min: 2,
+              max: 5
+            }
