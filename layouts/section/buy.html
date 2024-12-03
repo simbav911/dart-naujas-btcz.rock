@@ -15,52 +15,53 @@
                 <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="block h-full">
                     <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
                         <!-- Exchange Logo/Image -->
-                        <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 h-48">
-                            <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
+                            <div class="absolute top-4 left-4">
+                                <span class="inline-block px-3 py-1 bg-btcz-gray-800/80 text-btcz-gold text-sm font-medium rounded-full">
+                                    {{ if .Params.kyc_required }}Centralized{{ else }}Decentralized{{ end }}
+                                </span>
+                            </div>
+                            <div class="flex justify-center items-center h-32">
                                 {{ with .Params.image }}
                                 <img 
                                     src="{{ . }}" 
                                     alt="{{ $.Title }}" 
-                                    class="w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-110"
+                                    class="h-24 w-24 object-contain transition-transform duration-500 group-hover:scale-110 text-btcz-gold [filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(360deg)_brightness(105%)_contrast(105%)]"
                                 >
                                 {{ else }}
-                                <svg class="w-24 h-24 text-btcz-gold opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-24 h-24 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 {{ end }}
                             </div>
-                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-btcz-gray-900 opacity-80"></div>
                         </div>
 
                         <div class="p-6">
-                            <!-- Exchange Type -->
-                            <div class="mb-4">
-                                <span class="inline-block px-3 py-1 bg-btcz-gray-800 text-btcz-gold text-sm font-medium rounded-full">
-                                    {{ if .Params.kyc_required }}Centralized{{ else }}Decentralized{{ end }}
-                                </span>
-                            </div>
-
                             <!-- Exchange Name -->
                             <h2 class="text-2xl font-bold mb-3 text-btcz-gold group-hover:text-white transition-colors duration-300">
                                 {{ .Title }}
                             </h2>
 
                             <!-- Description -->
-                            <p class="text-btcz-gray-400 mb-6 line-clamp-3">
+                            <p class="text-btcz-gray-400 mb-6 line-clamp-2">
                                 {{ .Description }}
                             </p>
 
                             <!-- Trading Pairs -->
-                            <div class="mb-4">
-                                {{ range .Params.trading_pairs }}
-                                <span class="inline-block px-2 py-1 bg-btcz-gray-800/50 text-btcz-gray-400 text-xs rounded mr-2 mb-2">
-                                    {{ . }}
-                                </span>
-                                {{ end }}
+                            <div class="mb-6">
+                                <h3 class="text-sm font-medium text-btcz-gray-400 mb-2">Trading Pairs</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    {{ range .Params.trading_pairs }}
+                                    <span class="inline-block px-2 py-1 bg-btcz-gray-800/50 text-btcz-gray-400 text-xs rounded">
+                                        {{ . }}
+                                    </span>
+                                    {{ end }}
+                                </div>
                             </div>
 
                             <!-- Features -->
                             <div class="space-y-2 mb-6">
+                                <h3 class="text-sm font-medium text-btcz-gray-400 mb-2">Features</h3>
                                 {{ range .Params.features }}
                                 <div class="flex items-center text-btcz-gray-400">
                                     <svg class="w-4 h-4 mr-2 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +73,7 @@
                             </div>
 
                             <!-- Visit Button -->
-                            <div class="flex items-center justify-between text-sm mt-4 pt-4 border-t border-btcz-gray-800">
+                            <div class="flex items-center justify-between text-sm mt-6 pt-4 border-t border-btcz-gray-800">
                                 <span class="text-btcz-gray-400">
                                     {{ if .Params.kyc_required }}KYC Required{{ else }}No KYC Required{{ end }}
                                 </span>
@@ -91,26 +92,26 @@
         </div>
 
         <!-- Safety Notice -->
-        <div class="mt-16 max-w-3xl mx-auto bg-btcz-gray-900/50 border border-btcz-gray-800 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-btcz-gold mb-4">Safety Tips</h3>
-            <ul class="space-y-2 text-btcz-gray-400">
+        <div class="mt-16 max-w-3xl mx-auto bg-btcz-gray-900/50 border border-btcz-gray-800 rounded-xl p-8">
+            <h3 class="text-xl font-bold text-btcz-gold mb-6">Safety Tips</h3>
+            <ul class="space-y-4 text-btcz-gray-400">
                 <li class="flex items-start">
-                    <svg class="w-5 h-5 mr-2 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                     </svg>
-                    <span>Always verify the exchange URL and security certificates</span>
+                    <span>Always verify the exchange URL and security certificates before trading</span>
                 </li>
                 <li class="flex items-start">
-                    <svg class="w-5 h-5 mr-2 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
-                    <span>Enable two-factor authentication when available</span>
+                    <span>Enable two-factor authentication when available for enhanced security</span>
                 </li>
                 <li class="flex items-start">
-                    <svg class="w-5 h-5 mr-2 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <span>Start with small test transactions</span>
+                    <span>Start with small test transactions to verify everything works correctly</span>
                 </li>
             </ul>
         </div>
