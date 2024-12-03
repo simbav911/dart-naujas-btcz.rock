@@ -1,162 +1,33 @@
-/* Import Tailwind CSS base styles */
 @tailwind base;
-
-/* Import Tailwind CSS component classes */
 @tailwind components;
-
-/* Import Tailwind CSS utility classes */
 @tailwind utilities;
 
-/* Custom base styles */
 @layer base {
-  html {
-    @apply scroll-smooth;
-  }
-  
   body {
-    @apply font-sans text-btcz-black bg-gradient-to-br from-white to-btcz-gray-100;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl lg:text-3xl;
-  }
-
-  a {
-    @apply text-btcz-gold hover:text-opacity-80 transition-all duration-200;
-  }
-}
-
-/* Custom components */
-@layer components {
-  .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-200;
-  }
-
-  .btn-primary {
-    @apply btn bg-gradient-to-r from-btcz-gold to-yellow-500 text-btcz-black hover:opacity-90 shadow-sm hover:shadow-md;
-  }
-
-  .btn-secondary {
-    @apply btn border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-black shadow-sm hover:shadow-md;
-  }
-
-  .nav-link {
-    @apply text-btcz-black hover:text-btcz-gold transition-all duration-200;
-  }
-
-  .section {
-    @apply py-16 md:py-20 lg:py-24;
-  }
-
-  .card {
-    @apply bg-white rounded-xl shadow-sm p-8 hover:shadow-md transition-all duration-300 transform hover:-translate-y-1;
+    @apply bg-btcz-gray-950 text-white;
   }
 
   .feature-card {
-    @apply bg-gradient-to-br from-white to-btcz-gray-100 rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2;
+    @apply transition-all duration-300 ease-in-out;
   }
 
-  .feature-icon {
-    @apply w-20 h-20 mr-8 bg-btcz-gold/10 rounded-2xl p-4 transition-all duration-500;
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg text-lg font-bold uppercase tracking-wide;
   }
 
-  .feature-title {
-    @apply text-3xl font-bold bg-gradient-to-r from-btcz-gold to-yellow-500 bg-clip-text text-transparent;
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg text-lg font-bold uppercase tracking-wide;
   }
 }
 
-/* Custom utilities */
 @layer utilities {
-  .text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 5s ease infinite;
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-btcz-gold to-yellow-500;
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
-
-  .animate-fade-up {
-    opacity: 0;
-    animation: fadeUp 0.8s ease-out forwards;
-  }
-
-  .delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .delay-600 {
-    animation-delay: 600ms;
-  }
-
-  .delay-800 {
-    animation-delay: 800ms;
-  }
-
-  .delay-1000 {
-    animation-delay: 1000ms;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* Prose Customization */
-.prose {
-  @apply max-w-none;
-}
-
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  @apply text-gradient;
-}
-
-.prose a {
-  @apply text-btcz-gold hover:text-opacity-80 no-underline;
-}
-
-.prose strong {
-  @apply text-btcz-black font-semibold;
-}
-
-.prose ul li::before {
-  @apply text-btcz-gold;
-}
-
-.prose blockquote {
-  @apply border-l-4 border-btcz-gold;
-}
-
-.prose code {
-  @apply text-btcz-gold bg-btcz-gray-100 px-2 py-1 rounded;
-}
-
-.prose pre {
-  @apply bg-btcz-gray-100 rounded-xl shadow-sm;
 }
