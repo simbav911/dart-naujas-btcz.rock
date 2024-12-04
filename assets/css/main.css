@@ -2,105 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-btcz-gray-950 text-btcz-gray-200;
-  }
-
-  .feature-card {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  .btn-primary {
-    @apply px-6 py-3 rounded-lg text-lg font-bold uppercase tracking-wide;
-  }
-
-  .btn-secondary {
-    @apply px-6 py-3 rounded-lg text-lg font-bold uppercase tracking-wide;
-  }
+/* Year Timeline */
+.year-timeline {
+    @apply fixed top-1/4 left-4 z-50;
 }
 
-@layer components {
-  /* News tile styles */
-  .news-tile {
-    @apply relative bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-950;
-  }
-
-  .news-tile:hover::after {
-    @apply opacity-100;
-  }
-
-  .news-tile::after {
-    content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-300 rounded-2xl;
-    background: linear-gradient(45deg, rgba(255,215,0,0.1) 0%, transparent 100%);
-  }
+.year-timeline-line {
+    @apply absolute left-6 top-0 bottom-0 w-0.5 bg-btcz-gray-800;
 }
 
-@layer utilities {
-  .animate-gradient-x {
-    background-size: 200% 200%;
-    animation: gradient-x 5s ease infinite;
-  }
-
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  @keyframes gradient-x {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
+.year-button {
+    @apply block w-12 h-12 rounded-full bg-btcz-gray-800 text-btcz-gray-400 hover:bg-btcz-gold hover:text-btcz-gray-900 flex items-center justify-center text-sm font-medium mb-4 relative z-10 transition-all duration-300;
 }
 
-/* Prose Customization for News Articles */
-.prose {
-  @apply text-btcz-gray-200;
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
 }
 
-.prose h2 {
-  @apply text-btcz-gold mt-8 mb-4;
+/* Year Section */
+.year-section {
+    scroll-margin-top: 2rem;
 }
 
-.prose h3 {
-  @apply text-btcz-gold/90 mt-6 mb-3;
-}
-
-.prose p {
-  @apply text-btcz-gray-200 mb-6 leading-relaxed;
-}
-
-.prose a {
-  @apply text-btcz-gold hover:text-white transition-colors duration-200;
-}
-
-.prose ul, .prose ol {
-  @apply my-6 space-y-2;
-}
-
-.prose li {
-  @apply text-btcz-gray-200;
-}
-
-.prose blockquote {
-  @apply border-l-4 border-btcz-gold bg-btcz-gray-900/50 p-4 my-6;
-}
-
-.prose code {
-  @apply bg-btcz-gray-900 text-btcz-gold px-2 py-1 rounded;
-}
-
-.prose pre {
-  @apply bg-btcz-gray-900 p-4 rounded-lg overflow-x-auto my-6;
-}
-
-.prose img {
-  @apply rounded-lg shadow-xl my-8;
-}
-
-.prose hr {
-  @apply border-btcz-gray-800 my-8;
+/* Mobile Timeline */
+@media (max-width: 768px) {
+    .year-timeline {
+        @apply fixed bottom-4 left-0 right-0 top-auto flex justify-center items-center bg-btcz-gray-950 py-2 px-4 space-x-2 overflow-x-auto;
+    }
+    
+    .year-timeline-line {
+        @apply hidden;
+    }
+    
+    .year-button {
+        @apply mb-0 w-10 h-10 text-xs flex-shrink-0;
+    }
 }

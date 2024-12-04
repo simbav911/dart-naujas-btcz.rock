@@ -1,5 +1,5 @@
 {{ define "main" }}
-<section class="section bg-btcz-gray-950 py-24" x-data="{ mode: 'all' }">
+<section class="section bg-btcz-gray-950 py-24" x-data="{ mode: 'all', selectedYear: null }">
     <div class="container mx-auto px-4">
         <!-- Header -->
         <div class="max-w-3xl mx-auto text-center mb-16">
@@ -33,122 +33,136 @@
             </div>
         </div>
 
-        <!-- Roadmap Years -->
-        {{ $roadmapPages := where .Site.RegularPages "Section" "roadmap" }}
-        {{ $years := slice }}
-        {{ range $roadmapPages }}
-            {{ $years = $years | append .Params.year }}
-        {{ end }}
-        {{ $uniqueYears := uniq $years }}
-        {{ $sortedYears := sort $uniqueYears }}
+        <!-- Main Content with Timeline -->
+        <div class="flex">
+            <!-- Year Timeline -->
+            {{ $roadmapPages := where .Site.RegularPages "Section" "roadmap" }}
+            {{ $years := slice }}
+            {{ range $roadmapPages }}
+                {{ $years = $years | append .Params.year }}
+            {{ end }}
+            {{ $uniqueYears := uniq $years }}
+            {{ $sortedYears := sort $uniqueYears "value" "desc" }}
 
-        {{ range $sortedYears }}
-        {{ $year := . }}
-        <div class="mb-16">
-            <h2 class="text-3xl font-bold text-btcz-gold mb-8">{{ $year }}</h2>
-            
-            <!-- Roadmap Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {{ range where $roadmapPages "Params.year" $year }}
-                <article 
-                    x-show="mode === 'all' || 
-                           (mode === 'completed' && '{{ .Params.status }}' === 'completed') || 
-                           (mode === 'upcoming' && '{{ .Params.status }}' !== 'completed')"
-                    class="group">
-                    <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
-                        <!-- Status Badge -->
-                        <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
-                            <div class="absolute top-4 left-4">
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
-                                    {{ if eq .Params.status "completed" }}
-                                        bg-btcz-gray-800 text-green-400
-                                    {{ else if eq .Params.status "in-progress" }}
-                                        bg-btcz-gray-800 text-btcz-gold
-                                    {{ else }}
-                                        bg-btcz-gray-800 text-blue-400
-                                    {{ end }}">
-                                    {{ humanize .Params.status }}
-                                </span>
-                            </div>
-                            
-                            <!-- Icon or Image -->
-                            <div class="flex justify-center items-center h-32">
-                                {{ with .Params.icon }}
-                                <img src="{{ . }}" alt="{{ $.Title }}" class="h-24 w-24 object-contain transition-transform duration-500 group-hover:scale-110">
-                                {{ else }}
-                                <svg class="w-24 h-24 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                                </svg>
-                                {{ end }}
-                            </div>
-                        </div>
+            <div class="w-16 flex-shrink-0 relative">
+                <div class="fixed top-1/4 space-y-4">
+                    <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-btcz-gray-800"></div>
+                    {{ range $sortedYears }}
+                    {{ $year := . }}
+                    <a 
+                        href="#year-{{ $year }}"
+                        class="relative z-10 block w-12 h-12 rounded-full bg-btcz-gray-800 text-btcz-gray-400 hover:bg-btcz-gold hover:text-btcz-gray-900 flex items-center justify-center transition-all duration-300">
+                        {{ $year }}
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
 
-                        <div class="p-6">
-                            <!-- Title -->
-                            <h3 class="text-2xl font-bold mb-3 text-btcz-gold group-hover:text-white transition-colors duration-300">
-                                {{ .Title }}
-                            </h3>
-
-                            <!-- Description -->
-                            <p class="text-btcz-gray-400 mb-6">
-                                {{ .Description }}
-                            </p>
-
-                            <!-- Progress Bar -->
-                            <div class="mb-6">
-                                <div class="flex justify-between text-sm text-btcz-gray-400 mb-2">
-                                    <span>Progress</span>
-                                    <span>{{ .Params.progress }}%</span>
+            <!-- Roadmap Content -->
+            <div class="flex-grow">
+                {{ range $sortedYears }}
+                {{ $year := . }}
+                <div id="year-{{ $year }}" class="mb-16">
+                    <h2 class="text-3xl font-bold text-btcz-gold mb-8">{{ $year }}</h2>
+                    
+                    <!-- Roadmap Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {{ range sort (where $roadmapPages "Params.year" $year) "Date" "desc" }}
+                        <article 
+                            x-show="mode === 'all' || 
+                                   (mode === 'completed' && '{{ .Params.status }}' === 'completed') || 
+                                   (mode === 'upcoming' && '{{ .Params.status }}' !== 'completed')"
+                            class="group">
+                            <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
+                                <!-- Status Badge -->
+                                <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
+                                    <div class="absolute top-4 left-4">
+                                        <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
+                                            {{ if eq .Params.status "completed" }}
+                                                bg-btcz-gray-800 text-green-400
+                                            {{ else if eq .Params.status "in-progress" }}
+                                                bg-btcz-gray-800 text-btcz-gold
+                                            {{ else }}
+                                                bg-btcz-gray-800 text-blue-400
+                                            {{ end }}">
+                                            {{ humanize .Params.status }}
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- Icon -->
+                                    <div class="flex justify-center items-center h-32">
+                                        <img src="{{ .Params.icon }}" alt="{{ .Title }} icon" class="w-24 h-24">
+                                    </div>
                                 </div>
-                                <div class="w-full bg-btcz-gray-800 rounded-full h-2">
-                                    <div class="h-2 rounded-full transition-all duration-500
-                                        {{ if eq .Params.status "completed" }}
-                                            bg-green-500
-                                        {{ else if eq .Params.status "in-progress" }}
-                                            bg-btcz-gold
-                                        {{ else }}
-                                            bg-blue-500
-                                        {{ end }}
-                                        {{ if eq .Params.progress 0 }}w-0
-                                        {{ else if eq .Params.progress 25 }}w-1/4
-                                        {{ else if eq .Params.progress 50 }}w-1/2
-                                        {{ else if eq .Params.progress 75 }}w-3/4
-                                        {{ else if eq .Params.progress 100 }}w-full
-                                        {{ else }}w-0{{ end }}">
+
+                                <div class="p-6">
+                                    <!-- Title -->
+                                    <h3 class="text-2xl font-bold mb-3 text-btcz-gold group-hover:text-white transition-colors duration-300">
+                                        {{ .Title }}
+                                    </h3>
+
+                                    <!-- Description -->
+                                    <p class="text-btcz-gray-400 mb-6">
+                                        {{ .Description }}
+                                    </p>
+
+                                    <!-- Progress Bar -->
+                                    <div class="mb-6">
+                                        <div class="flex justify-between text-sm text-btcz-gray-400 mb-2">
+                                            <span>Progress</span>
+                                            <span>{{ .Params.progress }}%</span>
+                                        </div>
+                                        <div class="w-full bg-btcz-gray-800 rounded-full h-2">
+                                            <div class="h-2 rounded-full transition-all duration-500
+                                                {{ if eq .Params.status "completed" }}
+                                                    bg-green-500
+                                                {{ else if eq .Params.status "in-progress" }}
+                                                    bg-btcz-gold
+                                                {{ else }}
+                                                    bg-blue-500
+                                                {{ end }}
+                                                {{ if eq .Params.progress 0 }}w-0
+                                                {{ else if eq .Params.progress 25 }}w-1/4
+                                                {{ else if eq .Params.progress 50 }}w-1/2
+                                                {{ else if eq .Params.progress 75 }}w-3/4
+                                                {{ else if eq .Params.progress 100 }}w-full
+                                                {{ else }}w-0{{ end }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tags -->
+                                    <div class="mb-6">
+                                        <div class="flex flex-wrap gap-2">
+                                            {{ range .Params.tags }}
+                                            <span class="inline-block px-2 py-1 bg-btcz-gray-800 text-btcz-gray-400 text-xs rounded">
+                                                {{ . }}
+                                            </span>
+                                            {{ end }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Read More Link -->
+                                    <div class="flex items-center justify-between text-sm mt-6 pt-4 border-t border-btcz-gray-800">
+                                        <span class="text-btcz-gray-400">
+                                            {{ .Date.Format "January 2006" }}
+                                        </span>
+                                        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
+                                            Read More
+                                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                            </svg>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Tags -->
-                            <div class="mb-6">
-                                <div class="flex flex-wrap gap-2">
-                                    {{ range .Params.tags }}
-                                    <span class="inline-block px-2 py-1 bg-btcz-gray-800 text-btcz-gray-400 text-xs rounded">
-                                        {{ . }}
-                                    </span>
-                                    {{ end }}
-                                </div>
-                            </div>
-
-                            <!-- Read More Link -->
-                            <div class="flex items-center justify-between text-sm mt-6 pt-4 border-t border-btcz-gray-800">
-                                <span class="text-btcz-gray-400">
-                                    {{ .Date.Format "January 2006" }}
-                                </span>
-                                <a href="{{ .RelPermalink }}" class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
-                                    Read More
-                                    <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
+                        </article>
+                        {{ end }}
                     </div>
-                </article>
+                </div>
                 {{ end }}
             </div>
         </div>
-        {{ end }}
 
         <!-- Additional Information -->
         <div class="mt-16 max-w-3xl mx-auto bg-btcz-gray-800 border border-btcz-gray-800 rounded-xl p-8">
