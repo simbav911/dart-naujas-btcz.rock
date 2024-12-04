@@ -2,192 +2,38 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "static/images"
+public_folder: "/images"
 
 collections:
-  - name: "news"
-    label: "News"
-    folder: "content/en/news"
+  - name: "roadmap"
+    label: "Roadmap"
+    folder: "content/roadmap"
     create: true
-    slug: "{{year}}-{{month}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Subject", name: "subject", widget: "string"}
+      - {label: "Description", name: "description", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Section", name: "section", widget: "hidden", default: "roadmap"}
+      - {label: "Type", name: "type", widget: "hidden", default: "roadmap"}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+      - {label: "Year", name: "year", widget: "number"}
+      - {label: "Status", name: "status", widget: "select", options: ["completed", "in-progress", "upcoming"]}
+      - {label: "Progress", name: "progress", widget: "number", min: 0, max: 100, default: 0}
+      - {label: "Tags", name: "tags", widget: "select", multiple: true, options: ["Mining", "Exchange", "Community", "Wallet", "Payment", "Media", "Update", "Video", "Launch"]}
+      - {label: "Icon", name: "icon", widget: "image", media_folder: "/static/images/icons"}
+      - {label: "Priority", name: "priority", widget: "select", options: ["high", "medium", "low"]}
       - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Summary", name: "summary", widget: "text", required: false}
 
-  - name: "exchanges"
-    label: "Exchange Listings"
-    folder: "content/en/buy/exchanges"
+  - name: "icons"
+    label: "Icons"
+    folder: "static/images/icons"
     create: true
-    slug: "{{slug}}"
+    extension: "svg"
+    format: "raw"
     fields:
-      - {label: "Exchange Name", name: "title", widget: "string", hint: "Enter the name of the exchange"}
-      - {label: "Description", name: "description", widget: "text", hint: "Brief description of the exchange (2-3 sentences)"}
-      - {label: "Date Added", name: "date", widget: "datetime"}
-      - {
-          label: "Exchange Logo", 
-          name: "image", 
-          widget: "image", 
-          hint: "Upload a PNG logo with transparent background (recommended size: 200x200px)",
-          media_library: {
-            config: {
-              multiple: false
-            }
-          }
-        }
-      - {label: "Exchange Type", name: "type", widget: "hidden", default: "exchange"}
-      - {label: "Categories", name: "categories", widget: "hidden", default: ["Exchange"]}
-      - {
-          label: "Exchange Features", 
-          name: "features", 
-          widget: "list", 
-          hint: "Add key features of the exchange",
-          min: 2,
-          max: 6
-        }
-      - {
-          label: "Trading Pairs", 
-          name: "trading_pairs", 
-          widget: "list",
-          hint: "Add available trading pairs (e.g., 'BTCZ/BTC')",
-          min: 1
-        }
-      - {
-          label: "Exchange Website URL", 
-          name: "website", 
-          widget: "string",
-          hint: "Full URL including https://"
-        }
-      - {
-          label: "KYC Required?", 
-          name: "kyc_required", 
-          widget: "boolean", 
-          default: false,
-          hint: "Select Yes if KYC verification is required"
-        }
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-
-  - name: "wallets"
-    label: "Wallet Listings"
-    folder: "content/en/wallets"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {
-          label: "Wallet Name", 
-          name: "title", 
-          widget: "string", 
-          hint: "Enter the name of the wallet (e.g., 'BitcoinZ Desktop Wallet')"
-        }
-      - {
-          label: "Description", 
-          name: "description", 
-          widget: "text", 
-          hint: "Brief overview of the wallet's main features (2-3 sentences)"
-        }
-      - {label: "Date Added", name: "date", widget: "datetime"}
-      - {
-          label: "Wallet Logo", 
-          name: "image", 
-          widget: "image", 
-          hint: "Upload a PNG logo with transparent background (recommended size: 200x200px). This will be displayed at the top of the wallet page.",
-          media_library: {
-            config: {
-              multiple: false
-            }
-          }
-        }
-      - {
-          label: "Screenshots", 
-          name: "gallery", 
-          widget: "list",
-          field: {
-            label: "Screenshot", 
-            name: "image", 
-            widget: "image",
-            hint: "Upload wallet screenshots (recommended size: 1200x675px)"
-          },
-          hint: "Add screenshots showing key features of the wallet",
-          required: false
-        }
-      - {label: "Type", name: "type", widget: "hidden", default: "wallet"}
-      - {
-          label: "Key Features", 
-          name: "features", 
-          widget: "list", 
-          hint: "Add main features of the wallet (e.g., 'Secure Key Management', 'Multi-Address Support')",
-          min: 2,
-          max: 6
-        }
-      - {
-          label: "Download Links", 
-          name: "platforms", 
-          widget: "list",
-          hint: "Add download information for each supported platform",
-          fields:
-            - {
-                label: "Platform", 
-                name: "name", 
-                widget: "select", 
-                options: ["Windows", "macOS", "Linux", "Android", "iOS", "Web"],
-                hint: "Select the operating system"
-              }
-            - {
-                label: "Download URL", 
-                name: "download_url", 
-                widget: "string",
-                hint: "Full URL to download the wallet (e.g., GitHub release link)"
-              }
-            - {
-                label: "Version", 
-                name: "version", 
-                widget: "string",
-                hint: "Current version number (e.g., '2.1.0')"
-              }
-        }
-      - {
-          label: "System Requirements", 
-          name: "requirements", 
-          widget: "list",
-          hint: "List minimum system requirements (e.g., '4GB RAM minimum', '2GB free disk space')",
-          required: false
-        }
-      - {
-          label: "Draft", 
-          name: "draft", 
-          widget: "boolean", 
-          default: false,
-          hint: "Set to Yes to hide this wallet from the website"
-        }
-      - {
-          label: "Detailed Description", 
-          name: "body", 
-          widget: "markdown", 
-          hint: "Add detailed information about the wallet. Use markdown headings (## and ###) to organize content into sections.",
-          required: false
-        }
-
-  - name: "pages"
-    label: "Page Settings"
-    files:
-      - name: "wallets-index"
-        label: "Wallets Page Content"
-        file: "content/en/wallets/_index.md"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Description", name: "description", widget: "text"}
-          - {label: "Type", name: "type", widget: "hidden", default: "section"}
-          - {label: "Layout", name: "layout", widget: "hidden", default: "wallets"}
-          - {
-              label: "Safety Tips", 
-              name: "safety_tips", 
-              widget: "list",
-              hint: "Add wallet safety tips for users",
-              min: 2,
-              max: 5
-            }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "SVG Content", name: "body", widget: "code", default_language: "svg"}

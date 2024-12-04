@@ -3,66 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BitcoinZ CMS</title>
-  <style>
-    /* Custom styling for admin interface */
-    :root {
-      --bitcoinz-gold: #f7931a;
-      --bitcoinz-dark: #1a1a1a;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-
-    /* Header customization */
-    .css-12b66la-AppHeaderContent {
-      background-color: var(--bitcoinz-dark) !important;
-    }
-
-    /* Primary buttons */
-    .css-2960tt-ButtonElement {
-      background-color: var(--bitcoinz-gold) !important;
-    }
-
-    /* Error message styling */
-    .error-message {
-      background: #ff4444;
-      color: white;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-    }
-  </style>
+  <title>BitcoinZ Content Manager</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Include Netlify CMS -->
+  <!-- Include the script that builds the page and powers Netlify CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
-    // Initialize CMS
-    CMS.init();
-
-    // Register preview templates
+    // Custom preview styles
     CMS.registerPreviewStyle("/css/main.css");
     
-    // Custom editor components
-    CMS.registerEditorComponent({
-      id: "youtube",
-      label: "YouTube",
-      fields: [{name: 'id', label: 'YouTube Video ID', widget: 'string'}],
-      pattern: /^{{< youtube ([a-zA-Z0-9]+) >}}$/,
-      fromBlock: function(match) {
-        return {
-          id: match[1]
-        };
-      },
-      toBlock: function(obj) {
-        return `{{< youtube ${obj.id} >}}`;
-      },
-      toPreview: function(obj) {
-        return `<img src="https://img.youtube.com/vi/${obj.id}/maxresdefault.jpg" alt="YouTube Video"/>`;
+    // Custom icon preview component
+    const IconPreview = createClass({
+      render: function() {
+        const {value, getAsset} = this.props;
+        return h('div', {className: 'icon-preview'},
+          h('img', {
+            src: value ? getAsset(value) : '',
+            className: 'icon-preview-image',
+            style: {
+              width: '64px',
+              height: '64px',
+              objectFit: 'contain'
+            }
+          })
+        );
       }
     });
+
+    CMS.registerWidget('icon-preview', IconPreview);
   </script>
+  <style>
+    /* Custom admin styles */
+    .icon-preview {
+      padding: 1rem;
+      background: #f0f0f0;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .icon-preview-image {
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
 </body>
 </html>
