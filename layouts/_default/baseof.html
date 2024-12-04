@@ -11,7 +11,11 @@
         *,::after,::before{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
         body{font-family:'Open Sans',ui-sans-serif,system-ui;color:var(--btcz-black);background-color:var(--btcz-white)}
+        [x-cloak] { display: none !important; }
     </style>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Preload and Prefetch -->
     <link rel="preload" href="/images/hero-illustration.svg" as="image">
@@ -72,7 +76,7 @@
     }
     </script>
 </head>
-<body class="min-h-screen flex flex-col" x-data="{ darkMode: false }">
+<body class="min-h-screen flex flex-col">
     <!-- Header -->
     {{ partial "header.html" . }}
     
@@ -83,9 +87,6 @@
     
     <!-- Footer -->
     {{ partial "footer.html" . }}
-    
-    <!-- Performance Optimization: Defer non-critical scripts -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Scripts -->
     {{ block "scripts" . }}{{ end }}

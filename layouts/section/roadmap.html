@@ -1,0 +1,184 @@
+{{ define "main" }}
+<section class="section bg-btcz-gray-950 py-24" x-data="{ mode: 'all' }">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-5xl mb-6">
+                {{ .Title }}
+            </h1>
+            <p class="text-btcz-gray-400 text-lg">{{ .Description }}</p>
+        </div>
+
+        <!-- View Mode Selector -->
+        <div class="mb-12">
+            <div class="flex justify-center space-x-4 mb-8">
+                <button 
+                    @click="mode = 'all'" 
+                    class="px-6 py-2 rounded-full transition-all duration-300 hover:bg-btcz-gold hover:text-btcz-gray-900"
+                    :class="mode === 'all' ? 'bg-btcz-gold text-btcz-gray-900' : 'bg-btcz-gray-800 text-btcz-gray-400'">
+                    All Items
+                </button>
+                <button 
+                    @click="mode = 'completed'" 
+                    class="px-6 py-2 rounded-full transition-all duration-300 hover:bg-btcz-gold hover:text-btcz-gray-900"
+                    :class="mode === 'completed' ? 'bg-btcz-gold text-btcz-gray-900' : 'bg-btcz-gray-800 text-btcz-gray-400'">
+                    Completed
+                </button>
+                <button 
+                    @click="mode = 'upcoming'" 
+                    class="px-6 py-2 rounded-full transition-all duration-300 hover:bg-btcz-gold hover:text-btcz-gray-900"
+                    :class="mode === 'upcoming' ? 'bg-btcz-gold text-btcz-gray-900' : 'bg-btcz-gray-800 text-btcz-gray-400'">
+                    Upcoming
+                </button>
+            </div>
+        </div>
+
+        <!-- Roadmap Years -->
+        {{ $roadmapPages := where .Site.RegularPages "Section" "roadmap" }}
+        {{ $years := slice }}
+        {{ range $roadmapPages }}
+            {{ $years = $years | append .Params.year }}
+        {{ end }}
+        {{ $uniqueYears := uniq $years }}
+        {{ $sortedYears := sort $uniqueYears }}
+
+        {{ range $sortedYears }}
+        {{ $year := . }}
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-btcz-gold mb-8">{{ $year }}</h2>
+            
+            <!-- Roadmap Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {{ range where $roadmapPages "Params.year" $year }}
+                <article 
+                    x-show="mode === 'all' || 
+                           (mode === 'completed' && '{{ .Params.status }}' === 'completed') || 
+                           (mode === 'upcoming' && '{{ .Params.status }}' !== 'completed')"
+                    class="group">
+                    <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
+                        <!-- Status Badge -->
+                        <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
+                            <div class="absolute top-4 left-4">
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
+                                    {{ if eq .Params.status "completed" }}
+                                        bg-btcz-gray-800 text-green-400
+                                    {{ else if eq .Params.status "in-progress" }}
+                                        bg-btcz-gray-800 text-btcz-gold
+                                    {{ else }}
+                                        bg-btcz-gray-800 text-blue-400
+                                    {{ end }}">
+                                    {{ humanize .Params.status }}
+                                </span>
+                            </div>
+                            
+                            <!-- Icon or Image -->
+                            <div class="flex justify-center items-center h-32">
+                                {{ with .Params.icon }}
+                                <img src="{{ . }}" alt="{{ $.Title }}" class="h-24 w-24 object-contain transition-transform duration-500 group-hover:scale-110">
+                                {{ else }}
+                                <svg class="w-24 h-24 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
+                                {{ end }}
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <!-- Title -->
+                            <h3 class="text-2xl font-bold mb-3 text-btcz-gold group-hover:text-white transition-colors duration-300">
+                                {{ .Title }}
+                            </h3>
+
+                            <!-- Description -->
+                            <p class="text-btcz-gray-400 mb-6">
+                                {{ .Description }}
+                            </p>
+
+                            <!-- Progress Bar -->
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm text-btcz-gray-400 mb-2">
+                                    <span>Progress</span>
+                                    <span>{{ .Params.progress }}%</span>
+                                </div>
+                                <div class="w-full bg-btcz-gray-800 rounded-full h-2">
+                                    <div class="h-2 rounded-full transition-all duration-500
+                                        {{ if eq .Params.status "completed" }}
+                                            bg-green-500
+                                        {{ else if eq .Params.status "in-progress" }}
+                                            bg-btcz-gold
+                                        {{ else }}
+                                            bg-blue-500
+                                        {{ end }}
+                                        {{ if eq .Params.progress 0 }}w-0
+                                        {{ else if eq .Params.progress 25 }}w-1/4
+                                        {{ else if eq .Params.progress 50 }}w-1/2
+                                        {{ else if eq .Params.progress 75 }}w-3/4
+                                        {{ else if eq .Params.progress 100 }}w-full
+                                        {{ else }}w-0{{ end }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="mb-6">
+                                <div class="flex flex-wrap gap-2">
+                                    {{ range .Params.tags }}
+                                    <span class="inline-block px-2 py-1 bg-btcz-gray-800 text-btcz-gray-400 text-xs rounded">
+                                        {{ . }}
+                                    </span>
+                                    {{ end }}
+                                </div>
+                            </div>
+
+                            <!-- Read More Link -->
+                            <div class="flex items-center justify-between text-sm mt-6 pt-4 border-t border-btcz-gray-800">
+                                <span class="text-btcz-gray-400">
+                                    {{ .Date.Format "January 2006" }}
+                                </span>
+                                <a href="{{ .RelPermalink }}" class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
+                                    Read More
+                                    <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+
+        <!-- Additional Information -->
+        <div class="mt-16 max-w-3xl mx-auto bg-btcz-gray-800 border border-btcz-gray-800 rounded-xl p-8">
+            <h3 class="text-xl font-bold text-btcz-gold mb-6">Roadmap Information</h3>
+            <ul class="space-y-4 text-btcz-gray-400">
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Roadmap items are regularly updated to reflect current progress</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <span>Community feedback is considered for future roadmap items</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 mr-3 mt-1 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Timelines may be adjusted based on development priorities</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content from _index.md -->
+        <div class="mt-16 prose prose-invert max-w-none">
+            {{ .Content }}
+        </div>
+    </div>
+</section>
+{{ end }}
