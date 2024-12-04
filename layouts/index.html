@@ -12,16 +12,28 @@
                     {{ i18n "heroSubtitle" | default "A Community-Driven Cryptocurrency for Everyone" }}
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
-                    <a href="/en/wallets/" class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-btcz-gold/50">
+                    <a href="/en/wallets/" class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white">
                         {{ i18n "downloadWallet" | default "Download Wallet" }}
                     </a>
-                    <a href="/en/why-bitcoinz/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 transition-all duration-300 transform hover:scale-105 shadow-md">
+                    <a href="/en/why-bitcoinz/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900">
                         {{ i18n "learnMore" | default "Learn More" }}
                     </a>
                 </div>
             </div>
-            <div class="hidden lg:block transform hover:scale-105 transition-transform duration-500 perspective-1000">
-                <img src="/images/hero-illustration.svg" alt="BitcoinZ Illustration" class="w-full h-auto rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div class="hidden lg:block transform hover:scale-105 transition-transform duration-500">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-btcz-gray-800 hover:border-btcz-gold transition-colors duration-300">
+                    <div class="relative pb-[56.25%] h-0">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ILOzg-9X7Jc?autoplay=0&rel=0&modestbranding=1" 
+                            title="BitcoinZ Introduction Video"
+                            class="absolute top-0 left-0 w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="absolute inset-0 bg-btcz-gold/10 pointer-events-none"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -124,30 +136,32 @@
 </section>
 
 <!-- Latest News Section with Improved Contrast -->
-<section class="section bg-btcz-gray-950 py-24">
+<section class="section bg-btcz-gray-950 py-12">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-16">
-            <h2 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-5xl">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-4xl">
                 {{ i18n "latestNews" | default "Latest News" }}
             </h2>
-            <a href="/en/news/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 transition-all duration-300 transform hover:scale-105 shadow-md">
+            <a href="/en/news/" class="btn-secondary border border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 transition-all duration-300 transform hover:scale-105">
                 {{ i18n "viewAll" | default "View All" }}
             </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {{ range first 3 (where .Site.RegularPages "Section" "news") }}
-            <article class="group bg-btcz-gray-900 border border-btcz-gray-800 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {{ $news := where .Site.RegularPages "Type" "news" }}
+            {{ range first 3 (sort $news "Date" "desc") }}
+            <a href="{{ .RelPermalink }}" class="group bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-1 overflow-hidden block">
                 {{ with .Params.image }}
-                <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-48 object-cover">
-                {{ end }}
-                <div class="p-8">
-                    <time class="text-sm text-btcz-gray-400">{{ .Date.Format "January 2, 2006" }}</time>
-                    <h3 class="text-xl font-bold mt-2 mb-4">
-                        <a href="{{ .RelPermalink }}" class="text-btcz-gold hover:text-white transition-colors duration-200">{{ .Title }}</a>
-                    </h3>
-                    <p class="text-btcz-gray-200">{{ .Summary }}</p>
+                <div class="relative h-40 overflow-hidden">
+                    <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/20 group-hover:opacity-75 transition-opacity"></div>
                 </div>
-            </article>
+                {{ end }}
+                <div class="p-4">
+                    <time class="text-xs text-btcz-gray-400 block">{{ .Date.Format "January 2, 2006" }}</time>
+                    <h3 class="text-lg font-bold mt-1 mb-2 text-btcz-gold group-hover:text-white transition-colors duration-200">{{ .Title }}</h3>
+                    <p class="text-btcz-gray-200 text-sm line-clamp-2">{{ .Description }}</p>
+                </div>
+            </a>
             {{ end }}
         </div>
     </div>

@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Glass Effect */
+.glass-effect {
+    @apply bg-clip-padding backdrop-filter;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(16px) saturate(140%);
+}
+
+/* Button Styles */
+.btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3 text-lg font-medium rounded-xl;
+    @apply transform transition-all duration-300;
+    @apply shadow-lg shadow-btcz-gold/20;
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3 text-lg font-medium rounded-xl;
+    @apply transform transition-all duration-300;
+    @apply shadow-lg shadow-btcz-gold/10;
+    @apply backdrop-blur-sm;
+}
+
+/* Button Hover Effects */
+.btn-primary:hover {
+    @apply shadow-xl shadow-btcz-gold/30;
+    transform: translateY(-2px);
+}
+
+.btn-secondary:hover {
+    @apply shadow-xl shadow-btcz-gold/20;
+    transform: translateY(-2px);
+}
+
 /* Year Timeline */
 .year-timeline {
     @apply fixed top-1/4 left-4 z-50;

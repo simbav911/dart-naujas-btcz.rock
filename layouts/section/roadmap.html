@@ -34,7 +34,7 @@
         </div>
 
         <!-- Roadmap Years -->
-        {{ $roadmapPages := where (where .Site.Pages "Type" "roadmap") "Section" "roadmap" }}
+        {{ $roadmapPages := where .Site.Pages "Section" "roadmap" }}
         {{ $years := slice }}
         {{ range $roadmapPages }}
             {{ if ne .File.BaseFileName "_index" }}
