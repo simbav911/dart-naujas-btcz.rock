@@ -1,0 +1,140 @@
+{{ define "main" }}
+<div class="bg-black min-h-screen">
+    <!-- Hero Section -->
+    <div class="relative py-32 px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white">{{ .Title }}</h1>
+            <p class="mt-6 text-xl md:text-2xl text-gray-300">{{ .Description }}</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16">
+        <!-- Mission Section -->
+        <div class="max-w-4xl mx-auto mb-32">
+            <div class="glass-effect rounded-2xl p-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-btcz-gold mb-10 text-center">Our Mission</h2>
+                <p class="text-xl md:text-2xl text-gray-300 leading-relaxed text-center">
+                    BitcoinZ is a community-driven cryptocurrency that embodies the true spirit of decentralization, privacy, and financial empowerment.
+                </p>
+            </div>
+        </div>
+
+        <!-- Core Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32">
+            <!-- Decentralization -->
+            <div class="glass-effect rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-btcz-gold mb-6">True Decentralization</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Every BTCZ coin is fairly mined</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>No initial coin offering to centralize control</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Community-driven governance</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Privacy -->
+            <div class="glass-effect rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-btcz-gold mb-6">Enhanced Privacy</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Advanced encryption protection</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Anonymous transactions</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Multiple security layers</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Additional Features -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32">
+            <!-- Community -->
+            <div class="glass-effect rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-btcz-gold mb-6">Community Governance</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Transparent decision making</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Open contribution system</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Regular community updates</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Scalability -->
+            <div class="glass-effect rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-btcz-gold mb-6">Scalable Solution</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Fast and efficient transactions</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Adaptive network scaling</span>
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <span class="w-2.5 h-2.5 bg-btcz-gold rounded-full mr-4 flex-shrink-0"></span>
+                        <span>Future-proof architecture</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Community Links -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- GitHub -->
+            <a href="https://github.com/bitcoinz-site/bitcoinz" target="_blank" rel="noopener noreferrer"
+                class="glass-effect rounded-2xl p-6 text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                <img src="/images/social/github.svg" alt="GitHub" class="w-12 h-12 mx-auto mb-4">
+                <h4 class="text-btcz-gold font-bold mb-2">GitHub</h4>
+                <p class="text-gray-300">Contribute Code</p>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.gg/bitcoinz" target="_blank" rel="noopener noreferrer"
+                class="glass-effect rounded-2xl p-6 text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                <img src="/images/social/discord.svg" alt="Discord" class="w-12 h-12 mx-auto mb-4">
+                <h4 class="text-btcz-gold font-bold mb-2">Discord</h4>
+                <p class="text-gray-300">Join Community</p>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/bitcoinzcommunity" target="_blank" rel="noopener noreferrer"
+                class="glass-effect rounded-2xl p-6 text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                <img src="/images/social/telegram.svg" alt="Telegram" class="w-12 h-12 mx-auto mb-4">
+                <h4 class="text-btcz-gold font-bold mb-2">Telegram</h4>
+                <p class="text-gray-300">Stay Informed</p>
+            </a>
+
+            <!-- Twitter -->
+            <a href="https://twitter.com/bitcoinz_team" target="_blank" rel="noopener noreferrer"
+                class="glass-effect rounded-2xl p-6 text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                <img src="/images/social/twitter.svg" alt="Twitter" class="w-12 h-12 mx-auto mb-4">
+                <h4 class="text-btcz-gold font-bold mb-2">Twitter</h4>
+                <p class="text-gray-300">Follow Updates</p>
+            </a>
+        </div>
+    </div>
+</div>
+{{ end }}
