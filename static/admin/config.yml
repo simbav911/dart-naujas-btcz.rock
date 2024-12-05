@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: bitcoinz-site/bitcoinz  # Replace with your GitHub repository
   branch: main
+  base_url: https://api.github.com
+  auth_endpoint: /auth
 
 media_folder: "static/images"
 public_folder: "/images"

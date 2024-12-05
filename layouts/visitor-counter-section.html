@@ -1,0 +1,19 @@
+<!-- Visitor Counter Section -->
+<section class="section bg-btcz-gray-900 py-8">
+    <div class="container mx-auto px-4">
+        <div class="visitor-stats grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
+            <div>
+                <div id="today-visitors" class="visitor-count">0</div>
+                <div class="visitor-label">{{ i18n "visitorsToday" | default "Today's Visitors" }}</div>
+            </div>
+            <div>
+                <div id="week-visitors" class="visitor-count">0</div>
+                <div class="visitor-label">{{ i18n "visitorsThisWeek" | default "This Week" }}</div>
+            </div>
+            <div>
+                <div id="month-visitors" class="visitor-count">0</div>
+                <div class="visitor-label">{{ i18n "visitorsThisMonth" | default "This Month" }}</div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -4,15 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BitcoinZ Content Manager</title>
+  <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
     // Custom preview styles
     CMS.registerPreviewStyle("/css/main.css");
     
+    // Custom GitHub OAuth configuration
+    CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'bitcoinz-site/bitcoinz',
+          branch: 'main',
+          base_url: 'https://api.github.com',
+          auth_endpoint: '/auth'
+        }
+      }
+    });
+
     // Custom icon preview component
     const IconPreview = createClass({
       render: function() {
