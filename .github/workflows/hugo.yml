@@ -21,10 +21,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: true
-
-      - name: List files
-        run: ls -la
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -32,12 +30,15 @@ jobs:
           hugo-version: '0.121.1'
           extended: true
 
-      - name: Check Hugo installation
-        run: hugo version
-
-      - name: List theme directory
+      - name: Verify theme
         run: |
-          echo "Theme directory contents:"
+          echo "Current directory contents:"
+          ls -la
+          echo "\nTheme directory contents:"
+          ls -la themes/PaperMod || true
+          echo "\nInitializing submodules if needed:"
+          git submodule update --init --recursive
+          echo "\nTheme directory contents after init:"
           ls -la themes/PaperMod
 
       - name: Build with Hugo
@@ -45,12 +46,9 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
-          hugo --debug --verbose --minify
-
-      - name: List public directory
-        run: |
-          echo "Public directory contents:"
-          ls -la public
+          hugo \
+            --minify \
+            --baseURL "https://simbav911.github.io/dart-naujas-btcz.rock/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
