@@ -1,4 +1,4 @@
-baseURL = "https://bitcoinz.org/"
+baseURL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
 languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = ""
@@ -10,7 +10,7 @@ theme = ""
   author = "BitcoinZ Community"
 
   # Social Media Links
-  github = "https://github.com/bitcoinz-site/bitcoinz"
+  github = "https://github.com/simbav911/dart-naujas-btcz.rock"
   twitter = "https://twitter.com/bitcoinz_team"
   telegram = "https://t.me/bitcoinzcommunity"
   discord = "https://discord.gg/bitcoinz"
@@ -151,8 +151,8 @@ theme = ""
 # Deployment Settings
 [deployment]
   [[deployment.targets]]
-    name = "production"
-    URL = "https://bitcoinz.org"
+    name = "github-pages"
+    URL = "https://simbav911.github.io/dart-naujas-btcz.rock"
 
 # Sitemap Configuration
 [sitemap]
