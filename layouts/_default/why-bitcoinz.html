@@ -1,10 +1,45 @@
 {{ define "main" }}
 <div class="bg-btcz-gray-950 min-h-screen">
     <!-- Hero Section -->
-    <div class="relative py-32 px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-btcz-gold">{{ .Title }}</h1>
-            <p class="mt-6 text-xl md:text-2xl text-btcz-gray-200">{{ .Description }}</p>
+    <div class="relative py-20 sm:py-24 lg:py-32">
+        <div class="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+            <div class="glass-effect rounded-3xl p-8 md:p-12 lg:p-16">
+                <!-- Title with gradient -->
+                <h1 class="text-center">
+                    <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-btcz-gold via-yellow-300 to-btcz-gold bg-clip-text text-transparent animate-gradient-x">
+                        BitcoinZ
+                    </span>
+                    <span class="mt-2 block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-btcz-gray-200">
+                        The Most Underrated Cryptocurrency
+                    </span>
+                    <span class="mt-2 block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-btcz-gold">
+                        Poised for the Future
+                    </span>
+                </h1>
+
+                <!-- Description with modern layout -->
+                <div class="mt-8 md:mt-12 max-w-4xl mx-auto">
+                    <p class="text-lg sm:text-xl md:text-2xl text-btcz-gray-200 leading-relaxed text-center font-light">
+                        In a world flooded with overhyped tokens and questionable projects, 
+                        <span class="text-btcz-gold font-medium">BitcoinZ stands out as a beacon of true decentralization and innovation.</span>
+                    </p>
+                    
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="glass-effect rounded-xl p-6 transform hover:scale-[1.02] transition-all duration-300">
+                            <span class="text-btcz-gold font-bold block text-xl mb-2">Established 2017</span>
+                            <span class="text-btcz-gray-200">Proven resilience & stability</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-6 transform hover:scale-[1.02] transition-all duration-300">
+                            <span class="text-btcz-gold font-bold block text-xl mb-2">Unique Blockchain</span>
+                            <span class="text-btcz-gray-200">Not a fork, built from scratch</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-6 transform hover:scale-[1.02] transition-all duration-300">
+                            <span class="text-btcz-gold font-bold block text-xl mb-2">True Crypto</span>
+                            <span class="text-btcz-gray-200">Embodying original principles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -232,6 +267,28 @@
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+@keyframes gradient-x {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-gradient-x {
+    background-size: 200% auto;
+    animation: gradient-x 8s linear infinite;
+}
+
+.glass-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-effect:hover {
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
 }
 </style>
 {{ end }}
