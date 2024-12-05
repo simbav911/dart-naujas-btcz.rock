@@ -129,6 +129,17 @@ theme = "PaperMod"
 [build]
   writeStats = true
 
+# CSS Processing
+[module]
+  [module.hugoVersion]
+    extended = true
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
 # Markup Settings
 [markup]
   [markup.goldmark]
