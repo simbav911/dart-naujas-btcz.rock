@@ -20,7 +20,7 @@ theme = ""
   [languages.en]
     languageName = "English"
     weight = 1
-    contentDir = "content/roadmap"
+    contentDir = "content"
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "home"
@@ -50,12 +50,13 @@ theme = ""
       [[languages.en.menu.main]]
         identifier = "roadmap"
         name = "Roadmap"
-        url = "/en/roadmap/"
+        url = "/roadmap/"
         weight = 6
 
   [languages.es]
     languageName = "Español"
     weight = 2
+    contentDir = "content/es"
     [languages.es.menu]
       [[languages.es.menu.main]]
         identifier = "home"
@@ -91,6 +92,7 @@ theme = ""
   [languages.zh]
     languageName = "中文"
     weight = 3
+    contentDir = "content/zh"
     [languages.zh.menu]
       [[languages.zh.menu.main]]
         identifier = "home"
