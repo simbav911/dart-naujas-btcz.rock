@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
           fetch-depth: 0
 
       - name: Setup Hugo
@@ -30,16 +30,9 @@ jobs:
           hugo-version: '0.121.1'
           extended: true
 
-      - name: Verify theme
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "\nTheme directory contents:"
-          ls -la themes/PaperMod || true
-          echo "\nInitializing submodules if needed:"
-          git submodule update --init --recursive
-          echo "\nTheme directory contents after init:"
-          ls -la themes/PaperMod
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
 
       - name: Build with Hugo
         env:
@@ -48,7 +41,7 @@ jobs:
         run: |
           hugo \
             --minify \
-            --baseURL "https://simbav911.github.io/dart-naujas-btcz.rock/"
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
@@ -58,7 +51,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ github.event.repository.html_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
