@@ -28,7 +28,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="absolute right-0 mt-2 py-2 w-40 bg-black/95 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <div class="absolute right-0 mt-2 py-2 w-40 bg-black/95 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                         {{ range .Site.Home.AllTranslations }}
                         <a href="{{ .Permalink }}" 
                            class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 {{ if eq .Language $.Site.Language }}text-btcz-gold{{ end }}"
@@ -38,7 +38,7 @@
                         {{ end }}
                     </div>
                     <!-- Price Ticker (Positioned absolutely under language selector) -->
-                    <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center bg-btcz-gray-800/50 rounded-lg px-3 py-1 glass-effect shadow-lg transition-all duration-300">
+                    <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center bg-btcz-gray-800/50 rounded-lg px-3 py-1 glass-effect shadow-lg transition-all duration-300 z-40">
                         <div class="flex items-center">
                             <span class="text-sm font-bold text-white" id="btcz-price">$0.00000000</span>
                         </div>
