@@ -1,0 +1,15 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#grad3)"/>
+  <g fill="#ffffff">
+    <path d="M300,200 L400,100 L500,200 L400,300 Z"/>
+    <circle cx="400" cy="200" r="30"/>
+    <text x="400" y="210" font-family="Arial" font-size="36" fill="#f59e0b" text-anchor="middle">₿</text>
+  </g>
+  <text x="400" y="350" font-family="Arial" font-size="24" fill="white" text-anchor="middle">Exchange Listing</text>
+</svg>
