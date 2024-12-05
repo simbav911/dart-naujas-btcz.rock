@@ -116,8 +116,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Download Wallet -->
                 <a href="/en/wallets/" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <img src="/images/icons/wallet.svg" alt="Wallet Icon" class="w-12 h-12">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                        <i class="fas fa-wallet text-4xl text-btcz-gold"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-btcz-gold">{{ i18n "downloadWallet" | default "Download Wallet" }}</h3>
                     <p class="text-btcz-gray-200">{{ i18n "downloadWalletDesc" | default "Get your BitcoinZ wallet" }}</p>
@@ -125,17 +125,17 @@
 
                 <!-- Buy BitcoinZ -->
                 <a href="/en/buy/" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <img src="/images/icons/exchange.svg" alt="Exchange Icon" class="w-12 h-12">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                        <i class="fas fa-coins text-4xl text-btcz-gold"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-btcz-gold">{{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }}</h3>
                     <p class="text-btcz-gray-200">{{ i18n "buyBitcoinZDesc" | default "Purchase from exchanges" }}</p>
                 </a>
 
                 <!-- Join Community -->
-                <a href="#community" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <img src="/images/icons/join.svg" alt="Join Icon" class="w-12 h-12">
+                <a href="/en/community/" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                        <i class="fas fa-users text-4xl text-btcz-gold"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-btcz-gold">{{ i18n "joinCommunity" | default "Join Community" }}</h3>
                     <p class="text-btcz-gray-200">{{ i18n "joinCommunityDesc" | default "Connect with others" }}</p>
@@ -187,8 +187,8 @@
             <!-- Social Media Links with Improved Contrast -->
             <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer" 
                class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                    <img src="/images/social/github.svg" alt="GitHub" class="w-12 h-12">
+                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                    <i class="fa-brands fa-github text-4xl text-btcz-gold"></i>
                 </div>
                 <span class="font-bold text-btcz-gray-200 group-hover:text-btcz-gold transition-colors duration-200">GitHub</span>
             </a>
@@ -196,24 +196,24 @@
             <!-- Repeat similar styling for other social media links -->
             <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener noreferrer"
                class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                    <img src="/images/social/twitter.svg" alt="Twitter" class="w-12 h-12">
+                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                    <i class="fa-brands fa-twitter text-4xl text-btcz-gold"></i>
                 </div>
                 <span class="font-bold text-btcz-gray-200 group-hover:text-btcz-gold transition-colors duration-200">Twitter</span>
             </a>
 
             <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener noreferrer"
                class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                    <img src="/images/social/telegram.svg" alt="Telegram" class="w-12 h-12">
+                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                    <i class="fa-brands fa-telegram text-4xl text-btcz-gold"></i>
                 </div>
                 <span class="font-bold text-btcz-gray-200 group-hover:text-btcz-gold transition-colors duration-200">Telegram</span>
             </a>
 
             <a href="{{ .Site.Params.discord }}" target="_blank" rel="noopener noreferrer"
                class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                    <img src="/images/social/discord.svg" alt="Discord" class="w-12 h-12">
+                <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                    <i class="fa-brands fa-discord text-4xl text-btcz-gold"></i>
                 </div>
                 <span class="font-bold text-btcz-gray-200 group-hover:text-btcz-gold transition-colors duration-200">Discord</span>
             </a>
