@@ -4,7 +4,7 @@ theme = "PaperMod"
 
 # Site Settings
 [params]
-  description = "A decentralized cryptocurrency focused on privacy, security, and community governance"
+  description = "BitcoinZ - A decentralized cryptocurrency focused on privacy, security, and true community governance"
   keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
 
