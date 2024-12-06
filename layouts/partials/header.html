@@ -3,7 +3,7 @@
         <nav class="flex items-center justify-between py-2">
             <!-- Logo -->
             <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center space-x-2">
-                <img src="{{ .Site.BaseURL }}images/btcz-logo.png" alt="BitcoinZ Logo" class="h-12 w-auto">
+                <img src="{{ "images/btcz-logo.png" | absURL }}" alt="BitcoinZ Logo" class="h-12 w-auto">
                 <span class="font-heading font-bold text-xl text-white">BitcoinZ</span>
             </a>
 
@@ -100,6 +100,8 @@
 <!-- Add scripts -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-{{ $styles := resources.Get "css/main.css" | resources.PostCSS }}
+{{ $css := resources.Get "css/main.css" }}
+{{ $style := $css | resources.ToCSS | resources.Minify }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 <script src="/js/price-ticker.js"></script>
 <script src="/js/scroll-handler.js"></script>
