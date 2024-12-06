@@ -4,10 +4,8 @@ backend:
   branch: main
   base_url: https://api.github.com
   auth_endpoint: https://github.com/login/oauth/authorize
-  token_endpoint: https://github.com/login/oauth/access_token
   client_id: Ov23likVSo2M8nWaTKxA
-  auth_type: implicit
-  redirect_uri: https://simbav911.github.io/dart-naujas-btcz.rock/admin/callback/
+  scope: repo,user
 
 # Media handling
 media_folder: static/images
@@ -40,3 +38,7 @@ publish_mode: editorial_workflow
 slug:
   encoding: "ascii"
   clean_accents: true
+
+# OAuth settings
+oauth_client_id: Ov23likVSo2M8nWaTKxA
+oauth_scopes: repo,user
