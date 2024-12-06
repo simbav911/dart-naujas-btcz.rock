@@ -3,51 +3,61 @@ console.log('Debug mode enabled for Decap CMS');
 
 window.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
+    console.log('Current URL:', window.location.href);
+    console.log('Hostname:', window.location.hostname);
+    console.log('Pathname:', window.location.pathname);
     
     // Monitor hash changes for OAuth callback
     window.addEventListener('hashchange', function() {
         console.log('Hash changed:', window.location.hash);
-        if (window.location.hash && window.location.hash.includes('token=')) {
-            console.log('OAuth callback detected');
-        }
     });
 
-    // Log CMS initialization
-    if (window.CMS) {
-        console.log('CMS object found');
-        
-        // Log authentication status changes
-        window.CMS.registerEventListener({
-            name: 'auth',
-            handler: function(event) {
-                console.log('Auth event:', event);
-                // Log full authentication details
-                if (event.token) {
-                    console.log('Authentication successful');
+    // Wait for CMS to be available
+    const waitForCMS = setInterval(function() {
+        if (window.CMS) {
+            clearInterval(waitForCMS);
+            console.log('CMS object found');
+            
+            // Register event listeners
+            window.CMS.registerEventListener({
+                name: 'auth',
+                handler: function(event) {
+                    console.log('Auth event:', {
+                        type: event.type,
+                        error: event.error,
+                    });
                 }
-            },
-        });
-        
-        // Enhanced error logging
-        window.CMS.registerEventListener({
-            name: 'error',
-            handler: function(error) {
-                console.error('CMS Error:', {
-                    message: error.message,
-                    stack: error.stack,
-                    details: error
-                });
-            },
-        });
+            });
 
-        // Log initialization details
-        console.log('CMS Configuration:', {
-            backend: window.CMS.getConfig().backend,
-            site_domain: window.location.hostname,
-            current_url: window.location.href,
-            pathname: window.location.pathname
-        });
-    } else {
-        console.error('CMS object not found - check script loading');
-    }
+            window.CMS.registerEventListener({
+                name: 'error',
+                handler: function(error) {
+                    console.error('CMS Error:', {
+                        message: error.message,
+                        details: error
+                    });
+                }
+            });
+
+            // Log initialization
+            window.CMS.registerEventListener({
+                name: 'init',
+                handler: function() {
+                    console.log('CMS Initialized');
+                }
+            });
+        }
+    }, 100);
 });
+
+// Handle authentication errors
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+    console.error('Global error:', {
+        message: msg,
+        url: url,
+        line: lineNo,
+        column: columnNo,
+        error: error
+    });
+    return false;
+};

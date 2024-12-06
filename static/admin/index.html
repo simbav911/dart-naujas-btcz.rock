@@ -8,48 +8,18 @@
   <script src="debug.js"></script>
 </head>
 <body>
+  <!-- Create the root element for the CMS -->
   <div id="nc-root"></div>
-  <!-- Load the Decap CMS script -->
-  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
-  <script>
-    // Wait for DOM content to be loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize the CMS
-      window.CMS.init({
-        config: {
-          backend: {
-            name: 'github',
-            repo: 'simbav911/dart-naujas-btcz.rock',
-            branch: 'main',
-            auth_type: 'implicit',
-            client_id: 'Ov23likVSo2M8nWaTKxA',
-            site_domain: 'simbav911.github.io'
-          },
-          local_backend: false,
-          publish_mode: 'editorial_workflow',
-          media_folder: 'static/images',
-          public_folder: '/images',
-          collections: [{
-            name: 'news',
-            label: 'News',
-            folder: 'content/news',
-            create: true,
-            slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-            fields: [
-              { label: 'Title', name: 'title', widget: 'string' },
-              { label: 'Publish Date', name: 'date', widget: 'datetime' },
-              { label: 'Featured Image', name: 'image', widget: 'image', required: false },
-              { label: 'Body', name: 'body', widget: 'markdown' }
-            ]
-          }]
-        }
-      });
-    });
 
-    // Handle authentication callback
-    if (window.location.hash && window.location.hash.includes('token=')) {
-      console.log('Handling authentication callback');
-    }
+  <!-- Load Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+  
+  <!-- Initialize CMS -->
+  <script>
+    // Simple initialization using external config
+    window.addEventListener('DOMContentLoaded', function() {
+      CMS.init();
+    });
   </script>
 </body>
 </html>
