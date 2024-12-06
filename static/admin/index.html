@@ -4,12 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
+  <style>
+    #nc-root {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
+  <div id="nc-root">Loading...</div>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    window.CMS.init();
+    // Initialize the CMS after the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        window.CMS.init();
+        console.log('CMS initialized successfully');
+      } catch (error) {
+        console.error('Error initializing CMS:', error);
+      }
+    });
   </script>
 </body>
 </html>
