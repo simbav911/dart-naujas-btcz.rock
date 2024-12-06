@@ -4,34 +4,44 @@
     <meta charset="utf-8" />
     <title>Authenticating...</title>
     <script>
-        // Handle the OAuth callback
         (function() {
-            function parseHash(hash) {
-                return hash
-                    .substring(1)
-                    .split('&')
-                    .reduce(function(result, item) {
-                        var parts = item.split('=');
-                        result[parts[0]] = decodeURIComponent(parts[1]);
-                        return result;
-                    }, {});
+            // Parse URL parameters or hash
+            function getParams() {
+                const params = {};
+                const hash = window.location.hash.substring(1);
+                const search = window.location.search.substring(1);
+                const parseString = str => {
+                    str.split('&').forEach(pair => {
+                        const [key, value] = pair.split('=');
+                        if (key && value) {
+                            params[decodeURIComponent(key)] = decodeURIComponent(value);
+                        }
+                    });
+                };
+                
+                if (hash) parseString(hash);
+                if (search) parseString(search);
+                return params;
             }
 
-            // Get the hash parameters
-            var params = parseHash(window.location.hash);
-
+            const params = getParams();
+            
             if (params.access_token) {
-                console.log('Access token received, storing credentials');
+                // Store the credentials
                 localStorage.setItem('netlify-cms-user', JSON.stringify({
                     token: params.access_token,
                     provider: 'github'
                 }));
                 
-                // Redirect back to the admin page
+                // Redirect to admin
                 window.location.href = '/dart-naujas-btcz.rock/admin/';
+            } else if (params.error) {
+                // Handle error
+                console.error('Authentication error:', params.error);
+                window.location.href = '/dart-naujas-btcz.rock/admin/#error=' + params.error;
             } else {
-                console.error('No access token found in callback');
-                window.location.href = '/dart-naujas-btcz.rock/admin/#error=access_denied';
+                // No token or error, redirect back to admin
+                window.location.href = '/dart-naujas-btcz.rock/admin/';
             }
         })();
     </script>
@@ -39,5 +49,6 @@
 <body>
     <h1>Authenticating...</h1>
     <p>You will be redirected back to the admin interface shortly.</p>
+    <p id="error" style="color: red; display: none;">Authentication failed. Redirecting back to login...</p>
 </body>
 </html>
