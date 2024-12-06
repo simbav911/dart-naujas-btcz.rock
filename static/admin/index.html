@@ -9,35 +9,8 @@
   <div id="nc-root"></div>
   <script src="https://unpkg.com/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
   <script>
-    // Configure CMS
-    CMS.init({
-      config: {
-        load_config_file: false,
-        backend: {
-          name: "github",
-          repo: "simbav911/dart-naujas-btcz.rock",
-          branch: "main",
-          base_url: "https://api.github.com",
-          auth_endpoint: "login/oauth/authorize",
-          client_id: "Ov23likVSo2M8nWaTKxA",
-          auth_type: "implicit"
-        },
-        media_folder: "static/images",
-        collections: [
-          {
-            name: "news",
-            label: "News",
-            folder: "content/news",
-            create: true,
-            fields: [
-              { label: "Title", name: "title", widget: "string" },
-              { label: "Date", name: "date", widget: "datetime" },
-              { label: "Body", name: "body", widget: "markdown" }
-            ]
-          }
-        ]
-      }
-    });
+    // Basic initialization using external config
+    CMS.init();
   </script>
 </body>
 </html>

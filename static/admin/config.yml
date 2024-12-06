@@ -2,23 +2,42 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  site_domain: simbav911.github.io
+  client_id: Ov23likVSo2M8nWaTKxA
   auth_type: implicit
-  app_id: Ov23likVSo2M8nWaTKxA
+  site_domain: simbav911.github.io
+  base_url: https://api.github.com
 
+# Media handling
 media_folder: static/images
 public_folder: /images
 
+# Collections
 collections:
-  - name: news
-    label: News
+  - name: blog_posts
+    label: "Blog Posts"
     folder: content/news
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: Title, name: title, widget: string}
+      - {label: "Title", name: title, widget: string}
       - {label: "Publish Date", name: date, widget: datetime}
       - {label: "Featured Image", name: image, widget: image, required: false}
-      - {label: Body, name: body, widget: markdown}
+      - {label: "Body", name: body, widget: markdown}
 
+  - name: wallet_pages
+    label: "Wallet Pages"
+    folder: content/wallet
+    create: true
+    fields:
+      - {label: "Title", name: title, widget: string}
+      - {label: "Body", name: body, widget: markdown}
+
+# Publishing settings
 publish_mode: editorial_workflow
+
+# Development settings
 local_backend: false
+
+# Site URL settings
+site_url: https://simbav911.github.io/dart-naujas-btcz.rock
+display_url: https://simbav911.github.io/dart-naujas-btcz.rock
