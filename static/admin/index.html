@@ -7,5 +7,19 @@
 </head>
 <body>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script>
+    CMS.registerBackend('github', {
+      name: 'github',
+      repo: 'simbav911/dart-naujas-btcz.rock',
+      branch: 'main',
+      api_root: 'https://api.github.com',
+      base_url: 'https://github.com',
+      auth_endpoint: 'login/oauth/authorize',
+      token_endpoint: 'login/oauth/access_token',
+      client_id: 'Ov23likVSo2M8nWaTKxA',
+      redirect_uri: 'https://simbav911.github.io/dart-naujas-btcz.rock/admin/callback.html',
+      scope: 'repo,user'
+    });
+  </script>
 </body>
 </html>

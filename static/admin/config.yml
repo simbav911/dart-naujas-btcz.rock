@@ -4,8 +4,11 @@ backend:
   branch: main
   base_url: https://github.com
   auth_endpoint: login/oauth/authorize
+  token_endpoint: login/oauth/access_token
   client_id: Ov23likVSo2M8nWaTKxA
+  redirect_uri: https://simbav911.github.io/dart-naujas-btcz.rock/admin/callback.html
   scope: repo,user
+  site_domain: simbav911.github.io
   auth_type: implicit
 
 local_backend: true
