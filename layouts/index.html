@@ -12,7 +12,7 @@
                     {{ i18n "heroSubtitle" | default "A Community-Driven Cryptocurrency for Everyone" }}
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
-                    <a href="/en/wallets/" class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white">
+                    <a href="{{ "en/wallets" | relLangURL }}" class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white">
                         {{ i18n "downloadWallet" | default "Download Wallet" }}
                     </a>
                     <a href="/en/why-bitcoinz/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900">
@@ -115,7 +115,7 @@
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Download Wallet -->
-                <a href="/en/wallets/" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
+                <a href="{{ "en/wallets" | relLangURL }}" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
                         <i class="fas fa-wallet text-4xl text-btcz-gold"></i>
                     </div>
