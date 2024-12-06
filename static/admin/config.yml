@@ -1,14 +1,9 @@
 backend:
   name: github
-  repo: simbav911/dart-naujas-btcz.rock   # Replace with your "username/repo"
+  repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  base_url: https://github.com
-  auth_endpoint: /login/oauth/authorize
-  client_id: Ov23likVSo2M8nWaTKxA          # Replace with your actual client_id from GitHub OAuth App
-  app_id: dart-naujas-btcz.rock
-
-# Removes the local backend; rely on the GitHub OAuth flow
-# local_backend: true   # <= Do not include in production
+  auth_type: implicit
+  client_id: Ov23likVSo2M8nWaTKxA
 
 publish_mode: editorial_workflow
 
