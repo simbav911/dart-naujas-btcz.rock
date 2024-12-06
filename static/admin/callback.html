@@ -20,17 +20,17 @@
             // Get the hash parameters
             var params = parseHash(window.location.hash);
 
-            if (params.token) {
-                console.log('Token received, storing credentials');
+            if (params.access_token) {
+                console.log('Access token received, storing credentials');
                 localStorage.setItem('netlify-cms-user', JSON.stringify({
-                    token: params.token,
+                    token: params.access_token,
                     provider: 'github'
                 }));
                 
                 // Redirect back to the admin page
                 window.location.href = '/dart-naujas-btcz.rock/admin/';
             } else {
-                console.error('No token found in callback');
+                console.error('No access token found in callback');
                 window.location.href = '/dart-naujas-btcz.rock/admin/#error=access_denied';
             }
         })();
