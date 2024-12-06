@@ -1,9 +1,9 @@
 ---
 title: "Strategic Partnership Announcement"
-description: "BitcoinZ forms strategic partnership to enhance cross-chain capabilities and expand ecosystem"
-date: 2023-12-02T11:00:00Z
+description: "BitcoinZ forms strategic partnership to enhance ecosystem growth"
+date: 2023-12-20T09:00:00Z
 author: "BitcoinZ Team"
-image: "/images/uploads/partnership.svg"
+image: "images/uploads/partnership.svg"
 type: "news"
 categories: ["Updates"]
 tags: ["Partnership", "Development", "Ecosystem"]

@@ -3,7 +3,7 @@ title: "BitcoinZ Listed on Major Exchange"
 description: "BitcoinZ achieves significant milestone with new exchange listing, expanding accessibility and trading options"
 date: 2023-12-03T14:30:00Z
 author: "BitcoinZ Team"
-image: "/images/uploads/exchange-listing.svg"
+image: "images/uploads/exchange-listing.svg"
 type: "news"
 categories: ["Updates"]
 tags: ["Exchange", "Trading", "Milestone"]

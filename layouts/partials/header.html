@@ -103,5 +103,5 @@
 {{ $css := resources.Get "css/main.css" }}
 {{ $style := $css | resources.ToCSS | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-<script src="/js/price-ticker.js"></script>
-<script src="/js/scroll-handler.js"></script>
+<script src="{{ "js/price-ticker.js" | relURL }}"></script>
+<script src="{{ "js/scroll-handler.js" | relURL }}"></script>
