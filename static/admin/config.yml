@@ -5,6 +5,7 @@ backend:
   base_url: https://github.com
   auth_endpoint: login/oauth/authorize
   client_id: Ov23likVSo2M8nWaTKxA
+  scope: repo,user
   auth_type: implicit
 
 local_backend: true
