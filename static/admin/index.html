@@ -4,60 +4,53 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BitcoinZ Content Manager</title>
-  <script src="https://unpkg.com/decap-cms@^3.1.3/dist/decap-cms.js"></script>
-  <script src="config.js" defer></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Include the script that builds the page and powers Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@3.1.3/dist/decap-cms.js"></script>
 </head>
 <body>
   <script>
-    // Custom preview styles
-    CMS.registerPreviewStyle("/css/main.css");
-    
-    // Custom GitHub OAuth configuration
-    CMS.init({
-      config: {
-        backend: {
-          name: 'github',
-          repo: 'bitcoinz-site/bitcoinz',
-          branch: 'main',
-          base_url: 'https://api.github.com',
-          auth_endpoint: '/auth'
-        }
-      }
-    });
-
-    // Custom icon preview component
-    const IconPreview = createClass({
-      render: function() {
-        const {value, getAsset} = this.props;
-        return h('div', {className: 'icon-preview'},
-          h('img', {
-            src: value ? getAsset(value) : '',
-            className: 'icon-preview-image',
-            style: {
-              width: '64px',
-              height: '64px',
-              objectFit: 'contain'
+    window.addEventListener('load', function() {
+      CMS.init({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'simbav911/dart-naujas-btcz.rock',
+            branch: 'main',
+            auth_type: 'oauth',
+            base_url: 'https://api.github.com',
+            auth_endpoint: 'auth',
+            client_id: 'Ov23likVSo2M8nWaTKxA'
+          },
+          publish_mode: 'editorial_workflow',
+          media_folder: 'static/images',
+          public_folder: '/images',
+          collections: [
+            {
+              name: 'news',
+              label: 'News',
+              folder: 'content/en/news',
+              create: true,
+              slug: '{{year}}-{{month}}-{{slug}}',
+              editor: {
+                preview: true
+              },
+              fields: [
+                { label: 'Title', name: 'title', widget: 'string' },
+                { label: 'Description', name: 'description', widget: 'string' },
+                { label: 'Date', name: 'date', widget: 'datetime' },
+                { label: 'Author', name: 'author', widget: 'string', default: 'BitcoinZ Team' },
+                { label: 'Image', name: 'image', widget: 'image', required: false },
+                { label: 'Type', name: 'type', widget: 'hidden', default: 'news' },
+                { label: 'Categories', name: 'categories', widget: 'select', multiple: true, options: ['Community', 'Development', 'Exchange', 'Mining', 'Partnership', 'Update'] },
+                { label: 'Tags', name: 'tags', widget: 'list' },
+                { label: 'Layout', name: 'layout', widget: 'hidden', default: 'single' },
+                { label: 'Body', name: 'body', widget: 'markdown' }
+              ]
             }
-          })
-        );
-      }
+          ]
+        }
+      });
     });
-
-    CMS.registerWidget('icon-preview', IconPreview);
   </script>
-  <style>
-    /* Custom admin styles */
-    .icon-preview {
-      padding: 1rem;
-      background: #f0f0f0;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-    }
-    .icon-preview-image {
-      display: block;
-      margin: 0 auto;
-    }
-  </style>
 </body>
 </html>
