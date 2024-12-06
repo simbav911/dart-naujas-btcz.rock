@@ -11,17 +11,37 @@
 </head>
 <body>
   <div id="nc-root"></div>
-  <!-- Load a specific version of the CMS -->
+  
+  <!-- Load Netlify CMS -->
   <script src="https://unpkg.com/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
-  <!-- Load our configuration -->
-  <script src="config.js"></script>
+  
   <script>
-    // Basic initialization
-    if (window.CMS) {
+    // Initialize CMS
+    window.addEventListener('load', function() {
+      // Check for OAuth code in session storage
+      const code = sessionStorage.getItem('github-oauth-code');
+      if (code) {
+        console.log('Found OAuth code, attempting to exchange for token');
+        sessionStorage.removeItem('github-oauth-code');
+      }
+
+      // Initialize CMS
       window.CMS.init();
-    } else if (window.NetlifyCMS) {
-      window.NetlifyCMS.init();
-    }
+
+      // Log initialization
+      console.log('CMS initialized');
+    });
+
+    // Log any errors
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      console.error('Error:', {
+        message: msg,
+        url: url,
+        line: lineNo,
+        column: columnNo,
+        error: error
+      });
+    };
   </script>
 </body>
 </html>

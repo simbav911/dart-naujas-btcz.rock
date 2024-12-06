@@ -2,10 +2,12 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  site_domain: simbav911.github.io
   base_url: https://api.github.com
-  auth_endpoint: auth
+  auth_endpoint: https://github.com/login/oauth/authorize
+  token_endpoint: https://github.com/login/oauth/access_token
   client_id: Ov23likVSo2M8nWaTKxA
+  auth_type: implicit
+  redirect_uri: https://simbav911.github.io/dart-naujas-btcz.rock/admin/callback/
 
 # Media handling
 media_folder: static/images
@@ -30,3 +32,11 @@ site_url: https://simbav911.github.io/dart-naujas-btcz.rock
 
 # Development settings
 local_backend: false
+
+# Publishing settings
+publish_mode: editorial_workflow
+
+# Slug settings
+slug:
+  encoding: "ascii"
+  clean_accents: true
