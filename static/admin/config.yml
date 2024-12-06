@@ -3,16 +3,20 @@ backend:
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
   auth_type: implicit
+  base_url: https://simbav911.github.io/dart-naujas-btcz.rock
+  auth_endpoint: auth
   client_id: Ov23likVSo2M8nWaTKxA
 
 publish_mode: editorial_workflow
 
-media_folder: "static/images"    # Folder in your repo where images are stored
-public_folder: "/images"         # The public path to these images
+media_folder: "static/images"
+public_folder: "/images"
 
 slug:
   encoding: "ascii"
   clean_accents: true
+
+local_backend: false
 
 collections:
   - name: "news"

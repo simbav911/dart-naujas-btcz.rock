@@ -4,16 +4,54 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Content Manager</title>
+  <!-- Debug script -->
+  <script src="debug.js"></script>
 </head>
 <body>
   <div id="nc-root"></div>
   <!-- Load the Decap CMS script -->
   <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
   <script>
-    // Initialize the CMS with the path to your config file
-    CMS.init({
-      config: '/admin/config.yml'
+    // Handle GitHub Pages path prefix
+    const baseUrl = window.location.hostname === 'simbav911.github.io' 
+      ? '/dart-naujas-btcz.rock'
+      : '';
+
+    // Initialize the CMS with the correct config path and base URL
+    window.CMS.init({
+      config: {
+        load_config_file: false,
+        backend: {
+          name: 'github',
+          repo: 'simbav911/dart-naujas-btcz.rock',
+          branch: 'main',
+          auth_type: 'implicit',
+          base_url: 'https://simbav911.github.io/dart-naujas-btcz.rock',
+          auth_endpoint: 'auth',
+          client_id: 'Ov23likVSo2M8nWaTKxA',
+          app_id: 'Ov23likVSo2M8nWaTKxA'
+        },
+        publish_mode: 'editorial_workflow',
+        media_folder: 'static/images',
+        public_folder: '/images',
+        collections: [{
+          name: 'news',
+          label: 'News',
+          folder: 'content/news',
+          create: true,
+          slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+          fields: [
+            { label: 'Title', name: 'title', widget: 'string' },
+            { label: 'Publish Date', name: 'date', widget: 'datetime' },
+            { label: 'Featured Image', name: 'image', widget: 'image', required: false },
+            { label: 'Body', name: 'body', widget: 'markdown' }
+          ]
+        }]
+      }
     });
+
+    // Log initialization
+    console.log('CMS initialized with base URL:', baseUrl);
   </script>
 </body>
 </html>
