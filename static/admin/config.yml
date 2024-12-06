@@ -4,6 +4,7 @@ backend:
   branch: main
   auth_type: implicit
   client_id: Ov23likVSo2M8nWaTKxA
+  site_url: https://simbav911.github.io/dart-naujas-btcz.rock
 
 publish_mode: editorial_workflow
 media_folder: static/images
