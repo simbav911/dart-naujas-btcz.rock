@@ -2,10 +2,10 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  base_url: https://github.com
-  auth_endpoint: login/oauth/authorize
+  auth_type: implicit
   client_id: Ov23likVSo2M8nWaTKxA
   site_url: https://simbav911.github.io/dart-naujas-btcz.rock
+  local_backend: true # Enable local backend
 
 publish_mode: editorial_workflow
 media_folder: static/images
