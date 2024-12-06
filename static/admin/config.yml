@@ -1,16 +1,19 @@
 backend:
   name: github
-  repo: simbav911/dart-naujas-btcz.rock
+  repo: simbav911/dart-naujas-btcz.rock   # Replace with your "username/repo"
   branch: main
   base_url: https://github.com
-  auth_endpoint: login/oauth/authorize
-  client_id: Ov23likVSo2M8nWaTKxA
+  auth_endpoint: /login/oauth/authorize
+  client_id: Ov23likVSo2M8nWaTKxA          # Replace with your actual client_id from GitHub OAuth App
   app_id: dart-naujas-btcz.rock
 
-local_backend: true
+# Removes the local backend; rely on the GitHub OAuth flow
+# local_backend: true   # <= Do not include in production
+
 publish_mode: editorial_workflow
-media_folder: static/images
-public_folder: /images
+
+media_folder: "static/images"    # Folder in your repo where images are stored
+public_folder: "/images"         # The public path to these images
 
 slug:
   encoding: "ascii"
@@ -23,7 +26,7 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
