@@ -11,7 +11,7 @@
             <div class="hidden md:flex items-center space-x-8">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL }}" 
+                <a href="{{ .URL | relLangURL }}" 
                    class="nav-link text-white hover:text-btcz-gold transition-colors duration-200 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
                 >
                     {{ .Name }}
