@@ -1,54 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Authenticating...</title>
-    <script>
-        (function() {
-            // Parse URL parameters or hash
-            function getParams() {
-                const params = {};
-                const hash = window.location.hash.substring(1);
-                const search = window.location.search.substring(1);
-                const parseString = str => {
-                    str.split('&').forEach(pair => {
-                        const [key, value] = pair.split('=');
-                        if (key && value) {
-                            params[decodeURIComponent(key)] = decodeURIComponent(value);
-                        }
-                    });
-                };
-                
-                if (hash) parseString(hash);
-                if (search) parseString(search);
-                return params;
-            }
-
-            const params = getParams();
-            
-            if (params.access_token) {
-                // Store the credentials
-                localStorage.setItem('netlify-cms-user', JSON.stringify({
-                    token: params.access_token,
-                    provider: 'github'
-                }));
-                
-                // Redirect to admin
-                window.location.href = '/dart-naujas-btcz.rock/admin/';
-            } else if (params.error) {
-                // Handle error
-                console.error('Authentication error:', params.error);
-                window.location.href = '/dart-naujas-btcz.rock/admin/#error=' + params.error;
-            } else {
-                // No token or error, redirect back to admin
-                window.location.href = '/dart-naujas-btcz.rock/admin/';
-            }
-        })();
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
 </head>
 <body>
-    <h1>Authenticating...</h1>
-    <p>You will be redirected back to the admin interface shortly.</p>
-    <p id="error" style="color: red; display: none;">Authentication failed. Redirecting back to login...</p>
+  <script>
+    // Parse the URL parameters
+    const hash = window.location.hash
+      .substring(1)
+      .split('&')
+      .reduce(function(result, item) {
+        const parts = item.split('=');
+        result[parts[0]] = decodeURIComponent(parts[1]);
+        return result;
+      }, {});
+
+    // Handle the OAuth callback
+    if (hash.access_token) {
+      window.opener.postMessage(
+        'authorization:github:success:' + JSON.stringify({
+          provider: 'github',
+          token: hash.access_token,
+          scope: hash.scope
+        }),
+        window.location.origin
+      );
+      window.close();
+    } else {
+      window.opener.postMessage(
+        'authorization:github:error:' + JSON.stringify({
+          error: 'No access token found in URL'
+        }),
+        window.location.origin
+      );
+      window.close();
+    }
+  </script>
 </body>
 </html>

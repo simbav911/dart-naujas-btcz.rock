@@ -3,23 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Content Manager</title>
 </head>
 <body>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    CMS.registerBackend('github', {
-      name: 'github',
-      repo: 'simbav911/dart-naujas-btcz.rock',
-      branch: 'main',
-      api_root: 'https://api.github.com',
-      base_url: 'https://github.com',
-      auth_endpoint: 'login/oauth/authorize',
-      token_endpoint: 'login/oauth/access_token',
-      client_id: 'Ov23likVSo2M8nWaTKxA',
-      redirect_uri: 'https://simbav911.github.io/dart-naujas-btcz.rock/admin/callback.html',
-      scope: 'repo,user'
-    });
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
   </script>
 </body>
 </html>
