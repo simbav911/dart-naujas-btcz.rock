@@ -9,8 +9,41 @@
   <div id="nc-root"></div>
   <script src="https://unpkg.com/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
   <script>
-    // Basic initialization using external config
-    CMS.init();
+    // Check for stored token
+    const hasToken = () => {
+      const token = localStorage.getItem('github-token');
+      return !!token;
+    };
+
+    // Initialize CMS
+    window.addEventListener('load', function() {
+      // Clear any existing tokens if we're not on the oauth proxy page
+      if (!window.location.pathname.includes('oauth-proxy')) {
+        localStorage.removeItem('github-token');
+        localStorage.removeItem('netlify-cms-user');
+      }
+
+      // Initialize CMS
+      CMS.init();
+
+      // Log environment info
+      console.log('Environment:', {
+        hostname: window.location.hostname,
+        pathname: window.location.pathname,
+        hasToken: hasToken()
+      });
+    });
+
+    // Handle errors
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      console.error('Error:', {
+        message: msg,
+        url: url,
+        line: lineNo,
+        column: columnNo,
+        error: error
+      });
+    };
   </script>
 </body>
 </html>

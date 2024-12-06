@@ -2,10 +2,12 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  client_id: Ov23likVSo2M8nWaTKxA
   auth_type: implicit
-  site_domain: simbav911.github.io
-  base_url: https://api.github.com
+  app_id: Ov23likVSo2M8nWaTKxA
+  client_id: Ov23likVSo2M8nWaTKxA
+  base_url: https://github.com
+  auth_endpoint: login/oauth/authorize
+  redirect_uri: https://simbav911.github.io/dart-naujas-btcz.rock/admin/oauth-proxy.html
 
 # Media handling
 media_folder: static/images
@@ -13,8 +15,8 @@ public_folder: /images
 
 # Collections
 collections:
-  - name: blog_posts
-    label: "Blog Posts"
+  - name: posts
+    label: "News Posts"
     folder: content/news
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -24,9 +26,9 @@ collections:
       - {label: "Featured Image", name: image, widget: image, required: false}
       - {label: "Body", name: body, widget: markdown}
 
-  - name: wallet_pages
-    label: "Wallet Pages"
-    folder: content/wallet
+  - name: pages
+    label: "Pages"
+    folder: content
     create: true
     fields:
       - {label: "Title", name: title, widget: string}

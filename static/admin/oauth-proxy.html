@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Authenticating...</title>
+    <script>
+        (function() {
+            function parseHash(hash) {
+                return hash
+                    .substring(1)
+                    .split('&')
+                    .reduce(function(result, item) {
+                        var parts = item.split('=');
+                        result[parts[0]] = decodeURIComponent(parts[1]);
+                        return result;
+                    }, {});
+            }
+
+            // Get the hash parameters
+            var params = parseHash(window.location.hash);
+
+            if (params.access_token) {
+                localStorage.setItem('github-token', params.access_token);
+                localStorage.setItem('netlify-cms-user', JSON.stringify({
+                    token: params.access_token,
+                    provider: 'github'
+                }));
+                
+                // Redirect back to the admin page
+                window.location.href = '/dart-naujas-btcz.rock/admin/';
+            } else {
+                console.error('No access token found in callback');
+                window.location.href = '/dart-naujas-btcz.rock/admin/#error=access_denied';
+            }
+        })();
+    </script>
+</head>
+<body>
+    <h1>Authenticating...</h1>
+    <p>Please wait while we complete the authentication process...</p>
+</body>
+</html>
