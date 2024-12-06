@@ -2,20 +2,13 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  client_id: Ov23likVSo2M8nWaTKxA
   auth_type: implicit
-  app_id: Ov23likVSo2M8nWaTKxA
-  api_root: https://api.github.com
-  base_url: https://api.github.com
-  auth_endpoint: oauth-github
+  client_id: Ov23likVSo2M8nWaTKxA
   site_domain: simbav911.github.io
 
 # Media handling
 media_folder: "static/images"
 public_folder: "/images"
-
-# Publishing settings
-publish_mode: editorial_workflow
 
 # Collections
 collections:
@@ -24,25 +17,11 @@ collections:
     folder: "content/news"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    editor:
-      preview: false
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
 
-# Site URLs
+# Site URL
 site_url: https://simbav911.github.io/dart-naujas-btcz.rock
-display_url: https://simbav911.github.io/dart-naujas-btcz.rock
-
-# Commit messages
-commit_messages:
-  create: 'Create {{collection}} "{{slug}}"'
-  update: 'Update {{collection}} "{{slug}}"'
-  delete: 'Delete {{collection}} "{{slug}}"'
-  uploadMedia: 'Upload "{{path}}"'
-  deleteMedia: 'Delete "{{path}}"'
-
-# Development settings
-local_backend: false

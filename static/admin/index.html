@@ -3,55 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
   <title>Content Manager</title>
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-    #nc-root {
-      min-height: 100vh;
-    }
+    body { margin: 0; padding: 0; }
+    #nc-root { height: 100vh; }
   </style>
 </head>
 <body>
-  <!-- The root element -->
   <div id="nc-root"></div>
-
-  <!-- Load Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
+  <!-- Load a specific version of the CMS -->
+  <script src="https://unpkg.com/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
+  <!-- Load our configuration -->
+  <script src="config.js"></script>
   <script>
-    // Initialize CMS
-    window.addEventListener('load', function() {
-      // Basic initialization
-      CMS.init();
-
-      // Log initialization
-      console.log('CMS initialized');
-
-      // Handle authentication callback
-      if (window.location.hash.includes('token=')) {
-        console.log('Processing authentication callback');
-        const token = window.location.hash.match(/token=([^&]*)/)[1];
-        localStorage.setItem('netlify-cms-user', JSON.stringify({
-          token: token,
-          provider: 'github'
-        }));
-      }
-    });
-
-    // Log any errors
-    window.onerror = function(msg, url, lineNo, columnNo, error) {
-      console.error('Error:', {
-        message: msg,
-        url: url,
-        line: lineNo,
-        column: columnNo,
-        error: error
-      });
-    };
+    // Basic initialization
+    if (window.CMS) {
+      window.CMS.init();
+    } else if (window.NetlifyCMS) {
+      window.NetlifyCMS.init();
+    }
   </script>
 </body>
 </html>
