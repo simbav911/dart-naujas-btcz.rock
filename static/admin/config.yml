@@ -3,9 +3,10 @@ backend:
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
   auth_type: implicit
-  base_url: https://simbav911.github.io/dart-naujas-btcz.rock
-  auth_endpoint: auth
   client_id: Ov23likVSo2M8nWaTKxA
+  site_domain: simbav911.github.io
+
+local_backend: false
 
 publish_mode: editorial_workflow
 
@@ -15,8 +16,6 @@ public_folder: "/images"
 slug:
   encoding: "ascii"
   clean_accents: true
-
-local_backend: false
 
 collections:
   - name: "news"
