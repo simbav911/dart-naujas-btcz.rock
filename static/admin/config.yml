@@ -4,10 +4,15 @@ backend:
   branch: main
   auth_type: oauth
   base_url: https://api.github.com
+  auth_endpoint: auth
+  client_id: Ov23likVSo2M8nWaTKxA
 
+local_backend: false
 publish_mode: editorial_workflow
-media_folder: "static/images"
-public_folder: "/images"
+media_folder: static/images
+public_folder: /images
+site_url: https://simbav911.github.io/dart-naujas-btcz.rock
+display_url: https://simbav911.github.io/dart-naujas-btcz.rock
 
 collections:
   - name: "news"
