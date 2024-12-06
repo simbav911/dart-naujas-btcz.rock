@@ -6,15 +6,6 @@
   <title>Content Manager</title>
 </head>
 <body>
-  <div id="nc-root"></div>
-  <script src="https://unpkg.com/decap-cms@3.1.3/dist/decap-cms.js"></script>
-  <script>
-    if (window.CMS) {
-      CMS.init();
-    } else {
-      console.error('CMS failed to load');
-      document.body.innerHTML = '<div style="padding: 20px; background: #ff4444; color: white; text-align: center;">Failed to load CMS. Please refresh the page.</div>';
-    }
-  </script>
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 </body>
 </html>
