@@ -2,23 +2,66 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Content Manager</title>
-  <!-- Debug script -->
-  <script src="debug.js"></script>
+  <style>
+    .error-message {
+      display: none;
+      color: #721c24;
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <!-- Create the root element for the CMS -->
   <div id="nc-root"></div>
+  <div id="error-display" class="error-message"></div>
 
   <!-- Load Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
-  <!-- Initialize CMS -->
   <script>
-    // Simple initialization using external config
+    // Handle initialization errors
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      console.error('Error:', msg, '\nURL:', url, '\nLine:', lineNo, '\nColumn:', columnNo, '\nError:', error);
+      const errorDisplay = document.getElementById('error-display');
+      errorDisplay.style.display = 'block';
+      errorDisplay.textContent = 'Error: ' + msg;
+      return false;
+    };
+
+    // Initialize CMS
     window.addEventListener('DOMContentLoaded', function() {
+      console.log('Initializing CMS...');
+      
+      // Clear any existing auth data
+      localStorage.removeItem('netlify-cms-user');
+      localStorage.removeItem('github-token');
+      
+      // Initialize CMS
       CMS.init();
+      
+      // Register event listeners
+      CMS.registerEventListener({
+        name: 'auth',
+        handler: function(event) {
+          console.log('Auth event:', event);
+        }
+      });
+
+      CMS.registerEventListener({
+        name: 'error',
+        handler: function(error) {
+          console.error('CMS Error:', error);
+          const errorDisplay = document.getElementById('error-display');
+          errorDisplay.style.display = 'block';
+          errorDisplay.textContent = 'CMS Error: ' + error.message;
+        }
+      });
     });
   </script>
 </body>

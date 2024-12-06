@@ -4,11 +4,16 @@ backend:
   branch: main
   auth_type: implicit
   client_id: Ov23likVSo2M8nWaTKxA
-  site_domain: simbav911.github.io
-  base_url: https://simbav911.github.io/dart-naujas-btcz.rock
-  auth_endpoint: callback
+  auth_endpoint: oauth
+  app_id: Ov23likVSo2M8nWaTKxA
+  base_url: https://api.github.com
+  auth_scope: repo,user
 
-# These settings should be relative to the site root
+# Site URLs
+site_url: https://simbav911.github.io/dart-naujas-btcz.rock
+display_url: https://simbav911.github.io/dart-naujas-btcz.rock
+
+# Media handling
 media_folder: "static/images"
 public_folder: "/images"
 
@@ -16,7 +21,7 @@ public_folder: "/images"
 publish_mode: editorial_workflow
 local_backend: false
 
-# Content Collections
+# Collections
 collections:
   - name: "posts"
     label: "News Posts"
@@ -28,3 +33,8 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
+
+# Slug settings
+slug:
+  encoding: "ascii"
+  clean_accents: true

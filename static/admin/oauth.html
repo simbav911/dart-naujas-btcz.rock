@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>GitHub OAuth</title>
+    <script>
+        // Handle GitHub OAuth callback
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+            
+            console.log('OAuth callback received');
+            console.log('Search params:', window.location.search);
+            console.log('Hash:', hash);
+
+            // If we have a hash with a token
+            if (hash && hash.includes('access_token=')) {
+                const token = hash.match(/access_token=([^&]*)/)[1];
+                console.log('Token found');
+                
+                // Store the token
+                localStorage.setItem('github-token', token);
+                localStorage.setItem('netlify-cms-user', JSON.stringify({
+                    token: token,
+                    provider: 'github'
+                }));
+
+                // Redirect back to the admin
+                window.location.replace('/dart-naujas-btcz.rock/admin/');
+            } else {
+                console.error('No token found in callback');
+                window.location.replace('/dart-naujas-btcz.rock/admin/#error=access_denied');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <h1>Processing authentication...</h1>
+    <p>You will be redirected shortly.</p>
+</body>
+</html>
