@@ -1,10 +1,11 @@
 backend:
   name: github
-  repo: bitcoinz-site/bitcoinz  # Replace with your GitHub repository
+  repo: simbav911/dart-naujas-btcz.rock
   branch: main
+  auth_type: oauth
   base_url: https://api.github.com
-  auth_endpoint: /auth
 
+publish_mode: editorial_workflow
 media_folder: "static/images"
 public_folder: "/images"
 
