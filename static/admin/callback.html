@@ -3,38 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
+  <title>GitHub OAuth Callback</title>
 </head>
 <body>
   <script>
-    // Parse the URL parameters
-    const hash = window.location.hash
-      .substring(1)
-      .split('&')
-      .reduce(function(result, item) {
-        const parts = item.split('=');
-        result[parts[0]] = decodeURIComponent(parts[1]);
-        return result;
-      }, {});
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const state = params.get('state');
 
-    // Handle the OAuth callback
-    if (hash.access_token) {
+    if (code && state) {
       window.opener.postMessage(
-        'authorization:github:success:' + JSON.stringify({
+        {
+          type: 'authorization',
           provider: 'github',
-          token: hash.access_token,
-          scope: hash.scope
-        }),
+          code: code,
+          state: state
+        },
         window.location.origin
       );
       window.close();
     } else {
-      window.opener.postMessage(
-        'authorization:github:error:' + JSON.stringify({
-          error: 'No access token found in URL'
-        }),
-        window.location.origin
-      );
+      console.error('No code or state found in URL');
       window.close();
     }
   </script>
