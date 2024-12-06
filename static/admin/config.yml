@@ -2,12 +2,9 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  auth_type: implicit
-  app_id: Ov23likVSo2M8nWaTKxA
+  base_url: https://api.github.com
+  auth_endpoint: oauth/authorize
   client_id: Ov23likVSo2M8nWaTKxA
-  base_url: https://github.com
-  auth_endpoint: login/oauth/authorize
-  redirect_uri: https://simbav911.github.io/dart-naujas-btcz.rock/admin/oauth-proxy.html
 
 # Media handling
 media_folder: static/images
@@ -36,9 +33,6 @@ collections:
 
 # Publishing settings
 publish_mode: editorial_workflow
-
-# Development settings
-local_backend: false
 
 # Site URL settings
 site_url: https://simbav911.github.io/dart-naujas-btcz.rock

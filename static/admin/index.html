@@ -4,48 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <div id="nc-root"></div>
-  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@3.1.3/dist/decap-cms.js"></script>
   <script>
-    // Initialize CMS
-    window.addEventListener('load', function() {
-      // Only clear tokens if we're starting a fresh login
-      if (!window.location.hash && !window.location.pathname.includes('oauth-proxy')) {
-        localStorage.removeItem('github-token');
-        localStorage.removeItem('netlify-cms-user');
-      }
-
-      // Initialize CMS
+    if (window.CMS) {
       CMS.init();
-
-      // Log environment info for debugging
-      console.log('CMS Environment:', {
-        hostname: window.location.hostname,
-        pathname: window.location.pathname,
-        hash: window.location.hash,
-        hasToken: !!localStorage.getItem('github-token')
-      });
-    });
-
-    // Handle errors
-    window.onerror = function(msg, url, lineNo, columnNo, error) {
-      console.error('CMS Error:', {
-        message: msg,
-        url: url,
-        line: lineNo,
-        column: columnNo,
-        error: error
-      });
-      
-      // Display user-friendly error message
-      const errorDiv = document.createElement('div');
-      errorDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:1em;text-align:center;';
-      errorDiv.textContent = 'An error occurred. Please try refreshing the page.';
-      document.body.appendChild(errorDiv);
-    };
+    } else {
+      console.error('CMS failed to load');
+      document.body.innerHTML = '<div style="padding: 20px; background: #ff4444; color: white; text-align: center;">Failed to load CMS. Please refresh the page.</div>';
+    }
   </script>
 </body>
 </html>
