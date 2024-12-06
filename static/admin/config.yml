@@ -2,7 +2,7 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  auth_endpoint: auth/github
+  auth_type: implicit
   client_id: Ov23likVSo2M8nWaTKxA
 
 publish_mode: editorial_workflow
