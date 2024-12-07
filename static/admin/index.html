@@ -108,14 +108,12 @@
     }
 
     // Initialize CMS
-    async function initCMS(token) {
+    async function initCMS() {
       try {
         console.log('Initializing CMS');
-        window.CMS.init({
-          config: {
-            load_config_file: true
-          }
-        });
+        if (window.CMS) {
+          window.CMS.init();
+        }
         console.log('CMS initialized successfully');
       } catch (error) {
         console.error('Error initializing CMS:', error);
@@ -128,7 +126,7 @@
       if (user) {
         console.log('User is signed in');
         try {
-          await initCMS();
+          initCMS();
         } catch (error) {
           console.error('Error:', error);
           showError(error.message);

@@ -2,70 +2,24 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  base_url: https://api.github.com
-  auth_type: implicit
-
-local_backend: true
-publish_mode: editorial_workflow
 
 media_folder: static/images
 public_folder: /images
 
-media_library:
-  name: uploadcare
-  config:
-    publicKey: demopublickey
-
 collections:
   - name: posts
-    label: "Blog Posts"
+    label: Blog Posts
     folder: content/news
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title", name: title, widget: string}
-      - {label: "Publish Date", name: date, widget: datetime}
-      - {label: "Featured Image", name: image, widget: image, required: false}
-      - {label: "Body", name: body, widget: markdown}
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Body, name: body, widget: markdown }
 
   - name: pages
-    label: "English Pages"
-    folder: content/en
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: title, widget: string}
-      - {label: "Featured Image", name: image, widget: image, required: false}
-      - {label: "Body", name: body, widget: markdown}
-
-  - name: roadmap
-    label: "Roadmap Items"
-    folder: content/roadmap
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Title", name: title, widget: string}
-      - {label: "Date", name: date, widget: datetime}
-      - {label: "Status", name: status, widget: select, options: [planned, in-progress, completed]}
-      - {label: "Body", name: body, widget: markdown}
-
-  - name: wallets
-    label: "Wallet Information"
-    folder: content/wallets
+    label: Pages
+    folder: content/pages
     create: true
     fields:
-      - {label: "Name", name: name, widget: string}
-      - {label: "Type", name: type, widget: select, options: [desktop, mobile, web]}
-      - {label: "Platform", name: platform, widget: select, multiple: true, options: [Windows, macOS, Linux, iOS, Android]}
-      - {label: "Download URL", name: download_url, widget: string}
-      - {label: "Description", name: description, widget: markdown}
-
-  - name: exchanges
-    label: "Exchange Information"
-    folder: content/exchanges
-    create: true
-    fields:
-      - {label: "Name", name: name, widget: string}
-      - {label: "URL", name: url, widget: string}
-      - {label: "Logo", name: logo, widget: image}
-      - {label: "Description", name: description, widget: markdown}
+      - { label: Title, name: title, widget: string }
+      - { label: Body, name: body, widget: markdown }
