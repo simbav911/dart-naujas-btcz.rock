@@ -107,29 +107,13 @@
       setTimeout(() => errorDiv.remove(), 5000);
     }
 
-    // Initialize CMS after Firebase auth
+    // Initialize CMS
     async function initCMS(token) {
       try {
-        console.log('Initializing CMS with Firebase token');
-        
-        // Clean up any existing CMS instance
-        if (window.CMS) {
-          try {
-            await window.CMS.close();
-          } catch (e) {
-            console.log('No existing CMS instance to close');
-          }
-        }
-
-        // Initialize new CMS instance
-        await window.CMS.init({
+        console.log('Initializing CMS');
+        window.CMS.init({
           config: {
-            load_config_file: true,
-            backend: {
-              name: 'proxy',
-              proxy_url: 'https://api.github.com',
-              auth_token: token
-            }
+            load_config_file: true
           }
         });
         console.log('CMS initialized successfully');
@@ -144,11 +128,10 @@
       if (user) {
         console.log('User is signed in');
         try {
-          const token = await user.getIdToken();
-          await initCMS(token);
+          await initCMS();
         } catch (error) {
-          console.error('Error getting token:', error);
-          showError('Failed to get authentication token: ' + error.message);
+          console.error('Error:', error);
+          showError(error.message);
         }
       } else {
         console.log('No user signed in');
