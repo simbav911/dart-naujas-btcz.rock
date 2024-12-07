@@ -2,9 +2,6 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  base_url: https://api.github.com
-  auth_endpoint: https://github.com/login/oauth/authorize
-  app_id: Ov23likVSo2M8nWaTKxA
 
 media_folder: static/images
 public_folder: /images
