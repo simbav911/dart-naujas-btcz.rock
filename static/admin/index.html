@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BitcoinZ Admin CMS</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     body {
       font-family: -apple-system, system-ui, sans-serif;
@@ -20,8 +21,11 @@
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       text-align: center;
+      width: 300px;
     }
     .login-button {
+      width: 100%;
+      margin: 10px 0;
       background: #4285f4;
       color: white;
       border: none;
@@ -32,33 +36,26 @@
       transition: background-color 0.3s ease;
     }
     .login-button:hover {
-      background: #357abd;
-    }
-    #nc-root {
-      display: none;
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
-  <div class="login-container" id="login">
+  <div class="login-container">
     <h2>BitcoinZ Admin CMS</h2>
-    <button class="login-button" id="google-login">Sign in with Google</button>
+    <button class="login-button" onclick="netlifyIdentity.open()">Login</button>
   </div>
 
-  <div id="nc-root"></div>
+  <script>
+    // Netlify Identity Widget Configuration
+    netlifyIdentity.on('login', user => {
+      netlifyIdentity.close();
+      window.location.href = '/admin/cms.html';
+    });
 
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@3.1.0-beta.1/dist/decap-cms.js"></script>
-
-  <!-- Firebase Authentication Module -->
-  <script type="module">
-    import { handleLogin, initAuth } from './firebase-auth.js';
-
-    // Attach login handler to button
-    document.getElementById('google-login').addEventListener('click', handleLogin);
-
-    // Initialize authentication state
-    initAuth();
+    netlifyIdentity.on('logout', () => {
+      netlifyIdentity.close();
+    });
   </script>
 </body>
 </html>
