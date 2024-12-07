@@ -114,48 +114,20 @@
     async function initCMS(token) {
       try {
         console.log('Initializing CMS with token');
-        await window.CMS.init({
-          config: {
-            backend: {
-              name: 'github',
-              repo: 'simbav911/dart-naujas-btcz.rock',
-              branch: 'main',
-              api_root: 'https://api.github.com',
-              base_url: 'https://api.github.com',
-              auth_type: 'github',
-              app_id: '',
-              auth_endpoint: 'auth',
-              auth_token: token
-            },
-            media_folder: 'static/images',
-            public_folder: '/images',
-            collections: [
-              {
-                name: 'posts',
-                label: 'Blog Posts',
-                folder: 'content/news',
-                create: true,
-                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-                fields: [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Publish Date', name: 'date', widget: 'datetime' },
-                  { label: 'Body', name: 'body', widget: 'markdown' }
-                ]
-              },
-              {
-                name: 'pages',
-                label: 'English Pages',
-                folder: 'content/en',
-                create: true,
-                slug: '{{slug}}',
-                fields: [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Body', name: 'body', widget: 'markdown' }
-                ]
-              }
-            ]
+        
+        // Initialize CMS with just the backend configuration
+        const config = {
+          backend: {
+            name: 'github',
+            repo: 'simbav911/dart-naujas-btcz.rock',
+            branch: 'main',
+            api_root: 'https://api.github.com',
+            base_url: 'https://api.github.com',
+            token: token
           }
-        });
+        };
+        
+        window.CMS.init(config);
         console.log('CMS initialized successfully');
       } catch (error) {
         console.error('Error initializing CMS:', error);
