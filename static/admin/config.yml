@@ -3,34 +3,46 @@ backend:
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
   base_url: https://api.github.com
-  site_domain: simbav911.github.io
-  auth_type: implicit # Use implicit OAuth flow
-  app_id: Ov23likVSo2M8nWaTKxA
+  auth_endpoint: oauth
+  client_id: Ov23liqF0ZzZ0yHojmSc
 
-# Editorial workflow for drafts and review
 publish_mode: editorial_workflow
 
-# Media configuration
 media_folder: static/images
 public_folder: /images
 
-# Content collections
 collections:
-  - name: news
-    label: "News Posts"
+  - name: posts
+    label: "Blog Posts"
     folder: content/news
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
     fields:
       - {label: "Title", name: title, widget: string}
       - {label: "Publish Date", name: date, widget: datetime}
-      - {label: "Featured Image", name: image, widget: image, required: false}
       - {label: "Body", name: body, widget: markdown}
 
-  - name: content
-    label: "Pages"
-    folder: content
+  - name: pages
+    label: "English Pages"
+    folder: content/en
     create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
     fields:
       - {label: "Title", name: title, widget: string}
+      - {label: "Body", name: body, widget: markdown}
+
+  - name: roadmap_items
+    label: "Roadmap Items"
+    folder: content/roadmap
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - {label: "Title", name: title, widget: string}
+      - {label: "Date", name: date, widget: datetime}
       - {label: "Body", name: body, widget: markdown}

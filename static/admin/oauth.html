@@ -1,41 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>GitHub OAuth</title>
-    <script>
-        // Handle GitHub OAuth callback
-        (function() {
-            const params = new URLSearchParams(window.location.search);
-            const hash = window.location.hash;
-            
-            console.log('OAuth callback received');
-            console.log('Search params:', window.location.search);
-            console.log('Hash:', hash);
-
-            // If we have a hash with a token
-            if (hash && hash.includes('access_token=')) {
-                const token = hash.match(/access_token=([^&]*)/)[1];
-                console.log('Token found');
-                
-                // Store the token
-                localStorage.setItem('github-token', token);
-                localStorage.setItem('netlify-cms-user', JSON.stringify({
-                    token: token,
-                    provider: 'github'
-                }));
-
-                // Redirect back to the admin
-                window.location.replace('/dart-naujas-btcz.rock/admin/');
-            } else {
-                console.error('No token found in callback');
-                window.location.replace('/dart-naujas-btcz.rock/admin/#error=access_denied');
-            }
-        })();
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub OAuth Redirect</title>
 </head>
 <body>
-    <h1>Processing authentication...</h1>
-    <p>You will be redirected shortly.</p>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const state = params.get('state');
+    const origin = window.location.origin;
+
+    if (code && state) {
+      // Forward the auth code to the main window
+      window.opener.postMessage(
+        {
+          type: 'github-oauth',
+          code: code,
+          state: state
+        },
+        origin
+      );
+      window.close();
+    } else {
+      console.error('No code or state found in URL');
+      window.close();
+    }
+  </script>
+  <p>Completing authentication, please wait...</p>
 </body>
 </html>
