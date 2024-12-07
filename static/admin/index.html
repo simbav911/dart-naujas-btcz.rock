@@ -147,7 +147,7 @@
           const adminRef = firebase.firestore().collection('adminUsers').doc(user.email);
           const doc = await adminRef.get();
           
-          if (doc.exists && doc.data().isAdmin === true) {
+          if (doc.exists && doc.data().role === 'admin') {
             console.log('User is authorized');
             loginContainer.style.display = 'none';
             cmsContainer.style.display = 'block';
