@@ -6,11 +6,32 @@
   <meta name="robots" content="noindex" />
   <title>BitcoinZ Content Manager</title>
   
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
+  
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f2f5;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
     }
     .error-message {
       color: #dc3545;
@@ -20,50 +41,50 @@
       border-radius: 4px;
       display: none;
     }
-    #login-container {
-      display: none;
-      text-align: center;
-      margin-top: 50px;
-    }
     .login-button {
       background-color: #4285f4;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+    }
+    .login-button:hover {
+      background-color: #357abd;
+    }
+    .login-button img {
+      margin-right: 10px;
+      width: 18px;
     }
     #cms-container {
       display: none;
     }
-    .unauthorized {
-      color: #dc3545;
-      margin-top: 20px;
+    h2 {
+      color: #1a73e8;
+      margin-bottom: 30px;
     }
   </style>
 </head>
 <body>
-  <div id="login-container">
-    <h2>BitcoinZ Admin Panel</h2>
-    <button class="login-button" onclick="signInWithGoogle()">Sign in with Google</button>
-    <div id="unauthorized-message" class="unauthorized" style="display: none;">
-      You are not authorized to access this admin panel. Please contact the administrator.
+  <div class="container">
+    <div id="login-container" class="login-box">
+      <h2>BitcoinZ Admin Panel</h2>
+      <button class="login-button" onclick="signInWithGoogle()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+        Sign in with Google
+      </button>
+      <div id="error-message" class="error-message"></div>
     </div>
   </div>
-  <div id="cms-container">
-    <div id="error-message" class="error-message"></div>
-  </div>
+  
+  <div id="cms-container"></div>
 
-  <!-- Initialize Firebase -->
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-    // Your web app's Firebase configuration
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyAvkAmFSvGx57gCMuXoZ_9ZZT3DUV69ya4",
       authDomain: "bitcoinz-home-page.firebaseapp.com",
@@ -74,111 +95,56 @@
       measurementId: "G-9MQBX0H1DR"
     };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const analytics = getAnalytics(app);
-    const db = getFirestore(app);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-    // Show error messages
     function showError(message) {
       const errorDiv = document.getElementById('error-message');
-      if (errorDiv) {
-        errorDiv.textContent = message;
-        errorDiv.style.display = 'block';
-      }
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
       console.error('[CMS Error]:', message);
     }
 
-    // Check if user is authorized
-    async function isAuthorizedUser(email) {
-      try {
-        const adminUsersRef = collection(db, 'adminUsers');
-        const q = query(adminUsersRef, where("email", "==", email));
-        const querySnapshot = await getDocs(q);
-        return !querySnapshot.empty;
-      } catch (error) {
-        console.error('Error checking authorization:', error);
-        return false;
-      }
+    function signInWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider).catch((error) => {
+        showError('Authentication failed: ' + error.message);
+      });
     }
 
-    // Handle unauthorized user
-    async function handleUnauthorizedUser() {
-      const unauthorizedMsg = document.getElementById('unauthorized-message');
-      unauthorizedMsg.style.display = 'block';
-      await signOut(auth);
-    }
-
-    // Google Sign In
-    window.signInWithGoogle = function() {
-      const provider = new GoogleAuthProvider();
-      signInWithPopup(auth, provider)
-        .catch((error) => {
-          showError('Authentication failed: ' + error.message);
-        });
-    }
-
-    // Auth state observer
     auth.onAuthStateChanged(async (user) => {
       const loginContainer = document.getElementById('login-container');
       const cmsContainer = document.getElementById('cms-container');
-      const unauthorizedMsg = document.getElementById('unauthorized-message');
       
       if (user) {
-        // Check if user is authorized
-        const authorized = await isAuthorizedUser(user.email);
-        
-        if (authorized) {
-          // User is authorized
-          unauthorizedMsg.style.display = 'none';
-          loginContainer.style.display = 'none';
-          cmsContainer.style.display = 'block';
+        try {
+          const adminRef = db.collection('adminUsers').doc(user.email);
+          const doc = await adminRef.get();
           
-          // Get ID token for CMS authentication
-          user.getIdToken().then((token) => {
-            window.CMS.init({
-              config: {
-                backend: {
-                  name: 'github',
-                  repo: 'simbav911/dart-naujas-btcz.rock',
-                  branch: 'main',
-                  auth_type: 'implicit',
-                  app_id: 'Ov23liqF0ZzZ0yHojmSc',
-                  base_url: 'https://api.github.com',
-                  auth_token: token
-                }
-              }
-            });
-          });
-        } else {
-          // User is not authorized
-          await handleUnauthorizedUser();
+          if (doc.exists) {
+            loginContainer.style.display = 'none';
+            cmsContainer.style.display = 'block';
+            window.CMS.init();
+          } else {
+            auth.signOut();
+            showError('You are not authorized to access this admin panel');
+          }
+        } catch (error) {
+          showError(error.message);
         }
       } else {
-        // User is signed out
         loginContainer.style.display = 'block';
         cmsContainer.style.display = 'none';
-        unauthorizedMsg.style.display = 'none';
       }
     });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('login-container').style.display = 'block';
+    });
   </script>
-  
+
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    // CMS Event Listeners
-    window.CMS.registerEventListener({
-      name: 'error',
-      handler: function(error) {
-        const errorDiv = document.getElementById('error-message');
-        if (errorDiv) {
-          errorDiv.textContent = error.message;
-          errorDiv.style.display = 'block';
-        }
-        console.error('[CMS Error]:', error.message);
-      }
-    });
-  </script>
 </body>
 </html>
