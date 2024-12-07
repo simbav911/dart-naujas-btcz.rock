@@ -61,7 +61,7 @@
       margin-right: 10px;
       width: 18px;
     }
-    #cms-container {
+    #nc-root {
       display: none;
       height: 100vh;
       width: 100vw;
@@ -84,7 +84,7 @@
     </div>
   </div>
   
-  <div id="cms-container"></div>
+  <div id="nc-root"></div>
 
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
@@ -115,19 +115,20 @@
       try {
         console.log('Initializing CMS with token');
         
-        // Initialize CMS with just the backend configuration
-        const config = {
-          backend: {
-            name: 'github',
-            repo: 'simbav911/dart-naujas-btcz.rock',
-            branch: 'main',
-            api_root: 'https://api.github.com',
-            base_url: 'https://api.github.com',
-            token: token
+        // Initialize CMS with GitHub backend
+        window.CMS.init({
+          config: {
+            load_config_file: false,
+            backend: {
+              name: 'github',
+              repo: 'simbav911/dart-naujas-btcz.rock',
+              branch: 'main',
+              base_url: 'https://api.github.com',
+              auth_type: 'implicit',
+              token: token
+            }
           }
-        };
-        
-        window.CMS.init(config);
+        });
         console.log('CMS initialized successfully');
       } catch (error) {
         console.error('Error initializing CMS:', error);
@@ -151,7 +152,7 @@
         if (doc.exists && doc.data().role === 'admin') {
           console.log('User is authorized');
           document.getElementById('login-container').style.display = 'none';
-          const cmsContainer = document.getElementById('cms-container');
+          const cmsContainer = document.getElementById('nc-root');
           cmsContainer.style.display = 'block';
           await initCMS(token);
         } else {
@@ -167,7 +168,7 @@
 
     firebase.auth().onAuthStateChanged(async (user) => {
       const loginContainer = document.getElementById('login-container');
-      const cmsContainer = document.getElementById('cms-container');
+      const cmsContainer = document.getElementById('nc-root');
       
       if (!user) {
         loginContainer.style.display = 'flex';
