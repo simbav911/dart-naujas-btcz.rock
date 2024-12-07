@@ -2,10 +2,9 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  client_id: Ov23likVSo2M8nWaTKxA
-  proxy_url: https://auth.decapcms.com
-  site_domain: simbav911.github.io
   base_url: https://api.github.com
+  auth_endpoint: https://github.com/login/oauth/authorize
+  app_id: Ov23likVSo2M8nWaTKxA
 
 media_folder: static/images
 public_folder: /images

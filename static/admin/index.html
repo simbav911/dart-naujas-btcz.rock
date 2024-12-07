@@ -5,8 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Content Manager</title>
+  <script>
+    if (window.location.hostname === 'localhost') {
+      console.log('Running in development mode');
+    }
+  </script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      console.error('CMS Error:', msg, error);
+    };
+  </script>
 </body>
 </html>
