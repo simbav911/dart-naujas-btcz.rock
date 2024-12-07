@@ -107,27 +107,22 @@
       setTimeout(() => errorDiv.remove(), 5000);
     }
 
-    // Handle Firebase Authentication
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        console.log('User is signed in');
-        const token = await user.getIdToken();
-        await initCMS(token);
-      } else {
-        console.log('No user signed in');
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).catch(error => {
-          console.error('Auth Error:', error);
-          showError('Authentication failed: ' + error.message);
-        });
-      }
-    });
-
     // Initialize CMS after Firebase auth
     async function initCMS(token) {
       try {
         console.log('Initializing CMS with Firebase token');
-        window.CMS.init({
+        
+        // Clean up any existing CMS instance
+        if (window.CMS) {
+          try {
+            await window.CMS.close();
+          } catch (e) {
+            console.log('No existing CMS instance to close');
+          }
+        }
+
+        // Initialize new CMS instance
+        await window.CMS.init({
           config: {
             load_config_file: true,
             backend: {
@@ -143,6 +138,27 @@
         showError('Failed to initialize CMS: ' + error.message);
       }
     }
+
+    // Handle Firebase Authentication
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log('User is signed in');
+        try {
+          const token = await user.getIdToken();
+          await initCMS(token);
+        } catch (error) {
+          console.error('Error getting token:', error);
+          showError('Failed to get authentication token: ' + error.message);
+        }
+      } else {
+        console.log('No user signed in');
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).catch(error => {
+          console.error('Auth Error:', error);
+          showError('Authentication failed: ' + error.message);
+        });
+      }
+    });
   </script>
 </body>
 </html>
