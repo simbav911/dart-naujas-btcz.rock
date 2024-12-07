@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>BitcoinZ Content Manager</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     body {
       margin: 0;
@@ -23,44 +24,41 @@
 </head>
 <body>
   <div id="error-message" class="error-message"></div>
+  <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Enable debug mode
-    window.CMS_DEBUG = true;
-
-    // Error handling
+    // Show error messages
     function showError(message) {
       const errorDiv = document.getElementById('error-message');
-      errorDiv.textContent = message;
-      errorDiv.style.display = 'block';
-      console.error('[CMS Error]', message);
+      if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+      }
+      console.error('[CMS Error]:', message);
     }
 
     // Initialize CMS
-    try {
-      window.CMS.init();
-      console.log('[CMS] Initialized successfully');
-    } catch (error) {
-      showError(`Failed to initialize CMS: ${error.message}`);
-      console.error('[CMS Error]', error);
-    }
+    window.addEventListener('load', function() {
+      try {
+        window.CMS.init();
+        console.log('[CMS] Initialized successfully');
+      } catch (error) {
+        showError('Failed to initialize CMS: ' + error.message);
+      }
+    });
 
-    // Register event listeners
+    // Handle authentication events
     window.CMS.registerEventListener({
-      name: 'auth',
-      handler: function(event) {
-        console.log('[CMS Auth]', event);
-        if (event.error) {
-          showError(`Authentication error: ${event.error}`);
-        }
+      name: 'preSave',
+      handler: function() {
+        console.log('[CMS] Pre-save event triggered');
       }
     });
 
     window.CMS.registerEventListener({
       name: 'error',
       handler: function(error) {
-        showError(error.message || 'An error occurred');
-        console.error('[CMS Error]', error);
+        showError(error.message || 'An unknown error occurred');
       }
     });
   </script>
