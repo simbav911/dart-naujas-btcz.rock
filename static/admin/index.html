@@ -9,7 +9,6 @@
   <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   
   <style>
     body {
@@ -76,11 +75,6 @@
   <div class="container" id="login-container">
     <div class="login-box">
       <h2>BitcoinZ Admin Panel</h2>
-      <button class="login-button" onclick="signInWithGoogle()">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-        Sign in with Google
-      </button>
-      <div id="error-message" class="error-message"></div>
     </div>
   </div>
   
@@ -90,114 +84,56 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
-    // Your web app's Firebase configuration
+    // Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyAvkAmFSvGx57gCMuXoZ_9ZZT3DUV69ya4",
-      authDomain: "bitcoinz-home-page.firebaseapp.com",
-      projectId: "bitcoinz-home-page",
-      storageBucket: "bitcoinz-home-page.firebasestorage.app",
-      messagingSenderId: "78841991032",
-      appId: "1:78841991032:web:8b06fd51c835389206028d",
-      measurementId: "G-9MQBX0H1DR"
+      apiKey: "AIzaSyBzUFnJ8QUKaZwPt_Qe6xRvOqFDPPdkKVE",
+      authDomain: "btcz-rock.firebaseapp.com",
+      projectId: "btcz-rock",
+      storageBucket: "btcz-rock.appspot.com",
+      messagingSenderId: "1037108188669",
+      appId: "1:1037108188669:web:a7aeea5d8a0f1e0b6c3c0b"
     };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
+    // Function to show error messages
     function showError(message) {
-      const errorDiv = document.getElementById('error-message');
+      const errorDiv = document.createElement('div');
+      errorDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #ff4444; color: white; padding: 15px; border-radius: 5px; z-index: 9999;';
       errorDiv.textContent = message;
-      errorDiv.style.display = 'block';
-      console.error('[CMS Error]:', message);
+      document.body.appendChild(errorDiv);
+      setTimeout(() => errorDiv.remove(), 5000);
     }
 
+    // Handle Firebase Authentication
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log('User is signed in');
+        const token = await user.getIdToken();
+        await initCMS(token);
+      } else {
+        console.log('No user signed in');
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).catch(error => {
+          console.error('Auth Error:', error);
+          showError('Authentication failed: ' + error.message);
+        });
+      }
+    });
+
+    // Initialize CMS after Firebase auth
     async function initCMS(token) {
       try {
         console.log('Initializing CMS with Firebase token');
-        
-        // Initialize CMS with Firebase backend
         window.CMS.init({
           config: {
-            load_config_file: false,
+            load_config_file: true,
             backend: {
-              name: 'git-gateway',
-              repo: 'simbav911/dart-naujas-btcz.rock',
-              branch: 'main',
-              auth_token: token,
-            },
-            media_folder: 'static/images',
-            public_folder: '/images',
-            media_library: {
-              name: 'uploadcare',
-              config: {
-                publicKey: 'demopublickey'
-              }
-            },
-            collections: [
-              {
-                name: 'posts',
-                label: 'Blog Posts',
-                folder: 'content/news',
-                create: true,
-                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-                fields: [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Publish Date', name: 'date', widget: 'datetime' },
-                  { label: 'Featured Image', name: 'image', widget: 'image', required: false },
-                  { label: 'Body', name: 'body', widget: 'markdown' }
-                ]
-              },
-              {
-                name: 'pages',
-                label: 'English Pages',
-                folder: 'content/en',
-                create: true,
-                slug: '{{slug}}',
-                fields: [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Featured Image', name: 'image', widget: 'image', required: false },
-                  { label: 'Body', name: 'body', widget: 'markdown' }
-                ]
-              },
-              {
-                name: 'roadmap',
-                label: 'Roadmap Items',
-                folder: 'content/roadmap',
-                create: true,
-                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-                fields: [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Date', name: 'date', widget: 'datetime' },
-                  { label: 'Status', name: 'status', widget: 'select', options: ['planned', 'in-progress', 'completed'] },
-                  { label: 'Body', name: 'body', widget: 'markdown' }
-                ]
-              },
-              {
-                name: 'wallets',
-                label: 'Wallet Information',
-                folder: 'content/wallets',
-                create: true,
-                fields: [
-                  { label: 'Name', name: 'name', widget: 'string' },
-                  { label: 'Type', name: 'type', widget: 'select', options: ['desktop', 'mobile', 'web'] },
-                  { label: 'Platform', name: 'platform', widget: 'select', multiple: true, options: ['Windows', 'macOS', 'Linux', 'iOS', 'Android'] },
-                  { label: 'Download URL', name: 'download_url', widget: 'string' },
-                  { label: 'Description', name: 'description', widget: 'markdown' }
-                ]
-              },
-              {
-                name: 'exchanges',
-                label: 'Exchange Information',
-                folder: 'content/exchanges',
-                create: true,
-                fields: [
-                  { label: 'Name', name: 'name', widget: 'string' },
-                  { label: 'URL', name: 'url', widget: 'string' },
-                  { label: 'Logo', name: 'logo', widget: 'image' },
-                  { label: 'Description', name: 'description', widget: 'markdown' }
-                ]
-              }
-            ]
+              name: 'proxy',
+              proxy_url: 'https://api.github.com',
+              auth_token: token
+            }
           }
         });
         console.log('CMS initialized successfully');
@@ -206,50 +142,6 @@
         showError('Failed to initialize CMS: ' + error.message);
       }
     }
-
-    async function signInWithGoogle() {
-      try {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        const result = await firebase.auth().signInWithPopup(provider);
-        const user = result.user;
-        
-        // Get the Firebase ID token
-        const token = await user.getIdToken();
-        console.log('Got Firebase token');
-        
-        const adminRef = firebase.firestore().collection('adminUsers').doc(user.email);
-        const doc = await adminRef.get();
-        
-        if (doc.exists && doc.data().role === 'admin') {
-          console.log('User is authorized');
-          document.getElementById('login-container').style.display = 'none';
-          const cmsContainer = document.getElementById('nc-root');
-          cmsContainer.style.display = 'block';
-          await initCMS(token);
-        } else {
-          console.log('User is not authorized');
-          await firebase.auth().signOut();
-          showError(`You are not authorized to access this admin panel. Email: ${user.email} is not in the admin list.`);
-        }
-      } catch (error) {
-        console.error('Authentication failed:', error);
-        showError('Authentication failed: ' + error.message);
-      }
-    }
-
-    firebase.auth().onAuthStateChanged(async (user) => {
-      const loginContainer = document.getElementById('login-container');
-      const cmsContainer = document.getElementById('nc-root');
-      
-      if (!user) {
-        loginContainer.style.display = 'flex';
-        cmsContainer.style.display = 'none';
-      }
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('login-container').style.display = 'flex';
-    });
   </script>
 </body>
 </html>
