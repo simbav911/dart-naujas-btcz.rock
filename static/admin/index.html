@@ -109,11 +109,32 @@
       console.error('[CMS Error]:', message);
     }
 
-    function signInWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithPopup(provider).catch((error) => {
+    async function signInWithGoogle() {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
+        const user = result.user;
+        
+        // Get the Firebase ID token
+        const token = await user.getIdToken();
+        
+        // Initialize CMS with the token
+        window.CMS.init({
+          config: {
+            backend: {
+              name: 'github',
+              repo: 'simbav911/dart-naujas-btcz.rock',
+              branch: 'main',
+              auth_endpoint: 'auth',
+              api_root: 'https://api.github.com',
+              base_url: 'https://api.github.com',
+              auth_token: token,
+            },
+          },
+        });
+      } catch (error) {
         showError('Authentication failed: ' + error.message);
-      });
+      }
     }
 
     firebase.auth().onAuthStateChanged(async (user) => {
@@ -128,9 +149,8 @@
           if (doc.exists) {
             loginContainer.style.display = 'none';
             cmsContainer.style.display = 'block';
-            window.CMS.init();
           } else {
-            firebase.auth().signOut();
+            await firebase.auth().signOut();
             showError('You are not authorized to access this admin panel');
           }
         } catch (error) {

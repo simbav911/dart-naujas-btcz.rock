@@ -2,9 +2,9 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  auth_type: implicit
+  auth_endpoint: auth
+  api_root: https://api.github.com
   base_url: https://api.github.com
-  app_id: Ov23liqF0ZzZ0yHojmSc
 
 local_backend: true
 publish_mode: editorial_workflow
@@ -18,8 +18,6 @@ collections:
     folder: content/news
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    editor:
-      preview: true
     fields:
       - {label: "Title", name: title, widget: string}
       - {label: "Publish Date", name: date, widget: datetime}
@@ -30,8 +28,6 @@ collections:
     folder: content/en
     create: true
     slug: "{{slug}}"
-    editor:
-      preview: true
     fields:
       - {label: "Title", name: title, widget: string}
       - {label: "Body", name: body, widget: markdown}
@@ -41,8 +37,6 @@ collections:
     folder: content/roadmap
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    editor:
-      preview: true
     fields:
       - {label: "Title", name: title, widget: string}
       - {label: "Date", name: date, widget: datetime}
