@@ -3,130 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>BitcoinZ Content Manager</title>
-  
-  <!-- Firebase App (the core Firebase SDK) -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-  
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-    #nc-root {
-      height: 100vh;
-    }
-    .error-message {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #ff4444;
-      color: white;
-      padding: 15px;
-      border-radius: 5px;
-      z-index: 9999;
-    }
-  </style>
+  <title>Content Manager</title>
 </head>
 <body>
-  <div id="nc-root"></div>
-
-  <!-- Include the script that builds the page and powers Decap CMS -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
-    // Show error messages
-    function showError(message) {
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message';
-      errorDiv.textContent = message;
-      document.body.appendChild(errorDiv);
-      setTimeout(() => errorDiv.remove(), 5000);
-    }
-
-    // Firebase configuration
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyAvkAmFSvGx57gCMuXoZ_9ZZT3DUV69ya4",
       authDomain: "bitcoinz-home-page.firebaseapp.com",
       projectId: "bitcoinz-home-page",
       storageBucket: "bitcoinz-home-page.firebasestorage.app",
       messagingSenderId: "78841991032",
-      appId: "1:78841991032:web:8b06fd51c835389206028d",
-      measurementId: "G-9MQBX0H1DR"
+      appId: "1:78841991032:web:8b06fd51c835389206028d"
     };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // Initialize Firestore
-    const db = firebase.firestore();
-
-    // Custom backend implementation
-    const customBackend = {
-      init: () => {
-        console.log('Custom backend initialized');
+    // Custom auth handler
+    const authHandler = {
+      login: () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        return firebase.auth().signInWithPopup(provider);
       },
-      authenticate: () => {
-        return new Promise((resolve, reject) => {
-          const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            unsubscribe();
-            if (user) {
-              resolve({ email: user.email });
-            } else {
-              const provider = new firebase.auth.GoogleAuthProvider();
-              firebase.auth().signInWithPopup(provider)
-                .then(result => resolve({ email: result.user.email }))
-                .catch(reject);
-            }
-          });
-        });
-      },
-      currentUser: () => {
+      logout: () => firebase.auth().signOut(),
+      isLoggedIn: () => {
         const user = firebase.auth().currentUser;
-        return user ? Promise.resolve({ email: user.email }) : Promise.reject('No user');
-      },
-      logout: () => {
-        return firebase.auth().signOut();
+        return !!user;
       }
     };
 
-    // Register custom backend
-    CMS.registerBackend('firebase', customBackend);
+    // Register auth handler with CMS
+    CMS.registerBackend('firebase', authHandler);
 
     // Initialize CMS
-    CMS.init({
-      backend: {
-        name: 'firebase'
-      },
-      load_config_file: true,
-      local_backend: false
-    });
+    CMS.init();
 
-    // Handle Firebase Authentication
+    // Handle initial auth state
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log('User is signed in:', user.email);
-        user.getIdToken().then(token => {
-          window.localStorage.setItem('cms-token', token);
-          db.collection('users').doc(user.uid).set({
-            email: user.email,
-            lastLogin: new Date()
-          }, { merge: true });
-        }).catch(error => {
-          console.error('Token Error:', error);
-          showError('Failed to get authentication token: ' + error.message);
-        });
-      } else {
-        console.log('No user signed in');
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).catch(error => {
-          console.error('Auth Error:', error);
-          showError('Authentication failed: ' + error.message);
-        });
+      if (!user) {
+        authHandler.login();
       }
     });
   </script>
