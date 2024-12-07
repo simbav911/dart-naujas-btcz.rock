@@ -4,9 +4,71 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Content Manager</title>
+  <title>BitcoinZ Content Manager</title>
+  <style>
+    .error-message {
+      color: red;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid red;
+      display: none;
+    }
+    .login-status {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      background: #f0f0f0;
+      border-bottom-left-radius: 5px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Error message container -->
+  <div id="error-message" class="error-message"></div>
+  
+  <!-- Login status -->
+  <div id="login-status" class="login-status"></div>
+
+  <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    // Initialize CMS
+    window.CMS.init();
+
+    // Error handling
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.style.display = 'block';
+      errorDiv.textContent = `Error: ${msg}`;
+      console.error('CMS Error:', {message: msg, url, lineNo, columnNo, error});
+      return false;
+    };
+
+    // Authentication status handling
+    window.CMS.registerEventListener({
+      name: 'auth',
+      handler: function(event) {
+        const statusDiv = document.getElementById('login-status');
+        if (event.data) {
+          statusDiv.textContent = `Logged in as: ${event.data.email}`;
+        } else {
+          statusDiv.textContent = 'Not logged in';
+        }
+      },
+    });
+
+    // Handle authentication errors
+    window.CMS.registerEventListener({
+      name: 'error',
+      handler: function(event) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.style.display = 'block';
+        errorDiv.textContent = `Authentication Error: ${event.error}`;
+      },
+    });
+  </script>
 </body>
 </html>

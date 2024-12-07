@@ -7,25 +7,81 @@
 </head>
 <body>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code');
-    const state = params.get('state');
-
-    if (code && state) {
-      window.opener.postMessage(
-        {
-          type: 'authorization',
-          provider: 'github',
-          code: code,
-          state: state
-        },
-        window.location.origin
-      );
-      window.close();
-    } else {
-      console.error('No code or state found in URL');
-      window.close();
+    // Function to handle errors
+    function handleError(message) {
+      console.error('Authentication error:', message);
+      const errorDiv = document.createElement('div');
+      errorDiv.style.color = 'red';
+      errorDiv.textContent = `Authentication failed: ${message}`;
+      document.body.appendChild(errorDiv);
+      setTimeout(() => {
+        window.close();
+      }, 3000);
     }
+
+    // Function to process authentication
+    function processAuth() {
+      const params = new URLSearchParams(window.location.search);
+      const hash = window.location.hash;
+      
+      // Check for errors in URL parameters
+      if (params.has('error')) {
+        handleError(params.get('error_description') || params.get('error'));
+        return;
+      }
+
+      // Get code and state from URL parameters
+      const code = params.get('code');
+      const state = params.get('state');
+
+      if (code && state) {
+        // Post message to parent window
+        window.opener.postMessage(
+          {
+            type: 'netlify-cms-auth',
+            provider: 'github',
+            code,
+            state
+          },
+          window.location.origin
+        );
+
+        // Store auth info in localStorage
+        const authInfo = {
+          provider: 'github',
+          code,
+          state,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('netlify-cms-auth', JSON.stringify(authInfo));
+
+        // Close the window after successful authentication
+        window.close();
+      } else if (hash && hash.includes('access_token=')) {
+        // Handle implicit flow (though we're not using it currently)
+        const token = hash.match(/access_token=([^&]*)/)[1];
+        if (token) {
+          window.opener.postMessage(
+            {
+              type: 'netlify-cms-auth',
+              provider: 'github',
+              token
+            },
+            window.location.origin
+          );
+          window.close();
+        }
+      } else {
+        handleError('No authentication code received');
+      }
+    }
+
+    // Start processing when the page loads
+    processAuth();
   </script>
+  <div style="text-align: center; padding: 20px;">
+    <h1>Authenticating...</h1>
+    <p>Please wait while we complete the authentication process.</p>
+  </div>
 </body>
 </html>

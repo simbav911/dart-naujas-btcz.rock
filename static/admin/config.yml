@@ -2,9 +2,23 @@ backend:
   name: github
   repo: simbav911/dart-naujas-btcz.rock
   branch: main
-  base_url: https://api.github.com
-  auth_endpoint: oauth/authorize
   client_id: Ov23likVSo2M8nWaTKxA
+  auth_endpoint: login/oauth/authorize
+  base_url: https://api.github.com
+  auth_scope: repo,user # This allows access to private repos and user information
+  accept_roles: # This controls who can access the CMS
+    - admin
+    - write
+    - maintain
+  squash_merges: true # Cleaner commit history
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
+
+publish_mode: editorial_workflow # Enables drafts and review process
 
 media_folder: static/images
 public_folder: /images
