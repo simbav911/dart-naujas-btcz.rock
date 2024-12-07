@@ -113,19 +113,17 @@
 
     async function initCMS(token) {
       try {
-        console.log('Initializing CMS with token');
+        console.log('Initializing CMS with Firebase token');
         
-        // Initialize CMS with GitHub backend
+        // Initialize CMS with Firebase backend
         window.CMS.init({
           config: {
             load_config_file: false,
             backend: {
-              name: 'github',
+              name: 'git-gateway',
               repo: 'simbav911/dart-naujas-btcz.rock',
               branch: 'main',
-              base_url: 'https://api.github.com',
-              auth_type: 'implicit',
-              token: token
+              auth_token: token,
             },
             media_folder: 'static/images',
             public_folder: '/images',
