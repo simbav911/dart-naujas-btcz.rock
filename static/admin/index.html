@@ -9,6 +9,7 @@
   <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   
   <style>
     body {
@@ -16,74 +17,37 @@
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f0f2f5;
-    }
-    .login-box {
-      background: white;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
+    #nc-root {
+      height: 100vh;
     }
     .error-message {
-      color: #dc3545;
-      padding: 15px;
-      margin: 15px;
-      border: 1px solid #dc3545;
-      border-radius: 4px;
-      display: none;
-    }
-    .login-button {
-      background-color: #4285f4;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #ff4444;
       color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 20px auto;
-    }
-    .login-button:hover {
-      background-color: #357abd;
-    }
-    .login-button img {
-      margin-right: 10px;
-      width: 18px;
-    }
-    #nc-root {
-      display: none;
-      height: 100vh;
-      width: 100vw;
-    }
-    h2 {
-      color: #1a73e8;
-      margin-bottom: 30px;
+      padding: 15px;
+      border-radius: 5px;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="login-container">
-    <div class="login-box">
-      <h2>BitcoinZ Admin Panel</h2>
-    </div>
-  </div>
-  
   <div id="nc-root"></div>
 
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
+    // Show error messages
+    function showError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.textContent = message;
+      document.body.appendChild(errorDiv);
+      setTimeout(() => errorDiv.remove(), 5000);
+    }
+
     // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAvkAmFSvGx57gCMuXoZ_9ZZT3DUV69ya4",
@@ -98,39 +62,64 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // Function to show error messages
-    function showError(message) {
-      const errorDiv = document.createElement('div');
-      errorDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background-color: #ff4444; color: white; padding: 15px; border-radius: 5px; z-index: 9999;';
-      errorDiv.textContent = message;
-      document.body.appendChild(errorDiv);
-      setTimeout(() => errorDiv.remove(), 5000);
-    }
+    // Initialize Firestore
+    const db = firebase.firestore();
+
+    // Custom backend implementation
+    const customBackend = {
+      init: () => {
+        console.log('Custom backend initialized');
+      },
+      authenticate: () => {
+        return new Promise((resolve, reject) => {
+          const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+            unsubscribe();
+            if (user) {
+              resolve({ email: user.email });
+            } else {
+              const provider = new firebase.auth.GoogleAuthProvider();
+              firebase.auth().signInWithPopup(provider)
+                .then(result => resolve({ email: result.user.email }))
+                .catch(reject);
+            }
+          });
+        });
+      },
+      currentUser: () => {
+        const user = firebase.auth().currentUser;
+        return user ? Promise.resolve({ email: user.email }) : Promise.reject('No user');
+      },
+      logout: () => {
+        return firebase.auth().signOut();
+      }
+    };
+
+    // Register custom backend
+    CMS.registerBackend('firebase', customBackend);
 
     // Initialize CMS
-    async function initCMS() {
-      try {
-        console.log('Initializing CMS');
-        if (window.CMS) {
-          window.CMS.init();
-        }
-        console.log('CMS initialized successfully');
-      } catch (error) {
-        console.error('Error initializing CMS:', error);
-        showError('Failed to initialize CMS: ' + error.message);
-      }
-    }
+    CMS.init({
+      backend: {
+        name: 'firebase'
+      },
+      load_config_file: true,
+      local_backend: false
+    });
 
     // Handle Firebase Authentication
-    firebase.auth().onAuthStateChanged(async (user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('User is signed in');
-        try {
-          initCMS();
-        } catch (error) {
-          console.error('Error:', error);
-          showError(error.message);
-        }
+        console.log('User is signed in:', user.email);
+        user.getIdToken().then(token => {
+          window.localStorage.setItem('cms-token', token);
+          db.collection('users').doc(user.uid).set({
+            email: user.email,
+            lastLogin: new Date()
+          }, { merge: true });
+        }).catch(error => {
+          console.error('Token Error:', error);
+          showError('Failed to get authentication token: ' + error.message);
+        });
       } else {
         console.log('No user signed in');
         const provider = new firebase.auth.GoogleAuthProvider();

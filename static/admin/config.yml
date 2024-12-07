@@ -1,7 +1,10 @@
 backend:
-  name: github
-  repo: simbav911/dart-naujas-btcz.rock
-  branch: main
+  name: firebase
+  firebase_app_id: "1:78841991032:web:8b06fd51c835389206028d"
+  firebase_project_id: "bitcoinz-home-page"
+
+local_backend: false
+publish_mode: simple
 
 media_folder: static/images
 public_folder: /images
@@ -11,6 +14,7 @@ collections:
     label: Blog Posts
     folder: content/news
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Date, name: date, widget: datetime }
