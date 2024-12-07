@@ -3,58 +3,122 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BitcoinZ Admin CMS</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <title>Content Manager</title>
   <style>
     body {
-      font-family: -apple-system, system-ui, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      font-family: -apple-system, system-ui, sans-serif;
     }
     .login-container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
     .login-button {
-      width: 100%;
-      margin: 10px 0;
       background: #4285f4;
       color: white;
-      border: none;
       padding: 12px 24px;
+      border: none;
       border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      margin-top: 20px;
     }
     .login-button:hover {
-      opacity: 0.9;
+      background: #357abd;
+    }
+    .error {
+      color: #721c24;
+      background: #f8d7da;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+      display: none;
+    }
+    #cms-root {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>BitcoinZ Admin CMS</h2>
-    <button class="login-button" onclick="netlifyIdentity.open()">Login</button>
+  <div id="login" class="login-container">
+    <div id="error" class="error"></div>
+    <button class="login-button" onclick="handleLogin()">Sign in with Google</button>
   </div>
 
+  <div id="cms-root"></div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+  <!-- Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
+
   <script>
-    // Netlify Identity Widget Configuration
-    netlifyIdentity.on('login', user => {
-      netlifyIdentity.close();
-      window.location.href = '/admin/cms.html';
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAvkAmFSvGx57gCMuXoZ_9ZZT3DUV69ya4",
+      authDomain: "bitcoinz-home-page.firebaseapp.com",
+      projectId: "bitcoinz-home-page",
+      storageBucket: "bitcoinz-home-page.firebasestorage.app",
+      messagingSenderId: "78841991032",
+      appId: "1:78841991032:web:8b06fd51c835389206028d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    function showError(message) {
+      const error = document.getElementById('error');
+      error.textContent = message;
+      error.style.display = 'block';
+      setTimeout(() => error.style.display = 'none', 5000);
+    }
+
+    async function handleLogin() {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
+        
+        if (result.user) {
+          const token = await result.user.getIdToken();
+          localStorage.setItem('netlify-cms-user', JSON.stringify({
+            token: token,
+            email: result.user.email
+          }));
+
+          // Hide login, show CMS
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('cms-root').style.display = 'block';
+
+          // Initialize CMS
+          CMS.init();
+        }
+      } catch (error) {
+        console.error('Login failed:', error);
+        showError(error.message);
+      }
+    }
+
+    // Check authentication state on load
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('cms-root').style.display = 'block';
+        CMS.init();
+      }
     });
 
-    netlifyIdentity.on('logout', () => {
-      netlifyIdentity.close();
+    // Register authentication handler
+    CMS.registerAuthProvider({
+      name: 'firebase',
+      login: () => handleLogin(),
+      logout: () => firebase.auth().signOut(),
+      isAuthenticated: () => !!firebase.auth().currentUser
     });
   </script>
 </body>

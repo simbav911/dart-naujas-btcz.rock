@@ -1,28 +1,27 @@
 backend:
   name: github
-  repo: bitcoinz-site/homepage
+  repo: simbav911/dart-naujas-btcz.rock
   branch: main
+  base_url: https://simbav911.github.io
+  auth_endpoint: /auth
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+media_folder: static/images
+public_folder: /images
 
 collections:
-  - name: "site_news"
-    label: "Site News"
-    folder: "content/en/news"
+  - name: posts
+    label: Blog Posts
+    folder: content/news
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Body, name: body, widget: markdown }
 
-  - name: "project_roadmap"
-    label: "Project Roadmap"
-    folder: "content/roadmap"
+  - name: pages
+    label: Pages
+    folder: content/pages
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text"}
+      - { label: Title, name: title, widget: string }
+      - { label: Body, name: body, widget: markdown }
