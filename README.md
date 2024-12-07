@@ -1,65 +1,28 @@
-# BitcoinZ Website
+# BitcoinZ Homepage Admin CMS
 
-## Project Overview
-A community-driven cryptocurrency website built with Hugo, Netlify CMS, and GitHub Pages.
+## Firebase Authentication Setup
 
-## Prerequisites
-- Git
-- Hugo (extended version)
-- GitHub Account
+### Prerequisites
+1. Create a Firebase project at https://console.firebase.google.com/
+2. Enable Google Authentication in your Firebase project
+3. Configure authorized users in Firebase Console
 
-## Setup Instructions
+### Authentication Management
+- Go to Firebase Console > Authentication > Users
+- Add authorized users or set up additional sign-in methods
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/simbav911/bitcoinz.git
-cd bitcoinz
-```
+### Key Features
+- Secure Google Sign-In
+- User management through Firebase Console
+- No hardcoded email restrictions
 
-### 2. Local Development
-```bash
-# Install Hugo (if not already installed)
-brew install hugo  # macOS
-# Or use appropriate method for your OS
+### Troubleshooting
+- Ensure Google Authentication is enabled
+- Verify user permissions in Firebase Console
+- Check browser console for any login errors
 
-# Run local server
-hugo server
-```
-
-### 3. GitHub Pages Deployment
-- Repository settings must have GitHub Pages enabled
-- Branch: `main`
-- Folder: `/root`
-
-### 4. Netlify CMS Setup
-- Create GitHub OAuth Application
-- Configure repository secrets
-  - `GITHUB_CLIENT_ID`
-  - `GITHUB_CLIENT_SECRET`
-  - `SITE_URL`
-
-### 5. Admin Access
-- Navigate to `/admin/` on deployed site
-- Login with GitHub account
-
-## Project Structure
-- `content/`: Website content
-- `layouts/`: Hugo templates
-- `static/`: Static assets
-- `i18n/`: Multilingual support
-
-## Contributing
-1. Fork repository
-2. Create feature branch
-3. Commit changes
-4. Push to branch
-5. Create pull request
-
-## Technologies
-- Hugo
-- Netlify CMS
-- GitHub Pages
-- Tailwind CSS
-
-## License
-[Specify your license]
+## Local Development
+1. Clone the repository
+2. Set up Firebase project
+3. Configure authorized users
+4. Deploy to GitHub Pages
