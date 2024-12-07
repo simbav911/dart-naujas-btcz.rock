@@ -63,6 +63,8 @@
     }
     #cms-container {
       display: none;
+      height: 100vh;
+      width: 100vw;
     }
     h2 {
       color: #1a73e8;
@@ -71,8 +73,8 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="login-container" class="login-box">
+  <div class="container" id="login-container">
+    <div class="login-box">
       <h2>BitcoinZ Admin Panel</h2>
       <button class="login-button" onclick="signInWithGoogle()">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
@@ -109,6 +111,58 @@
       console.error('[CMS Error]:', message);
     }
 
+    async function initCMS(token) {
+      try {
+        console.log('Initializing CMS with token');
+        await window.CMS.init({
+          config: {
+            backend: {
+              name: 'github',
+              repo: 'simbav911/dart-naujas-btcz.rock',
+              branch: 'main',
+              api_root: 'https://api.github.com',
+              base_url: 'https://api.github.com',
+              auth_type: 'github',
+              app_id: '',
+              auth_endpoint: 'auth',
+              auth_token: token
+            },
+            media_folder: 'static/images',
+            public_folder: '/images',
+            collections: [
+              {
+                name: 'posts',
+                label: 'Blog Posts',
+                folder: 'content/news',
+                create: true,
+                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Publish Date', name: 'date', widget: 'datetime' },
+                  { label: 'Body', name: 'body', widget: 'markdown' }
+                ]
+              },
+              {
+                name: 'pages',
+                label: 'English Pages',
+                folder: 'content/en',
+                create: true,
+                slug: '{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Body', name: 'body', widget: 'markdown' }
+                ]
+              }
+            ]
+          }
+        });
+        console.log('CMS initialized successfully');
+      } catch (error) {
+        console.error('Error initializing CMS:', error);
+        showError('Failed to initialize CMS: ' + error.message);
+      }
+    }
+
     async function signInWithGoogle() {
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -117,22 +171,24 @@
         
         // Get the Firebase ID token
         const token = await user.getIdToken();
+        console.log('Got Firebase token');
         
-        // Initialize CMS with the token
-        window.CMS.init({
-          config: {
-            backend: {
-              name: 'github',
-              repo: 'simbav911/dart-naujas-btcz.rock',
-              branch: 'main',
-              auth_endpoint: 'auth',
-              api_root: 'https://api.github.com',
-              base_url: 'https://api.github.com',
-              auth_token: token,
-            },
-          },
-        });
+        const adminRef = firebase.firestore().collection('adminUsers').doc(user.email);
+        const doc = await adminRef.get();
+        
+        if (doc.exists && doc.data().role === 'admin') {
+          console.log('User is authorized');
+          document.getElementById('login-container').style.display = 'none';
+          const cmsContainer = document.getElementById('cms-container');
+          cmsContainer.style.display = 'block';
+          await initCMS(token);
+        } else {
+          console.log('User is not authorized');
+          await firebase.auth().signOut();
+          showError(`You are not authorized to access this admin panel. Email: ${user.email} is not in the admin list.`);
+        }
       } catch (error) {
+        console.error('Authentication failed:', error);
         showError('Authentication failed: ' + error.message);
       }
     }
@@ -141,33 +197,14 @@
       const loginContainer = document.getElementById('login-container');
       const cmsContainer = document.getElementById('cms-container');
       
-      if (user) {
-        try {
-          console.log('Checking authorization for:', user.email);
-          const adminRef = firebase.firestore().collection('adminUsers').doc(user.email);
-          const doc = await adminRef.get();
-          
-          if (doc.exists && doc.data().role === 'admin') {
-            console.log('User is authorized');
-            loginContainer.style.display = 'none';
-            cmsContainer.style.display = 'block';
-          } else {
-            console.log('User is not authorized');
-            await firebase.auth().signOut();
-            showError(`You are not authorized to access this admin panel. Email: ${user.email} is not in the admin list.`);
-          }
-        } catch (error) {
-          console.error('Error checking authorization:', error);
-          showError('Error checking authorization: ' + error.message);
-        }
-      } else {
-        loginContainer.style.display = 'block';
+      if (!user) {
+        loginContainer.style.display = 'flex';
         cmsContainer.style.display = 'none';
       }
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('login-container').style.display = 'block';
+      document.getElementById('login-container').style.display = 'flex';
     });
   </script>
 </body>
