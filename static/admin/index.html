@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>BitcoinZ Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
   <style>
     body {
       margin: 0;
@@ -20,13 +20,66 @@
       border-radius: 4px;
       display: none;
     }
+    #login-container {
+      display: none;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .login-button {
+      background-color: #4285f4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #cms-container {
+      display: none;
+    }
+    .unauthorized {
+      color: #dc3545;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <div id="error-message" class="error-message"></div>
-  <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
+  <div id="login-container">
+    <h2>BitcoinZ Admin Panel</h2>
+    <button class="login-button" onclick="signInWithGoogle()">Sign in with Google</button>
+    <div id="unauthorized-message" class="unauthorized" style="display: none;">
+      You are not authorized to access this admin panel. Please contact the administrator.
+    </div>
+  </div>
+  <div id="cms-container">
+    <div id="error-message" class="error-message"></div>
+  </div>
+
+  <!-- Initialize Firebase -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAvkAmFSvGx57gCMuXoZ_9ZZT3DUV69ya4",
+      authDomain: "bitcoinz-home-page.firebaseapp.com",
+      projectId: "bitcoinz-home-page",
+      storageBucket: "bitcoinz-home-page.firebasestorage.app",
+      messagingSenderId: "78841991032",
+      appId: "1:78841991032:web:8b06fd51c835389206028d",
+      measurementId: "G-9MQBX0H1DR"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
     // Show error messages
     function showError(message) {
       const errorDiv = document.getElementById('error-message');
@@ -37,28 +90,93 @@
       console.error('[CMS Error]:', message);
     }
 
-    // Initialize CMS
-    window.addEventListener('load', function() {
+    // Check if user is authorized
+    async function isAuthorizedUser(email) {
       try {
-        window.CMS.init();
-        console.log('[CMS] Initialized successfully');
+        const adminUsersRef = collection(db, 'adminUsers');
+        const q = query(adminUsersRef, where("email", "==", email));
+        const querySnapshot = await getDocs(q);
+        return !querySnapshot.empty;
       } catch (error) {
-        showError('Failed to initialize CMS: ' + error.message);
+        console.error('Error checking authorization:', error);
+        return false;
+      }
+    }
+
+    // Handle unauthorized user
+    async function handleUnauthorizedUser() {
+      const unauthorizedMsg = document.getElementById('unauthorized-message');
+      unauthorizedMsg.style.display = 'block';
+      await signOut(auth);
+    }
+
+    // Google Sign In
+    window.signInWithGoogle = function() {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .catch((error) => {
+          showError('Authentication failed: ' + error.message);
+        });
+    }
+
+    // Auth state observer
+    auth.onAuthStateChanged(async (user) => {
+      const loginContainer = document.getElementById('login-container');
+      const cmsContainer = document.getElementById('cms-container');
+      const unauthorizedMsg = document.getElementById('unauthorized-message');
+      
+      if (user) {
+        // Check if user is authorized
+        const authorized = await isAuthorizedUser(user.email);
+        
+        if (authorized) {
+          // User is authorized
+          unauthorizedMsg.style.display = 'none';
+          loginContainer.style.display = 'none';
+          cmsContainer.style.display = 'block';
+          
+          // Get ID token for CMS authentication
+          user.getIdToken().then((token) => {
+            window.CMS.init({
+              config: {
+                backend: {
+                  name: 'github',
+                  repo: 'simbav911/dart-naujas-btcz.rock',
+                  branch: 'main',
+                  auth_type: 'implicit',
+                  app_id: 'Ov23liqF0ZzZ0yHojmSc',
+                  base_url: 'https://api.github.com',
+                  auth_token: token
+                }
+              }
+            });
+          });
+        } else {
+          // User is not authorized
+          await handleUnauthorizedUser();
+        }
+      } else {
+        // User is signed out
+        loginContainer.style.display = 'block';
+        cmsContainer.style.display = 'none';
+        unauthorizedMsg.style.display = 'none';
       }
     });
-
-    // Handle authentication events
-    window.CMS.registerEventListener({
-      name: 'preSave',
-      handler: function() {
-        console.log('[CMS] Pre-save event triggered');
-      }
-    });
-
+  </script>
+  
+  <!-- Include the script that builds the page and powers Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // CMS Event Listeners
     window.CMS.registerEventListener({
       name: 'error',
       handler: function(error) {
-        showError(error.message || 'An unknown error occurred');
+        const errorDiv = document.getElementById('error-message');
+        if (errorDiv) {
+          errorDiv.textContent = error.message;
+          errorDiv.style.display = 'block';
+        }
+        console.error('[CMS Error]:', error.message);
       }
     });
   </script>
