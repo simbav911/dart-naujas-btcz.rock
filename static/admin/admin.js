@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     environmentNotice.textContent = 'Running in local development mode';
 
+    // Initialize variables
+    let currentContentType = null;
+    let currentFilePath = null;
+    const editorContainer = document.getElementById('editor-container');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const currentSection = document.getElementById('current-section');
+    const contentList = document.getElementById('content-list');
+    const newContentBtn = document.getElementById('newContentBtn');
+
     // Initialize Quill editor
     const quill = new Quill('#editor', {
         theme: 'snow',
@@ -27,6 +36,128 @@ document.addEventListener('DOMContentLoaded', function() {
                 ['clean']
             ]
         }
+    });
+
+    // Content type configuration
+    const contentTypes = {
+        news: {
+            path: 'content/en/news',
+            template: {
+                frontMatter: (title) => ({
+                    title: title,
+                    date: new Date().toISOString(),
+                    draft: false,
+                    author: "BitcoinZ Team",
+                    categories: ["Update"],
+                    tags: [],
+                    type: "news",
+                    layout: "single"
+                })
+            }
+        },
+        roadmap: {
+            path: 'content/en/roadmap',
+            template: {
+                frontMatter: (title) => ({
+                    title: title,
+                    date: new Date().toISOString(),
+                    draft: false,
+                    type: "roadmap",
+                    layout: "single"
+                })
+            }
+        },
+        wallets: {
+            path: 'content/en/wallets',
+            template: {
+                frontMatter: (title) => ({
+                    title: title,
+                    date: new Date().toISOString(),
+                    draft: false,
+                    type: "wallet",
+                    layout: "single"
+                })
+            }
+        },
+        'why-bitcoinz': {
+            path: 'content/en/why-bitcoinz',
+            template: {
+                frontMatter: (title) => ({
+                    title: title,
+                    date: new Date().toISOString(),
+                    draft: false,
+                    type: "page",
+                    layout: "single"
+                })
+            }
+        }
+    };
+
+    // Handle content type selection
+    document.querySelectorAll('.content-type-btn').forEach(button => {
+        button.addEventListener('click', async function() {
+            const type = this.dataset.type;
+            currentContentType = type;
+            currentSection.textContent = this.textContent.trim();
+            
+            // Show editor container and hide welcome message
+            editorContainer.classList.remove('hidden');
+            welcomeMessage.classList.add('hidden');
+
+            // Load existing content
+            await loadExistingContent(type);
+        });
+    });
+
+    // Load existing content for a content type
+    async function loadExistingContent(type) {
+        try {
+            const response = await fetch(`/api/content?type=${type}`);
+            const files = await response.json();
+            
+            contentList.innerHTML = files.map(file => `
+                <div class="py-2 px-3 hover:bg-gray-100 cursor-pointer content-item" data-path="${file.path}">
+                    ${file.title}
+                </div>
+            `).join('');
+
+            // Add click handlers for content items
+            document.querySelectorAll('.content-item').forEach(item => {
+                item.addEventListener('click', () => loadContent(item.dataset.path));
+            });
+        } catch (error) {
+            console.error('Error loading content:', error);
+            contentList.innerHTML = '<div class="text-red-500 p-2">Error loading content</div>';
+        }
+    }
+
+    // Load specific content
+    async function loadContent(path) {
+        try {
+            const response = await fetch(`/api/content/${encodeURIComponent(path)}`);
+            const content = await response.json();
+            
+            currentFilePath = path;
+            document.getElementById('title').value = content.title || '';
+            quill.root.innerHTML = content.content || '';
+        } catch (error) {
+            console.error('Error loading content:', error);
+            alert('Error loading content. Please try again.');
+        }
+    }
+
+    // New content button
+    newContentBtn.addEventListener('click', function() {
+        if (!currentContentType) {
+            alert('Please select a content type first');
+            return;
+        }
+
+        currentFilePath = null;
+        document.getElementById('title').value = '';
+        quill.root.innerHTML = '';
+        editorContainer.classList.remove('hidden');
+        welcomeMessage.classList.add('hidden');
     });
 
     // Preview functionality
@@ -51,20 +182,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (!currentContentType) {
+            alert('Please select a content type');
+            return;
+        }
+
         try {
+            const typeConfig = contentTypes[currentContentType];
             const timestamp = new Date().toISOString();
-            const fileName = `content/en/news/${timestamp.split('T')[0]}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.md`;
+            const fileName = currentFilePath || `${typeConfig.path}/${timestamp.split('T')[0]}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.md`;
             
             // Create the content in Hugo format
+            const frontMatter = typeConfig.template.frontMatter(title);
             const hugoContent = `---
-title: "${title}"
-date: ${timestamp}
-draft: false
-author: "BitcoinZ Team"
-categories: ["Update"]
-tags: []
-type: "news"
-layout: "single"
+${Object.entries(frontMatter).map(([key, value]) => {
+    if (Array.isArray(value)) {
+        return `${key}: ${JSON.stringify(value)}`;
+    }
+    return `${key}: "${value}"`;
+}).join('\n')}
 ---
 
 ${content}`;
@@ -77,7 +213,7 @@ ${content}`;
                 body: JSON.stringify({
                     path: fileName,
                     content: hugoContent,
-                    message: `Add news: ${title}`
+                    message: currentFilePath ? `Update ${currentContentType}: ${title}` : `Add ${currentContentType}: ${title}`
                 })
             });
 
@@ -85,8 +221,11 @@ ${content}`;
             
             if (result.success) {
                 alert('Content saved successfully!');
-                titleInput.value = '';
-                quill.setContents([]);
+                await loadExistingContent(currentContentType);
+                if (!currentFilePath) {
+                    titleInput.value = '';
+                    quill.setContents([]);
+                }
             } else {
                 throw new Error(result.error || 'Failed to save content');
             }
