@@ -9,14 +9,14 @@
       margin: 0;
       font-family: -apple-system, system-ui, sans-serif;
     }
-    .login-container {
+    #login {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
-      box-sizing: border-box;
+      background: #f5f5f5;
     }
     .login-button {
       background: #4285f4;
@@ -26,38 +26,23 @@
       border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 20px;
     }
     .login-button:hover {
       background: #357abd;
     }
-    .error {
-      color: #721c24;
-      background: #f8d7da;
-      padding: 10px;
-      border-radius: 4px;
-      margin: 10px 0;
-      display: none;
-    }
-    #cms-root {
-      display: none;
-    }
   </style>
 </head>
 <body>
-  <div id="login" class="login-container">
-    <div id="error" class="error"></div>
+  <div id="login">
     <button class="login-button" onclick="handleLogin()">Sign in with Google</button>
   </div>
-
-  <div id="cms-root"></div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 
-  <!-- Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
     // Initialize Firebase
@@ -72,35 +57,18 @@
 
     firebase.initializeApp(firebaseConfig);
 
-    function showError(message) {
-      const error = document.getElementById('error');
-      error.textContent = message;
-      error.style.display = 'block';
-      setTimeout(() => error.style.display = 'none', 5000);
-    }
-
     async function handleLogin() {
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
         
         if (result.user) {
-          const token = await result.user.getIdToken();
-          localStorage.setItem('netlify-cms-user', JSON.stringify({
-            token: token,
-            email: result.user.email
-          }));
-
-          // Hide login, show CMS
           document.getElementById('login').style.display = 'none';
-          document.getElementById('cms-root').style.display = 'block';
-
-          // Initialize CMS
           CMS.init();
         }
       } catch (error) {
         console.error('Login failed:', error);
-        showError(error.message);
+        alert(error.message);
       }
     }
 
@@ -108,17 +76,18 @@
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         document.getElementById('login').style.display = 'none';
-        document.getElementById('cms-root').style.display = 'block';
         CMS.init();
       }
     });
 
-    // Register authentication handler
-    CMS.registerAuthProvider({
-      name: 'firebase',
-      login: () => handleLogin(),
-      logout: () => firebase.auth().signOut(),
-      isAuthenticated: () => !!firebase.auth().currentUser
+    // Handle logout
+    window.addEventListener('message', function(e) {
+      if (e.data.type === 'logout') {
+        firebase.auth().signOut().then(() => {
+          document.getElementById('login').style.display = 'flex';
+          location.reload();
+        });
+      }
     });
   </script>
 </body>
