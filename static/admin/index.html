@@ -11,6 +11,8 @@
         .preview-content { min-height: 300px; }
         #editor { height: 400px; }
         .content-list { max-height: 400px; overflow-y: auto; }
+        .wallet-fields { display: none; }
+        .roadmap-fields { display: none; }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -77,6 +79,78 @@
                                     <label class="block text-sm font-medium text-gray-700">Title</label>
                                     <input type="text" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
+
+                                <!-- Roadmap-specific fields -->
+                                <div id="roadmap-fields" class="roadmap-fields space-y-4 mb-4" style="display: none;">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Progress (%)</label>
+                                        <input type="number" id="roadmap-progress" min="0" max="100" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Icon</label>
+                                        <select id="roadmap-icon" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                            <option value="check-circle">✓ Completed</option>
+                                            <option value="in-progress">🔄 In Progress</option>
+                                            <option value="pending">⏳ Pending</option>
+                                            <option value="planned">📅 Planned</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Status Color</label>
+                                        <select id="roadmap-status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                            <option value="green">🟢 Green (Completed)</option>
+                                            <option value="yellow">🟡 Yellow (In Progress)</option>
+                                            <option value="blue">🔵 Blue (Planned)</option>
+                                            <option value="gray">⚪ Gray (Pending)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Wallet-specific fields -->
+                                <div id="wallet-fields" class="wallet-fields space-y-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Description</label>
+                                        <input type="text" id="wallet-description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Icon Image URL</label>
+                                        <input type="text" id="wallet-image" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    </div>
+
+                                    <div id="platforms-container">
+                                        <label class="block text-sm font-medium text-gray-700">Platforms</label>
+                                        <div id="platform-list" class="space-y-4">
+                                            <!-- Platform entries will be added here -->
+                                        </div>
+                                        <button type="button" id="add-platform" class="mt-2 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                                            Add Platform
+                                        </button>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Features</label>
+                                        <div id="features-list" class="space-y-2">
+                                            <!-- Feature entries will be added here -->
+                                        </div>
+                                        <button type="button" id="add-feature" class="mt-2 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                                            Add Feature
+                                        </button>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Requirements</label>
+                                        <div id="requirements-list" class="space-y-2">
+                                            <!-- Requirement entries will be added here -->
+                                        </div>
+                                        <button type="button" id="add-requirement" class="mt-2 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                                            Add Requirement
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700">Content</label>
                                     <div id="editor"></div>

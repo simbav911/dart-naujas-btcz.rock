@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentSection = document.getElementById('current-section');
     const contentList = document.getElementById('content-list');
     const newContentBtn = document.getElementById('newContentBtn');
+    const walletFields = document.getElementById('wallet-fields');
+    const roadmapFields = document.getElementById('roadmap-fields');
 
     // Initialize Quill editor
     const quill = new Quill('#editor', {
@@ -38,6 +40,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Wallet-specific functions
+    function addPlatform() {
+        const platformList = document.getElementById('platform-list');
+        const platformDiv = document.createElement('div');
+        platformDiv.className = 'platform-entry grid grid-cols-3 gap-2';
+        platformDiv.innerHTML = `
+            <input type="text" placeholder="Platform Name" class="platform-name rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+            <input type="text" placeholder="Download URL" class="platform-url rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+            <div class="flex items-center">
+                <input type="text" placeholder="Version" class="platform-version w-2/3 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <button type="button" class="remove-platform ml-2 px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                    Remove
+                </button>
+            </div>
+        `;
+        platformList.appendChild(platformDiv);
+
+        platformDiv.querySelector('.remove-platform').addEventListener('click', () => {
+            platformDiv.remove();
+        });
+    }
+
+    function addListItem(listId, placeholder) {
+        const list = document.getElementById(listId);
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex items-center space-x-2';
+        itemDiv.innerHTML = `
+            <input type="text" placeholder="${placeholder}" class="flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+            <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                Remove
+            </button>
+        `;
+        list.appendChild(itemDiv);
+
+        itemDiv.querySelector('.remove-item').addEventListener('click', () => {
+            itemDiv.remove();
+        });
+    }
+
+    // Add event listeners for wallet-specific buttons
+    document.getElementById('add-platform').addEventListener('click', addPlatform);
+    document.getElementById('add-feature').addEventListener('click', () => addListItem('features-list', 'Enter feature'));
+    document.getElementById('add-requirement').addEventListener('click', () => addListItem('requirements-list', 'Enter requirement'));
+
     // Content type configuration
     const contentTypes = {
         news: {
@@ -55,27 +101,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
             }
         },
+        wallets: {
+            path: 'content/en/wallets',
+            template: {
+                frontMatter: (data) => ({
+                    title: data.title,
+                    description: data.description,
+                    date: new Date().toISOString(),
+                    type: "wallet",
+                    image: data.image,
+                    features: data.features,
+                    platforms: data.platforms,
+                    requirements: data.requirements,
+                    draft: false
+                })
+            }
+        },
         roadmap: {
             path: 'content/en/roadmap',
             template: {
                 frontMatter: (title) => ({
                     title: title,
+                    description: "",
                     date: new Date().toISOString(),
-                    draft: false,
+                    year: new Date().getFullYear(),
+                    section: "roadmap",
                     type: "roadmap",
-                    layout: "single"
-                })
-            }
-        },
-        wallets: {
-            path: 'content/en/wallets',
-            template: {
-                frontMatter: (title) => ({
-                    title: title,
-                    date: new Date().toISOString(),
-                    draft: false,
-                    type: "wallet",
-                    layout: "single"
+                    layout: "single",
+                    status: "planned",
+                    progress: 0,
+                    tags: [],
+                    icon: "/images/icons/default.svg",
+                    priority: "medium"
                 })
             }
         },
@@ -95,24 +152,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle content type selection
     document.querySelectorAll('.content-type-btn').forEach(button => {
-        button.addEventListener('click', async function() {
+        button.addEventListener('click', function() {
             const type = this.dataset.type;
             currentContentType = type;
-            currentSection.textContent = this.textContent.trim();
             
-            // Show editor container and hide welcome message
+            // Reset fields
+            document.getElementById('title').value = '';
+            quill.setContents([]);
+            
+            // Hide all specific fields first
+            const walletFields = document.getElementById('wallet-fields');
+            const roadmapFields = document.getElementById('roadmap-fields');
+            if (walletFields) walletFields.style.display = 'none';
+            if (roadmapFields) roadmapFields.style.display = 'none';
+
+            // Show specific fields based on content type
+            if (type === 'wallets' && walletFields) {
+                walletFields.style.display = 'block';
+            } else if (type === 'roadmap' && roadmapFields) {
+                roadmapFields.style.display = 'block';
+            }
+
+            currentSection.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+            loadExistingContent(type);
             editorContainer.classList.remove('hidden');
             welcomeMessage.classList.add('hidden');
-
-            // Load existing content
-            await loadExistingContent(type);
         });
     });
 
     // Load existing content for a content type
     async function loadExistingContent(type) {
         try {
-            const response = await fetch(`/api/content?type=${type}`);
+            const response = await fetch(`/api/content?type=${encodeURIComponent(type)}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const files = await response.json();
             
             contentList.innerHTML = files.map(file => `
@@ -127,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } catch (error) {
             console.error('Error loading content:', error);
-            contentList.innerHTML = '<div class="text-red-500 p-2">Error loading content</div>';
+            contentList.innerHTML = '<div class="text-red-500 p-2">Error loading content: ' + error.message + '</div>';
         }
     }
 
@@ -135,14 +209,92 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadContent(path) {
         try {
             const response = await fetch(`/api/content/${encodeURIComponent(path)}`);
-            const content = await response.json();
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
             
-            currentFilePath = path;
-            document.getElementById('title').value = content.title || '';
-            quill.root.innerHTML = content.content || '';
+            if (data) {
+                document.getElementById('title').value = data.title || '';
+                
+                // Handle roadmap-specific fields
+                if (currentContentType === 'roadmap') {
+                    const progress = document.getElementById('roadmap-progress');
+                    const icon = document.getElementById('roadmap-icon');
+                    const status = document.getElementById('roadmap-status');
+                    
+                    if (progress) progress.value = data.frontMatter?.progress || 0;
+                    if (icon) icon.value = data.frontMatter?.icon || 'planned';
+                    if (status) status.value = data.frontMatter?.status || 'gray';
+                }
+                
+                // Handle wallet-specific fields
+                if (currentContentType === 'wallets') {
+                    document.getElementById('wallet-description').value = data.frontMatter?.description || '';
+                    document.getElementById('wallet-image').value = data.frontMatter?.image || '';
+                    
+                    // Load platforms
+                    const platformList = document.getElementById('platform-list');
+                    platformList.innerHTML = '';
+                    if (data.frontMatter?.platforms) {
+                        data.frontMatter.platforms.forEach(platform => {
+                            const platformDiv = document.createElement('div');
+                            platformDiv.className = 'platform-entry grid grid-cols-3 gap-2';
+                            platformDiv.innerHTML = `
+                                <input type="text" value="${platform.name}" class="platform-name rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" value="${platform.download_url}" class="platform-url rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                <div class="flex items-center">
+                                    <input type="text" value="${platform.version}" class="platform-version w-2/3 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                    <button type="button" class="remove-platform ml-2 px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                                        Remove
+                                    </button>
+                                </div>
+                            `;
+                            platformList.appendChild(platformDiv);
+                        });
+                    }
+
+                    // Load features
+                    const featuresList = document.getElementById('features-list');
+                    featuresList.innerHTML = '';
+                    if (data.frontMatter?.features) {
+                        data.frontMatter.features.forEach(feature => {
+                            const featureDiv = document.createElement('div');
+                            featureDiv.className = 'flex items-center space-x-2';
+                            featureDiv.innerHTML = `
+                                <input type="text" value="${feature}" class="flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                                    Remove
+                                </button>
+                            `;
+                            featuresList.appendChild(featureDiv);
+                        });
+                    }
+
+                    // Load requirements
+                    const requirementsList = document.getElementById('requirements-list');
+                    requirementsList.innerHTML = '';
+                    if (data.frontMatter?.requirements) {
+                        data.frontMatter.requirements.forEach(requirement => {
+                            const requirementDiv = document.createElement('div');
+                            requirementDiv.className = 'flex items-center space-x-2';
+                            requirementDiv.innerHTML = `
+                                <input type="text" value="${requirement}" class="flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                                    Remove
+                                </button>
+                            `;
+                            requirementsList.appendChild(requirementDiv);
+                        });
+                    }
+                }
+
+                quill.root.innerHTML = data.content || '';
+                currentFilePath = path;
+            }
         } catch (error) {
             console.error('Error loading content:', error);
-            alert('Error loading content. Please try again.');
+            alert('Error loading content: ' + error.message);
         }
     }
 
@@ -153,11 +305,34 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // Reset form
+        titleInput.value = '';
+        quill.setContents([]);
         currentFilePath = null;
-        document.getElementById('title').value = '';
-        quill.root.innerHTML = '';
-        editorContainer.classList.remove('hidden');
-        welcomeMessage.classList.add('hidden');
+
+        // Reset roadmap fields if they exist
+        const progress = document.getElementById('roadmap-progress');
+        const icon = document.getElementById('roadmap-icon');
+        const status = document.getElementById('roadmap-status');
+        
+        if (progress) progress.value = 0;
+        if (icon) icon.value = 'planned';
+        if (status) status.value = 'gray';
+
+        // Reset wallet fields if they exist
+        if (currentContentType === 'wallets') {
+            const description = document.getElementById('wallet-description');
+            const image = document.getElementById('wallet-image');
+            const platformList = document.getElementById('platform-list');
+            const featuresList = document.getElementById('features-list');
+            const requirementsList = document.getElementById('requirements-list');
+
+            if (description) description.value = '';
+            if (image) image.value = '';
+            if (platformList) platformList.innerHTML = '';
+            if (featuresList) featuresList.innerHTML = '';
+            if (requirementsList) requirementsList.innerHTML = '';
+        }
     });
 
     // Preview functionality
@@ -168,6 +343,43 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = quill.root.innerHTML;
         preview.innerHTML = marked.parse(content);
     });
+
+    // Helper function to gather wallet data
+    function getWalletData() {
+        const data = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('wallet-description').value,
+            image: document.getElementById('wallet-image').value,
+            platforms: [],
+            features: [],
+            requirements: []
+        };
+
+        // Gather platforms
+        document.querySelectorAll('.platform-entry').forEach(entry => {
+            data.platforms.push({
+                name: entry.querySelector('.platform-name').value,
+                download_url: entry.querySelector('.platform-url').value,
+                version: entry.querySelector('.platform-version').value
+            });
+        });
+
+        // Gather features
+        document.querySelectorAll('#features-list input').forEach(input => {
+            if (input.value.trim()) {
+                data.features.push(input.value.trim());
+            }
+        });
+
+        // Gather requirements
+        document.querySelectorAll('#requirements-list input').forEach(input => {
+            if (input.value.trim()) {
+                data.requirements.push(input.value.trim());
+            }
+        });
+
+        return data;
+    }
 
     // Save functionality
     const saveBtn = document.getElementById('saveBtn');
@@ -193,11 +405,49 @@ document.addEventListener('DOMContentLoaded', function() {
             const fileName = currentFilePath || `${typeConfig.path}/${timestamp.split('T')[0]}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.md`;
             
             // Create the content in Hugo format
-            const frontMatter = typeConfig.template.frontMatter(title);
+            let frontMatter;
+            if (currentContentType === 'wallets') {
+                const walletData = getWalletData();
+                frontMatter = typeConfig.template.frontMatter(walletData);
+            } else if (currentContentType === 'roadmap') {
+                frontMatter = typeConfig.template.frontMatter(title);
+                frontMatter.progress = parseInt(document.getElementById('roadmap-progress')?.value || 0);
+                frontMatter.status = document.getElementById('roadmap-status')?.value || 'planned';
+                
+                // Map status to icon
+                const statusIconMap = {
+                    'green': '/images/icons/check-circle.svg',
+                    'yellow': '/images/icons/in-progress.svg',
+                    'blue': '/images/icons/planned.svg',
+                    'gray': '/images/icons/pending.svg'
+                };
+                frontMatter.icon = statusIconMap[frontMatter.status] || '/images/icons/default.svg';
+                
+                // Set tags based on status
+                const statusTagMap = {
+                    'green': ['Completed'],
+                    'yellow': ['In Progress'],
+                    'blue': ['Planned'],
+                    'gray': ['Pending']
+                };
+                frontMatter.tags = statusTagMap[frontMatter.status] || [];
+                
+                // Update description if empty
+                if (!frontMatter.description) {
+                    frontMatter.description = title;
+                }
+            } else {
+                frontMatter = typeConfig.template.frontMatter(title);
+            }
+
             const hugoContent = `---
 ${Object.entries(frontMatter).map(([key, value]) => {
     if (Array.isArray(value)) {
         return `${key}: ${JSON.stringify(value)}`;
+    } else if (typeof value === 'object' && value !== null) {
+        return `${key}:\n${Object.entries(value).map(([k, v]) => `  ${k}: "${v}"`).join('\n')}`;
+    } else if (typeof value === 'number') {
+        return `${key}: ${value}`;
     }
     return `${key}: "${value}"`;
 }).join('\n')}
@@ -217,22 +467,43 @@ ${content}`;
                 })
             });
 
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const result = await response.json();
             
-            if (result.success) {
-                alert('Content saved successfully!');
-                await loadExistingContent(currentContentType);
-                if (!currentFilePath) {
-                    titleInput.value = '';
-                    quill.setContents([]);
-                }
-            } else {
-                throw new Error(result.error || 'Failed to save content');
+            if (result.error) {
+                throw new Error(result.error);
             }
+
+            alert('Content saved successfully!');
+            await loadExistingContent(currentContentType);
             
+            if (!currentFilePath) {
+                titleInput.value = '';
+                quill.setContents([]);
+                
+                // Reset roadmap fields
+                if (currentContentType === 'roadmap') {
+                    const progress = document.getElementById('roadmap-progress');
+                    const status = document.getElementById('roadmap-status');
+                    if (progress) progress.value = 0;
+                    if (status) status.value = 'gray';
+                }
+                
+                // Reset wallet fields
+                if (currentContentType === 'wallets') {
+                    document.getElementById('wallet-description').value = '';
+                    document.getElementById('wallet-image').value = '';
+                    document.getElementById('platform-list').innerHTML = '';
+                    document.getElementById('features-list').innerHTML = '';
+                    document.getElementById('requirements-list').innerHTML = '';
+                }
+            }
         } catch (error) {
             console.error('Error saving content:', error);
-            alert('Error saving content. Please try again.');
+            alert('Error saving content: ' + error.message);
         }
     });
 });

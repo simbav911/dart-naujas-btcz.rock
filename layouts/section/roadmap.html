@@ -136,13 +136,8 @@
                                             bg-btcz-gold
                                         {{ else }}
                                             bg-blue-500
-                                        {{ end }}
-                                        {{ if eq .Params.progress 0 }}w-0
-                                        {{ else if eq .Params.progress 25 }}w-1/4
-                                        {{ else if eq .Params.progress 50 }}w-1/2
-                                        {{ else if eq .Params.progress 75 }}w-3/4
-                                        {{ else if eq .Params.progress 100 }}w-full
-                                        {{ else }}w-0{{ end }}">
+                                        {{ end }}"
+                                        style="width: {{ with .Params.progress }}{{ . }}{{ else }}0{{ end }}%">
                                     </div>
                                 </div>
                             </div>

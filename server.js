@@ -23,6 +23,14 @@ app.get('/api/content', async (req, res) => {
     try {
         const type = req.query.type;
         const contentPath = path.join(__dirname, 'content/en', type);
+        
+        // Check if directory exists
+        try {
+            await fs.access(contentPath);
+        } catch {
+            return res.status(404).json({ error: `Content type '${type}' not found` });
+        }
+        
         const files = await fs.readdir(contentPath);
         
         const contentFiles = await Promise.all(files
@@ -30,10 +38,19 @@ app.get('/api/content', async (req, res) => {
             .map(async file => {
                 const filePath = path.join(contentPath, file);
                 const content = await fs.readFile(filePath, 'utf8');
-                const titleMatch = content.match(/title:\s*"([^"]+)"/);
+                const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+                let title = file;
+                
+                if (frontMatterMatch) {
+                    const titleMatch = frontMatterMatch[1].match(/title:\s*"?([^"\n]+)"?/);
+                    if (titleMatch) {
+                        title = titleMatch[1];
+                    }
+                }
+                
                 return {
                     path: `content/en/${type}/${file}`,
-                    title: titleMatch ? titleMatch[1] : file
+                    title: title
                 };
             }));
 
@@ -56,11 +73,28 @@ app.get('/api/content/:path(*)', async (req, res) => {
             throw new Error('Invalid content format');
         }
 
-        const [, frontMatter, markdown] = frontMatterMatch;
-        const titleMatch = frontMatter.match(/title:\s*"([^"]+)"/);
+        const [, frontMatterStr, markdown] = frontMatterMatch;
+        
+        // Parse frontmatter into an object
+        const frontMatter = {};
+        const frontMatterLines = frontMatterStr.split('\n');
+        frontMatterLines.forEach(line => {
+            const match = line.match(/^(\w+):\s*(.+)$/);
+            if (match) {
+                const [, key, value] = match;
+                // Remove quotes if present
+                frontMatter[key] = value.replace(/^"(.*)"$/, '$1');
+                
+                // Parse numbers
+                if (!isNaN(value)) {
+                    frontMatter[key] = parseFloat(value);
+                }
+            }
+        });
 
         res.json({
-            title: titleMatch ? titleMatch[1] : '',
+            title: frontMatter.title,
+            frontMatter,
             content: markdown.trim()
         });
     } catch (error) {
@@ -73,16 +107,35 @@ app.get('/api/content/:path(*)', async (req, res) => {
 app.post('/api/save', async (req, res) => {
     try {
         const { path: filePath, content, message } = req.body;
-        const result = await githubHandler.createOrUpdateFile(filePath, content, message);
         
-        // Also save locally
-        const localPath = path.join(__dirname, filePath);
-        await fs.mkdir(path.dirname(localPath), { recursive: true });
-        await fs.writeFile(localPath, content);
-        
-        res.json(result);
+        if (!filePath || !content) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        // Ensure the content directory exists
+        const fullPath = path.join(__dirname, filePath);
+        await fs.mkdir(path.dirname(fullPath), { recursive: true });
+
+        // Save locally
+        try {
+            await fs.writeFile(fullPath, content, 'utf8');
+        } catch (error) {
+            console.error('Error saving file locally:', error);
+            return res.status(500).json({ error: 'Failed to save file locally' });
+        }
+
+        // Save to GitHub
+        try {
+            await githubHandler.createOrUpdateFile(filePath, content, message || 'Update content');
+        } catch (error) {
+            console.error('Error saving to GitHub:', error);
+            // Don't fail if GitHub save fails, just log it
+            console.warn('Content saved locally but failed to save to GitHub');
+        }
+
+        res.json({ success: true });
     } catch (error) {
-        console.error('Error saving content:', error);
+        console.error('Error in save endpoint:', error);
         res.status(500).json({ error: error.message });
     }
 });
