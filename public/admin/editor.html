@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitcoinZ Blog Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- SimpleMDE Markdown Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+</head>
+<body class="bg-gray-100 p-4">
+    <!-- Auth Check Message -->
+    <div id="authCheck" class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6 mb-4">
+        <p class="text-center">Checking authorization...</p>
+    </div>
+
+    <!-- Editor Content (hidden until authenticated) -->
+    <div id="editorContent" class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6 hidden">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">BitcoinZ Blog Post Editor</h1>
+            <a href="index.html" class="text-blue-500 hover:text-blue-700">← Back to Dashboard</a>
+        </div>
+        
+        <form id="blogForm" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Date</label>
+                <input type="date" id="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Content</label>
+                <textarea id="content" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Generate Markdown
+            </button>
+        </form>
+
+        <div id="output" class="mt-8 hidden">
+            <h2 class="text-xl font-bold mb-4">Generated Markdown</h2>
+            <div class="bg-gray-50 p-4 rounded">
+                <pre id="markdown" class="whitespace-pre-wrap"></pre>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+                Copy this markdown and create a new file in the content/news folder with the filename format: YYYY-MM-DD-title.md
+            </p>
+            <button id="copyBtn" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                Copy to Clipboard
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        function checkAuth() {
+            const token = localStorage.getItem('github_token');
+            if (!token) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Verify repository access
+            fetch('https://api.github.com/repos/simbav911/dart-naujas-btcz.rock', {
+                headers: {
+                    'Authorization': `token ${token}`
+                }
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    document.getElementById('authCheck').style.display = 'none';
+                    document.getElementById('editorContent').classList.remove('hidden');
+                    initializeEditor();
+                } else {
+                    window.location.href = 'index.html';
+                }
+            })
+            .catch(() => {
+                window.location.href = 'index.html';
+            });
+        }
+
+        // Initialize SimpleMDE
+        function initializeEditor() {
+            var simplemde = new SimpleMDE({ 
+                element: document.getElementById("content"),
+                spellChecker: false,
+                toolbar: [
+                    "bold", "italic", "heading", "|",
+                    "quote", "unordered-list", "ordered-list", "|",
+                    "link", "image", "|",
+                    "preview", "guide"
+                ]
+            });
+
+            document.getElementById('blogForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('title').value;
+                const date = document.getElementById('date').value;
+                const content = simplemde.value();
+                
+                // Generate markdown with frontmatter
+                const markdown = `---
+title: "${title}"
+date: ${date}
+---
+
+${content}`;
+                
+                // Show output section
+                document.getElementById('output').classList.remove('hidden');
+                document.getElementById('markdown').textContent = markdown;
+            });
+
+            document.getElementById('copyBtn').addEventListener('click', function() {
+                const markdown = document.getElementById('markdown').textContent;
+                navigator.clipboard.writeText(markdown).then(function() {
+                    alert('Markdown copied to clipboard!');
+                }).catch(function(err) {
+                    console.error('Failed to copy text: ', err);
+                });
+            });
+        }
+
+        // Check auth on load
+        checkAuth();
+    </script>
+</body>
+</html>

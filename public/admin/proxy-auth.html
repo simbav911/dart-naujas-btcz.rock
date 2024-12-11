@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OAuth Proxy</title>
+</head>
+<body>
+  <script>
+    const proxyUrl = 'https://auth.decapcms.com';
+    
+    // Parse the URL parameters
+    const params = new URLSearchParams(document.location.search);
+    const authCode = params.get('code');
+    const authProvider = params.get('provider') || 'github';
+    const authSite = params.get('site_id') || window.location.hostname;
+
+    if (authCode) {
+      // Forward the auth code to the proxy
+      fetch(`${proxyUrl}/auth`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: authCode,
+          provider: authProvider,
+          site_id: authSite
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Send the token back to the parent window
+        window.opener.postMessage(
+          `authorization:${authProvider}:success:${JSON.stringify({
+            provider: authProvider,
+            token: data.token,
+            ...data
+          })}`,
+          window.location.origin
+        );
+        window.close();
+      })
+      .catch(error => {
+        console.error('Auth Error:', error);
+        window.opener.postMessage(
+          `authorization:${authProvider}:error:${error.message}`,
+          window.location.origin
+        );
+        window.close();
+      });
+    }
+  </script>
+</body>
+</html>
