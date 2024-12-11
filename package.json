@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "BitcoinZ Website",
   "scripts": {
-    "dev": "hugo server -D",
+    "dev": "concurrently \"hugo server -D\" \"node server.js\"",
     "build": "hugo",
-    "cms": "npx netlify-cms-proxy-server"
+    "cms": "npx netlify-cms-proxy-server",
+    "admin": "node server.js"
   },
   "dependencies": {
     "@octokit/rest": "^19.0.13",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "formidable": "^3.5.2",
     "marked": "^9.1.6"
   },
   "devDependencies": {

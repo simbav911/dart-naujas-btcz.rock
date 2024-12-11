@@ -98,6 +98,8 @@
                                         bg-btcz-gray-800 text-green-400
                                     {{ else if eq .Params.status "in-progress" }}
                                         bg-btcz-gray-800 text-btcz-gold
+                                    {{ else if eq .Params.status "pending" }}
+                                        bg-btcz-gray-800 text-gray-400
                                     {{ else }}
                                         bg-btcz-gray-800 text-blue-400
                                     {{ end }}">
@@ -134,6 +136,8 @@
                                             bg-green-500
                                         {{ else if eq .Params.status "in-progress" }}
                                             bg-btcz-gold
+                                        {{ else if eq .Params.status "pending" }}
+                                            bg-gray-500
                                         {{ else }}
                                             bg-blue-500
                                         {{ end }}"

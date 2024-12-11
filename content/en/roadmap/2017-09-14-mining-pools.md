@@ -1,16 +1,16 @@
 ---
 title: "Mining Pool Integration"
-description: "Mining Pool Integration"
-date: "2024-12-08T20:15:49.497Z"
+description: ""
+date: "2024-12-09T11:52:06.395Z"
 year: 2024
 section: "roadmap"
 type: "roadmap"
 layout: "single"
 status: "planned"
 progress: 70
-tags: []
-icon: "/images/icons/default.svg"
-priority: "medium"
+tags: ["planned"]
+icon: ""
+priority: "high"
 ---
 
 <p># Mining Pool Integration

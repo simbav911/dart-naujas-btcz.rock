@@ -44,11 +44,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <!-- Styles -->
-    {{ $styles := resources.Get "css/main.css" | resources.PostCSS }}
-    {{ if hugo.IsProduction }}
-        {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
-    {{ end }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -88,6 +84,8 @@
     {{ partial "footer.html" . }}
     
     <!-- Scripts -->
+    <script defer src="{{ "js/price-ticker.js" | relURL }}"></script>
+    <script defer src="{{ "js/scroll-handler.js" | relURL }}"></script>
     {{ block "scripts" . }}{{ end }}
 </body>
 </html>

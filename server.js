@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fs = require('fs').promises;
+const fsSync = require('fs');
+const { formidable } = require('formidable');
 const GitHubHandler = require('./static/admin/github-handler');
 
 const app = express();
@@ -10,6 +12,14 @@ const port = 3000;
 // Middleware
 app.use(express.json());
 app.use(express.static('static'));
+
+// CORS middleware for local development
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:1313');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 // Initialize GitHub handler
 const githubHandler = new GitHubHandler(
@@ -137,6 +147,108 @@ app.post('/api/save', async (req, res) => {
     } catch (error) {
         console.error('Error in save endpoint:', error);
         res.status(500).json({ error: error.message });
+    }
+});
+
+// Get list of icons
+app.get('/api/icons', async (req, res) => {
+    try {
+        const iconsDir = path.join(__dirname, 'static', 'images', 'icons');
+        
+        // Create icons directory if it doesn't exist
+        if (!fsSync.existsSync(iconsDir)) {
+            fsSync.mkdirSync(iconsDir, { recursive: true });
+        }
+
+        const files = await fs.readdir(iconsDir);
+        const icons = files.filter(file => file.endsWith('.svg') || file.endsWith('.png'));
+        res.json(icons);
+    } catch (error) {
+        console.error('Error reading icons:', error);
+        res.status(500).json({ error: 'Failed to load icons: ' + error.message });
+    }
+});
+
+// Upload icon
+app.post('/api/upload-icon', async (req, res) => {
+    try {
+        const iconsDir = path.join(__dirname, 'static', 'images', 'icons');
+        
+        // Create icons directory if it doesn't exist
+        if (!fsSync.existsSync(iconsDir)) {
+            try {
+                fsSync.mkdirSync(iconsDir, { recursive: true });
+                console.log('Created icons directory:', iconsDir);
+            } catch (err) {
+                console.error('Error creating icons directory:', err);
+                return res.status(500).json({ 
+                    error: 'Failed to create icons directory: ' + err.message 
+                });
+            }
+        }
+
+        // Configure formidable
+        const form = formidable({
+            uploadDir: iconsDir,
+            keepExtensions: true,
+            maxFileSize: 500 * 1024, // 500KB
+            multiples: false,
+            filename: (name, ext, part) => {
+                return part.originalFilename // Keep original filename
+            }
+        });
+
+        // Parse the form using Promise
+        try {
+            const [fields, files] = await form.parse(req);
+            console.log('Parsed files:', files);
+
+            if (!files || !files.icon || !files.icon[0]) {
+                return res.status(400).json({ 
+                    error: 'No icon file uploaded' 
+                });
+            }
+
+            const file = files.icon[0];
+            console.log('Processing file:', file);
+
+            // Validate file type
+            const allowedTypes = ['image/svg+xml', 'image/png'];
+            if (!allowedTypes.includes(file.mimetype)) {
+                fsSync.unlinkSync(file.filepath); // Clean up the invalid file
+                return res.status(400).json({ 
+                    error: 'Only SVG and PNG files are allowed' 
+                });
+            }
+
+            const oldPath = file.filepath;
+            const newPath = path.join(iconsDir, file.originalFilename);
+
+            // If a file with the same name exists, delete it
+            if (fsSync.existsSync(newPath)) {
+                fsSync.unlinkSync(newPath);
+            }
+
+            // Rename the file to its original name
+            fsSync.renameSync(oldPath, newPath);
+            console.log('File saved successfully:', newPath);
+
+            return res.json({ 
+                success: true, 
+                filename: file.originalFilename,
+                path: `/images/icons/${file.originalFilename}`
+            });
+        } catch (parseError) {
+            console.error('Error parsing form:', parseError);
+            return res.status(500).json({ 
+                error: 'Failed to parse upload form: ' + parseError.message 
+            });
+        }
+    } catch (error) {
+        console.error('Error in upload endpoint:', error);
+        return res.status(500).json({ 
+            error: 'Server error: ' + error.message 
+        });
     }
 });
 

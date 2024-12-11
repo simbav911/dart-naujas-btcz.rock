@@ -199,9 +199,33 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.content-item').forEach(item => {
                 item.addEventListener('click', () => loadContent(item.dataset.path));
             });
+
+            // If it's roadmap type, load the icons
+            if (type === 'roadmap') {
+                loadIcons();
+            }
         } catch (error) {
             console.error('Error loading content:', error);
-            contentList.innerHTML = '<div class="text-red-500 p-2">Error loading content: ' + error.message + '</div>';
+            contentList.innerHTML = '<div class="text-red-500">Error loading content</div>';
+        }
+    }
+
+    // Function to load available icons
+    async function loadIcons() {
+        try {
+            const response = await fetch('/api/icons');
+            if (!response.ok) throw new Error('Failed to load icons');
+            const icons = await response.json();
+            
+            const iconSelect = document.getElementById('roadmap-icon');
+            if (!iconSelect) return; // Skip if element doesn't exist
+            
+            iconSelect.innerHTML = `
+                <option value="">Select an icon</option>
+                ${icons.map(icon => `<option value="/images/icons/${icon}">${icon}</option>`).join('')}
+            `;
+        } catch (error) {
+            console.error('Error loading icons:', error);
         }
     }
 
@@ -381,65 +405,60 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
 
+    // Helper function to gather roadmap data
+    function getRoadmapData() {
+        const data = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('roadmap-description').value,
+            status: document.getElementById('roadmap-status').value,
+            progress: parseInt(document.getElementById('roadmap-progress').value) || 0,
+            priority: document.getElementById('roadmap-priority').value,
+            icon: document.getElementById('roadmap-icon').value,
+            tags: [document.getElementById('roadmap-status').value]
+        };
+
+        // If icon doesn't start with /, add the path prefix
+        if (data.icon && !data.icon.startsWith('/')) {
+            data.icon = `/images/icons/${data.icon}`;
+        }
+
+        return data;
+    }
+
     // Save functionality
     const saveBtn = document.getElementById('saveBtn');
     const titleInput = document.getElementById('title');
     
     saveBtn.addEventListener('click', async function() {
-        const title = titleInput.value;
-        const content = quill.root.innerHTML;
-        
-        if (!title) {
-            alert('Please enter a title');
-            return;
-        }
-
-        if (!currentContentType) {
-            alert('Please select a content type');
+        if (!currentContentType || !titleInput.value.trim()) {
+            alert('Please fill in all required fields');
             return;
         }
 
         try {
-            const typeConfig = contentTypes[currentContentType];
-            const timestamp = new Date().toISOString();
-            const fileName = currentFilePath || `${typeConfig.path}/${timestamp.split('T')[0]}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.md`;
-            
-            // Create the content in Hugo format
             let frontMatter;
+            let content = quill.root.innerHTML;
+
             if (currentContentType === 'wallets') {
                 const walletData = getWalletData();
-                frontMatter = typeConfig.template.frontMatter(walletData);
+                frontMatter = contentTypes.wallets.template.frontMatter(walletData);
             } else if (currentContentType === 'roadmap') {
-                frontMatter = typeConfig.template.frontMatter(title);
-                frontMatter.progress = parseInt(document.getElementById('roadmap-progress')?.value || 0);
-                frontMatter.status = document.getElementById('roadmap-status')?.value || 'planned';
-                
-                // Map status to icon
-                const statusIconMap = {
-                    'green': '/images/icons/check-circle.svg',
-                    'yellow': '/images/icons/in-progress.svg',
-                    'blue': '/images/icons/planned.svg',
-                    'gray': '/images/icons/pending.svg'
-                };
-                frontMatter.icon = statusIconMap[frontMatter.status] || '/images/icons/default.svg';
-                
-                // Set tags based on status
-                const statusTagMap = {
-                    'green': ['Completed'],
-                    'yellow': ['In Progress'],
-                    'blue': ['Planned'],
-                    'gray': ['Pending']
-                };
-                frontMatter.tags = statusTagMap[frontMatter.status] || [];
-                
-                // Update description if empty
-                if (!frontMatter.description) {
-                    frontMatter.description = title;
-                }
+                const roadmapData = getRoadmapData();
+                frontMatter = contentTypes.roadmap.template.frontMatter(roadmapData.title);
+                frontMatter.description = roadmapData.description;
+                frontMatter.status = roadmapData.status;
+                frontMatter.progress = roadmapData.progress;
+                frontMatter.priority = roadmapData.priority;
+                frontMatter.icon = roadmapData.icon;
+                frontMatter.tags = roadmapData.tags;
             } else {
-                frontMatter = typeConfig.template.frontMatter(title);
+                frontMatter = contentTypes[currentContentType].template.frontMatter(titleInput.value);
             }
 
+            const timestamp = new Date().toISOString();
+            const fileName = currentFilePath || `${contentTypes[currentContentType].path}/${timestamp.split('T')[0]}-${titleInput.value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.md`;
+            
+            // Create the content in Hugo format
             const hugoContent = `---
 ${Object.entries(frontMatter).map(([key, value]) => {
     if (Array.isArray(value)) {
@@ -463,7 +482,7 @@ ${content}`;
                 body: JSON.stringify({
                     path: fileName,
                     content: hugoContent,
-                    message: currentFilePath ? `Update ${currentContentType}: ${title}` : `Add ${currentContentType}: ${title}`
+                    message: currentFilePath ? `Update ${currentContentType}: ${titleInput.value}` : `Add ${currentContentType}: ${titleInput.value}`
                 })
             });
 
@@ -506,4 +525,120 @@ ${content}`;
             alert('Error saving content: ' + error.message);
         }
     });
+
+    // Add event listener for progress bar
+    const progressBar = document.getElementById('roadmap-progress');
+    const progressValue = document.getElementById('progress-value');
+    
+    if (progressBar) {
+        progressBar.addEventListener('input', function() {
+            progressValue.textContent = this.value + '%';
+        });
+    }
+
+    // Add event listener for status change
+    const statusSelect = document.getElementById('roadmap-status');
+    if (statusSelect) {
+        statusSelect.addEventListener('change', function() {
+            const status = this.value;
+            // Update progress based on status
+            if (status === 'completed') {
+                progressBar.value = 100;
+                progressValue.textContent = '100%';
+            } else if (status === 'planned') {
+                progressBar.value = 0;
+                progressValue.textContent = '0%';
+            }
+        });
+    }
+
+    // Initialize icon upload functionality
+    const iconUpload = document.getElementById('icon-upload');
+    const uploadButton = document.getElementById('upload-icon');
+
+    if (iconUpload && uploadButton) {
+        uploadButton.addEventListener('click', async (e) => {
+            e.preventDefault(); // Prevent form submission
+            
+            const file = iconUpload.files[0];
+            if (!file) {
+                alert('Please select a file first');
+                return;
+            }
+
+            // Check file size (500KB limit)
+            if (file.size > 500 * 1024) {
+                alert('File size must be less than 500KB');
+                return;
+            }
+
+            // Check file type
+            if (!file.type.match(/^image\/(svg\+xml|png)$/)) {
+                alert('Only SVG and PNG files are allowed');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('icon', file);
+
+            uploadButton.disabled = true;
+            uploadButton.textContent = 'Uploading...';
+            uploadButton.classList.add('opacity-50');
+
+            try {
+                const response = await fetch('/api/upload-icon', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.error || 'Upload failed');
+                }
+
+                alert('Icon uploaded successfully!');
+                await loadIcons(); // Reload the icons list
+                
+                // Preview the uploaded icon
+                const iconPreview = document.createElement('img');
+                iconPreview.src = `/images/icons/${result.filename}`;
+                iconPreview.style.maxWidth = '32px';
+                iconPreview.style.maxHeight = '32px';
+                iconPreview.style.marginLeft = '10px';
+                
+                const previewContainer = document.createElement('div');
+                previewContainer.id = 'icon-preview';
+                previewContainer.style.display = 'inline-block';
+                previewContainer.appendChild(iconPreview);
+                
+                // Remove old preview if exists
+                const oldPreview = document.getElementById('icon-preview');
+                if (oldPreview) oldPreview.remove();
+                
+                // Add new preview next to the select
+                const iconSelect = document.getElementById('roadmap-icon');
+                if (iconSelect) {
+                    iconSelect.parentNode.appendChild(previewContainer);
+                    
+                    // Select the uploaded icon
+                    const iconPath = `/images/icons/${result.filename}`;
+                    const iconOption = Array.from(iconSelect.options).find(opt => opt.value === iconPath);
+                    if (iconOption) {
+                        iconOption.selected = true;
+                    }
+                }
+
+                // Clear the file input
+                iconUpload.value = '';
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert(error.message || 'Failed to upload icon');
+            } finally {
+                uploadButton.disabled = false;
+                uploadButton.textContent = 'Upload';
+                uploadButton.classList.remove('opacity-50');
+            }
+        });
+    }
 });
