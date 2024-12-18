@@ -1,13 +1,13 @@
 ---
 title: "Mining Pool Integration"
 description: ""
-date: "2024-12-09T11:52:06.395Z"
+date: "2024-12-18T18:22:07.160Z"
 year: 2024
 section: "roadmap"
 type: "roadmap"
 layout: "single"
 status: "planned"
-progress: 70
+progress: 24
 tags: ["planned"]
 icon: ""
 priority: "high"
