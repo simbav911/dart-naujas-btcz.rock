@@ -269,7 +269,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load specific content
     async function loadContent(path) {
         try {
-            const response = await fetch(`http://localhost:3000/api/content/${encodeURIComponent(path)}`);
+            // Extract the filename and construct the correct path
+            const filename = path.split('/').pop();
+            const apiPath = `${currentContentType}/${filename}`;
+            
+            const response = await fetch(`http://localhost:3000/api/content/${encodeURIComponent(apiPath)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

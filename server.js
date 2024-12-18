@@ -41,7 +41,7 @@ app.get('/api/content', async (req, res) => {
         // Map content types to their directories
         const contentConfig = {
             'news': {
-                path: path.join(__dirname, 'content/en')
+                path: path.join(__dirname, 'content/en/news')
             },
             'roadmap': {
                 path: path.join(__dirname, 'content/en/roadmap')
@@ -124,10 +124,42 @@ app.get('/api/content', async (req, res) => {
     }
 });
 
-// Get specific content
+// Get content of a specific file
 app.get('/api/content/:path(*)', async (req, res) => {
     try {
-        const filePath = path.join(__dirname, req.params.path);
+        // Extract the file path and determine content type
+        const requestPath = req.params.path;
+        const contentType = requestPath.split('/')[0];  // Get the content type from the path
+        
+        // Map content types to their directories
+        const contentConfig = {
+            'news': {
+                path: path.join(__dirname, 'content/en/news')
+            },
+            'roadmap': {
+                path: path.join(__dirname, 'content/en/roadmap')
+            },
+            'wallets': {
+                path: path.join(__dirname, 'content/en/wallets')
+            },
+            'why-bitcoinz': {
+                path: path.join(__dirname, 'content/en/why-bitcoinz')
+            }
+        };
+
+        // Get the filename from the path
+        const filename = path.basename(requestPath);
+        
+        // Find the correct base path for this content type
+        const config = contentConfig[contentType];
+        if (!config) {
+            return res.status(400).json({ error: `Invalid content type: ${contentType}` });
+        }
+
+        // Construct the full file path
+        const filePath = path.join(config.path, filename);
+        console.log('Loading content from:', filePath);
+
         const content = await fs.readFile(filePath, 'utf8');
         
         // Parse frontmatter and content
@@ -161,7 +193,7 @@ app.get('/api/content/:path(*)', async (req, res) => {
             content: markdown.trim()
         });
     } catch (error) {
-        console.error('Error getting content:', error);
+        console.error('Error reading file:', error);
         res.status(500).json({ error: error.message });
     }
 });
