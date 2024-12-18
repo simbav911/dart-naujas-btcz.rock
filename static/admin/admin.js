@@ -40,54 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Exchange-specific functions
-    function addTradingPair() {
-        const tradingPairsList = document.getElementById('trading-pairs-list');
-        const pairDiv = document.createElement('div');
-        pairDiv.className = 'flex items-center space-x-2';
-        pairDiv.innerHTML = `
-            <input type="text" placeholder="BTCZ/BTC" class="trading-pair flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-            <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
-                Remove
-            </button>
-        `;
-        tradingPairsList.appendChild(pairDiv);
-
-        pairDiv.querySelector('.remove-item').addEventListener('click', () => {
-            pairDiv.remove();
-        });
-    }
-
-    function addExchangeFeature() {
-        const featuresList = document.getElementById('exchange-features-list');
-        const featureDiv = document.createElement('div');
-        featureDiv.className = 'flex items-center space-x-2';
-        featureDiv.innerHTML = `
-            <input type="text" placeholder="Enter feature" class="exchange-feature flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-            <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
-                Remove
-            </button>
-        `;
-        featuresList.appendChild(featureDiv);
-
-        featureDiv.querySelector('.remove-item').addEventListener('click', () => {
-            featureDiv.remove();
-        });
-    }
-
-    // Initialize exchange handlers
-    function initExchangeHandlers() {
-        const addTradingPairBtn = document.getElementById('add-trading-pair');
-        const addFeatureBtn = document.getElementById('add-exchange-feature');
-
-        if (addTradingPairBtn) {
-            addTradingPairBtn.addEventListener('click', addTradingPair);
-        }
-        if (addFeatureBtn) {
-            addFeatureBtn.addEventListener('click', addExchangeFeature);
-        }
-    }
-
     // Wallet-specific functions
     function addPlatform() {
         const platformList = document.getElementById('platform-list');
@@ -127,54 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Exchange-specific functions
-    function addTradingPair() {
-        const tradingPairsList = document.getElementById('trading-pairs-list');
-        const pairDiv = document.createElement('div');
-        pairDiv.className = 'flex items-center space-x-2';
-        pairDiv.innerHTML = `
-            <input type="text" placeholder="BTCZ/BTC" class="trading-pair flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-            <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
-                Remove
-            </button>
-        `;
-        tradingPairsList.appendChild(pairDiv);
-
-        pairDiv.querySelector('.remove-item').addEventListener('click', () => {
-            pairDiv.remove();
-        });
-    }
-
-    function addExchangeFeature() {
-        const featuresList = document.getElementById('exchange-features-list');
-        const featureDiv = document.createElement('div');
-        featureDiv.className = 'flex items-center space-x-2';
-        featureDiv.innerHTML = `
-            <input type="text" placeholder="Enter feature" class="exchange-feature flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-            <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
-                Remove
-            </button>
-        `;
-        featuresList.appendChild(featureDiv);
-
-        featureDiv.querySelector('.remove-item').addEventListener('click', () => {
-            featureDiv.remove();
-        });
-    }
-
-    // Initialize exchange handlers
-    function initExchangeHandlers() {
-        const addTradingPairBtn = document.getElementById('add-trading-pair');
-        const addFeatureBtn = document.getElementById('add-exchange-feature');
-
-        if (addTradingPairBtn) {
-            addTradingPairBtn.addEventListener('click', addTradingPair);
-        }
-        if (addFeatureBtn) {
-            addFeatureBtn.addEventListener('click', addExchangeFeature);
-        }
-    }
-
     // Add event listeners for wallet-specific buttons
     document.getElementById('add-platform').addEventListener('click', addPlatform);
     document.getElementById('add-feature').addEventListener('click', () => addListItem('features-list', 'Enter feature'));
@@ -182,24 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Content type configuration
     const contentTypes = {
-        'buy': {
-            path: 'content/en/buy/exchanges',
-            template: {
-                frontMatter: (data) => ({
-                    title: data.title,
-                    description: data.description,
-                    date: new Date().toISOString(),
-                    type: "exchange",
-                    image: "/images/icons/exchange.svg",
-                    categories: ["Exchange"],
-                    features: data.features,
-                    trading_pairs: data.trading_pairs,
-                    website: data.website,
-                    kyc_required: data.kyc_required === 'true',
-                    draft: false
-                })
-            }
-        },
         news: {
             path: 'news',
             template: {
@@ -278,36 +164,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('title').value = '';
                 quill.setContents([]);
                 
-                // Hide all specific fields
-                const specificFields = {
-                    wallet: document.getElementById('wallet-fields'),
-                    roadmap: document.getElementById('roadmap-fields'),
-                    exchange: document.getElementById('exchange-fields')
-                };
-
-                // Hide all fields
-                Object.values(specificFields).forEach(field => {
-                    if (field) field.style.display = 'none';
-                });
+                // Hide all specific fields first
+                const walletFields = document.getElementById('wallet-fields');
+                const roadmapFields = document.getElementById('roadmap-fields');
+                if (walletFields) walletFields.style.display = 'none';
+                if (roadmapFields) roadmapFields.style.display = 'none';
 
                 // Show specific fields based on content type
-                const fieldMap = {
-                    'wallets': 'wallet',
-                    'roadmap': 'roadmap',
-                    'buy': 'exchange'
-                };
-
-                const fieldType = fieldMap[type];
-                if (fieldType && specificFields[fieldType]) {
-                    specificFields[fieldType].style.display = 'block';
-                    if (fieldType === 'exchange') {
-                        initExchangeHandlers();
-                    }
-                }
-
-                // Initialize exchange-specific handlers if needed
-                if (type === 'buy') {
-                    initExchangeHandlers();
+                if (type === 'wallets' && walletFields) {
+                    walletFields.style.display = 'block';
+                } else if (type === 'roadmap' && roadmapFields) {
+                    roadmapFields.style.display = 'block';
                 }
 
                 currentSection.textContent = type.charAt(0).toUpperCase() + type.slice(1);
@@ -346,37 +213,27 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Construct the correct path based on content type
-            // Sort files by date in descending order
-            files.sort((a, b) => {
-                const dateA = new Date(a.date || a.path.split('-').slice(0, 3).join('-'));
-                const dateB = new Date(b.date || b.path.split('-').slice(0, 3).join('-'));
-                return dateB - dateA;
-            });
-
             const processedFiles = files.map(file => ({
                 title: file.title,
-                path: `content/en/${type === 'news' ? '' : type === 'buy' ? 'buy/exchanges/' : type + '/'}${file.path}`
+                path: type === 'news'
+                    ? `content/en/${file.path}`
+                    : `content/en/${type}/${file.path}`
             }));
             
             console.log('Processed files:', processedFiles);
             
-            contentList.innerHTML = '';
-            processedFiles.forEach(file => {
-                const div = document.createElement('div');
-                div.className = 'py-2 px-3 hover:bg-gray-100 cursor-pointer content-item';
-                div.dataset.path = file.path;
-                div.textContent = file.title;
-                
-                div.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    console.log('Content item clicked:', file.path);
-                    console.log('Current content type:', currentContentType);
-                    loadContent(file.path);
-                });
-                
-                contentList.appendChild(div);
+            contentList.innerHTML = processedFiles.map(file => `
+                <div class="py-2 px-3 hover:bg-gray-100 cursor-pointer content-item" data-path="${file.path}">
+                    ${file.title}
+                </div>
+            `).join('');
+            console.log('Content list updated');
+
+            // Add click handlers for content items
+            document.querySelectorAll('.content-item').forEach(item => {
+                item.addEventListener('click', () => loadContent(item.dataset.path));
             });
-            console.log('Content list updated with files:', processedFiles);
+            console.log('Click handlers added');
 
             // If it's roadmap type, load the icons
             if (type === 'roadmap') {
@@ -412,44 +269,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load specific content
     async function loadContent(path) {
         try {
-            console.log('Loading content for path:', path);
-            console.log('Current content type:', currentContentType);
-            
             const response = await fetch(`http://localhost:3000/api/content/${encodeURIComponent(path)}`);
-            console.log('Response status:', response.status);
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Error response:', errorText);
-                throw new Error(`HTTP error! status: ${response.status}, details: ${errorText}`);
-            }
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('Received data:', data);
             
             if (data) {
                 document.getElementById('title').value = data.title || '';
-                console.log('Setting title:', data.title);
-
-                // Handle exchange-specific fields
-                if (currentContentType === 'buy') {
-                    console.log('Loading exchange fields');
-                    const description = document.getElementById('exchange-description');
-                    const website = document.getElementById('exchange-website');
-                    const kyc = document.getElementById('exchange-kyc');
-                    
-                    if (description) description.value = data.frontMatter?.description || '';
-                    if (website) website.value = data.frontMatter?.website || '';
-                    if (kyc) kyc.value = data.frontMatter?.kyc_required?.toString() || 'false';
-                    
-                    console.log('Exchange fields loaded:', {
-                        description: description?.value,
-                        website: website?.value,
-                        kyc: kyc?.value
-                    });
-                }
                 
                 // Handle roadmap-specific fields
                 if (currentContentType === 'roadmap') {
@@ -519,57 +346,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </button>
                             `;
                             requirementsList.appendChild(requirementDiv);
-                        });
-                    }
-                }
-
-                // Handle exchange-specific fields
-                if (currentContentType === 'buy') {
-                    document.getElementById('exchange-description').value = data.frontMatter?.description || '';
-                    document.getElementById('exchange-website').value = data.frontMatter?.website || '';
-                    document.getElementById('exchange-kyc').value = data.frontMatter?.kyc_required?.toString() || 'false';
-
-                    // Load trading pairs
-                    const tradingPairsList = document.getElementById('trading-pairs-list');
-                    tradingPairsList.innerHTML = '';
-                    if (data.frontMatter?.trading_pairs) {
-                        data.frontMatter.trading_pairs.forEach(pair => {
-                            const pairDiv = document.createElement('div');
-                            pairDiv.className = 'flex items-center space-x-2';
-                            pairDiv.innerHTML = `
-                                <input type="text" value="${pair}" class="trading-pair flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-                                <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
-                                    Remove
-                                </button>
-                            `;
-                            tradingPairsList.appendChild(pairDiv);
-
-                            // Add click handler for remove button
-                            pairDiv.querySelector('.remove-item').addEventListener('click', () => {
-                                pairDiv.remove();
-                            });
-                        });
-                    }
-
-                    // Load features
-                    const featuresList = document.getElementById('exchange-features-list');
-                    featuresList.innerHTML = '';
-                    if (data.frontMatter?.features) {
-                        data.frontMatter.features.forEach(feature => {
-                            const featureDiv = document.createElement('div');
-                            featureDiv.className = 'flex items-center space-x-2';
-                            featureDiv.innerHTML = `
-                                <input type="text" value="${feature}" class="exchange-feature flex-grow rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-                                <button type="button" class="remove-item px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
-                                    Remove
-                                </button>
-                            `;
-                            featuresList.appendChild(featureDiv);
-
-                            // Add click handler for remove button
-                            featureDiv.querySelector('.remove-item').addEventListener('click', () => {
-                                featureDiv.remove();
-                            });
                         });
                     }
                 }
@@ -666,34 +442,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
 
-    // Helper function to gather exchange data
-    function getExchangeData() {
-        const data = {
-            title: document.getElementById('title').value,
-            description: document.getElementById('exchange-description').value,
-            website: document.getElementById('exchange-website').value,
-            kyc_required: document.getElementById('exchange-kyc').value,
-            trading_pairs: [],
-            features: []
-        };
-
-        // Gather trading pairs
-        document.querySelectorAll('.trading-pair').forEach(input => {
-            if (input.value.trim()) {
-                data.trading_pairs.push(input.value.trim());
-            }
-        });
-
-        // Gather features
-        document.querySelectorAll('.exchange-feature').forEach(input => {
-            if (input.value.trim()) {
-                data.features.push(input.value.trim());
-            }
-        });
-
-        return data;
-    }
-
     // Helper function to gather roadmap data
     function getRoadmapData() {
         const data = {
@@ -740,9 +488,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 frontMatter.priority = roadmapData.priority;
                 frontMatter.icon = roadmapData.icon;
                 frontMatter.tags = roadmapData.tags;
-            } else if (currentContentType === 'buy') {
-                const exchangeData = getExchangeData();
-                frontMatter = contentTypes.buy.template.frontMatter(exchangeData);
             } else {
                 frontMatter = contentTypes[currentContentType].template.frontMatter(titleInput.value);
             }

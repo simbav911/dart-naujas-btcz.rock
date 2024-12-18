@@ -51,9 +51,6 @@ app.get('/api/content', async (req, res) => {
             },
             'why-bitcoinz': {
                 path: path.join(__dirname, 'content/en/why-bitcoinz')
-            },
-            'buy': {
-                path: path.join(__dirname, 'content/en/buy/exchanges')
             }
         };
         
@@ -130,12 +127,11 @@ app.get('/api/content', async (req, res) => {
 // Get specific content
 app.get('/api/content/:path(*)', async (req, res) => {
     try {
-        // Extract content type and file path
-        const fullPath = path.join(__dirname, req.params.path);
-        const fileContent = await fs.readFile(fullPath, 'utf8');
+        const filePath = path.join(__dirname, req.params.path);
+        const content = await fs.readFile(filePath, 'utf8');
         
         // Parse frontmatter and content
-        const frontMatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+        const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
         if (!frontMatterMatch) {
             throw new Error('Invalid content format');
         }
@@ -145,32 +141,16 @@ app.get('/api/content/:path(*)', async (req, res) => {
         // Parse frontmatter into an object
         const frontMatter = {};
         const frontMatterLines = frontMatterStr.split('\n');
-        let currentArray = null;
-        let currentKey = null;
-
         frontMatterLines.forEach(line => {
-            // Check for array items
-            const arrayItemMatch = line.match(/^\s*-\s*"?([^"]*)"?$/);
-            if (arrayItemMatch && currentArray) {
-                currentArray.push(arrayItemMatch[1]);
-                return;
-            }
-
-            // Check for new key
-            const match = line.match(/^(\w+):\s*(.+)?$/);
+            const match = line.match(/^(\w+):\s*(.+)$/);
             if (match) {
-                currentKey = match[1];
-                if (match[2]) {
-                    // Single line value
-                    const value = match[2].replace(/^"(.*)"$/, '$1');
-                    frontMatter[currentKey] = !isNaN(value) ? parseFloat(value) :
-                        value === 'true' ? true :
-                        value === 'false' ? false :
-                        value;
-                } else {
-                    // Start of array
-                    currentArray = [];
-                    frontMatter[currentKey] = currentArray;
+                const [, key, value] = match;
+                // Remove quotes if present
+                frontMatter[key] = value.replace(/^"(.*)"$/, '$1');
+                
+                // Parse numbers
+                if (!isNaN(value)) {
+                    frontMatter[key] = parseFloat(value);
                 }
             }
         });
@@ -195,24 +175,8 @@ app.post('/api/save', async (req, res) => {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // Extract content type and construct correct path
-        const pathParts = filePath.split('/');
-        const type = pathParts[0];
-        const contentConfig = {
-            'news': 'content/en',
-            'roadmap': 'content/en/roadmap',
-            'wallets': 'content/en/wallets',
-            'why-bitcoinz': 'content/en/why-bitcoinz',
-            'buy': 'content/en/buy/exchanges'
-        };
-
-        const basePath = contentConfig[type];
-        if (!basePath) {
-            return res.status(400).json({ error: `Invalid content type: ${type}` });
-        }
-
         // Ensure the content directory exists
-        const fullPath = path.join(__dirname, basePath, pathParts.slice(1).join('/'));
+        const fullPath = path.join(__dirname, filePath);
         await fs.mkdir(path.dirname(fullPath), { recursive: true });
 
         // Save locally
