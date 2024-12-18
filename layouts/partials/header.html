@@ -101,7 +101,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 {{ $css := resources.Get "css/main.css" }}
-{{ $style := $css | resources.ToCSS | resources.Minify }}
+{{ $style := $css | css.Sass | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 <script src="{{ "js/price-ticker.js" | relURL }}"></script>
 <script src="{{ "js/scroll-handler.js" | relURL }}"></script>
