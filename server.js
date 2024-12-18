@@ -15,7 +15,11 @@ app.use(express.static('static'));
 
 // CORS middleware for local development
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:1313');
+    const allowedOrigins = ['http://localhost:1313', 'http://localhost:3000'];
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
@@ -32,21 +36,65 @@ const githubHandler = new GitHubHandler(
 app.get('/api/content', async (req, res) => {
     try {
         const type = req.query.type;
-        const contentPath = path.join(__dirname, 'content/en', type);
+        console.log(`Requested content type: ${type}`);
+        
+        // Map content types to their directories
+        const contentConfig = {
+            'news': {
+                path: path.join(__dirname, 'content/en')
+            },
+            'roadmap': {
+                path: path.join(__dirname, 'content/en/roadmap')
+            },
+            'wallets': {
+                path: path.join(__dirname, 'content/en/wallets')
+            },
+            'why-bitcoinz': {
+                path: path.join(__dirname, 'content/en/why-bitcoinz')
+            }
+        };
+        
+        const config = contentConfig[type];
+        if (!config) {
+            console.error(`Invalid content type: ${type}`);
+            return res.status(400).json({ error: `Invalid content type: ${type}` });
+        }
+        
+        console.log(`Looking for content in: ${config.path}`);
         
         // Check if directory exists
         try {
-            await fs.access(contentPath);
-        } catch {
-            return res.status(404).json({ error: `Content type '${type}' not found` });
+            await fs.access(config.path);
+        } catch (accessError) {
+            console.error(`Directory access error: ${accessError}`);
+            return res.status(404).json({ error: `Content type '${type}' not found`, details: accessError.message });
         }
         
-        const files = await fs.readdir(contentPath);
+        const files = await fs.readdir(config.path);
+        console.log(`Found ${files.length} files in directory`);
         
-        const contentFiles = await Promise.all(files
-            .filter(file => file.endsWith('.md'))
+        // Filter files based on content type
+        const matchingFiles = files.filter(file => {
+            // Skip index and non-markdown files
+            if (file === '_index.md' || !file.endsWith('.md')) {
+                return false;
+            }
+            
+            // For news type, only include date-prefixed files
+            if (type === 'news') {
+                return /^\d{4}-\d{2}-.*\.md$/.test(file);
+            }
+            
+            // For other types, include all markdown files
+            return true;
+        });
+        console.log(`Found ${matchingFiles.length} matching files for type: ${type}`);
+        
+        const contentFiles = await Promise.all(matchingFiles
             .map(async file => {
-                const filePath = path.join(contentPath, file);
+                const filePath = path.join(config.path, file);
+                console.log(`Processing file: ${filePath}`);
+                
                 const content = await fs.readFile(filePath, 'utf8');
                 const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
                 let title = file;
@@ -58,16 +106,21 @@ app.get('/api/content', async (req, res) => {
                     }
                 }
                 
+                console.log(`Processed file: ${file}, Title: ${title}`);
+                
                 return {
-                    path: `content/en/${type}/${file}`,
+                    path: file,
                     title: title
                 };
             }));
 
+        console.log(`Successfully processed ${contentFiles.length} files`);
+
+        console.log(`Returning ${contentFiles.length} content files`);
         res.json(contentFiles);
     } catch (error) {
         console.error('Error getting content list:', error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message, stack: error.stack });
     }
 });
 

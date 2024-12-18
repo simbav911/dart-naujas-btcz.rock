@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Content type configuration
     const contentTypes = {
         news: {
-            path: 'content/en/news',
+            path: 'news',
             template: {
                 frontMatter: (title) => ({
                     title: title,
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         wallets: {
-            path: 'content/en/wallets',
+            path: 'wallets',
             template: {
                 frontMatter: (data) => ({
                     title: data.title,
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         roadmap: {
-            path: 'content/en/roadmap',
+            path: 'roadmap',
             template: {
                 frontMatter: (title) => ({
                     title: title,
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         'why-bitcoinz': {
-            path: 'content/en/why-bitcoinz',
+            path: 'why-bitcoinz',
             template: {
                 frontMatter: (title) => ({
                     title: title,
@@ -151,69 +151,106 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Handle content type selection
+    // Handle content type selection
     document.querySelectorAll('.content-type-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const type = this.dataset.type;
-            currentContentType = type;
-            
-            // Reset fields
-            document.getElementById('title').value = '';
-            quill.setContents([]);
-            
-            // Hide all specific fields first
-            const walletFields = document.getElementById('wallet-fields');
-            const roadmapFields = document.getElementById('roadmap-fields');
-            if (walletFields) walletFields.style.display = 'none';
-            if (roadmapFields) roadmapFields.style.display = 'none';
+        button.addEventListener('click', async function() {
+            try {
+                console.log('Content type button clicked');
+                const type = this.dataset.type;
+                console.log('Selected type:', type);
+                currentContentType = type;
+                
+                // Reset fields
+                document.getElementById('title').value = '';
+                quill.setContents([]);
+                
+                // Hide all specific fields first
+                const walletFields = document.getElementById('wallet-fields');
+                const roadmapFields = document.getElementById('roadmap-fields');
+                if (walletFields) walletFields.style.display = 'none';
+                if (roadmapFields) roadmapFields.style.display = 'none';
 
-            // Show specific fields based on content type
-            if (type === 'wallets' && walletFields) {
-                walletFields.style.display = 'block';
-            } else if (type === 'roadmap' && roadmapFields) {
-                roadmapFields.style.display = 'block';
+                // Show specific fields based on content type
+                if (type === 'wallets' && walletFields) {
+                    walletFields.style.display = 'block';
+                } else if (type === 'roadmap' && roadmapFields) {
+                    roadmapFields.style.display = 'block';
+                }
+
+                currentSection.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+                console.log('Loading existing content for type:', type);
+                await loadExistingContent(type);
+                console.log('Content loaded successfully');
+                editorContainer.classList.remove('hidden');
+                welcomeMessage.classList.add('hidden');
+            } catch (error) {
+                console.error('Error in content type selection:', error);
+                alert('Error loading content: ' + error.message);
             }
-
-            currentSection.textContent = type.charAt(0).toUpperCase() + type.slice(1);
-            loadExistingContent(type);
-            editorContainer.classList.remove('hidden');
-            welcomeMessage.classList.add('hidden');
         });
     });
-
     // Load existing content for a content type
     async function loadExistingContent(type) {
         try {
-            const response = await fetch(`/api/content?type=${encodeURIComponent(type)}`);
+            console.log('Making API request for type:', type);
+            const url = `http://localhost:3000/api/content?type=${encodeURIComponent(type)}`;
+            console.log('Request URL:', url);
+            
+            const response = await fetch(url);
+            console.log('Response status:', response.status);
+            
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                console.error('Error response:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, details: ${errorText}`);
             }
             const files = await response.json();
+            console.log('Received files:', files);
             
-            contentList.innerHTML = files.map(file => `
+            if (!Array.isArray(files)) {
+                console.error('Expected array of files but got:', typeof files);
+                throw new Error('Invalid response format');
+            }
+            
+            // Construct the correct path based on content type
+            const processedFiles = files.map(file => ({
+                title: file.title,
+                path: type === 'news'
+                    ? `content/en/${file.path}`
+                    : `content/en/${type}/${file.path}`
+            }));
+            
+            console.log('Processed files:', processedFiles);
+            
+            contentList.innerHTML = processedFiles.map(file => `
                 <div class="py-2 px-3 hover:bg-gray-100 cursor-pointer content-item" data-path="${file.path}">
                     ${file.title}
                 </div>
             `).join('');
+            console.log('Content list updated');
 
             // Add click handlers for content items
             document.querySelectorAll('.content-item').forEach(item => {
                 item.addEventListener('click', () => loadContent(item.dataset.path));
             });
+            console.log('Click handlers added');
 
             // If it's roadmap type, load the icons
             if (type === 'roadmap') {
-                loadIcons();
+                console.log('Loading icons for roadmap');
+                await loadIcons();
             }
         } catch (error) {
             console.error('Error loading content:', error);
-            contentList.innerHTML = '<div class="text-red-500">Error loading content</div>';
+            contentList.innerHTML = `<div class="text-red-500">Error loading content: ${error.message}</div>`;
+            throw error; // Re-throw to be caught by the caller
         }
     }
 
     // Function to load available icons
     async function loadIcons() {
         try {
-            const response = await fetch('/api/icons');
+            const response = await fetch('http://localhost:3000/api/icons');
             if (!response.ok) throw new Error('Failed to load icons');
             const icons = await response.json();
             
@@ -222,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             iconSelect.innerHTML = `
                 <option value="">Select an icon</option>
-                ${icons.map(icon => `<option value="/images/icons/${icon}">${icon}</option>`).join('')}
+                ${icons.map(icon => `<option value="http://localhost:3000/images/icons/${icon}">${icon}</option>`).join('')}
             `;
         } catch (error) {
             console.error('Error loading icons:', error);
@@ -232,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load specific content
     async function loadContent(path) {
         try {
-            const response = await fetch(`/api/content/${encodeURIComponent(path)}`);
+            const response = await fetch(`http://localhost:3000/api/content/${encodeURIComponent(path)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -474,7 +511,7 @@ ${Object.entries(frontMatter).map(([key, value]) => {
 
 ${content}`;
 
-            const response = await fetch('/api/save', {
+            const response = await fetch('http://localhost:3000/api/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -586,7 +623,7 @@ ${content}`;
             uploadButton.classList.add('opacity-50');
 
             try {
-                const response = await fetch('/api/upload-icon', {
+                const response = await fetch('http://localhost:3000/api/upload-icon', {
                     method: 'POST',
                     body: formData
                 });
@@ -602,7 +639,7 @@ ${content}`;
                 
                 // Preview the uploaded icon
                 const iconPreview = document.createElement('img');
-                iconPreview.src = `/images/icons/${result.filename}`;
+                iconPreview.src = `http://localhost:3000/images/icons/${result.filename}`;
                 iconPreview.style.maxWidth = '32px';
                 iconPreview.style.maxHeight = '32px';
                 iconPreview.style.marginLeft = '10px';
