@@ -49,6 +49,11 @@
                                     Why BitcoinZ
                                 </button>
                             </li>
+                            <li>
+                                <button class="w-full text-left px-4 py-2 rounded hover:bg-blue-50 content-type-btn" data-type="buy">
+                                    Where to Buy
+                                </button>
+                            </li>
                         </ul>
                     </nav>
 
@@ -128,8 +133,56 @@
                             </div>
                         </div>
 
+                        <!-- Exchange-specific fields -->
+                        <div id="exchange-fields" class="exchange-fields space-y-4 mb-4 hidden">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <input type="text" id="exchange-description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Website URL</label>
+                                <input type="text" id="exchange-website" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Trading Pairs</label>
+                                <div id="trading-pairs-list" class="space-y-2">
+                                    <!-- Trading pairs will be added here -->
+                                </div>
+                                <button type="button" id="add-trading-pair" class="mt-2 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                                    Add Trading Pair
+                                </button>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Features</label>
+                                <div id="exchange-features-list" class="space-y-2">
+                                    <!-- Features will be added here -->
+                                </div>
+                                <button type="button" id="add-exchange-feature" class="mt-2 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                                    Add Feature
+                                </button>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">KYC Required</label>
+                                <select id="exchange-kyc" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Icon</label>
+                                <select id="exchange-icon" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    <option value="/images/icons/exchange.svg">Exchange</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <!-- Wallet-specific fields -->
-                        <div id="wallet-fields" class="wallet-fields space-y-4 mb-4">
+                        <div id="wallet-fields" class="wallet-fields space-y-4 mb-4 hidden">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Description</label>
                                 <input type="text" id="wallet-description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
