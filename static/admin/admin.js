@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load existing content for a content type
     async function loadExistingContent(type) {
         try {
-            const response = await fetch(`/api/content?type=${encodeURIComponent(type)}`);
+            const response = await fetch(`http://localhost:3000/api/content?type=${encodeURIComponent(type)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load specific content
     async function loadContent(path) {
         try {
-            const response = await fetch(`/api/content/${encodeURIComponent(path)}`);
+            const response = await fetch(`http://localhost:3000/api/content/${encodeURIComponent(path)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
