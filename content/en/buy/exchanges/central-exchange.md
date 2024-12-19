@@ -1,8 +1,8 @@
 ---
-title: "Central Exchange"
-description: "A leading centralized exchange offering high liquidity, advanced trading tools, and multiple BTCZ trading pairs"
+title: "WhiteBIT"
+description: "A user-friendly European cryptocurrency exchange for trading digital assets"
 date: 2023-12-03T11:00:00Z
-image: "/images/icons/exchange.svg"
+image: "/images/exchanges/WhiteBIT.png"
 type: "exchange"
 categories: ["Exchange"]
 features:
@@ -11,11 +11,8 @@ features:
   - "24/7 Customer Support"
   - "Mobile Trading App"
 trading_pairs:
-  - "BTCZ/BTC"
   - "BTCZ/USDT"
-  - "BTCZ/USDC"
-  - "BTCZ/ETH"
-website: "https://central-exchange-example.com"
+website: "https://whitebit.com/trade/BTCZ-USDT?type=spot&tab=open-orders"
 kyc_required: true
 draft: false
 ---
