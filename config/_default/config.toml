@@ -1,0 +1,53 @@
+languageCode = "en-us"
+title = "BitcoinZ - Community-Driven Cryptocurrency"
+theme = "PaperMod"
+
+# Site Settings
+[params]
+  description = "BitcoinZ - A decentralized cryptocurrency focused on privacy, security, and true community governance"
+  keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
+  author = "BitcoinZ Community"
+
+  # Social Media Links
+  github = "https://github.com/simbav911/dart-naujas-btcz.rock"
+  twitter = "https://twitter.com/bitcoinz_team"
+  telegram = "https://t.me/bitcoinzcommunity"
+  discord = "https://discord.gg/bitcoinz"
+
+# Language Configuration
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    contentDir = "content"
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "home"
+        name = "Home"
+        url = "/"
+        weight = 1
+      [[languages.en.menu.main]]
+        identifier = "why-bitcoinz"
+        name = "Why BitcoinZ"
+        url = "/en/why-bitcoinz/"
+        weight = 2
+      [[languages.en.menu.main]]
+        identifier = "wallets"
+        name = "Wallets"
+        url = "/en/wallets/"
+        weight = 3
+      [[languages.en.menu.main]]
+        identifier = "buy"
+        name = "Where to Buy"
+        url = "/en/buy/"
+        weight = 4
+      [[languages.en.menu.main]]
+        identifier = "news"
+        name = "News"
+        url = "/en/news/"
+        weight = 5
+      [[languages.en.menu.main]]
+        identifier = "roadmap"
+        name = "Roadmap"
+        url = "/en/roadmap/"
+        weight = 6

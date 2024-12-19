@@ -5,6 +5,7 @@ const fs = require('fs').promises;
 const fsSync = require('fs');
 const { formidable } = require('formidable');
 const GitHubHandler = require('./static/admin/github-handler');
+const yaml = require('js-yaml');
 
 const app = express();
 const port = 3000;
@@ -32,13 +33,43 @@ const githubHandler = new GitHubHandler(
     process.env.GITHUB_OWNER
 );
 
+// Helper function to parse markdown file
+const parseMarkdownFile = async (filePath) => {
+    const content = await fs.readFile(filePath, 'utf8');
+    const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    
+    if (!frontMatterMatch) {
+        throw new Error('Invalid content format');
+    }
+
+    const [, frontMatterStr, markdown] = frontMatterMatch;
+    let frontMatter;
+    try {
+        frontMatter = yaml.load(frontMatterStr);
+    } catch (error) {
+        console.error('Error parsing YAML:', error);
+        throw new Error('Failed to parse frontmatter');
+    }
+
+    // Clean up markdown content
+    const cleanMarkdown = markdown
+        .replace(/^\n+/, '') // Remove leading newlines
+        .replace(/\n+$/, '') // Remove trailing newlines
+        .replace(/\n\n\n+/g, '\n\n') // Replace multiple newlines with double newlines
+        .trim();
+
+    return {
+        frontMatter,
+        content: cleanMarkdown
+    };
+};
+
 // Get list of content files
 app.get('/api/content', async (req, res) => {
     try {
         const type = req.query.type;
         console.log(`Requested content type: ${type}`);
         
-        // Map content types to their directories
         const contentConfig = {
             'news': {
                 path: path.join(__dirname, 'content/en/news')
@@ -62,7 +93,6 @@ app.get('/api/content', async (req, res) => {
         
         console.log(`Looking for content in: ${config.path}`);
         
-        // Check if directory exists
         try {
             await fs.access(config.path);
         } catch (accessError) {
@@ -73,49 +103,39 @@ app.get('/api/content', async (req, res) => {
         const files = await fs.readdir(config.path);
         console.log(`Found ${files.length} files in directory`);
         
-        // Filter files based on content type
         const matchingFiles = files.filter(file => {
-            // Skip index and non-markdown files
             if (file === '_index.md' || !file.endsWith('.md')) {
                 return false;
             }
-            
-            // For news type, only include date-prefixed files
             if (type === 'news') {
                 return /^\d{4}-\d{2}-.*\.md$/.test(file);
             }
-            
-            // For other types, include all markdown files
             return true;
         });
         console.log(`Found ${matchingFiles.length} matching files for type: ${type}`);
         
-        const contentFiles = await Promise.all(matchingFiles
-            .map(async file => {
-                const filePath = path.join(config.path, file);
-                console.log(`Processing file: ${filePath}`);
-                
-                const content = await fs.readFile(filePath, 'utf8');
-                const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-                let title = file;
-                
-                if (frontMatterMatch) {
-                    const titleMatch = frontMatterMatch[1].match(/title:\s*"?([^"\n]+)"?/);
-                    if (titleMatch) {
-                        title = titleMatch[1];
-                    }
-                }
-                
-                console.log(`Processed file: ${file}, Title: ${title}`);
+        const contentFiles = await Promise.all(matchingFiles.map(async file => {
+            const filePath = path.join(config.path, file);
+            console.log(`Processing file: ${filePath}`);
+            
+            try {
+                const { frontMatter } = await parseMarkdownFile(filePath);
+                console.log(`Processed file: ${file} Title: ${frontMatter.title}`);
                 
                 return {
                     path: file,
-                    title: title
+                    title: frontMatter.title || file
                 };
-            }));
+            } catch (error) {
+                console.error(`Error processing file ${file}:`, error);
+                return {
+                    path: file,
+                    title: file
+                };
+            }
+        }));
 
         console.log(`Successfully processed ${contentFiles.length} files`);
-
         console.log(`Returning ${contentFiles.length} content files`);
         res.json(contentFiles);
     } catch (error) {
@@ -127,11 +147,9 @@ app.get('/api/content', async (req, res) => {
 // Get content of a specific file
 app.get('/api/content/:path(*)', async (req, res) => {
     try {
-        // Extract the file path and determine content type
         const requestPath = req.params.path;
-        const contentType = requestPath.split('/')[0];  // Get the content type from the path
+        const contentType = requestPath.split('/')[0];
         
-        // Map content types to their directories
         const contentConfig = {
             'news': {
                 path: path.join(__dirname, 'content/en/news')
@@ -147,50 +165,21 @@ app.get('/api/content/:path(*)', async (req, res) => {
             }
         };
 
-        // Get the filename from the path
         const filename = path.basename(requestPath);
-        
-        // Find the correct base path for this content type
         const config = contentConfig[contentType];
         if (!config) {
             return res.status(400).json({ error: `Invalid content type: ${contentType}` });
         }
 
-        // Construct the full file path
         const filePath = path.join(config.path, filename);
         console.log('Loading content from:', filePath);
 
-        const content = await fs.readFile(filePath, 'utf8');
-        
-        // Parse frontmatter and content
-        const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-        if (!frontMatterMatch) {
-            throw new Error('Invalid content format');
-        }
-
-        const [, frontMatterStr, markdown] = frontMatterMatch;
-        
-        // Parse frontmatter into an object
-        const frontMatter = {};
-        const frontMatterLines = frontMatterStr.split('\n');
-        frontMatterLines.forEach(line => {
-            const match = line.match(/^(\w+):\s*(.+)$/);
-            if (match) {
-                const [, key, value] = match;
-                // Remove quotes if present
-                frontMatter[key] = value.replace(/^"(.*)"$/, '$1');
-                
-                // Parse numbers
-                if (!isNaN(value)) {
-                    frontMatter[key] = parseFloat(value);
-                }
-            }
-        });
+        const { frontMatter, content } = await parseMarkdownFile(filePath);
 
         res.json({
             title: frontMatter.title,
             frontMatter,
-            content: markdown.trim()
+            content
         });
     } catch (error) {
         console.error('Error reading file:', error);
@@ -207,11 +196,9 @@ app.post('/api/save', async (req, res) => {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // Ensure the content directory exists
         const fullPath = path.join(__dirname, filePath);
         await fs.mkdir(path.dirname(fullPath), { recursive: true });
 
-        // Save locally
         try {
             await fs.writeFile(fullPath, content, 'utf8');
         } catch (error) {
@@ -219,12 +206,10 @@ app.post('/api/save', async (req, res) => {
             return res.status(500).json({ error: 'Failed to save file locally' });
         }
 
-        // Save to GitHub
         try {
             await githubHandler.createOrUpdateFile(filePath, content, message || 'Update content');
         } catch (error) {
             console.error('Error saving to GitHub:', error);
-            // Don't fail if GitHub save fails, just log it
             console.warn('Content saved locally but failed to save to GitHub');
         }
 
@@ -240,7 +225,6 @@ app.get('/api/icons', async (req, res) => {
     try {
         const iconsDir = path.join(__dirname, 'static', 'images', 'icons');
         
-        // Create icons directory if it doesn't exist
         if (!fsSync.existsSync(iconsDir)) {
             fsSync.mkdirSync(iconsDir, { recursive: true });
         }
@@ -259,7 +243,6 @@ app.post('/api/upload-icon', async (req, res) => {
     try {
         const iconsDir = path.join(__dirname, 'static', 'images', 'icons');
         
-        // Create icons directory if it doesn't exist
         if (!fsSync.existsSync(iconsDir)) {
             try {
                 fsSync.mkdirSync(iconsDir, { recursive: true });
@@ -272,18 +255,16 @@ app.post('/api/upload-icon', async (req, res) => {
             }
         }
 
-        // Configure formidable
         const form = formidable({
             uploadDir: iconsDir,
             keepExtensions: true,
-            maxFileSize: 500 * 1024, // 500KB
+            maxFileSize: 500 * 1024,
             multiples: false,
             filename: (name, ext, part) => {
-                return part.originalFilename // Keep original filename
+                return part.originalFilename
             }
         });
 
-        // Parse the form using Promise
         try {
             const [fields, files] = await form.parse(req);
             console.log('Parsed files:', files);
@@ -297,10 +278,9 @@ app.post('/api/upload-icon', async (req, res) => {
             const file = files.icon[0];
             console.log('Processing file:', file);
 
-            // Validate file type
             const allowedTypes = ['image/svg+xml', 'image/png'];
             if (!allowedTypes.includes(file.mimetype)) {
-                fsSync.unlinkSync(file.filepath); // Clean up the invalid file
+                fsSync.unlinkSync(file.filepath);
                 return res.status(400).json({ 
                     error: 'Only SVG and PNG files are allowed' 
                 });
@@ -309,12 +289,10 @@ app.post('/api/upload-icon', async (req, res) => {
             const oldPath = file.filepath;
             const newPath = path.join(iconsDir, file.originalFilename);
 
-            // If a file with the same name exists, delete it
             if (fsSync.existsSync(newPath)) {
                 fsSync.unlinkSync(newPath);
             }
 
-            // Rename the file to its original name
             fsSync.renameSync(oldPath, newPath);
             console.log('File saved successfully:', newPath);
 
