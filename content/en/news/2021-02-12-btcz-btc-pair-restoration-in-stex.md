@@ -6,5 +6,8 @@ subject: "Updates"
 image: "/images/news/SiteExch_STEX-400x250.png"
 ---
 
-The Bitcoinz/Bitcoin trading pair is again available in the STEX exchange. STEX is one of the very first exchange partners of the BitcoinZ Community. It has a wide range of listed assets and accepts many funding options. Happy trading!
-read more
+TheBitcoinz/Bitcointrading pair is again available in theSTEXexchange.
+
+STEX is one of the very first exchange partners of the BitcoinZ Community. It has a wide range of listed assets and accepts many funding options.
+
+Happy trading!

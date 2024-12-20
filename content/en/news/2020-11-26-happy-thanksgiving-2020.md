@@ -7,4 +7,3 @@ image: "/images/news/thanks-1060205_1920-400x250.jpg"
 ---
 
 The BitcoinZ Community wishes Happy Thanksgiving to everyone! Have a nice time and stay safe!
-read more

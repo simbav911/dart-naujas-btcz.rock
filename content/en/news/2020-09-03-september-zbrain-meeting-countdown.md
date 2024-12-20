@@ -6,4 +6,18 @@ subject: "Updates"
 image: "/images/news/Zbrain-template_Birthday_hours-400x250.jpg"
 ---
 
-read more
+3 YEARS BITCOINZ ANNIVERSARY MEETING
+
+Day(s)
+
+:
+
+Hour(s)
+
+:
+
+Minute(s)
+
+:
+
+Second(s)

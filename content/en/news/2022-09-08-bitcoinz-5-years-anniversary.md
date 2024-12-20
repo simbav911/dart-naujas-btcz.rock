@@ -6,5 +6,24 @@ subject: "Updates"
 image: "/images/news/5YEARS-ANNIVERSARY-BitcoinZlight-400x250.jpg"
 ---
 
-Happy 5 years Anniversary #BitcoinZ! Another superb year with - Four (4) new exchange listings  - Updated roadmap - New developers joining the Community - 4 new wallet options - Our first #BTC-like, fair halving that takes place every 4 years - Competitions with...
-read more
+Happy 5 years Anniversary#BitcoinZ! Another superb year with
+
+– Four (4) new exchange listings
+
+– Updated roadmap
+
+– New developers joining the Community
+
+– 4 new wallet options
+
+– Our first#BTC-like, fair halving that takes place every 4 years
+
+– Competitions with community prizes
+
+– Z-Brain meetings
+
+– Social media army
+
+– Charity activity
+
+& of course many more#BTCZplans!

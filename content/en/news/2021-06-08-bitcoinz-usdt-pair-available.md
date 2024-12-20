@@ -6,5 +6,8 @@ subject: "Updates"
 image: "/images/news/USDT-BITCOINZ-400x250.jpg"
 ---
 
-The Community asked for it and it is now available :  BITCOINZ / USDT market can be found in CREX24! Enjoy!
-read more
+The Community asked for it and it is now available :
+
+BITCOINZ / USDT market can be found inCREX24!
+
+Enjoy!

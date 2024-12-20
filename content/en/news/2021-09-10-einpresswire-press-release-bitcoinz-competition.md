@@ -6,5 +6,6 @@ subject: "Updates"
 image: "/images/news/BTCZEIN-400x250.jpg"
 ---
 
-An exciting moment for the BITCOINZ Community: You can now find a new press release in EINPresswire, the popular Media Distribution Platform. The article is about the upcoming BITCOINZ Competition in STEX!   
-read more
+An exciting moment for the BITCOINZ Community: You can now finda new press release in EINPresswire, the popular Media Distribution Platform.
+
+The article is about theupcoming BITCOINZ Competition in STEX!

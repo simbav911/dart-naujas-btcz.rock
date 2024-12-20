@@ -6,5 +6,8 @@ subject: "Updates"
 image: "/images/news/BTCZ-Update_NEWS_Whatomine-400x250.jpg"
 ---
 
-WhatToMine has updated the information  for BITCOINZ. The platform has added the new site address getbtcz.com and the refreshed BTCZ logo. Whattomine is the most popular platform among the cryptocurrency miners that use in order to track the profitability for each...
-read more
+WhatToMine has updated the information  forBITCOINZ.
+
+The platform has added the new site address getbtcz.com and the refreshed BTCZ logo.
+
+Whattomineis the most popular platform among thecryptocurrencyminersthat use in order to track the profitability for eachProof of Workcoin.
