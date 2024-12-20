@@ -156,20 +156,19 @@
                 {{ i18n "viewAll" | default "View All" }}
             </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {{ $newsPages := .Site.GetPage "section" "en/news" }}
             {{ range first 4 ($newsPages.Pages.ByDate.Reverse) }}
-            <a href="{{ .RelPermalink }}" class="group bg-btcz-gray-900 border border-btcz-gray-800 rounded-lg shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-1 overflow-hidden block">
+            <a href="{{ .RelPermalink }}" class="group bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-2 overflow-hidden block">
                 {{ with .Params.image }}
-                <div class="relative h-20 overflow-hidden">
-                    <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/20 group-hover:opacity-75 transition-opacity"></div>
+                <div class="relative h-32 overflow-hidden">
+                    <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 brightness-75 group-hover:brightness-100">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/70 group-hover:opacity-75 transition-opacity"></div>
                 </div>
                 {{ end }}
                 <div class="p-2">
-                    <time class="text-[10px] text-btcz-gray-400 block">{{ .Date.Format "Jan 2, 2006" }}</time>
-                    <h3 class="text-xs font-bold mt-0.5 mb-0.5 text-btcz-gold group-hover:text-white transition-colors duration-200 line-clamp-2">{{ .Title }}</h3>
-                    <p class="text-[10px] text-btcz-gray-200 line-clamp-1">{{ .Summary }}</p>
+                    <time class="text-[10px] text-btcz-gold block mb-1">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    <h3 class="text-xs font-bold text-white line-clamp-1">{{ .Title }}</h3>
                 </div>
             </a>
             {{ end }}
