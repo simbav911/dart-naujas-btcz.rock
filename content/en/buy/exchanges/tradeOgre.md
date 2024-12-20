@@ -13,6 +13,6 @@ features:
 trading_pairs:
   - "BTCZ/LTC"
 website: "https://tradeogre.com/exchange/BTCZ-LTC"
-kyc_required: false
+kyc_required: true
 draft: false
 ---

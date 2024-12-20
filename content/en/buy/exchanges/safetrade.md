@@ -16,6 +16,6 @@ trading_pairs:
   - "BTCZ/LTC"
   - "BTCZ/XMR"
 website: "https://xeggex.com/market/BTCZ_BTC"
-kyc_required: false
+kyc_required: true
 draft: false
 ---
