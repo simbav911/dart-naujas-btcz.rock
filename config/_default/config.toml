@@ -52,3 +52,27 @@ theme = "PaperMod"
         name = "Roadmap"
         url = "/roadmap/"
         weight = 6
+      [[languages.en.menu.main]]
+        identifier = "ecosystem"
+        name = "Ecosystem"
+        weight = 7
+        [[languages.en.menu.main.children]]
+          identifier = "white-paper"
+          name = "White Paper"
+          url = "/en/ecosystem/white-paper/"
+        [[languages.en.menu.main.children]]
+          identifier = "videos"
+          name = "Videos"
+          url = "/en/ecosystem/videos/"
+        [[languages.en.menu.main.children]]
+          identifier = "developers"
+          name = "For Developers"
+          url = "/en/ecosystem/developers/"
+        [[languages.en.menu.main.children]]
+          identifier = "games"
+          name = "Games"
+          url = "/en/ecosystem/games/"
+        [[languages.en.menu.main.children]]
+          identifier = "shops"
+          name = "Shops"
+          url = "/en/ecosystem/shops/"

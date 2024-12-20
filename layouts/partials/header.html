@@ -11,11 +11,31 @@
             <div class="hidden md:flex items-center space-x-8">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL | relLangURL }}" 
-                   class="nav-link text-white hover:text-btcz-gold transition-colors duration-200 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
-                >
-                    {{ .Name }}
-                </a>
+                    {{ if .HasChildren }}
+                        <div class="relative group">
+                            <button class="nav-link text-white hover:text-btcz-gold transition-colors duration-200 flex items-center">
+                                {{ .Name }}
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="absolute left-0 mt-2 w-48 bg-black/95 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                {{ range .Children }}
+                                <a href="{{ .URL | relLangURL }}" 
+                                   class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                                >
+                                    {{ .Name }}
+                                </a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    {{ else }}
+                        <a href="{{ .URL | relLangURL }}" 
+                           class="nav-link text-white hover:text-btcz-gold transition-colors duration-200 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                        >
+                            {{ .Name }}
+                        </a>
+                    {{ end }}
                 {{ end }}
             </div>
 
@@ -74,11 +94,24 @@
         <div id="mobile-menu" class="hidden md:hidden pb-4">
             <div class="flex flex-col space-y-4">
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL }}" 
-                   class="nav-link px-4 py-2 text-white hover:text-btcz-gold {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
-                >
-                    {{ .Name }}
-                </a>
+                    {{ if .HasChildren }}
+                        <div class="relative">
+                            <div class="px-4 py-2 text-white">{{ .Name }}</div>
+                            {{ range .Children }}
+                            <a href="{{ .URL }}" 
+                               class="block px-6 py-2 text-sm text-white hover:text-btcz-gold {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                            >
+                                {{ .Name }}
+                            </a>
+                            {{ end }}
+                        </div>
+                    {{ else }}
+                        <a href="{{ .URL }}" 
+                           class="nav-link px-4 py-2 text-white hover:text-btcz-gold {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                        >
+                            {{ .Name }}
+                        </a>
+                    {{ end }}
                 {{ end }}
 
                 <!-- Mobile Language Selector -->
