@@ -36,7 +36,6 @@
       "ul"
     ],
     "classes": [
-      "[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(360deg)_brightness(105%)_contrast(105%)]",
       "absolute",
       "all",
       "animate-fade-up",

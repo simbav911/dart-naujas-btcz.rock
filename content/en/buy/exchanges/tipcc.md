@@ -15,6 +15,6 @@ trading_pairs:
   - "BTCZ/LTC"
   - "BTCZ/DOGE"
 website: "https://tip.cc"
-kyc_required: false
+kyc_required: true
 draft: false
 ---

@@ -13,6 +13,6 @@ features:
 trading_pairs:
   - "wBTCZ/USD"
 website: "https://changelly.com"
-kyc_required: false
+kyc_required: true
 draft: false
 ---
