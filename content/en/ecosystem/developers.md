@@ -1,6 +1,6 @@
 ---
 title: "For Developers"
-description: "Access comprehensive documentation, tools, and resources to build on the BitcoinZ network"
+description: "Get started with BitcoinZ development using our comprehensive documentation, SDKs, and developer tools"
 ---
 
 # Developer Resources

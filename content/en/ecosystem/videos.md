@@ -1,6 +1,6 @@
 ---
 title: "Videos"
-description: "Watch educational content, tutorials, and community updates about BitcoinZ"
+description: "Learn about BitcoinZ through our collection of tutorials, community updates, and educational content"
 ---
 
 # BitcoinZ Videos
