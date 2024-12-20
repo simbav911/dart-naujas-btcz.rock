@@ -53,7 +53,7 @@ theme = "PaperMod"
       [[languages.en.menu.main]]
         identifier = "roadmap"
         name = "Roadmap"
-        url = "/roadmap/"
+        url = "/en/roadmap/"
         weight = 6
 
   [languages.es]
