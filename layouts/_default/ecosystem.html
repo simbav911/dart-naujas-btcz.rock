@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="hero min-h-[400px] bg-gradient-to-br from-btcz-gray-900 via-black to-btcz-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/images/ecosystem-bg.jpg')] opacity-20 bg-cover bg-center"></div>
+    <div class="container mx-auto px-6 py-24 relative z-10">
+        <h1 class="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">{{ .Title }}</h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl">{{ .Description }}</p>
+    </div>
+</div>
+
+<div class="container mx-auto px-6 py-20">
+    <div class="prose prose-invert prose-lg max-w-4xl mx-auto mb-16">
+        {{ .Content }}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {{ range .Pages }}
+        <a href="{{ .RelPermalink }}" class="group">
+            <div class="bg-btcz-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-btcz-gray-800/50 
+                       hover:bg-btcz-gray-800/50 hover:border-btcz-gold/30 transition-all duration-300 h-full
+                       shadow-lg hover:shadow-btcz-gold/5">
+                <h3 class="text-2xl font-bold text-btcz-gold mb-4 group-hover:translate-x-1 transition-transform">
+                    {{ .Title }}
+                    <span class="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                </h3>
+                <p class="text-gray-300 text-lg">{{ .Description }}</p>
+            </div>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
