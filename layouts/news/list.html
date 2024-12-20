@@ -5,7 +5,7 @@
             {{ .Title | default "Latest News & Updates" }}
         </h1>
         
-        {{ $paginator := .Paginate (where .Pages.ByDate.Reverse "Type" "news") 6 }}
+        {{ $paginator := .Paginate .Pages 50 }}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[800px]">
             {{ range $paginator.Pages }}
             <article class="group cursor-pointer" onclick="window.location='{{ .RelPermalink }}'">
