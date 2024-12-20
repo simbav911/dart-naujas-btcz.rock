@@ -71,3 +71,38 @@ html {
         @apply mb-0 w-10 h-10 text-xs flex-shrink-0;
     }
 }
+
+/* News Tile Adjustments */
+.group.bg-btcz-gray-900 {
+    @apply p-4 rounded-lg shadow-lg;
+    max-width: 400px;
+    margin: auto;
+    background-color: #1a1a1a;
+}
+
+.group.bg-btcz-gray-900 img {
+    @apply rounded-t-lg;
+    height: 200px;
+    object-fit: cover;
+}
+
+.group.bg-btcz-gray-900 h3 {
+    @apply text-lg font-bold text-btcz-gold mt-2;
+    line-height: 1.4;
+}
+
+.group.bg-btcz-gray-900 p {
+    @apply text-sm text-btcz-gray-200 mt-1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.group.bg-btcz-gray-900 time {
+    @apply text-sm text-btcz-gray-400;
+}
+
+.group.bg-btcz-gray-900 a {
+    @apply text-sm text-btcz-gold mt-2 inline-block;
+    font-weight: bold;
+}
