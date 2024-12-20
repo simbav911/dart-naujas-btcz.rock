@@ -1,33 +1,28 @@
 {{ define "main" }}
-<div class="min-h-[300px] bg-gradient-to-b from-black to-btcz-gray-900 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[url('/images/video-bg.jpg')] opacity-20 bg-cover bg-center"></div>
-    <div class="container mx-auto px-6 py-16 relative z-10">
-        <div class="mb-6">
-            <a href="/en/ecosystem/" class="inline-flex items-center text-btcz-gold hover:text-btcz-gold/80 transition-colors gap-2 bg-black/30 px-4 py-2 rounded-lg border border-btcz-gray-800/50">
+<div class="min-h-[200px] bg-gradient-to-b from-black to-btcz-gray-900 relative overflow-hidden">
+    <div class="container mx-auto px-6 py-8">
+        <div class="mb-4">
+            <a href="/en/ecosystem/" class="inline-flex items-center text-btcz-gold hover:text-btcz-gold/80 transition-colors gap-2 bg-white/5 backdrop-blur-sm px-4 py-2 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                 </svg>
                 Back to Ecosystem
             </a>
         </div>
-        <h1 class="text-5xl font-bold text-white mb-4">{{ .Title }}</h1>
-        <p class="text-xl text-gray-300 max-w-3xl">{{ .Description }}</p>
+        <h1 class="text-3xl font-bold text-white mb-2">{{ .Title }}</h1>
+        <p class="text-gray-400">{{ .Description }}</p>
     </div>
 </div>
 
-<div class="container mx-auto px-6 py-16">
-    <div class="prose prose-invert prose-lg max-w-4xl mb-16">
-        {{ .Content }}
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="container mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {{ range .Params.videos }}
-        <div class="bg-black/30 rounded-xl border border-btcz-gray-800/50 overflow-hidden group hover:border-btcz-gold/50 transition-all duration-300 transform hover:-translate-y-1">
+        <div class="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden group hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-1">
             <div class="relative aspect-video">
                 <img src="https://img.youtube.com/vi/{{ .id }}/maxresdefault.jpg" 
                      alt="{{ .title }}" 
                      class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <a href="https://www.youtube.com/watch?v={{ .id }}" 
                    target="_blank" 
                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -38,27 +33,22 @@
                     </div>
                 </a>
             </div>
-            <div class="p-6">
-                <h3 class="text-xl font-bold text-btcz-gold mb-3 group-hover:text-btcz-gold/80 transition-colors">{{ .title }}</h3>
-                <p class="text-gray-300 mb-4 line-clamp-3">{{ .description }}</p>
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-btcz-gold mb-2 group-hover:text-btcz-gold/80 transition-colors">{{ .title }}</h3>
+                <p class="text-gray-300 text-sm mb-3 line-clamp-2">{{ .description }}</p>
                 <div class="flex items-center justify-between text-sm text-gray-400">
-                    <span class="flex items-center gap-2">
+                    <span class="flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         {{ .author }}
                     </span>
-                    <span class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {{ .date }}
-                    </span>
+                    <span class="text-xs">{{ .date }}</span>
                 </div>
                 {{ if .tags }}
-                <div class="mt-4 flex flex-wrap gap-2">
+                <div class="mt-3 flex flex-wrap gap-1">
                     {{ range .tags }}
-                    <span class="px-2 py-1 bg-btcz-gray-800/50 rounded text-xs text-btcz-gold border border-btcz-gold/20">{{ . }}</span>
+                    <span class="px-2 py-0.5 bg-white/5 rounded-full text-xs text-btcz-gold">{{ . }}</span>
                     {{ end }}
                 </div>
                 {{ end }}
