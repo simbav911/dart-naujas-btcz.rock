@@ -3,9 +3,11 @@ languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = "PaperMod"
 
+[pagination]
+  pagerSize = 30
+
 # Site Settings
 [params]
-  paginate = 40
   description = "BitcoinZ - A decentralized cryptocurrency focused on privacy, security, and true community governance"
   keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
