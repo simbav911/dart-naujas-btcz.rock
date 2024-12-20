@@ -40,13 +40,13 @@
                         {{ end }}
                         
                         <!-- Excerpt -->
-                        <p class="text-btcz-gray-200 mb-4 line-clamp-3 flex-grow">
+                        <p class="text-btcz-gray-200 mb-4 flex-grow">
                             {{ .Description }}
                         </p>
                         
                         <div class="mt-auto">
                             <!-- Creation Date -->
-                            <div class="flex items-center text-sm text-btcz-gray-400 mb-4">
+                            <div class="flex items-center text-sm text-btcz-gray-400">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -55,14 +55,6 @@
                                 <span class="mx-2">•</span>
                                 <span>{{ .Params.author }}</span>
                                 {{ end }}
-                            </div>
-                            
-                            <!-- Read More Link -->
-                            <div class="flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
-                                <span>Read More</span>
-                                <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
                             </div>
                         </div>
                     </div>
