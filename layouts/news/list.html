@@ -5,8 +5,9 @@
             {{ .Title | default "Latest News & Updates" }}
         </h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {{ range .Pages }}
+        {{ $paginator := .Paginate (where .Pages.ByDate.Reverse "Type" "news") 6 }}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[800px]">
+            {{ range $paginator.Pages }}
             <article class="group cursor-pointer" onclick="window.location='{{ .RelPermalink }}'">
                 <div class="h-full news-tile bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-1 overflow-hidden flex flex-col">
                     {{ with .Params.image }}
@@ -57,22 +58,29 @@
             {{ end }}
         </div>
         
-        {{ if .Paginator }}
-        <div class="pagination mt-16 flex justify-center space-x-4">
-            {{ if .Paginator.HasPrev }}
-            <a href="{{ .Paginator.Prev.URL }}" class="px-4 py-2 bg-btcz-gray-800 text-btcz-gray-200 rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-300">
+        {{ if gt $paginator.TotalPages 1 }}
+        <div class="pagination mt-16 flex flex-wrap justify-center items-center gap-4">
+            {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="px-4 py-2 bg-btcz-gray-800 text-btcz-gray-200 rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-300">
                 Previous
             </a>
             {{ end }}
             
-            {{ range .Paginator.Pagers }}
-            <a href="{{ .URL }}" class="{{ if eq .PageNumber $.Paginator.PageNumber }}bg-btcz-gold text-btcz-gray-900{{ else }}bg-btcz-gray-800 text-btcz-gray-200{{ end }} px-4 py-2 rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-300">
-                {{ .PageNumber }}
-            </a>
+            {{ $currentPage := $paginator.PageNumber }}
+            {{ $totalPages := $paginator.TotalPages }}
+            
+            {{ range $paginator.Pagers }}
+                {{ if or (eq .PageNumber 1) (eq .PageNumber $totalPages) (and (ge .PageNumber (sub $currentPage 2)) (le .PageNumber (add $currentPage 2))) }}
+                    <a href="{{ .URL }}" class="min-w-[40px] text-center {{ if eq .PageNumber $currentPage }}bg-btcz-gold text-btcz-gray-900{{ else }}bg-btcz-gray-800 text-btcz-gray-200{{ end }} px-4 py-2 rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-300">
+                        {{ .PageNumber }}
+                    </a>
+                {{ else if or (eq .PageNumber (sub $currentPage 3)) (eq .PageNumber (add $currentPage 3)) }}
+                    <span class="px-2 text-btcz-gray-400">...</span>
+                {{ end }}
             {{ end }}
             
-            {{ if .Paginator.HasNext }}
-            <a href="{{ .Paginator.Next.URL }}" class="px-4 py-2 bg-btcz-gray-800 text-btcz-gray-200 rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-300">
+            {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="px-4 py-2 bg-btcz-gray-800 text-btcz-gray-200 rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-300">
                 Next
             </a>
             {{ end }}

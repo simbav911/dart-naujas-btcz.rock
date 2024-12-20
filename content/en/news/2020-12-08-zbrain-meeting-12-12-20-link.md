@@ -1,0 +1,10 @@
+---
+title: "ZBRAIN Meeting 12-12-20 Link!"
+date: 2020-12-08T00:00:00Z
+draft: false
+subject: "Updates"
+image: "/images/news/12-12-20-Zbrain-Hours-Invitation-card-400x250.jpg"
+---
+
+The time for the December ZBrain Meeting is approaching and the link for it is now ready! So you can save this link and check the time of the event for your city in the card below. (clicking in this card will drive you there as well) Other ZBrain links Our event...
+read more
