@@ -6,7 +6,7 @@
         </h1>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {{ range .Pages }}
+            {{ range .Paginator.Pages }}
             <article class="group cursor-pointer" onclick="window.location='{{ .RelPermalink }}'">
                 <div class="h-full news-tile bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-1 overflow-hidden flex flex-col">
                     {{ with .Params.image }}
