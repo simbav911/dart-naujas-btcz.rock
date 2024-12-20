@@ -55,7 +55,15 @@
         <div class="prose prose-invert prose-lg max-w-none">
             <!-- Custom styles for better readability -->
             <div class="text-btcz-gray-200 leading-relaxed space-y-6">
-                {{ .Content }}
+                <div id="content-preview" class="relative">
+                    {{ .Content }}
+                </div>
+                <div id="content-full" class="hidden">
+                    {{ .Content }}
+                </div>
+                <button onclick="toggleContent()" id="read-more-btn" class="mt-4 px-4 py-2 bg-btcz-gold text-btcz-gray-900 rounded-lg hover:bg-btcz-gold/90 transition-colors duration-300">
+                    Read More
+                </button>
             </div>
         </div>
 
@@ -81,4 +89,41 @@
         </div>
     </div>
 </article>
+
+<!-- Add JavaScript for content toggle -->
+<script>
+function toggleContent() {
+    const preview = document.getElementById('content-preview');
+    const full = document.getElementById('content-full');
+    const btn = document.getElementById('read-more-btn');
+
+    if (preview.style.display !== 'none') {
+        preview.style.display = 'none';
+        full.style.display = 'block';
+        btn.textContent = 'Show Less';
+    } else {
+        preview.style.display = 'block';
+        full.style.display = 'none';
+        btn.textContent = 'Read More';
+    }
+}
+
+// Add max-height and fade effect to preview
+document.addEventListener('DOMContentLoaded', function() {
+    const preview = document.getElementById('content-preview');
+    preview.style.maxHeight = '200px';
+    preview.style.overflow = 'hidden';
+    preview.style.position = 'relative';
+    
+    // Add fade effect
+    const fade = document.createElement('div');
+    fade.style.position = 'absolute';
+    fade.style.bottom = '0';
+    fade.style.left = '0';
+    fade.style.right = '0';
+    fade.style.height = '100px';
+    fade.style.background = 'linear-gradient(to bottom, transparent, rgb(17, 24, 39))';
+    preview.appendChild(fade);
+});
+</script>
 {{ end }}
