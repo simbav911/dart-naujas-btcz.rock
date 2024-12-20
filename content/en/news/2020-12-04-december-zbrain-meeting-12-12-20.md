@@ -6,5 +6,10 @@ subject: "Updates"
 image: "/images/news/ezgif.com-gif-maker-4-1-400x250.gif"
 ---
 
-Everyone is invited in our next ZBrain online meeting in December. It is planned for 12-12-20. An invitation link will be shared soon! At the same time, December is already here and the BitcoinZ Community is getting Christmas mood! Our Discord channels now have the...
-read more
+Everyone is invited in our next ZBrain online meeting in December. It is planned for 12-12-20. An invitation link will be shared soon!
+
+At the same time, December is already here and the BitcoinZ Community is getting Christmas mood!
+
+Our Discord channels now have the Santa hats on their symbols and the members are making their BTCZ Christmas wishing cards
+
+Merry Christmas and a wonderful December to everyone!

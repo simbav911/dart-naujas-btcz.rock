@@ -6,5 +6,8 @@ subject: "Updates"
 image: "/images/news/thumbnail_safepal-wallet-400x250.jpg"
 ---
 
-You can now store your BitcoinZ, using the wBTCZ form in the SafePal hardware wallet. SafePal also offers browser extension and application for your phone . BitcoinZ is present in both of them. Stay tuned for more hardware wallet solutions in the near future with...
-read more
+You can now store your BitcoinZ, using thewBTCZ formin theSafePal hardware wallet.
+
+SafePal also offers browser extension and application for your phone . BitcoinZ is present in both of them.
+
+Stay tuned for more hardware wallet solutions in the near future with Ledger being the next target for the BitcoinZ Community!

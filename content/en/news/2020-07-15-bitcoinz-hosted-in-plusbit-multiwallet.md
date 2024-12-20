@@ -6,5 +6,6 @@ subject: "Updates"
 image: "/images/news/News_Plusbit-400x250.jpg"
 ---
 
-PlusBit multiwallet is hosting the BITCOINZ coin, giving an extra mobile e-wallet option for the members of the BTCZ Community! The users, except their BTCZ coins, can use and store ZEL, Dash, IL and of course BTC as well. Soon more cryptocurrency options are going to...
-read more
+PlusBit multiwalletis hosting the BITCOINZ coin, giving an extra mobile e-wallet option for the members of the BTCZ Community!
+
+The users, except their BTCZ coins, can use and store ZEL, Dash, IL and of course BTC as well. Soon more cryptocurrency options are going to be available.

@@ -6,5 +6,4 @@ subject: "Updates"
 image: "/images/news/core_team_news-400x250.png"
 ---
 
-BTCZ Developers are working on updating the core and wallet to allow mining to Z addresses! Looking forward to these updates! #btcz #bitcoinz @BTCZOfficial
-read more
+BTCZ Developers are working on updating the core and wallet to allow mining to Z addresses! Looking forward to these updates!#btcz#bitcoinz
