@@ -7,6 +7,7 @@ theme = "PaperMod"
   description = "BitcoinZ - A decentralized cryptocurrency focused on privacy, security, and true community governance"
   keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
+  mainSections = ["roadmap"]
 
   # Social Media Links
   github = "https://github.com/simbav911/dart-naujas-btcz.rock"
@@ -49,5 +50,5 @@ theme = "PaperMod"
       [[languages.en.menu.main]]
         identifier = "roadmap"
         name = "Roadmap"
-        url = "/en/roadmap/"
+        url = "/roadmap/"
         weight = 6
