@@ -13,9 +13,9 @@ features:
 trading_pairs:
   - "BTCZ/LTC"
   - "BTCZ/DOGE"
-  - "BTCZ/DASH"
   - "BTCZ/ZEC"
   - "BTCZ/XMR"
+is_centralized: false
 website: "https://komodoplatform.com/en/wallet/"
 kyc_required: false
 draft: false

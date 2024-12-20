@@ -13,7 +13,7 @@ features:
 trading_pairs:
   - "BTCZ/BTC"
   - "BTCZ/LTC"
-  - "BTCZ/DOGE"
+is_centralized: true
 website: "https://cratex.io/trade/BTCZ_BTC"
 kyc_required: true
 draft: false

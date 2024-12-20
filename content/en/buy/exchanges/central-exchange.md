@@ -12,6 +12,7 @@ features:
   - "Mobile Trading App"
 trading_pairs:
   - "BTCZ/USDT"
+is_centralized: true
 website: "https://whitebit.com/trade/BTCZ-USDT?type=spot&tab=open-orders"
 kyc_required: true
 draft: false

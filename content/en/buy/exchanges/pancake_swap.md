@@ -13,7 +13,7 @@ features:
 trading_pairs:
   - "wBTCZ/BNB"
   - "wBTCZ/USDT"
-  - "wBTCZ/BUSD"
+is_centralized: false
 website: "https://pancakeswap.finance/?outputCurrency=0xcbbb3e5099f769f6d4e2b8b92dc0e268f7e099d8"
 kyc_required: false
 draft: false
