@@ -13,6 +13,7 @@ trading_pairs:
   - "BTCZ/BTC"
   - "BTCZ/USDT"
 website: "https://example.com"
+is_centralized: true
 kyc_required: false
 draft: false
 ---

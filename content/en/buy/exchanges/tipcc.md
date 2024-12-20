@@ -14,6 +14,7 @@ trading_pairs:
   - "BTCZ/BTC"
   - "BTCZ/LTC"
   - "BTCZ/DOGE"
+is_centralized: true
 website: "https://tip.cc"
 kyc_required: true
 draft: false

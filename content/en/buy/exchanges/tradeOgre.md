@@ -12,7 +12,8 @@ features:
   - "Cross-chain Support"
 trading_pairs:
   - "BTCZ/LTC"
+is_centralized: true
 website: "https://tradeogre.com/exchange/BTCZ-LTC"
-kyc_required: true
+kyc_required: false
 draft: false
 ---

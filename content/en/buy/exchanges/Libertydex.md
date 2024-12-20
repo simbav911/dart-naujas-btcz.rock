@@ -13,10 +13,9 @@ features:
 trading_pairs:
   - "BTCZ/BTC"
   - "BTCZ/USDT"
-  - "BTCZ/LTC"
   - "BTCZ/DOGE"
   - "BTCZ/ETH"
-  
+is_centralized: false
 website: "https://claude.site/artifacts/f4855ee2-0097-4c67-90fd-1dd4b448ba72"
 kyc_required: false
 draft: false

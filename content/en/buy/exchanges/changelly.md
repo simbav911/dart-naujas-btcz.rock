@@ -12,6 +12,7 @@ features:
   - "Instant Transactions"
 trading_pairs:
   - "wBTCZ/USD"
+is_centralized: true
 website: "https://changelly.com"
 kyc_required: true
 draft: false

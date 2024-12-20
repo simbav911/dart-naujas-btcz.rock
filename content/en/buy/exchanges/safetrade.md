@@ -13,8 +13,8 @@ features:
 trading_pairs:
   - "BTCZ/BTC"
   - "BTCZ/USDT"
-  - "BTCZ/LTC"
   - "BTCZ/XMR"
+is_centralized: true
 website: "https://xeggex.com/market/BTCZ_BTC"
 kyc_required: true
 draft: false
