@@ -1,6 +1,6 @@
 ---
 title: "Games"
-description: "Discover exciting games and gaming platforms built on the BitcoinZ blockchain"
+description: "Explore and play exciting blockchain games powered by BitcoinZ - from casual to competitive gaming experiences"
 ---
 
 # BitcoinZ Games

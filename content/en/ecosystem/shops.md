@@ -1,6 +1,6 @@
 ---
 title: "Shops"
-description: "Find merchants and services that accept BitcoinZ as a payment method"
+description: "Browse our directory of merchants and services that accept BitcoinZ payments for their products and services"
 ---
 
 # BitcoinZ Shops

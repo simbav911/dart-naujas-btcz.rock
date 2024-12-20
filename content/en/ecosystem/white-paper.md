@@ -1,6 +1,6 @@
 ---
 title: "White Paper"
-description: "Explore the technical foundations and vision behind BitcoinZ's decentralized cryptocurrency platform"
+description: "Understand the core principles, technical architecture, and vision that drive BitcoinZ's decentralized platform"
 ---
 
 # BitcoinZ White Paper
