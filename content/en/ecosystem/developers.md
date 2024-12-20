@@ -1,8 +1,8 @@
 ---
 title: "For Developers"
-description: "Resources for Developers Interested in BitcoinZ"
+description: "Access comprehensive documentation, tools, and resources to build on the BitcoinZ network"
 ---
 
 # Developer Resources
 
-[Developer documentation and resources to be added]
+[Developer documentation content to be added]

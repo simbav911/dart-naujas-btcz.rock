@@ -1,8 +1,8 @@
 ---
 title: "Shops"
-description: "BitcoinZ Accepted Shops and Merchants"
+description: "Find merchants and services that accept BitcoinZ as a payment method"
 ---
 
 # BitcoinZ Shops
 
-[Shops and merchants accepting BitcoinZ to be added]
+[Shops content to be added]

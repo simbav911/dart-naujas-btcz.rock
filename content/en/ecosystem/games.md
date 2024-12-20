@@ -1,8 +1,8 @@
 ---
 title: "Games"
-description: "BitcoinZ Ecosystem Games"
+description: "Discover exciting games and gaming platforms built on the BitcoinZ blockchain"
 ---
 
 # BitcoinZ Games
 
-[Games related to BitcoinZ to be added]
+[Games content to be added]
