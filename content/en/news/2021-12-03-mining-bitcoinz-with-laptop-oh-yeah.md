@@ -3,7 +3,7 @@ title: "Mining BITCOINZ with Laptop? Oh yeah!"
 date: 2021-12-03T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/LaptopBTCZ-400x250.jpg"
+image: "images/news/LaptopBTCZ-400x250.jpg"
 ---
 
 It is a common secret now :

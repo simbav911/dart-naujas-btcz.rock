@@ -3,7 +3,7 @@ title: "BitcoinZ listed in Changelly"
 date: 2024-04-19T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BTCZinChangelly-400x250.jpg"
+image: "images/news/BTCZinChangelly-400x250.jpg"
 ---
 
 BitcoinZ Community has made it again!

@@ -3,7 +3,7 @@ title: "BitcoinZ listed in Cryptology exchange"
 date: 2022-11-08T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/FhBOwObWAAAMzT7-400x250.jpg"
+image: "images/news/FhBOwObWAAAMzT7-400x250.jpg"
 ---
 
 BitcoinZ is listed inCryptology exchange. The BTCZ Community can nowtrade the BTCZ/USDT pairin the exchange.

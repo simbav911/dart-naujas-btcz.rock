@@ -3,7 +3,7 @@ title: "BITCOINZ listed in Exbitron"
 date: 2022-01-02T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/ExbitronListing-BTCZ-400x250.jpg"
+image: "images/news/ExbitronListing-BTCZ-400x250.jpg"
 ---
 
 BITCOINZ is listed inExbitron Exchange!

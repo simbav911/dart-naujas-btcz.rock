@@ -3,7 +3,7 @@ title: "BITCOINZ MINING GUIDE"
 date: 2021-02-17T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Mining_BTCZ-400x250.png"
+image: "images/news/Mining_BTCZ-400x250.png"
 ---
 
 Welcome to our mining guide in 4 easy to follow steps!

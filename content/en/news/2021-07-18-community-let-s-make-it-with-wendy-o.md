@@ -3,7 +3,7 @@ title: "Community let’s make it with Wendy O!"
 date: 2021-07-18T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Wendy-O-400x250.jpg"
+image: "images/news/Wendy-O-400x250.jpg"
 ---
 
 Wendy O, the popular & beautiful crypto influencer, asked today for Altcoin suggestions in her officialtwitterchannel.

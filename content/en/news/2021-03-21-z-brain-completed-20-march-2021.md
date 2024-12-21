@@ -3,7 +3,7 @@ title: "Z-Brain Completed : 20 March 2021"
 date: 2021-03-21T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/2.2-atomicDEX-400x250.jpg"
+image: "images/news/2.2-atomicDEX-400x250.jpg"
 ---
 
 TheZBrain of 20 March 2021by the BITCOINZ Community has been completed.

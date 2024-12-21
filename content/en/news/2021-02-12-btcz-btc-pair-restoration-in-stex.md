@@ -3,7 +3,7 @@ title: "BTCZ/BTC pair restoration in STEX!"
 date: 2021-02-12T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/SiteExch_STEX-400x250.png"
+image: "images/news/SiteExch_STEX-400x250.png"
 ---
 
 TheBitcoinz/Bitcointrading pair is again available in theSTEXexchange.

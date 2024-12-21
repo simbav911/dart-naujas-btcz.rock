@@ -3,7 +3,7 @@ title: "Cryptospedia major update!"
 date: 2020-11-23T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/cryptospedia-update-400x250.jpg"
+image: "images/news/cryptospedia-update-400x250.jpg"
 ---
 
 TheCryptospediasection of the GetBTCZ.com site has a major update.

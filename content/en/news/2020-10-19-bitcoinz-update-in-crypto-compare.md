@@ -3,7 +3,7 @@ title: "BITCOINZ Update in Crypto Compare"
 date: 2020-10-19T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/News_CryptoCompare-400x250.jpg"
+image: "images/news/News_CryptoCompare-400x250.jpg"
 ---
 
 The information page for BitcoinZ in theCryptoCompareplatform, has been updated with the recent data.

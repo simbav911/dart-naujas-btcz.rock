@@ -3,7 +3,7 @@ title: "BITCOINZ listed in TRADEOGRE!"
 date: 2022-01-12T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/tradeogre_listing-400x250.jpg"
+image: "images/news/tradeogre_listing-400x250.jpg"
 ---
 
 BITCOINZ is listed inTradeOgre Exchange!
