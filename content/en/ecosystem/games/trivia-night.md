@@ -4,6 +4,7 @@ description: "Monthly trivia challenge with BitcoinZ rewards"
 link: "https://discord.gg/bitcoinz"
 image: "images/games/trivia-night.png"
 tags: ["trivia", "rewards", "community"]
+layout: "games-single"
 ---
 
 # BitcoinZ Trivia Night - Test Your Knowledge, Win BTCZ!
