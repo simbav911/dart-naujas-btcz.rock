@@ -3,7 +3,7 @@
         <nav class="flex items-center justify-between py-2">
             <!-- Logo -->
             <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center space-x-2">
-                <img src="{{ "images/btcz-logo.png" | absURL }}" alt="BitcoinZ Logo" class="h-12 w-auto">
+                <img src="{{ "images/btcz-logo.png" | relURL }}" alt="BitcoinZ Logo" class="h-12 w-auto">
                 <span class="font-heading font-bold text-xl text-white">BitcoinZ</span>
             </a>
 
@@ -98,7 +98,7 @@
                         <div class="relative">
                             <div class="px-4 py-2 text-white">{{ .Name }}</div>
                             {{ range .Children }}
-                            <a href="{{ .URL }}" 
+                            <a href="{{ .URL | relLangURL }}" 
                                class="block px-6 py-2 text-sm text-white hover:text-btcz-gold {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
                             >
                                 {{ .Name }}
@@ -106,7 +106,7 @@
                             {{ end }}
                         </div>
                     {{ else }}
-                        <a href="{{ .URL }}" 
+                        <a href="{{ .URL | relLangURL }}" 
                            class="nav-link px-4 py-2 text-white hover:text-btcz-gold {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
                         >
                             {{ .Name }}
