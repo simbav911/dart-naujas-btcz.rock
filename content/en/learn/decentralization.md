@@ -1,7 +1,7 @@
 ---
 title: "What is Decentralization?"
 description: "Understanding the concept of decentralization in cryptocurrency and why it's crucial for true financial freedom."
-image: "/images/learn-crypto/BTCZ_centralization.png"
+image: "images/learn-crypto/BTCZ_centralization.png"
 weight: 16
 ---
 

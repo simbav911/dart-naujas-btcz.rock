@@ -1,7 +1,7 @@
 ---
 title: "What is a Cryptocurrency Wallet and Multiwallet?"
 description: "Understanding cryptocurrency wallets, their types, and the benefits of multiwallets for managing digital assets."
-image: "/images/learn-crypto/BTCZ_What-is-a-Wallet.png"
+image: "images/learn-crypto/BTCZ_What-is-a-Wallet.png"
 weight: 11
 ---
 

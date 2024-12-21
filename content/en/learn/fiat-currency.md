@@ -1,7 +1,7 @@
 ---
 title: "What is FIAT Currency?"
 description: "Understanding traditional government-issued currencies and how they differ from cryptocurrencies."
-image: "/images/learn-crypto/FIAT-money2.png"
+image: "images/learn-crypto/FIAT-money2.png"
 weight: 17
 ---
 

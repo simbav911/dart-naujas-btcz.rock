@@ -1,7 +1,7 @@
 ---
 title: "What is a Cryptocurrency Exchange?"
 description: "Understanding cryptocurrency exchanges, their types, and how they facilitate digital currency trading."
-image: "/images/learn-crypto/Exchange.png"
+image: "images/learn-crypto/Exchange.png"
 weight: 12
 ---
 
