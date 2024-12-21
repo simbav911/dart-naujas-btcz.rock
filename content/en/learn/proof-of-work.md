@@ -1,7 +1,7 @@
 ---
 title: "What is Proof of Work (PoW)?"
 description: "Understanding the consensus mechanism that secures Bitcoin, BitcoinZ, and many other cryptocurrencies."
-image: "/images/learn-crypto/mining.png"
+image: "images/learn-crypto/mining.png"
 weight: 6
 ---
 

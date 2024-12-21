@@ -1,7 +1,7 @@
 ---
 title: "What to mine after Ethereum's switch to PoS"
 description: "A guide to profitable mining options after Ethereum's transition to Proof of Stake"
-image: "/images/learn-crypto/ethereum-pos.png"
+image: "images/learn-crypto/ethereum-pos.png"
 weight: 1
 ---
 

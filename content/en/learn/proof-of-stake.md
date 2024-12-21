@@ -1,7 +1,7 @@
 ---
 title: "What is Proof of Stake?"
 description: "Understanding the Proof of Stake (PoS) consensus mechanism and how it differs from Proof of Work."
-image: "/images/learn-crypto/PoS3.png"
+image: "images/learn-crypto/PoS3.png"
 weight: 8
 ---
 

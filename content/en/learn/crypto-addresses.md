@@ -1,7 +1,7 @@
 ---
 title: "What is an Address for Payments with Cryptocurrencies?"
 description: "Understanding cryptocurrency addresses, their types, and how they enable secure digital transactions."
-image: "/images/learn-crypto/BTCZ_Address.png"
+image: "images/learn-crypto/BTCZ_Address.png"
 weight: 15
 ---
 
