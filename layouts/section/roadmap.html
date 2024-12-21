@@ -109,7 +109,7 @@
                             
                             <!-- Icon -->
                             <div class="flex justify-center items-center h-32">
-                                <img src="{{ .Params.icon }}" alt="{{ .Title }} icon" class="w-24 h-24">
+                                <img src="{{ .Params.icon | relURL }}" alt="{{ .Title }} icon" class="w-24 h-24">
                             </div>
                         </div>
 
