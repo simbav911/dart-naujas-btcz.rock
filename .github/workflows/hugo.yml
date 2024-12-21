@@ -62,7 +62,7 @@ jobs:
         run: |
           hugo --logLevel debug \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://simbav911.github.io/dart-naujas-btcz.rock/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
