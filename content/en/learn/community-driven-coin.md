@@ -1,7 +1,7 @@
 ---
 title: "What is a Community Driven Coin?"
 description: "Understanding the concept of community-driven cryptocurrency projects and their importance in true decentralization."
-image: "/images/learn-crypto/BTCZ_What-is-CommunityDriven2.png"
+image: "images/learn-crypto/BTCZ_What-is-CommunityDriven2.png"
 weight: 5
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "What is a block and Blockchain?"
 description: "A block is a file where data pertaining to a specific cryptocurrency network are permanently recorded, forming the foundation of blockchain technology."
-image: "/images/learn-crypto/BTCZ_blockchain.png"
+image: "images/learn-crypto/BTCZ_blockchain.png"
 weight: 2
 ---
 

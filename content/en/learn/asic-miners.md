@@ -1,7 +1,7 @@
 ---
 title: "What is an ASIC?"
 description: "Understanding Application-Specific Integrated Circuits (ASICs) in cryptocurrency mining and their impact on network decentralization."
-image: "/images/learn-crypto/BTCZ_ASICs.png"
+image: "images/learn-crypto/BTCZ_ASICs.png"
 weight: 14
 ---
 

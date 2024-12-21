@@ -1,7 +1,7 @@
 ---
 title: "What is a Blockchain Explorer?"
 description: "Understanding blockchain explorers and how they help users track and verify cryptocurrency transactions."
-image: "/images/learn-crypto/blockchain_Explorer2.png"
+image: "images/learn-crypto/blockchain_Explorer2.png"
 weight: 18
 ---
 
