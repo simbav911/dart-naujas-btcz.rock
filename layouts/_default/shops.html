@@ -1,0 +1,122 @@
+{{ define "main" }}
+<div class="min-h-screen bg-btcz-gray-950 py-24">
+    <div class="container mx-auto px-4">
+        <!-- Back Button -->
+        <div class="mb-8">
+            <a href="{{ "en/ecosystem" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1 hover:shadow-[0_0_30px_rgba(255,215,0,0.4)]">
+                <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                Back to Ecosystem
+            </a>
+        </div>
+
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-5xl mb-6">
+                {{ .Title }}
+            </h1>
+            <p class="text-btcz-gray-400 text-lg">{{ .Description }}</p>
+        </div>
+
+        <!-- Shops Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {{ range .Pages }}
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <!-- Image -->
+                <div class="relative h-48">
+                    {{ if .Params.image }}
+                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="w-full h-full object-cover">
+                    {{ else }}
+                    <div class="w-full h-full bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900"></div>
+                    {{ end }}
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                    <!-- Category Badge -->
+                    {{ if .Params.category }}
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-btcz-gold text-btcz-gray-900 text-sm font-bold rounded-full">
+                            {{ .Params.category }}
+                        </span>
+                    </div>
+                    {{ end }}
+                </div>
+
+                <div class="p-6">
+                    <!-- Title and Rating -->
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">
+                            {{ .Title }}
+                        </h3>
+                        {{ if .Params.rating }}
+                        <div class="flex items-center">
+                            {{ $rating := .Params.rating }}
+                            {{ range seq 5 }}
+                                {{ if le . (math.Round $rating) }}
+                                <svg class="w-5 h-5 text-btcz-gold" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                {{ else }}
+                                <svg class="w-5 h-5 text-btcz-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                {{ end }}
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+
+                    <!-- Location -->
+                    {{ if .Params.location }}
+                    <div class="flex items-start gap-2 text-btcz-gray-300 mb-3">
+                        <svg class="w-5 h-5 mt-1 flex-shrink-0 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span class="text-sm">{{ .Params.location }}</span>
+                    </div>
+                    {{ end }}
+
+                    <!-- Website -->
+                    {{ if .Params.website }}
+                    <div class="flex items-center gap-2 text-btcz-gray-300 mb-6">
+                        <svg class="w-5 h-5 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                        <a href="{{ .Params.website }}" target="_blank" class="text-sm hover:text-btcz-gold transition-colors">
+                            {{ .Params.website }}
+                        </a>
+                    </div>
+                    {{ end }}
+
+                    <!-- View Details Button -->
+                    <a href="{{ .RelPermalink }}" 
+                       class="group relative inline-flex items-center justify-center w-full px-6 py-3 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            View Details
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Join as Merchant -->
+        <div class="mt-16 max-w-3xl mx-auto text-center">
+            <div class="bg-btcz-gray-900/50 border border-btcz-gold/20 rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-btcz-gold mb-4">Accept BitcoinZ Payments</h2>
+                <p class="text-btcz-gray-300 mb-6">Want to start accepting BitcoinZ at your business? Join our growing network of merchants and tap into the cryptocurrency market.</p>
+                <a href="https://discord.gg/bitcoinz" class="inline-flex items-center px-6 py-3 bg-btcz-gold text-btcz-gray-900 hover:bg-yellow-400 rounded-lg transition-all duration-300 font-bold">
+                    Contact Us
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
