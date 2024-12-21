@@ -3,7 +3,7 @@ title: "Bitcoinz in LiveCoinWatch"
 date: 2020-10-12T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/livecoinwatch-400x250.jpg"
+image: "images/news/livecoinwatch-400x250.jpg"
 ---
 
 The information page for BitcoinZ in theLiveCoinWatchplatform, has been updated with the recent data.

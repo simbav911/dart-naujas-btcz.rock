@@ -3,7 +3,7 @@ title: "Interview of the BITCOINZ Team!"
 date: 2020-09-01T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/News_Interview-by-AgoristNexus-400x250.jpg"
+image: "images/news/News_Interview-by-AgoristNexus-400x250.jpg"
 ---
 
 Enjoy this interview of the BTCZ Team by AgoristNexus!

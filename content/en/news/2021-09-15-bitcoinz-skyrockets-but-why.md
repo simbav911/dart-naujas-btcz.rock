@@ -3,7 +3,7 @@ title: "BITCOINZ Skyrockets…but why?"
 date: 2021-09-15T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/57percent-400x250.jpg"
+image: "images/news/57percent-400x250.jpg"
 ---
 
 BITCOINZ skyrocketed up to +77% during a negative day for the cryptocurrency market.Many people wonder why this impressive move took place.

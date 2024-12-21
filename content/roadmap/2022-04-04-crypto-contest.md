@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Community", "Competition"]
-icon: "/images/icons/chart.svg"
+icon: "images/icons/chart.svg"
 priority: "high"
 ---
 

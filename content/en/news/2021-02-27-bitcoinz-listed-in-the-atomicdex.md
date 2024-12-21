@@ -3,7 +3,7 @@ title: "BITCOINZ listed in the atomicDEX !"
 date: 2021-02-27T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/ADex-lists-BTCZ-400x250.jpg"
+image: "images/news/ADex-lists-BTCZ-400x250.jpg"
 ---
 
 BITCOINZis listed in theatomicDEX, the ultimate Decentralized Exchange platform, developed byKomodo!

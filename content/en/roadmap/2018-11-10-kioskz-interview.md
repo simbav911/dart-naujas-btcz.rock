@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["Media", "Video"]
-icon: "/images/icons/video.svg"
+icon: "images/icons/video.svg"
 priority: "high"
 ---
 

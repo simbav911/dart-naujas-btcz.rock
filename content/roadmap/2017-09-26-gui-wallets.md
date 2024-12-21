@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Wallet", "Software"]
-icon: "/images/icons/wallet.svg"
+icon: "images/icons/wallet.svg"
 priority: "high"
 ---
 

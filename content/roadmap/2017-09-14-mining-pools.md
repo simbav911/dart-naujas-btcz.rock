@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Mining"]
-icon: "/images/icons/mining.svg"
+icon: "images/icons/mining.svg"
 priority: "high"
 ---
 

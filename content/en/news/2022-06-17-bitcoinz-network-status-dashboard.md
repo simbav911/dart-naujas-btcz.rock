@@ -3,7 +3,7 @@ title: "BitcoinZ Network Status Dashboard!"
 date: 2022-06-17T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BitcoinZStatus-400x250.jpg"
+image: "images/news/BitcoinZStatus-400x250.jpg"
 ---
 
 BitcoinZ Network Status Dashboard (BNSD) is here !

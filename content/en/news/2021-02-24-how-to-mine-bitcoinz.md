@@ -3,7 +3,7 @@ title: "HOW TO MINE BITCOINZ"
 date: 2021-02-24T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Mining-BTCZ2-400x250.jpg"
+image: "images/news/Mining-BTCZ2-400x250.jpg"
 ---
 
 This tutorial is showing you how to easilymineBITCOINZcryptocurrencyin less than 5 minutes, using your PC!

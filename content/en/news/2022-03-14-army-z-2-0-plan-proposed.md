@@ -3,7 +3,7 @@ title: "Army-Z 2.0 Plan proposed"
 date: 2022-03-14T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Ranks-and-rewards-400x250.jpg"
+image: "images/news/Ranks-and-rewards-400x250.jpg"
 ---
 
 What is Army-Z ?

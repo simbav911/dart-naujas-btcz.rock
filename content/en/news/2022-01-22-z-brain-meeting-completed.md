@@ -3,7 +3,7 @@ title: "Z-BRAIN Meeting Completed !"
 date: 2022-01-22T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Introduction-400x250.jpg"
+image: "images/news/Introduction-400x250.jpg"
 ---
 
 TheZBrain of 22 January 2022by the BITCOINZ Community has been completed.

@@ -3,7 +3,7 @@ title: "Z-Brain Meeting : 20 March 2021"
 date: 2021-03-09T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/0.-Zbrain-Hours-Invitation-Card-400x250.jpg"
+image: "images/news/0.-Zbrain-Hours-Invitation-Card-400x250.jpg"
 ---
 
 The next Z-Brain meeting :20 March 2021Saturday, 6pm (gmt+1).

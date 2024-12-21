@@ -3,7 +3,7 @@ title: "BITCOINZ Update in the WorldCoinIndex"
 date: 2020-10-06T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/WorldIndexBTCZ-400x250.jpg"
+image: "images/news/WorldIndexBTCZ-400x250.jpg"
 ---
 
 The information page for BitcoinZ in theWorldCoinIndexplatform, has been updated with the recent data.

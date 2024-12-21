@@ -3,7 +3,7 @@ title: "BITCOINZ in WhiteBIT ? Let’s do it!"
 date: 2021-12-18T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/WHITEBIT3-400x250.jpg"
+image: "images/news/WHITEBIT3-400x250.jpg"
 ---
 
 BITCOINZ in WhiteBIT ? Yes we can make this !

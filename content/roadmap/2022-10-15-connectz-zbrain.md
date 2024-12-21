@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Blockchain", "Integration"]
-icon: "/images/icons/exchange.svg"
+icon: "images/icons/exchange.svg"
 priority: "high"
 ---
 

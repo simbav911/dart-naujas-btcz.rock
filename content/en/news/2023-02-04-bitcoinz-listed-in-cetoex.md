@@ -3,7 +3,7 @@ title: "BitcoinZ listed in CetoeX"
 date: 2023-02-04T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BTCZ-CetoeX-400x250.jpg"
+image: "images/news/BTCZ-CetoeX-400x250.jpg"
 ---
 
 BitcoinZ is now listed in CetoeX!

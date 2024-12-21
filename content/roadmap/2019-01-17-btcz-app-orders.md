@@ -9,7 +9,7 @@ year: 2019
 status: "completed"
 progress: 100
 tags: ["Development", "Payment"]
-icon: "/images/icons/payment.svg"
+icon: "images/icons/payment.svg"
 priority: "high"
 ---
 

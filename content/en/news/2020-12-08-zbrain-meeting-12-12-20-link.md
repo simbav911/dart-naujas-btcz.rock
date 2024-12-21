@@ -3,7 +3,7 @@ title: "ZBRAIN Meeting 12-12-20 Link!"
 date: 2020-12-08T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/12-12-20-Zbrain-Hours-Invitation-card-400x250.jpg"
+image: "images/news/12-12-20-Zbrain-Hours-Invitation-card-400x250.jpg"
 ---
 
 The time for the December ZBrain Meeting is approaching and thelinkfor it is now ready!

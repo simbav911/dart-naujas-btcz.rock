@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 50
 tags: ["Innovation", "Media"]
-icon: "/images/icons/media.svg"
+icon: "images/icons/media.svg"
 priority: "medium"
 ---
 

@@ -3,7 +3,7 @@ title: "BitcoinZ Article in CoinMarketCap"
 date: 2023-02-05T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BTCZ-Gains-January-2023-400x250.jpg"
+image: "images/news/BTCZ-Gains-January-2023-400x250.jpg"
 ---
 
 A must-read article about BitcoinZ in CoinmarketCap , titled :

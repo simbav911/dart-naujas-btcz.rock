@@ -3,7 +3,7 @@ title: "ZelCore Wallet"
 description: "A feature-rich multi-currency wallet with advanced security features and cross-platform support"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/Zelcore.png"
+image: "images/wallets/Zelcore.png"
 features:
   - "Multi-Currency Support"
   - "Device-Based Key Storage"

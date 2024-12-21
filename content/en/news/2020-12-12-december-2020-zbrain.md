@@ -3,7 +3,7 @@ title: "December 2020 ZBrain"
 date: 2020-12-12T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/1.-New-Core-version-400x250.jpg"
+image: "images/news/1.-New-Core-version-400x250.jpg"
 ---
 
 TheZBrain of December 12 2020by the BITCOINZ Community has been completed.

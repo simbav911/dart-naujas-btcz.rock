@@ -3,7 +3,7 @@ title: "Komodo Wallet"
 description: "A powerful multi-platform wallet with built-in decentralized exchange capabilities"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/komodo.png"
+image: "images/wallets/komodo.png"
 features:
   - "Built-in DEX Trading"
   - "Cross-Platform Support"

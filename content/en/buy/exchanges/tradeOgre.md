@@ -2,7 +2,7 @@
 title: "TradeOgre"
 description: "TradeOgre is a privacy-focused cryptocurrency exchange offering secure trading with a wide range of digital assets and minimal user requirements."
 date: 2023-12-03T10:00:00Z
-image: "/images/exchanges/TradeOgre2.png"
+image: "images/exchanges/TradeOgre2.png"
 type: "exchange"
 categories: ["Exchange"]
 features:

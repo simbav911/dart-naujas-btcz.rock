@@ -3,7 +3,7 @@ title: "BitcoinZ Cryptocurrency Video"
 date: 2020-10-25T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/thumbnailTEASER-1-400x250.png"
+image: "images/news/thumbnailTEASER-1-400x250.png"
 ---
 
 BitcoinZ Community has released thefirst videofrom the new BTCZ video series.

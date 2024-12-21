@@ -3,7 +3,7 @@ title: "Space-Z concept: a new use case for BitcoinZ"
 date: 2023-02-02T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/SpaceZ-400x250.jpg"
+image: "images/news/SpaceZ-400x250.jpg"
 ---
 
 Space-Z is a new concept that adds use cases for BitcoinZ, expanding its ecosystem.

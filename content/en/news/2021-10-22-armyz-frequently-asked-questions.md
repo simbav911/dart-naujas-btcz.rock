@@ -3,7 +3,7 @@ title: "ArmyZ Frequently Asked Questions"
 date: 2021-10-22T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/ArmyZ-2.0-FAQs-400x250.jpg"
+image: "images/news/ArmyZ-2.0-FAQs-400x250.jpg"
 ---
 
 1)What exactly is ArmyZand why should I join it?

@@ -3,7 +3,7 @@ title: "BITCOINZ is listed in WhiteBIT!"
 date: 2022-02-03T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/whitebit_listing_02-400x250.jpg"
+image: "images/news/whitebit_listing_02-400x250.jpg"
 ---
 
 BITCOINZ is now listed inWhiteBIT!

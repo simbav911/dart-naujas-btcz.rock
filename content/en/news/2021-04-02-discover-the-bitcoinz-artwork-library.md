@@ -3,7 +3,7 @@ title: "Discover the BITCOINZ Artwork Library!"
 date: 2021-04-02T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Library-400x250.png"
+image: "images/news/Library-400x250.png"
 ---
 
 As you probably already know, BITCOINZ is a trulycommunity drivenproject with completelydecentralizeddevelopment.

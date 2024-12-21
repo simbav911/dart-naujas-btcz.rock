@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["Mining", "Technology"]
-icon: "/images/icons/mining.svg"
+icon: "images/icons/mining.svg"
 priority: "high"
 ---
 
