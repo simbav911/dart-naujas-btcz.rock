@@ -43,20 +43,25 @@ theme = "PaperMod"
         url = "/en/buy/"
         weight = 4
       [[languages.en.menu.main]]
+        identifier = "learn-crypto"
+        name = "Learn Crypto"
+        url = "/en/learn/"
+        weight = 5
+      [[languages.en.menu.main]]
         identifier = "news"
         name = "News"
         url = "/en/news/"
-        weight = 5
+        weight = 6
       [[languages.en.menu.main]]
         identifier = "roadmap"
         name = "Roadmap"
         url = "/roadmap/"
-        weight = 6
+        weight = 7
       [[languages.en.menu.main]]
         identifier = "ecosystem"
         name = "Ecosystem"
-        url = "/en/ecosystem/"  # Added explicit URL for ecosystem
-        weight = 7
+        url = "/en/ecosystem/"
+        weight = 8
         [[languages.en.menu.main.children]]
           identifier = "white-paper"
           name = "White Paper"
