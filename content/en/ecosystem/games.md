@@ -7,4 +7,4 @@ description: "Explore and play exciting blockchain games powered by BitcoinZ - f
 
 ## Available Games
 
-- [BitcoinZ Poker](/ecosystem/games/bitcoinz-poker) - Multiplayer online poker experience
+- [BitcoinZ Poker](/en/ecosystem/games/bitcoinz-poker/) - Multiplayer online poker experience
