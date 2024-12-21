@@ -2,7 +2,7 @@
 title: "Crypto Café"
 description: "A cozy café where you can enjoy great coffee and pay with BitcoinZ"
 layout: "shop-single"
-image: "images/shops/crypto-cafe.jpg"
+image: "images/shops/crypto-cafe.png"
 category: "Local Business"
 website: "https://cryptocafe.example.com"
 location: "123 Crypto Street, New York, NY 10001"

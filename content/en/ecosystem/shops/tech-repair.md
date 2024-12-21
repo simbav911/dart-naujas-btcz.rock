@@ -2,7 +2,7 @@
 title: "BitTech Repairs"
 description: "Professional tech repair service accepting BitcoinZ payments"
 layout: "shop-single"
-image: "images/shops/tech-repair.jpg"
+image: "images/shops/tech-repair.png"
 category: "Services"
 website: "https://bittech-repairs.example.com"
 location: "456 Digital Avenue, San Francisco, CA 94105"

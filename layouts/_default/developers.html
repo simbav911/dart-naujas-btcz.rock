@@ -1,0 +1,94 @@
+{{ define "main" }}
+<div class="min-h-[200px] bg-gradient-to-b from-black to-btcz-gray-900 relative overflow-hidden">
+    <div class="container mx-auto px-6 py-8">
+        <div class="mb-4">
+            <a href="{{ "en/ecosystem" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1 hover:shadow-[0_0_30px_rgba(255,215,0,0.4)]">
+                <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                Back to Ecosystem
+            </a>
+        </div>
+        <h1 class="text-3xl font-bold text-white mb-2">{{ .Title }}</h1>
+        <p class="text-gray-400 text-lg">{{ .Description }}</p>
+    </div>
+</div>
+
+<div class="container mx-auto px-6 py-12">
+    <!-- Main Content -->
+    <div class="prose prose-invert max-w-none">
+        {{ .Content }}
+    </div>
+
+    <!-- Featured Tools -->
+    <div class="mt-16">
+        <h2 class="text-2xl font-bold text-white mb-8 text-center">Featured Developer Tools</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Core Development Kit -->
+            <div class="bg-btcz-gray-800 rounded-xl p-6 border border-btcz-gray-700 hover:border-btcz-gold transition-all duration-300">
+                <div class="w-12 h-12 bg-btcz-gray-700 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Core Development Kit</h3>
+                <p class="text-gray-400 mb-4">Essential tools and libraries for BitcoinZ blockchain development</p>
+                <a href="https://github.com/bitcoinz-dev-tools" class="inline-flex items-center text-btcz-gold hover:text-btcz-gold-light">
+                    Learn More
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Smart Contract Templates -->
+            <div class="bg-btcz-gray-800 rounded-xl p-6 border border-btcz-gray-700 hover:border-btcz-gold transition-all duration-300">
+                <div class="w-12 h-12 bg-btcz-gray-700 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Smart Contract Templates</h3>
+                <p class="text-gray-400 mb-4">Ready-to-use templates for common smart contract use cases</p>
+                <a href="https://github.com/bitcoinz-dev-tools" class="inline-flex items-center text-btcz-gold hover:text-btcz-gold-light">
+                    View Templates
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Testing Framework -->
+            <div class="bg-btcz-gray-800 rounded-xl p-6 border border-btcz-gray-700 hover:border-btcz-gold transition-all duration-300">
+                <div class="w-12 h-12 bg-btcz-gray-700 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Testing Framework</h3>
+                <p class="text-gray-400 mb-4">Comprehensive testing tools for BitcoinZ applications</p>
+                <a href="https://github.com/bitcoinz-dev-tools" class="inline-flex items-center text-btcz-gold hover:text-btcz-gold-light">
+                    Get Started
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="mt-16">
+        <div class="bg-gradient-to-r from-btcz-gold/20 to-btcz-gold/10 rounded-2xl p-8 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">Ready to Build on BitcoinZ?</h2>
+            <p class="text-gray-400 mb-6">Join our developer community and start building the future of decentralized finance</p>
+            <a href="https://github.com/bitcoinz-dev-tools" class="inline-flex items-center px-8 py-3 bg-btcz-gold text-btcz-gray-900 rounded-lg hover:bg-btcz-gold-light transition-colors duration-300">
+                Access Developer Tools
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+{{ end }}
