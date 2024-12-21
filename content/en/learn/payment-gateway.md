@@ -1,7 +1,7 @@
 ---
 title: "What is a Payment Gateway?"
 description: "Understanding cryptocurrency payment gateways and their role in enabling digital currency transactions for businesses."
-image: "/images/learn-crypto/BTCZ_gatewaysPreview.png"
+image: "images/learn-crypto/BTCZ_gatewaysPreview.png"
 weight: 9
 ---
 

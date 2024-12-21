@@ -1,7 +1,7 @@
 ---
 title: "Some information about the legendary Bitcoin"
 description: "The root problem with conventional currencies is all the trust that's required to make it work. Bitcoin was created as a solution to this fundamental issue."
-image: "/images/learn-crypto/BTC_info.png"
+image: "images/learn-crypto/BTC_info.png"
 weight: 3
 ---
 

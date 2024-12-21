@@ -1,7 +1,7 @@
 ---
 title: "What is Transactions Privacy and Zk-snarks?"
 description: "Understanding cryptocurrency privacy features and how Zk-snarks technology enables secure, private transactions."
-image: "/images/learn-crypto/BTCZ_PRIVACY.png"
+image: "images/learn-crypto/BTCZ_PRIVACY.png"
 weight: 13
 ---
 

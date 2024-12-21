@@ -1,7 +1,7 @@
 ---
 title: "What is Mining, Block Reward and Reward Halving?"
 description: "Understanding the fundamentals of cryptocurrency mining, block rewards, and the halving mechanism that controls coin supply."
-image: "/images/learn-crypto/mining.png"
+image: "images/learn-crypto/mining.png"
 weight: 4
 ---
 

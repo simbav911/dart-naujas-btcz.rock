@@ -1,7 +1,7 @@
 ---
 title: "What is Premining?"
 description: "Understanding the concept of premining in cryptocurrency projects and why it can be problematic for fair distribution."
-image: "/images/learn-crypto/Purple_premine3-1.jpg"
+image: "images/learn-crypto/Purple_premine3-1.jpg"
 weight: 7
 ---
 

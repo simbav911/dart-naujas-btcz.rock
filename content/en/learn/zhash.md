@@ -1,7 +1,7 @@
 ---
 title: "What is ZHash?"
 description: "Understanding ZHash, the ASIC-resistant mining algorithm used by BitcoinZ to ensure fair and decentralized mining."
-image: "/images/learn-crypto/BTCZ_ZHash.png"
+image: "images/learn-crypto/BTCZ_ZHash.png"
 weight: 10
 ---
 

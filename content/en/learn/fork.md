@@ -1,7 +1,7 @@
 ---
 title: "What is a Fork?"
 description: "Understanding cryptocurrency forks, their types, and their impact on blockchain networks."
-image: "/images/learn-crypto/BTCZ_Fork.png"
+image: "images/learn-crypto/BTCZ_Fork.png"
 weight: 19
 ---
 
