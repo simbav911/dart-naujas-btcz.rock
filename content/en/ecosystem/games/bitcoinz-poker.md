@@ -4,6 +4,7 @@ description: "Multiplayer online poker experience powered by BitcoinZ cryptocurr
 link: "https://casinoz.getbtcz.com/lobby.php"
 image: "images/games/bitcoinz-poker.png"
 tags: ["poker", "multiplayer", "cryptocurrency"]
+layout: "games-single"
 ---
 
 # BitcoinZ Poker - The First BitcoinZ Multiplayer Gaming Experience
