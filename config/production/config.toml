@@ -5,6 +5,8 @@ baseURL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
 
 [build]
   writeStats = true
+  noJSConfigInAssets = true
+  useResourceCacheWhen = "fallback"
 
 [server]
   [[server.headers]]
@@ -18,3 +20,16 @@ baseURL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
 
 [minify]
   minifyOutput = true
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepWhitespace = false
+    [minify.tdewolff.css]
+      keepCSS2 = true
+    [minify.tdewolff.js]
+      keepVarNames = false
+    [minify.tdewolff.json]
+      keepNumbers = false
+    [minify.tdewolff.svg]
+      keepComments = false
+    [minify.tdewolff.xml]
+      keepWhitespace = false
