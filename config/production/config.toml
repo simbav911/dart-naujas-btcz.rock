@@ -15,3 +15,18 @@ baseURL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
     source = "static/images"
     target = "static/images"
     includeFiles = ["**/*"]
+
+[server]
+  [[server.headers]]
+    for = "/images/*"
+    [server.headers.values]
+      Cache-Control = "public, max-age=31536000"
+
+[imaging]
+  anchor = "Smart"
+  quality = 90
+  resampleFilter = "Lanczos"
+
+[security]
+  [security.http]
+    useHTTPS = true
