@@ -2,7 +2,7 @@
 title: "Changelly"
 description: "A fast and user-friendly exchange supporting wrapped BitcoinZ (wBTCZ) purchases with USD using Visa or MasterCard."
 date: 2023-12-03T10:00:00Z
-image: "images/exchanges/Changelly.png"
+image: "images/exchanges/changelly.png"
 type: "exchange"
 categories: ["Exchange"]
 features:
