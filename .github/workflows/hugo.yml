@@ -42,27 +42,27 @@ jobs:
         id: pages
         uses: actions/configure-pages@v3
 
-      - name: List files and environment
+      - name: List files before build
         run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "\nNode version:"
-          node --version
-          echo "\nNPM version:"
-          npm --version
-          echo "\nHugo version:"
-          hugo version
-          echo "\nTheme directory contents:"
-          ls -la themes/PaperMod || echo "Theme directory not found"
+          echo "Static directory contents:"
+          ls -la static/images/news || echo "News images directory not found"
 
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
-          hugo --logLevel debug \
+          hugo \
             --minify \
-            --baseURL "https://simbav911.github.io/dart-naujas-btcz.rock/"
+            --baseURL "https://simbav911.github.io/dart-naujas-btcz.rock/" \
+            --debug
+
+      - name: List files after build
+        run: |
+          echo "Public directory contents:"
+          ls -la public/images/news || echo "Built news images directory not found"
+          echo "\nVerifying specific image exists:"
+          find public/images/news -name "BTCZinChangelly-400x250.jpg" || echo "Test image not found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
