@@ -1,1 +1,17 @@
 baseURL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
+
+[params]
+  env = "production"
+
+[build]
+  writeStats = true
+  
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+    includeFiles = ["**/*"]
+  [[module.mounts]]
+    source = "static/images"
+    target = "static/images"
+    includeFiles = ["**/*"]
