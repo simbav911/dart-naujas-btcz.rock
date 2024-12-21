@@ -2,7 +2,7 @@
 title: "{{ replace .Name "-" " " | title }}"
 description: ""
 date: {{ .Date }}
-image: "/images/exchanges/default.svg"
+image: "images/exchanges/default.svg"
 type: "exchange"
 categories: ["Exchange"]
 features:
