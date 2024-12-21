@@ -51,23 +51,20 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
-          HUGO_BASEURL: "https://simbav911.github.io/dart-naujas-btcz.rock/"
         run: |
           hugo \
             --minify \
             --baseURL "https://simbav911.github.io/dart-naujas-btcz.rock/" \
             --logLevel info
 
-      - name: List files after build
+      - name: Verify build output
         run: |
-          echo "Public directory contents:"
-          ls -la public/images/news || echo "Built news images directory not found"
-          echo "\nVerifying specific image exists:"
-          find public/images/news -name "BTCZinChangelly-400x250.jpg" || echo "Test image not found"
-          echo "\nVerifying image URLs in HTML:"
+          echo "Public directory structure:"
+          ls -R public/images || echo "No images directory in public"
+          echo "\nChecking for specific image:"
+          find public -name "BTCZinChangelly-400x250.jpg" || echo "Test image not found"
+          echo "\nChecking image references in HTML:"
           grep -r "images/news" public/en/news/ || echo "No image references found"
-          echo "\nChecking a sample news article HTML:"
-          cat public/en/news/index.html | grep -A 2 "img src" || echo "No img tags found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
