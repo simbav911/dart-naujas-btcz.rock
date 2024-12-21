@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Exchange", "Trading"]
-icon: "/images/icons/exchange.svg"
+icon: "images/icons/exchange.svg"
 priority: "high"
 ---
 

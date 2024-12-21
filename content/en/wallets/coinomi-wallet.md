@@ -3,7 +3,7 @@ title: "Coinomi Wallet"
 description: "A secure, multi-currency mobile wallet with strong privacy features and BitcoinZ support"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/COINOMI-Multiwallet-610x610.png"
+image: "images/wallets/COINOMI-Multiwallet-610x610.png"
 features:
   - "Multi-Currency Support"
   - "Device-Based Key Storage"

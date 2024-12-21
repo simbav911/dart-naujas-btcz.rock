@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Marketing", "Recognition"]
-icon: "/images/icons/chart.svg"
+icon: "images/icons/chart.svg"
 priority: "high"
 ---
 

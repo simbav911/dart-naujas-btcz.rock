@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Payment", "Adoption"]
-icon: "/images/icons/payment.svg"
+icon: "images/icons/payment.svg"
 priority: "high"
 ---
 
