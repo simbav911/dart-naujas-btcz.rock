@@ -6,7 +6,7 @@
             <div class="flex justify-center items-center py-16">
                 {{ with .Params.image }}
                 <img 
-                    src="{{ . }}" 
+                    src="{{ . | relURL }}" 
                     alt="{{ $.Title }}" 
                     class="h-32 w-32 object-contain"
                 >
@@ -69,7 +69,7 @@
                 {{ range . }}
                 <div class="relative aspect-video bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl overflow-hidden group">
                     <img 
-                        src="{{ . }}" 
+                        src="{{ . | relURL }}" 
                         alt="Wallet Screenshot" 
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     >
@@ -98,7 +98,7 @@
 
         <!-- Navigation -->
         <div class="mt-16 border-t border-btcz-gray-800 pt-8 flex justify-between items-center">
-            <a href="/en/wallets/" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+            <a href="{{ "en/wallets/" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

@@ -4,14 +4,14 @@
         <!-- Top Back Button -->
         <div class="mb-8">
             {{ if eq .Type "wallet" }}
-            <a href="/en/wallets/" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+            <a href="{{ "en/wallets/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
                 Back to Wallets
             </a>
             {{ else }}
-            <a href="/en/news/" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+            <a href="{{ "en/news/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -22,7 +22,7 @@
 
         {{ with .Params.image }}
         <div class="mb-12 relative overflow-hidden rounded-2xl shadow-2xl">
-            <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-[400px] object-cover">
+            <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-[400px] object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/80"></div>
         </div>
         {{ end }}
