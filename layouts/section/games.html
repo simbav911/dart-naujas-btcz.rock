@@ -1,0 +1,60 @@
+{{ define "main" }}
+<div class="bg-btcz-gray-950 min-h-screen py-24">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-5xl mb-6">
+                Games
+            </h1>
+            <p class="text-btcz-gray-400 text-lg">Explore and play exciting blockchain games powered by BitcoinZ - from casual to competitive gaming experiences</p>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <!-- BitcoinZ Poker -->
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <div class="relative h-48">
+                    <img src="/images/games/bitcoinz-poker.png" alt="BitcoinZ Poker" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">BitcoinZ Poker</h3>
+                    <p class="text-btcz-gray-300 mb-6">Multiplayer online poker experience powered by BitcoinZ cryptocurrency</p>
+                    <a href="/en/ecosystem/games/_index/bitcoinz-poker/" 
+                       class="group relative inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            Learn More
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- BitcoinZ Trivia Night -->
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <div class="relative h-48">
+                    <img src="/images/games/trivia-night.png" alt="BitcoinZ Trivia Night" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">BitcoinZ Trivia Night</h3>
+                    <p class="text-btcz-gray-300 mb-6">Monthly trivia challenge with BitcoinZ rewards</p>
+                    <a href="/en/ecosystem/games/_index/trivia-night/" 
+                       class="group relative inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            Learn More
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
