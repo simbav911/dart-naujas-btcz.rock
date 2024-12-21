@@ -47,15 +47,20 @@ theme = "PaperMod"
         url = "/en/buy/"
         weight = 4
       [[languages.en.menu.main]]
+        identifier = "learn-crypto"
+        name = "Learn Crypto"
+        url = "/en/learn/"
+        weight = 5
+      [[languages.en.menu.main]]
         identifier = "news"
         name = "News"
         url = "/en/news/"
-        weight = 5
+        weight = 6
       [[languages.en.menu.main]]
         identifier = "roadmap"
         name = "Roadmap"
         url = "/en/roadmap/"
-        weight = 6
+        weight = 7
 
   [languages.es]
     languageName = "Español"
@@ -83,15 +88,20 @@ theme = "PaperMod"
         url = "/es/buy/"
         weight = 4
       [[languages.es.menu.main]]
+        identifier = "learn-crypto"
+        name = "Aprender Crypto"
+        url = "/es/learn/"
+        weight = 5
+      [[languages.es.menu.main]]
         identifier = "news"
         name = "Noticias"
         url = "/es/news/"
-        weight = 5
+        weight = 6
       [[languages.es.menu.main]]
         identifier = "roadmap"
         name = "Hoja de Ruta"
         url = "/es/roadmap/"
-        weight = 6
+        weight = 7
 
   [languages.zh]
     languageName = "中文"
@@ -119,15 +129,20 @@ theme = "PaperMod"
         url = "/zh/buy/"
         weight = 4
       [[languages.zh.menu.main]]
+        identifier = "learn-crypto"
+        name = "学习加密货币"
+        url = "/zh/learn/"
+        weight = 5
+      [[languages.zh.menu.main]]
         identifier = "news"
         name = "新闻"
         url = "/zh/news/"
-        weight = 5
+        weight = 6
       [[languages.zh.menu.main]]
         identifier = "roadmap"
         name = "路线图"
         url = "/zh/roadmap/"
-        weight = 6
+        weight = 7
 
 # Build Settings
 [build]
