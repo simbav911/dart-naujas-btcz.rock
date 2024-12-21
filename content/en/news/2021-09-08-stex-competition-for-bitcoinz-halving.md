@@ -3,7 +3,7 @@ title: "STEX Competition for BITCOINZ Halving!"
 date: 2021-09-08T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/E-vvX-xXoAAGZ55-400x250.jpg"
+image: "images/news/E-vvX-xXoAAGZ55-400x250.jpg"
 ---
 
 Don’t lose thecompetition by STEXfor the upcomingBITCOINZfirst halving!

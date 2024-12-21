@@ -3,7 +3,7 @@ title: "Z-BRAIN by BITCOINZ completed!"
 date: 2021-07-12T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/5.0-Zbrain-July2021-Future3-400x250.jpg"
+image: "images/news/5.0-Zbrain-July2021-Future3-400x250.jpg"
 ---
 
 The Z-Brain meeting has been completed!

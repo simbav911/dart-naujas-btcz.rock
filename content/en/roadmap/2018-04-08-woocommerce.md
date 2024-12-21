@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["E-commerce", "Integration"]
-icon: "/images/icons/payment.svg"
+icon: "images/icons/payment.svg"
 priority: "high"
 ---
 

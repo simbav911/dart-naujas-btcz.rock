@@ -3,7 +3,7 @@ title: "BITCOINZ 1st in Votes!"
 date: 2020-10-02T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/News_winnerCCC-400x250.jpg"
+image: "images/news/News_winnerCCC-400x250.jpg"
 ---
 
 BITCOINZ Community has achieved to take the 1st place in thevoting competitionof Cryptocurrency Checkout!

@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["Development", "Testing"]
-icon: "/images/icons/update.svg"
+icon: "images/icons/update.svg"
 priority: "high"
 ---
 

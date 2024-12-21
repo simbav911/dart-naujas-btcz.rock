@@ -3,7 +3,7 @@ title: "BITCOINZ in BLOCKFOLIO SIGNAL"
 date: 2021-01-14T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Blockfolio_Signals2-400x250.jpg"
+image: "images/news/Blockfolio_Signals2-400x250.jpg"
 ---
 
 BITCOINZhas joinedBLOCKFOLIO Signal Platform! Now the Community is able to instantly learn news about their favouritecryptocurrency.

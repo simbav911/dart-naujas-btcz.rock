@@ -3,7 +3,7 @@ title: "BitcoinZ now in SafePal hardware wallet"
 date: 2022-10-18T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/thumbnail_safepal-wallet-400x250.jpg"
+image: "images/news/thumbnail_safepal-wallet-400x250.jpg"
 ---
 
 You can now store your BitcoinZ, using thewBTCZ formin theSafePal hardware wallet.

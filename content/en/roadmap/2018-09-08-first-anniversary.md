@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["Community", "Media"]
-icon: "/images/icons/community.svg"
+icon: "images/icons/community.svg"
 priority: "high"
 ---
 

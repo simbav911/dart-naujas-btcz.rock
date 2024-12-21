@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Wallet", "Security"]
-icon: "/images/icons/wallet.svg"
+icon: "images/icons/wallet.svg"
 priority: "high"
 ---
 

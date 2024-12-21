@@ -3,7 +3,7 @@ title: "MetaMask (wBTCZ)"
 description: "Access wrapped BitcoinZ (wBTCZ) on Binance Smart Chain - For advanced users only"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/metamask.png"
+image: "images/wallets/metamask.png"
 features:
   - "Wrapped BitcoinZ Support"
   - "BSC Network Integration"

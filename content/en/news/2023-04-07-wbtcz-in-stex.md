@@ -3,7 +3,7 @@ title: "wBTCZ in STEX"
 date: 2023-04-07T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/wBTCZ-in-STEX-400x250.jpg"
+image: "images/news/wBTCZ-in-STEX-400x250.jpg"
 ---
 
 You can now trade wBTCZ inSTEX, one of the most historical and popular exchanges for the BitcoinZ Community.

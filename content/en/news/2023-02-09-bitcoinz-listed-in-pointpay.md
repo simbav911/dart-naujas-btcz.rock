@@ -3,7 +3,7 @@ title: "BitcoinZ Listed in Pointpay!"
 date: 2023-02-09T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BTCZ-PointPay-400x250.jpg"
+image: "images/news/BTCZ-PointPay-400x250.jpg"
 ---
 
 BitcoinZ is now listed in Pointpay!Users can trade it with a wBTCZ / USDT pair.

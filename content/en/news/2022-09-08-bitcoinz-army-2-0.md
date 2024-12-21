@@ -3,7 +3,7 @@ title: "BitcoinZ Army 2.0"
 date: 2022-09-08T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BitcoinZ-Army-2.0-400x250.jpg"
+image: "images/news/BitcoinZ-Army-2.0-400x250.jpg"
 ---
 
 An army of active people in social media that will fight for spreading the originalcryptocurrencyidea.

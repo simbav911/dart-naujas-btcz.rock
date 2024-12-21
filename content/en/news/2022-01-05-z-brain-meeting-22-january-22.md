@@ -3,7 +3,7 @@ title: "Z-Brain Meeting : 22 January 22"
 date: 2022-01-05T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Z-Brain-Invitation-22-1-22-small-400x250.jpg"
+image: "images/news/Z-Brain-Invitation-22-1-22-small-400x250.jpg"
 ---
 
 The date forthe next Z-Brain Meeting: 22-January-2022.

@@ -3,7 +3,7 @@ title: "Happy 2021 BITCOINZ"
 date: 2021-01-01T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/HappyNewYear_2021_BTCZ-400x250.jpg"
+image: "images/news/HappyNewYear_2021_BTCZ-400x250.jpg"
 ---
 
 The BitcoinZ Community wishes you the very best! Peace and Good Health to all of you!

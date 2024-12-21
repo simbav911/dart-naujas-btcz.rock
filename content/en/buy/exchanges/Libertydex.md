@@ -2,7 +2,7 @@
 title: "Liberty DEX"
 description: "Community-driven decentralized exchange supporting instant BitcoinZ (BTCZ) purchases with top cryptocurrencies."
 date: 2023-12-03T10:00:00Z
-image: "/images/exchanges/LibertyDEX.png"
+image: "images/exchanges/LibertyDEX.png"
 type: "exchange"
 categories: ["Exchange"]
 features:

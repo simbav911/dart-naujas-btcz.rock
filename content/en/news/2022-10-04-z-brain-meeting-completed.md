@@ -3,7 +3,7 @@ title: "Z-BRAIN Meeting Completed"
 date: 2022-10-04T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/00_Introduction-400x250.jpg"
+image: "images/news/00_Introduction-400x250.jpg"
 ---
 
 TheZ-Brain Meeting of 1 October 2022of the BITCOINZ Community has been completed with the participation of even more speakers and developers.

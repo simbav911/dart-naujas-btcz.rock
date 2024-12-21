@@ -2,7 +2,7 @@
 title: "PancakeSwap"
 description: "A decentralized exchange on the Binance Smart Chain, offering liquidity pools and trading for wrapped BitcoinZ (wBTCZ). Wrapped BitcoinZ (wBTCZ) represents BitcoinZ (BTCZ) on the Binance Smart Chain, enabling seamless integration and use within the BSC ecosystem."
 date: 2023-12-03T10:00:00Z
-image: "/images/exchanges/PancakeSwap_BTCZ.png"
+image: "images/exchanges/PancakeSwap_BTCZ.png"
 type: "exchange"
 categories: ["Exchange"]
 features:

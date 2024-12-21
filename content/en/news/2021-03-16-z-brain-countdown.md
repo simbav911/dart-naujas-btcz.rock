@@ -3,7 +3,7 @@ title: "Z-Brain Countdown"
 date: 2021-03-16T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/0.-Zbrain-Hours-Invitation-Card-400x250.jpg"
+image: "images/news/0.-Zbrain-Hours-Invitation-Card-400x250.jpg"
 ---
 
 The nextZ-Brainmeeting is scheduled on 20 May , 2021 and here you can return and check a countdown in order to help you with the different time zones.

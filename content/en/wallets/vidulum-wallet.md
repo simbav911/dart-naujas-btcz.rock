@@ -3,7 +3,7 @@ title: "Vidulum Wallet"
 description: "A versatile web-based multi-currency wallet accessible from any device"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/vidulum.png"
+image: "images/wallets/vidulum.png"
 features:
   - "Cross-Platform Web Access"
   - "Multi-Currency Support"

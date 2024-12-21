@@ -3,7 +3,7 @@ title: "BITCOINZ HALVING COUNTDOWN"
 date: 2021-03-12T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/BTCZ-Block-rewards-exampleFIXED2-400x250.jpg"
+image: "images/news/BTCZ-Block-rewards-exampleFIXED2-400x250.jpg"
 ---
 
 The first BITCOINZHALVINGCountdown has begun! The TOPCommunity Drivenand 100%PoWcryptocurrencyhas its firstmining rewards‘halvingsoon!

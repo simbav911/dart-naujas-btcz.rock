@@ -2,7 +2,7 @@
 title: "Tip.cc"
 description: "A cryptocurrency tipping bot for Discord and Telegram, enabling instant and fee-free transactions. Tip.cc supports BitcoinZ and other cryptocurrencies, fostering community engagement and adoption in social platforms."
 date: 2023-12-03T10:00:00Z
-image: "/images/exchanges/tipcc.png"
+image: "images/exchanges/tipcc.png"
 type: "exchange"
 categories: ["Exchange"]
 features:

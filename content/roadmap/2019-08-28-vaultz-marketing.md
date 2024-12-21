@@ -9,7 +9,7 @@ year: 2019
 status: "completed"
 progress: 100
 tags: ["Marketing", "Development"]
-icon: "/images/icons/media.svg"
+icon: "images/icons/media.svg"
 priority: "high"
 ---
 

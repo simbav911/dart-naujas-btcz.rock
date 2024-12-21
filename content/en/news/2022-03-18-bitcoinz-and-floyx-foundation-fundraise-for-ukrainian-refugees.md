@@ -3,7 +3,7 @@ title: "BITCOINZ and Floyx Foundation fundraise for Ukrainian Refugees"
 date: 2022-03-18T00:00:00Z
 draft: false
 subject: "Updates"
-image: "/images/news/Ukraine-DonationsFloyx-400x250.jpg"
+image: "images/news/Ukraine-DonationsFloyx-400x250.jpg"
 ---
 
 The BitcoinZ Community supportsFloyxFoundationfundraising to help Ukrainian refugees in Poland.

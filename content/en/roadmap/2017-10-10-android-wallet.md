@@ -9,7 +9,7 @@ layout: "single"
 status: "planned"
 progress: 10
 tags: []
-icon: "/images/icons/default.svg"
+icon: "images/icons/default.svg"
 priority: "medium"
 ---
 

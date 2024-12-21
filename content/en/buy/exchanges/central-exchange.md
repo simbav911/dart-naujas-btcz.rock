@@ -2,7 +2,7 @@
 title: "WhiteBIT"
 description: "A user-friendly European cryptocurrency exchange for trading digital assets"
 date: 2023-12-03T11:00:00Z
-image: "/images/exchanges/WhiteBIT.png"
+image: "images/exchanges/WhiteBIT.png"
 type: "exchange"
 categories: ["Exchange"]
 features:
