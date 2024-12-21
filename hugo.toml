@@ -142,6 +142,9 @@ theme = "PaperMod"
   [[module.mounts]]
     source = "static"
     target = "static"
+  [[module.mounts]]
+    source = "static/images"
+    target = "static/images"
 
 # Markup Settings
 [markup]
