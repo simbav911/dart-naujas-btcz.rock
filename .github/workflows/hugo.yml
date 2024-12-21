@@ -46,6 +46,8 @@ jobs:
         run: |
           echo "Static directory contents:"
           ls -la static/images/news || echo "News images directory not found"
+          echo "\nChecking a sample image:"
+          ls -la static/images/news/BTCZinChangelly-400x250.jpg || echo "Sample image not found"
 
       - name: Build with Hugo
         env:
@@ -65,6 +67,8 @@ jobs:
           find public -name "BTCZinChangelly-400x250.jpg" || echo "Test image not found"
           echo "\nChecking image references in HTML:"
           grep -r "images/news" public/en/news/ || echo "No image references found"
+          echo "\nChecking a sample news article:"
+          cat public/en/news/2024-04-19-bitcoinz-listed-in-changelly/index.html || echo "Sample article not found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
