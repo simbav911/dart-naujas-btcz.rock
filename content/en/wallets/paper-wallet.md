@@ -3,7 +3,7 @@ title: "BTCZ Paper Wallet"
 description: "A secure cold storage solution for storing your BitcoinZ offline as paper documents"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/BTCZ-Paper-wallet.png"
+image: "images/wallets/BTCZ-Paper-wallet.png"
 features:
   - "Offline Cold Storage"
   - "Complete Private Key Control"

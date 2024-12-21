@@ -3,7 +3,7 @@ title: "BitcoinZ Full Node Wallet"
 description: "Support network decentralization while maintaining complete control with the official BitcoinZ Full Node Wallet"
 date: 2024-01-09T10:00:00Z
 type: "wallet"
-image: "/images/wallets/full-node.png"
+image: "images/wallets/full-node.png"
 features:
   - "Complete Blockchain Copy"
   - "Network Decentralization Support"
