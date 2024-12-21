@@ -2,7 +2,7 @@
 title: "BitcoinZ Poker"
 description: "Multiplayer online poker experience powered by BitcoinZ cryptocurrency"
 link: "https://casinoz.getbtcz.com/lobby.php"
-image: "images/games/bitcoinz-poker.jpg"
+image: "images/games/bitcoinz-poker.png"
 tags: ["poker", "multiplayer", "cryptocurrency"]
 ---
 
