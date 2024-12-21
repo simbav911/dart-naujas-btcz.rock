@@ -12,7 +12,7 @@
                 <div class="h-full news-tile bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-1 overflow-hidden flex flex-col">
                     {{ with .Params.image }}
                     <div class="relative overflow-hidden h-48">
-                        <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/90"></div>
                     </div>
                     {{ end }}
