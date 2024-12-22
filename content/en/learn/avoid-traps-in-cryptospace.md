@@ -1,7 +1,7 @@
 ---
 title: "How to Avoid Traps in Cryptospace"
 description: "10 golden tips to protect yourself in the highly unexplored and dangerous world of cryptocurrencies"
-image: "images/learn-crypto/crypto-traps.jpg"
+image: "../../../images/learn-crypto/crypto-traps.jpg"
 weight: 2
 ---
 
@@ -17,7 +17,7 @@ Take in mind that the cryptocurrency markets never close, the exchanges are open
 
 We strongly recommend that you should never invest in cryptocurrencies any funds that you cannot afford to lose. Their prices are reacting strongly to governments' decisions for stricter and stricter regulations or even for plans to block their popularity.
 
-![Bitcoin Price Volatility]("images/learn-crypto/btc-prices.png")
+![Bitcoin Price Volatility](../../../images/learn-crypto/btc-prices.png)
 
 ## 2. Be extra cautious with the new cryptocurrencies
 
@@ -25,7 +25,7 @@ After the big success of the Bitcoin, came an endless wave of new cryptocurrenci
 
 Usually, the newer a cryptocurrency is, the biggest the possibility for a scam. Always check if there is action in the development history of a coin and the most important: life in its developing social media channel. Most Communities and development groups are using Discord/Slack channels or Telegram for their communication. Ask to join their channel to check if there are active people caring for the project. This is far more important than a shiny advertisement about a project.
 
-![Age Risk in Crypto]("images/learn-crypto/age-risk.jpg")
+![Age Risk in Crypto](../../../images/learn-crypto/age-risk.jpg)
 
 ## 3. Community driven Projects always have a big advantage
 
@@ -33,7 +33,7 @@ In addition to the previous tip, it is always better to prefer really Community 
 
 People around the world should understand that **they** have the power of option. They can either use the gift of the original Bitcoin philosophy in order to gain their freedom, by empowering a truly decentralized digital coin network, or they could possibly fall victims of companies which will abuse them economically in the short or long term, using the mask of a cryptocurrency project.
 
-![Community Driven Projects]("images/learn-crypto/community-driven-risk.jpg")
+![Community Driven Projects](../../../images/learn-crypto/community-driven-risk.jpg)
 
 ## 4. Be extremely careful with Projects that have ICO, premined coins or instamine period
 
@@ -41,13 +41,13 @@ In many occasions, developers gather funds either by automatically allocating a 
 
 After such scenarios, they follow a few price pumping techniques, for example by hyping in social media, announcing a fake plan or delivering just a small part of their plan. So they sell their coins in high prices (as they have technically created a high demand) and they disappear.
 
-![Premine Risk]("images/learn-crypto/premine-risk.jpg")
+![Premine Risk](../../../images/learn-crypto/premine-risk.jpg)
 
 ## 5. Everything that shines is not gold
 
 You will often see impressive ads, describing endless high tech characteristics of a Project that is selling its newly launched cryptocurrency through ICO (Initial Coin Offering). However you should always remember that this new project madness is not going to stop, while there are many potential victims and fraudulent developers who take advantage of the buyer's ignorance.
 
-![ICO Warning]("images/learn-crypto/ico.jpg")
+![ICO Warning](../../../images/learn-crypto/ico.jpg)
 
 ## 6. ALWAYS BACKUP your digital coin wallet
 
@@ -55,13 +55,13 @@ This is a must for all the digital coin users: The only way to secure your coins
 
 This way you are able to recover your wallet and the funds of your addresses after a data loss in your hard disk drive, a loss of your mobile device or other scenarios.
 
-![Backup Importance]("images/learn-crypto/backup.jpg")
+![Backup Importance](../../../images/learn-crypto/backup.jpg)
 
 ## 7. NEVER share your private keys
 
 You have to keep your private keys in a safe place. You should **never share** them in possible social media messages or phishing emails and you should never enter them in 3rd part applications that you don't trust. The private keys should be used only in the digital coin's original applications in order to restore your wallet and track your funds in the blockchain.
 
-![Private Keys Security]("images/learn-crypto/prkeys.jpg")
+![Private Keys Security](../../../images/learn-crypto/prkeys.jpg)
 
 ## 8. AVOID the various scams that ask you to send funds for any reasons
 
@@ -69,7 +69,7 @@ There are endless scams in the world of cryptocurrencies. An easy way to save yo
 
 A real giveaway promotion would never ask you to pay for anything. It would only ask to leave your address in order to receive your prize or to do a small legitime task like participating in a trivia or leaving a comment or sharing a post and leave your address.
 
-![Scam Warning]("images/learn-crypto/scam.jpg")
+![Scam Warning](../../../images/learn-crypto/scam.jpg)
 
 ## 9. Don't trade coins with unknown people, choose an exchange carefully
 
@@ -77,7 +77,7 @@ In the world of cryptocurrencies, the right way to buy a digital coin is by usin
 
 We must always have in mind that a digital currency is simply a medium, so the fact that a well known digital coin is accepted by an exchange, doesn't necessarily means that this exchange is trustworthy (and vice versa).
 
-![Exchange Warning]("images/learn-crypto/exchanges.jpg")
+![Exchange Warning](../../../images/learn-crypto/exchanges.jpg)
 
 ## 10. Never use an exchange to store your digital coins and turn 2FA ON!
 
@@ -85,4 +85,4 @@ Exchanges should be used only for selling a coin and buying another. You should 
 
 Finally, something really important: you should never consider that the 2FA (two factors authentication) is just another "boring" parameter. It is a really important thing and you should **always turn it ON**, because ONLY this way you can really protect your exchange account from hackers.
 
-![Security Warning]("images/learn-crypto/hacker.jpg")
+![Security Warning](../../../images/learn-crypto/hacker.jpg)
