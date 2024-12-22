@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-50 w-full glass-effect border-b border-btcz-gray-800/50">
+<header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-50 w-full glass-effect border-b border-btcz-gray-800/50">
     <div class="container mx-auto">
         <nav class="flex items-center justify-between py-2">
             <!-- Logo -->
@@ -81,13 +81,115 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button class="md:hidden p-2 text-white hover:text-btcz-gold" 
-                    aria-label="Toggle Menu"
-                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                    class="md:hidden flex items-center p-2 rounded-lg hover:bg-btcz-gray-800/50 transition-all duration-300"
+                    :aria-expanded="mobileMenuOpen"
+                    aria-label="Toggle mobile menu">
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" 
+                     :class="{ 'rotate-90': mobileMenuOpen }"
+                     fill="none" 
+                     stroke="currentColor" 
+                     viewBox="0 0 24 24">
+                    <path :class="{'hidden': mobileMenuOpen, 'inline-flex': !mobileMenuOpen }" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round" 
+                          stroke-width="2" 
+                          d="M4 6h16M4 12h16M4 18h16" />
+                    <path :class="{'hidden': !mobileMenuOpen, 'inline-flex': mobileMenuOpen }" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round" 
+                          stroke-width="2" 
+                          d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenuOpen"
+                 x-cloak
+                 x-transition:enter="transform transition-transform duration-300 ease-out"
+                 x-transition:enter-start="-translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transform transition-transform duration-300 ease-in"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="-translate-x-full"
+                 @click.away="mobileMenuOpen = false"
+                 class="fixed inset-0 w-full h-full bg-black/95 backdrop-blur-sm md:hidden z-50">
+                
+                <nav class="h-full w-4/5 max-w-sm bg-black/95 border-r border-btcz-gray-800/50 overflow-y-auto">
+                    <div class="p-6 space-y-4">
+                        {{ range .Site.Menus.main }}
+                            {{ if .HasChildren }}
+                                <div x-data="{ subMenuOpen: false }" class="space-y-2">
+                                    <button @click="subMenuOpen = !subMenuOpen"
+                                            class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-all duration-300">
+                                        <span class="text-lg">{{ .Name }}</span>
+                                        <svg class="w-5 h-5 transform transition-transform duration-300" 
+                                             :class="{'rotate-180': subMenuOpen}"
+                                             fill="none" 
+                                             stroke="currentColor" 
+                                             viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" 
+                                                  stroke-linejoin="round" 
+                                                  stroke-width="2" 
+                                                  d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    <div x-show="subMenuOpen"
+                                         x-collapse
+                                         x-cloak
+                                         class="pl-4 space-y-2 border-l-2 border-btcz-gray-800/50">
+                                        {{ range .Children }}
+                                        <a href="{{ .URL | relLangURL }}" 
+                                           class="block py-2 text-white hover:text-btcz-gold transition-all duration-300 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                                           @click="mobileMenuOpen = false">
+                                            {{ .Name }}
+                                        </a>
+                                        {{ end }}
+                                    </div>
+                                </div>
+                            {{ else }}
+                                <a href="{{ .URL | relLangURL }}" 
+                                   class="block py-2 text-lg text-white hover:text-btcz-gold transition-all duration-300 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                                   @click="mobileMenuOpen = false">
+                                    {{ .Name }}
+                                </a>
+                            {{ end }}
+                        {{ end }}
+
+                        <!-- Mobile Language Selector -->
+                        <div class="pt-4 mt-4 border-t border-btcz-gray-800/50">
+                            <div x-data="{ langMenuOpen: false }" class="space-y-2">
+                                <button @click="langMenuOpen = !langMenuOpen"
+                                        class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-all duration-300">
+                                    <span class="text-lg">{{ .Site.Language.LanguageName }}</span>
+                                    <svg class="w-5 h-5 transform transition-transform duration-300"
+                                         :class="{'rotate-180': langMenuOpen}"
+                                         fill="none" 
+                                         stroke="currentColor" 
+                                         viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" 
+                                              stroke-linejoin="round" 
+                                              stroke-width="2" 
+                                              d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div x-show="langMenuOpen"
+                                     x-collapse
+                                     x-cloak
+                                     class="pl-4 space-y-2 border-l-2 border-btcz-gray-800/50">
+                                    {{ range .Site.Home.AllTranslations }}
+                                    <a href="{{ .Permalink }}" 
+                                       class="block py-2 text-white hover:text-btcz-gold transition-all duration-300 {{ if eq .Language $.Site.Language }}text-btcz-gold{{ end }}"
+                                       @click="mobileMenuOpen = false">
+                                        {{ .Language.LanguageName }}
+                                    </a>
+                                    {{ end }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </nav>
 
         <!-- Mobile Menu -->
