@@ -9,7 +9,7 @@ layout: "single"
 status: "planned"
 progress: 0
 tags: ["LightWallet", "Z-Addresses", "Cross-Platform"]
-icon: "images/icons/wallet.svg"
+icon: "images/icons/material/secure-wallet.svg"
 priority: "high"
 ---
 

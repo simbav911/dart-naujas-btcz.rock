@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Growth chart -->
+  <path d="M3.5 18.5l6-6 4 4L22 7.5" stroke="#FFD700" fill="none" stroke-width="2"/>
+  <!-- Chart background -->
+  <path d="M20 4h-4v4l4-4zM4 20v-4h4l-4 4z" opacity="0.8"/>
+  <!-- Exchange arrows -->
+  <path d="M9 12l-2-2-2 2M15 12l2 2 2-2" opacity="0.6"/>
+  <!-- Volume bars -->
+  <path d="M6 16h2v2H6zm5-2h2v4h-2zm5-3h2v7h-2z" opacity="0.7"/>
+</svg>

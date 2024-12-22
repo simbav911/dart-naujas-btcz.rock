@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Exchange", "Trading"]
-icon: "images/icons/exchange.svg"
+icon: "images/icons/material/exchange-listing.svg"
 priority: "high"
 ---
 

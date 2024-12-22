@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 80
 tags: ["Wallet", "Development", "GUI"]
-icon: "images/icons/wallet.svg"
+icon: "images/icons/material/wallet-dev.svg"
 priority: "high"
 ---
 

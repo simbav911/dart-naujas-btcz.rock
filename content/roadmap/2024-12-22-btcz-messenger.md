@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 50
 tags: ["Messenger", "Blockchain-DApps", "Censorship-Resistant"]
-icon: "images/icons/messenger.svg"
+icon: "images/icons/material/secure-chat.svg"
 priority: "high"
 ---
 

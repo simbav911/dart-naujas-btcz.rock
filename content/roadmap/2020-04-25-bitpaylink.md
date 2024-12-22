@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Innovation", "Blockchain"]
-icon: "images/icons/chart.svg"
+icon: "images/icons/launch.svg"
 priority: "medium"
 ---
 

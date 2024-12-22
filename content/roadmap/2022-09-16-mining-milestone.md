@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Mining", "Network"]
-icon: "images/icons/mining.svg"
+icon: "images/icons/material/mining-network.svg"
 priority: "high"
 ---
 

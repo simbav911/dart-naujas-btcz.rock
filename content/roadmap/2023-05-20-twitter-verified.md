@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Social Media", "Credibility"]
-icon: "images/icons/media.svg"
+icon: "images/icons/material/verified-social.svg"
 priority: "high"
 ---
 

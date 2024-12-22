@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Launch", "Milestone"]
-icon: "images/icons/launch.svg"
+icon: "images/icons/community.svg"
 priority: "high"
 ---
 

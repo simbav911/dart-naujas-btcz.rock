@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 60
 tags: ["Marketing", "Exchange", "Liquidity"]
-icon: "images/icons/exchange.svg"
+icon: "images/icons/material/market-growth.svg"
 priority: "high"
 ---
 
