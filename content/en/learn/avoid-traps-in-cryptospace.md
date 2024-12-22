@@ -1,7 +1,7 @@
 ---
 title: "How to Avoid Traps in Cryptospace"
 description: "10 golden tips to protect yourself in the highly unexplored and dangerous world of cryptocurrencies"
-image: "../../../images/learn-crypto/crypto-traps.jpg"
+image: "images/learn-crypto/crypto-traps.jpg"
 weight: 2
 ---
 

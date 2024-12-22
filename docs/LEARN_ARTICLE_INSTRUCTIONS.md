@@ -23,7 +23,7 @@ static/images/learn-crypto/your-image-name.jpg
 ---
 title: "Your Article Title"
 description: "A brief description of your article (1-2 sentences)"
-image: "images/learn-crypto/your-header-image.jpg"
+image: "images/learn-crypto/your-header-image.jpg"  # IMPORTANT: Use this exact format for header image
 weight: [number]  # Controls article order in the list
 ---
 ```
@@ -36,20 +36,34 @@ weight: [number]  # Controls article order in the list
    - Place all article images in `static/images/learn-crypto/`
    - Use descriptive names for images (e.g., `mining-process.jpg`, not `image1.jpg`)
 
-2. **Image Path Format**
-   - For the header image in front matter:
+2. **Image Path Format - VERY IMPORTANT**
+   - For the header image in front matter (must follow exactly):
      ```yaml
      image: "images/learn-crypto/your-header-image.jpg"
      ```
+     - Must include quotes
+     - Must start with `images/` (not `../../../images/`)
+     - Must be relative to the `static` directory
+
    - For images in the article content:
      ```markdown
-     ![Alt Text](images/learn-crypto/your-image.jpg)
+     ![Alt Text](../../../images/learn-crypto/your-image.jpg)
      ```
-   - Use relative paths starting with `images/learn-crypto/`
-   - Front matter image needs quotes
-   - Content images don't need quotes
+     - No quotes needed
+     - Must include `../../../` to navigate up to root
+     - Must be relative to the markdown file
 
-3. **Image Best Practices**
+3. **Common Image Path Issues**
+   - Header image (front matter) won't work if:
+     - You add `../../../` at the start
+     - You forget the quotes
+     - You use the wrong path format
+   - Content images won't work if:
+     - You add quotes around the path
+     - You forget the `../../../`
+     - You use the wrong path format
+
+4. **Image Best Practices**
    - Use JPG for photographs
    - Use PNG for screenshots or images with text
    - Optimize images for web (compress them)
@@ -79,7 +93,7 @@ weight: [number]  # Controls article order in the list
 ---
 title: "Understanding Cryptocurrency Mining"
 description: "Learn how cryptocurrency mining works and why it's essential for blockchain networks"
-image: "images/learn-crypto/mining-header.jpg"
+image: "images/learn-crypto/mining-header.jpg"  # Correct header image format
 weight: 5
 ---
 
@@ -87,7 +101,7 @@ Introduction paragraph explaining what mining is...
 
 ## What is Cryptocurrency Mining?
 
-![Mining Process](images/learn-crypto/mining-process.jpg)
+![Mining Process](../../../images/learn-crypto/mining-process.jpg)  # Correct content image format
 
 Detailed explanation...
 
@@ -117,25 +131,30 @@ Summary and key takeaways...
    ```
 
 2. Check that:
-   - All images load correctly
+   - The header image loads correctly
+   - All content images load correctly
    - The article appears in the Learn section
    - The formatting looks correct
    - Links work properly
 
 ## Common Issues and Solutions
 
-1. **Images Not Loading**
-   - Front matter image needs quotes: `image: "images/learn-crypto/image.jpg"`
-   - Content images don't need quotes: `![Alt](images/learn-crypto/image.jpg)`
-   - Check that the image exists in the correct location
-   - Ensure there are no spaces in image filenames
+1. **Header Image Not Loading**
+   - Make sure you're using the exact format: `image: "images/learn-crypto/image.jpg"`
+   - Don't add `../../../` to the header image path
+   - Keep the quotes around the path
 
-2. **Formatting Problems**
+2. **Content Images Not Loading**
+   - Use format: `![Alt](../../../images/learn-crypto/image.jpg)`
+   - Include `../../../` in the path
+   - Don't use quotes around the path
+
+3. **Formatting Problems**
    - Use proper markdown syntax
    - Leave blank lines between paragraphs
    - Use proper heading hierarchy (## before ###)
 
-3. **Article Not Appearing**
+4. **Article Not Appearing**
    - Check the front matter syntax
    - Verify the weight value
    - Ensure the file is in the correct directory
@@ -143,6 +162,6 @@ Summary and key takeaways...
 ## Need Help?
 
 If you encounter any issues or need assistance, please:
-1. Check existing articles for reference (especially `bitcoinz-halving.md`)
+1. Check existing articles for reference (especially `cryptocurrencies-intro.md`)
 2. Review the Hugo documentation
 3. Open an issue on GitHub if needed
