@@ -1,7 +1,7 @@
 ---
 title: "BitcoinZ Halving"
 description: "Understanding BitcoinZ's halving mechanism, emission rate, and the importance of a fair halving plan"
-image: "../../../images/learn-crypto/bitcoinz-1st-halving.jpg"
+image: "images/learn-crypto/bitcoinz-1st-halving.jpg"
 weight: 2
 ---
 
