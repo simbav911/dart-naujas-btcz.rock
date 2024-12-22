@@ -1,7 +1,7 @@
 ---
 title: "BitcoinZ Halving"
 description: "Understanding BitcoinZ's halving mechanism, emission rate, and the importance of a fair halving plan"
-image: "images/learn-crypto/bitcoinz-1st-halving.jpg"
+image: "../../../images/learn-crypto/bitcoinz-1st-halving.jpg"
 weight: 2
 ---
 
@@ -17,9 +17,9 @@ BITCOINZ was launched with the legendary "BITCOIN" name because it added optiona
 
 Many times, cryptocurrency fans and newcomers hear the phrase "halving plan" or just "halving". We are using this word in order to describe the changes of the rewards of a minable digital coin (emission). These changes are included in a set of rules that every Project should always describe publicly in its announcement for the coin (white paper/ bitcointalk forum).
 
-![BITCOINZ HALVING](images/learn-crypto/halving1.jpg)
+![BITCOINZ HALVING](../../../images/learn-crypto/halving1.jpg)
 
-![Inflation Curve for BitcoinZ](images/learn-crypto/btcz-inflation-curve.jpg)
+![Inflation Curve for BitcoinZ](../../../images/learn-crypto/btcz-inflation-curve.jpg)
 
 ## What is the "emission rate"?
 
@@ -29,7 +29,7 @@ Each PoW (proof of work) cryptocurrency project has different rules for the chan
 
 But what is the meaning of a halving for the emissions rate? This is usually happens as **a hedge against inflation** over time. As the price, guided by price equilibrium, is bound to increase. On the flip side, fiat currencies (like the US dollar), inflate over time as its monetary supply increases, leading in reality to a decrease in purchasing power. This is known as monetary debasement by inflation and an example for this can be seen by just comparing the housing prices before some decades and today.
 
-![Mining Halving](images/learn-crypto/mining-halving.png)
+![Mining Halving](../../../images/learn-crypto/mining-halving.png)
 
 ## The example of the Bitcoin's halving plan
 
@@ -37,7 +37,7 @@ For example, the legendary Bitcoin with 21 Million coins maximum supply, when wa
 
 So, 4 years later (May 2013) and after the block no210,000, the reward was 25 BTC for every block. In the same way, after 4 more years and on May 2017, at the block no420,000 and beyond, the block reward is halved again to 12.5 BTC. And so on.
 
-![Block Rewards Example](images/learn-crypto/block-rewards-example.png)
+![Block Rewards Example](../../../images/learn-crypto/block-rewards-example.png)
 
 ## Another example: BitcoinZ's halving plan
 
@@ -45,7 +45,7 @@ In the same way, BitcoinZ has **a same halving pace** for its block rewards: **e
 
 4 years later, on Oct 2021, there are 6,250 BTCZ coins as reward, on Oct 2025 this is halved to 3125 coins and so on.
 
-![BITCOINZ halving](images/learn-crypto/btcz-block-rewards.jpg)
+![BITCOINZ halving](../../../images/learn-crypto/btcz-block-rewards.jpg)
 
 ## The importance of a fair and slow halving plan
 
@@ -63,4 +63,4 @@ This way, they can easily "pump" the price of their project with some tricks in 
 
 This is why the really Community Driven Projects with fair coin distribution are always much more transparent and resistant to such scam scenarios. Simply because there is no governor or founders beneficiaries who technically own the lion's share of the coin supply.
 
-![Halving rewards examples](images/learn-crypto/rewards-halving-table.png)
+![Halving rewards examples](../../../images/learn-crypto/rewards-halving-table.png)
