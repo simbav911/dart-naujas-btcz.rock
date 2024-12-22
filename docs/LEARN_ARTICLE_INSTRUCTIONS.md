@@ -23,7 +23,7 @@ static/images/learn-crypto/your-image-name.jpg
 ---
 title: "Your Article Title"
 description: "A brief description of your article (1-2 sentences)"
-image: "../../../images/learn-crypto/your-header-image.jpg"
+image: "images/learn-crypto/your-header-image.jpg"
 weight: [number]  # Controls article order in the list
 ---
 ```
@@ -39,14 +39,15 @@ weight: [number]  # Controls article order in the list
 2. **Image Path Format**
    - For the header image in front matter:
      ```yaml
-     image: "../../../images/learn-crypto/your-header-image.jpg"
+     image: "images/learn-crypto/your-header-image.jpg"
      ```
    - For images in the article content:
      ```markdown
-     ![Alt Text](../../../images/learn-crypto/your-image.jpg)
+     ![Alt Text](images/learn-crypto/your-image.jpg)
      ```
-   - Always use relative paths with `../../../` to navigate up to the root directory
-   - Do NOT use quotes around image paths in the markdown content
+   - Use relative paths starting with `images/learn-crypto/`
+   - Front matter image needs quotes
+   - Content images don't need quotes
 
 3. **Image Best Practices**
    - Use JPG for photographs
@@ -78,7 +79,7 @@ weight: [number]  # Controls article order in the list
 ---
 title: "Understanding Cryptocurrency Mining"
 description: "Learn how cryptocurrency mining works and why it's essential for blockchain networks"
-image: "../../../images/learn-crypto/mining-header.jpg"
+image: "images/learn-crypto/mining-header.jpg"
 weight: 5
 ---
 
@@ -86,7 +87,7 @@ Introduction paragraph explaining what mining is...
 
 ## What is Cryptocurrency Mining?
 
-![Mining Process](../../../images/learn-crypto/mining-process.jpg)
+![Mining Process](images/learn-crypto/mining-process.jpg)
 
 Detailed explanation...
 
@@ -124,8 +125,8 @@ Summary and key takeaways...
 ## Common Issues and Solutions
 
 1. **Images Not Loading**
-   - Verify the image path is correct
-   - Make sure you're using `../../../` in the path
+   - Front matter image needs quotes: `image: "images/learn-crypto/image.jpg"`
+   - Content images don't need quotes: `![Alt](images/learn-crypto/image.jpg)`
    - Check that the image exists in the correct location
    - Ensure there are no spaces in image filenames
 
@@ -142,6 +143,6 @@ Summary and key takeaways...
 ## Need Help?
 
 If you encounter any issues or need assistance, please:
-1. Check existing articles for reference
+1. Check existing articles for reference (especially `bitcoinz-halving.md`)
 2. Review the Hugo documentation
 3. Open an issue on GitHub if needed
