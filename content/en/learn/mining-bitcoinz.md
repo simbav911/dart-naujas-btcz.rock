@@ -7,7 +7,6 @@ weight: 3
 
 BITCOINZ is a minable digital coin which is using Zhash, an ASIC resistant algorithm. This way it protects the miners community so that virtually everyone is able to use his hardware in order to mine BITCOINZ and support its network. In this section you will find a list of the available mining pools and an analytical mining guide with some useful tips for BITCOINZ mining.
 
-{{< youtube k9AQLFR-bmc >}}
 
 ## A Few Words About Mining & Mining Pools
 
@@ -19,24 +18,11 @@ Mining pools are created to solve this problem. Mining pools are gathering / poo
 
 In this list you can find some of the most popular mining pools that host BITCOINZ miners. By selecting each pool, you will visit the relevant site. There you can find the settings of each mining pool like the server url and port number in order to setup your mining application.
 
-- [https://mine.btcz.app/](https://mine.btcz.app/)
-- [https://zergpool.com/](https://zergpool.com/)
-- [https://btcz.solopool.org/](https://btcz.solopool.org/)
 - [http://btcz.pcmining.xyz:8080/stats](http://btcz.pcmining.xyz:8080/stats)
-- [https://k1pool.com/pool/btcz](https://k1pool.com/pool/btcz)
-- [https://k1pool.com/pool/btczsolo](https://k1pool.com/pool/btczsolo)
-- [https://aikapool.com/btcz/index.php](https://aikapool.com/btcz/index.php)
 - [https://zpool.ca/](https://zpool.ca/)
-- [https://prohashing.com/live-pool-status](https://prohashing.com/live-pool-status)
 - [https://zeropool.io/getting_started](https://zeropool.io/getting_started)
-- [https://www.revolutionchain.it/it/bitcoinz-mining-pool/](https://www.revolutionchain.it/it/bitcoinz-mining-pool/)
 - [https://btcz.darkfibermines.com/](https://btcz.darkfibermines.com/)
-- [https://equihash.flarehashr.com:5000/getting_started](https://equihash.flarehashr.com:5000/getting_started)
 - [https://btcz.2mars.biz/](https://btcz.2mars.biz/)
-- [https://equihash.pro/coins/bitcoinz-solo](https://equihash.pro/coins/bitcoinz-solo)
-- [https://equihash.pro/coins/bitcoinz](https://equihash.pro/coins/bitcoinz)
-- [https://fastpool.xyz/btcz](https://fastpool.xyz/btcz)
-- [https://www.revolutionchain.it/it/mining-pool/](https://www.revolutionchain.it/it/mining-pool/)
 
 ## Easy Mining Video Tutorial: How to Mine BitcoinZ
 
@@ -52,16 +38,16 @@ This video explains:
 3. Which coins are the most profitable to mine with a laptop
 4. Tips for keeping your laptop safe while mining
 
-{{< youtube XPkVZGXkfHo >}}
+{{< youtube knO5eWLOQ6Y >}}
 
 ## Can I Double Mine Different Crypto with My GPU & CPU?
 
 Yes! BITCOINZ is a coin that is mined efficiently by GPU (Graphics Processing Unit). You can combine it with another crypto which is mined more efficiently by CPU. This video explains for example how to mine BITCOINZ and MONERO with one gaming PC.
 
-{{< youtube 9mwGbFK0EEg >}}
+{{< youtube qZ6fRhU_vSQ >}}
 
 ## Video Tutorial: How to Mine BitcoinZ with Mining Rig Rental
 
 This tutorial is showing you how to easily mine BITCOINZ cryptocurrency if you don't wish to use your PC or if you don't have a decent GPU. You can follow the described steps in order to rent mining rigs and mine the coins for you!
 
-{{< youtube 2JaKf-Oc8xY >}}
+{{< youtube SibM4M1dIpw >}}
