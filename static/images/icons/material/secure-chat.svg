@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Chat bubble with shield overlay -->
+  <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM12 15c-3.5-.93-5-4.35-5-7V6.2l5-2.2 5 2.2V8c0 2.65-1.5 6.07-5 7z"/>
+  <!-- Small shield inside chat -->
+  <path d="M12 6.5l-3 1.3v2.2c0 1.88 1.07 3.63 3 4.2 1.93-.57 3-2.32 3-4.2V7.8l-3-1.3z" opacity="0.8"/>
+</svg>

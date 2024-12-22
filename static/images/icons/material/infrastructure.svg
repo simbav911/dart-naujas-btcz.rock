@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Server racks -->
+  <path d="M20 2H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2z"/>
+  <!-- Network connections -->
+  <path d="M6 6h2v2H6zm0 14h2v2H6zm10-14h2v2h-2zm0 14h2v2h-2z" opacity="0.8"/>
+  <!-- Infrastructure connections -->
+  <path d="M4 8v6h2V8zm14 0v6h2V8z" opacity="0.6"/>
+  <!-- Central hub -->
+  <path d="M11 11h2v2h-2z" opacity="0.9"/>
+</svg>

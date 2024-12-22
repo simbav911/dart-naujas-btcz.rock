@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Celebration star -->
+  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+  <!-- Number 5 -->
+  <path d="M11 7h4v2h-4v2h3v2h-3v4h-2V7h2z" opacity="0.8"/>
+  <!-- Celebration sparkles -->
+  <path d="M4 4l1 1-1 1-1-1zm16 0l1 1-1 1-1-1zM4 20l1 1-1 1-1-1zm16 0l1 1-1 1-1-1z" opacity="0.6"/>
+  <!-- Anniversary ribbon -->
+  <path d="M9 21h6v1H9z" opacity="0.7"/>
+</svg>

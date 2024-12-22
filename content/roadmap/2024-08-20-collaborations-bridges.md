@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 65
 tags: ["Partnerships", "Bridge", "DEX"]
-icon: "images/icons/bridge.svg"
+icon: "images/icons/material/blockchain-bridge.svg"
 priority: "high"
 ---
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Chain blocks -->
+  <path d="M4 4h6v6H4zm10 0h6v6h-6zm-10 10h6v6H4zm10 0h6v6h-6z"/>
+  <!-- Bridge connections -->
+  <path d="M10 7h4v2h-4zm0 8h4v2h-4z" opacity="0.8"/>
+  <!-- Connection lines -->
+  <path d="M7 10v4m10-4v4" opacity="0.6"/>
+  <!-- Partnership symbol -->
+  <path d="M11 11h2v2h-2z" opacity="0.9"/>
+</svg>

@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 30
 tags: ["Development", "Smart Contracts", "Layer-2"]
-icon: "images/icons/smart-contract.svg"
+icon: "images/icons/material/smart-contract.svg"
 priority: "medium"
 ---
 

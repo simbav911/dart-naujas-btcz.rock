@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 70
 tags: ["Development", "Community", "Funding"]
-icon: "images/icons/community.svg"
+icon: "images/icons/material/community-fund.svg"
 priority: "high"
 ---
 

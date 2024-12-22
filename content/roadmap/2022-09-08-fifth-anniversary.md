@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Anniversary", "Milestone"]
-icon: "images/icons/launch.svg"
+icon: "images/icons/material/anniversary-five.svg"
 priority: "high"
 ---
 

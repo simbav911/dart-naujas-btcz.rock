@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 55
 tags: ["Infrastructure", "Website", "Development"]
-icon: "images/icons/infrastructure.svg"
+icon: "images/icons/material/infrastructure.svg"
 priority: "medium"
 ---
 

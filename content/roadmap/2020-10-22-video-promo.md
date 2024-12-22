@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Marketing", "Media"]
-icon: "images/icons/media.svg"
+icon: "images/icons/community.svg"
 priority: "medium"
 ---
 

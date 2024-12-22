@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Contract document base -->
+  <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+  <!-- Code/contract lines -->
+  <path d="M8 14l2 2 2-2M14 14l2 2 2-2" opacity="0.8"/>
+  <!-- Layer-2 indicator -->
+  <path d="M6 19h12v2H6v-2zm0-3h12v2H6v-2z" opacity="0.6"/>
+  <!-- Smart contract symbol -->
+  <path d="M13 9V3.5L18.5 9H13z" opacity="0.9"/>
+</svg>

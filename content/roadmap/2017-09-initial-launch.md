@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Launch", "Mining", "Community"]
-icon: "images/icons/community.svg"
+icon: "images/icons/wallet.svg"
 priority: "high"
 ---
 

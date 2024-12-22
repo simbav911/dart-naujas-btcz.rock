@@ -9,6 +9,7 @@
     "admin": "node server.js"
   },
   "dependencies": {
+    "@material-design-icons/svg": "^0.14.13",
     "@octokit/rest": "^19.0.13",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.7",

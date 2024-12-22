@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Community", "Communication"]
-icon: "images/icons/community.svg"
+icon: "images/icons/material/community-ama.svg"
 priority: "medium"
 ---
 

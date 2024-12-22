@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 85
 tags: ["No-KYC", "Instant-Swaps", "Privacy"]
-icon: "images/icons/exchange.svg"
+icon: "images/icons/material/private-exchange.svg"
 priority: "high"
 ---
 

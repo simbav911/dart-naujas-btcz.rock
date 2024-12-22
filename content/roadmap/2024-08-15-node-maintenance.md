@@ -9,7 +9,7 @@ layout: "single"
 status: "completed"
 progress: 100
 tags: ["Development", "Node", "Security"]
-icon: "images/icons/node.svg"
+icon: "images/icons/material/node-server.svg"
 priority: "high"
 ---
 

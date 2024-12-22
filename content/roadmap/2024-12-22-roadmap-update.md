@@ -9,7 +9,7 @@ layout: "single"
 status: "in-progress"
 progress: 70
 tags: ["Development", "Community", "Infrastructure"]
-icon: "images/icons/roadmap.svg"
+icon: "images/icons/material/roadmap-progress.svg"
 priority: "high"
 ---
 
