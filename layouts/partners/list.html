@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
+        <p class="text-xl text-gray-600">{{ .Description }}</p>
+    </div>
+
+    <!-- Partners Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Partner Card Template -->
+        {{ range .Site.Data.partners }}
+        <div class="bg-white rounded-lg shadow-lg p-6 transform transition duration-300 hover:scale-105">
+            <div class="flex items-center justify-center mb-4">
+                <img src="{{ .icon }}" alt="{{ .name }} logo" class="w-24 h-24 object-contain">
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ .name }}</h3>
+            <!-- Star Rating -->
+            <div class="flex items-center mb-3">
+                {{ range (seq 5) }}
+                    {{ if le . $.rating }}
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    {{ else }}
+                    <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    {{ end }}
+                {{ end }}
+            </div>
+            <p class="text-gray-600 mb-4">{{ .description }}</p>
+            <div class="flex space-x-2">
+                {{ range .tags }}
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ if .website }}
+            <a href="{{ .website }}" target="_blank" rel="noopener noreferrer" 
+               class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                Visit Website
+            </a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
