@@ -1,29 +1,25 @@
-@keyframes slideInFromTopRight {
-    0% {
-        transform: translate(100%, -100%) scale(0.8);
-        opacity: 0;
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
     }
-    100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
+    to {
+        transform: translateX(0);
     }
 }
 
-@keyframes slideOutToTopRight {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
     }
-    100% {
-        transform: translate(100%, -100%) scale(0.8);
-        opacity: 0;
+    to {
+        transform: translateX(100%);
     }
 }
 
 .slide-in {
-    animation: slideInFromTopRight 0.3s ease-out forwards;
+    animation: slideIn 0.3s ease forwards;
 }
 
 .slide-out {
-    animation: slideOutToTopRight 0.3s ease-in forwards;
+    animation: slideOut 0.3s ease forwards;
 }
