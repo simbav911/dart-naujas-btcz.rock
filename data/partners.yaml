@@ -1,29 +1,24 @@
-- name: "Freedom Voice X"
-  icon: "/images/partners/freedom-icon.svg"
+- name: "Freedom Voice X (Twitter)"
+  icon: "/images/partners/x.png"
   rating: 5
-  description: "A pioneering platform dedicated to unrestricted free speech and digital freedom. Like BitcoinZ, we believe in the fundamental right of expression without censorship. Our partnership represents a shared commitment to privacy, decentralization, and the power of community-driven initiatives."
+  description: "X, formerly known as Twitter, is a pioneering social media platform renowned for its commitment to open dialogue and the free exchange of ideas. In the spirit of BitcoinZ, X promotes unrestricted communication, privacy, and a vibrant, community-driven environment. Together, we champion a digital space where voices are heard, innovation thrives, and fundamental freedoms remain protected."
   tags: ["Free Speech", "Privacy", "Decentralization", "Digital Rights", "Community"]
-  website: "https://example.com"
+  website: "https://x.com/BTCZOfficial"
   order: 1
 
 - name: "TradeOgre"
   icon: "/images/partners/tradeogre.png"
   rating: 5
-  description: "Highly rated cryptocurrency exchange platform supporting BitcoinZ trading. Known for its simple, efficient interface and commitment to privacy."
+  description: "TradeOgre is a highly rated cryptocurrency exchange platform that supports BitcoinZ trading. Renowned for its simple, efficient interface, TradeOgre prioritizes user privacy and offers seamless trading without requiring KYC verification."
   tags: ["Exchange Partner", "Highly Rated", "Trading", "Privacy"]
   website: "https://tradeogre.com"
   order: 2
 
-- name: "Community Advocate"
-  icon: "/images/partners/community-icon.svg"
+- name: "Open Partnership Invite"
+  icon: "/images/partners/partnership.png"
   rating: 5
-  description: "Empowering the BitcoinZ community through education and support initiatives."
-  tags: ["Community", "Education", "Support"]
-  website: "https://example.com"
+  description: "Discover the power of true decentralization by becoming a BitcoinZ Partner. We invite like-minded individuals and organizations to support and collaborate with us, championing privacy, freedom, and community-driven innovation. Join us on this journey and help shape a future where financial sovereignty is accessible to all."
+  tags: ["Partnership", "Community", "Decentralization", "Privacy", "Freedom"]
+  website: "https://discord.gg/K59mxyf"
+  order: 3
 
-- name: "Innovation Hub"
-  icon: "/images/partners/innovation-icon.svg"
-  rating: 5
-  description: "Driving technological advancement in the BitcoinZ ecosystem."
-  tags: ["Innovation", "Technology", "Development"]
-  website: "https://example.com"
