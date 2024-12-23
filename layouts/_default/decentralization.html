@@ -1,0 +1,106 @@
+{{ define "main" }}
+<div class="bg-btcz-gray-950 min-h-screen">
+    <div class="relative py-12 sm:py-16 lg:py-20">
+        <div class="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+            <!-- Back Button -->
+            <a href="/" class="back-button inline-flex items-center px-6 py-3 mb-8 glass-effect rounded-full text-btcz-gold hover:text-yellow-300 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                Back to Home
+            </a>
+
+            <div class="glass-effect rounded-3xl p-8 md:p-10 lg:p-12">
+                <div class="prose prose-invert prose-lg max-w-none">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.glass-effect {
+    background: rgba(13, 17, 23, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-btcz-gold {
+    color: #FFD700;
+}
+
+.hover\:text-yellow-300:hover {
+    color: #FCD34D;
+}
+
+.prose h1 {
+    color: #FFD700;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.prose h2 {
+    color: #FFD700;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.prose strong {
+    color: #FFD700;
+}
+
+.prose p {
+    color: #E5E7EB;
+}
+
+.prose ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.prose ul li {
+    color: #E5E7EB;
+    display: flex;
+    align-items: start;
+    margin-top: 1rem;
+}
+
+.prose ul li:before {
+    content: "•";
+    color: #FFD700;
+    margin-right: 0.5rem;
+}
+
+/* Glowing button effect */
+.back-button {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.back-button:hover:before {
+    opacity: 1;
+}
+
+.back-button:before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 9999px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+}
+</style>
+{{ end }}
