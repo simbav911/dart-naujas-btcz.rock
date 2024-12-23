@@ -9,13 +9,27 @@ async function updatePriceData() {
             const change7d = data.market_data.price_change_percentage_7d;
             const change30d = data.market_data.price_change_percentage_30d;
 
-            // Update price
-            document.getElementById('btcz-price').textContent = `$${price.toFixed(8)}`;
+            // Update desktop price
+            const desktopPrice = document.getElementById('btcz-price');
+            if (desktopPrice) {
+                desktopPrice.textContent = `$${price.toFixed(8)}`;
+            }
+
+            // Update mobile price
+            const mobilePrice = document.getElementById('btcz-price-mobile');
+            if (mobilePrice) {
+                mobilePrice.textContent = `$${price.toFixed(8)}`;
+            }
             
-            // Update percentage changes
+            // Update desktop percentage changes
             updateChangeElement('change-24h', change24h);
             updateChangeElement('change-7d', change7d);
             updateChangeElement('change-30d', change30d);
+
+            // Update mobile percentage changes
+            updateChangeElement('btcz-change-mobile-24h', change24h);
+            updateChangeElement('btcz-change-mobile-7d', change7d);
+            updateChangeElement('btcz-change-mobile-30d', change30d);
         }
     } catch (error) {
         console.error('Error fetching price data:', error);
