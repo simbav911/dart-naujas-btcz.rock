@@ -19,10 +19,6 @@
                                 <span id="btcz-change-mobile-24h" class="ml-1">0.00%</span>
                             </div>
                             <div class="flex items-center ml-2">
-                                <span class="text-gray-400">7d</span>
-                                <span id="btcz-change-mobile-7d" class="ml-1">0.00%</span>
-                            </div>
-                            <div class="flex items-center ml-2">
                                 <span class="text-gray-400">30d</span>
                                 <span id="btcz-change-mobile-30d" class="ml-1">0.00%</span>
                             </div>
@@ -82,7 +78,7 @@
                         {{ end }}
                     </div>
                     <!-- Price Ticker (Positioned absolutely under language selector) -->
-                    <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center bg-btcz-gray-800/50 rounded-lg px-3 py-1 glass-effect shadow-lg transition-all duration-300 z-40">
+                    <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center bg-btcz-gray-800/50 rounded-lg px-3 py-1 glass-effect shadow-lg transition-all duration-200 z-40">
                         <div class="flex items-center">
                             <span class="text-sm font-bold text-white" id="btcz-price">$0.00000000</span>
                         </div>
@@ -107,10 +103,10 @@
             <!-- Mobile Menu Button -->
             <div class="flex items-center space-x-4 md:hidden">
                 <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                        class="md:hidden flex items-center p-2 rounded-lg hover:bg-btcz-gray-800/50 transition-all duration-300"
+                        class="md:hidden flex items-center p-2 rounded-lg hover:bg-btcz-gray-800/50 transition-all duration-200"
                         :aria-expanded="mobileMenuOpen"
                         aria-label="Toggle mobile menu">
-                    <svg class="w-6 h-6 text-white transform transition-transform duration-300" 
+                    <svg class="w-6 h-6 text-white transform transition-transform duration-200" 
                          :class="{ 'rotate-90': mobileMenuOpen }"
                          fill="none" 
                          stroke="currentColor" 
@@ -122,24 +118,25 @@
 
             <!-- Mobile Menu -->
             <div x-show="mobileMenuOpen"
+                 x-transition:enter="transition-opacity ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition-opacity ease-in duration-300"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
                  x-cloak
                  class="fixed inset-0 bg-black/80 backdrop-blur-sm md:hidden z-40">
                 <div x-show="mobileMenuOpen"
-                     x-transition:enter="transform transition-transform duration-300 ease-out"
-                     x-transition:enter-start="translate-x-full"
-                     x-transition:enter-end="translate-x-0"
-                     x-transition:leave="transform transition-transform duration-300 ease-in"
-                     x-transition:leave-start="translate-x-0"
-                     x-transition:leave-end="translate-x-full"
+                     x-bind:class="{ 'slide-in': mobileMenuOpen, 'slide-out': !mobileMenuOpen }"
                      @click.away="mobileMenuOpen = false"
-                     class="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden z-50 bg-black/90 backdrop-blur-md border-l border-white/5 shadow-2xl"
+                     class="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden z-50 bg-black/90 backdrop-blur-md border-l border-white/5 shadow-2xl transform origin-top-right"
                      style="background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.9));">
                     
                     <nav class="h-full w-full overflow-y-auto flex flex-col">
                         <!-- Menu Header with Close Button -->
                         <div class="flex justify-end items-center p-6 border-b border-white/10">
                             <button @click="mobileMenuOpen = false" 
-                                    class="p-2 text-white/80 hover:text-btcz-gold transition-all duration-300 hover:rotate-90 transform">
+                                    class="p-2 text-white/80 hover:text-btcz-gold transition-all duration-200 hover:rotate-90 transform">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
@@ -152,10 +149,10 @@
                                 {{ if .HasChildren }}
                                     <div class="py-2" x-data="{ subMenuOpen: false }">
                                         <div class="text-right">
-                                            <a class="group inline-flex items-center justify-end text-xl text-white/90 hover:text-btcz-gold transition-all duration-300 cursor-pointer mb-2 hover:translate-x-[-8px] transform"
+                                            <a class="group inline-flex items-center justify-end text-xl text-white/90 hover:text-btcz-gold transition-all duration-200 cursor-pointer mb-2 hover:translate-x-[-8px] transform"
                                                @click="subMenuOpen = !subMenuOpen">
                                                 {{ .Name }}
-                                                <svg class="inline-block w-4 h-4 transform transition-transform duration-300 ml-2 opacity-70 group-hover:opacity-100" 
+                                                <svg class="inline-block w-4 h-4 transform transition-transform duration-200 ml-2 opacity-70 group-hover:opacity-100" 
                                                      :class="{'rotate-180': subMenuOpen}"
                                                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
@@ -168,7 +165,7 @@
                                             {{ range .Children }}
                                             <div class="text-right">
                                                 <a href="{{ .URL | relLangURL }}" 
-                                                   class="inline-block py-2 text-lg text-white/70 hover:text-btcz-gold transition-all duration-300 hover:translate-x-[-8px] transform {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                                                   class="inline-block py-2 text-lg text-white/70 hover:text-btcz-gold transition-all duration-200 hover:translate-x-[-8px] transform {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
                                                    @click="mobileMenuOpen = false">
                                                     {{ .Name }}
                                                 </a>
@@ -179,7 +176,7 @@
                                 {{ else }}
                                     <div class="text-right">
                                         <a href="{{ .URL | relLangURL }}" 
-                                           class="inline-block py-2 text-xl text-white/90 hover:text-btcz-gold transition-all duration-300 hover:translate-x-[-8px] transform {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                                           class="inline-block py-2 text-xl text-white/90 hover:text-btcz-gold transition-all duration-200 hover:translate-x-[-8px] transform {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
                                            @click="mobileMenuOpen = false">
                                             {{ .Name }}
                                         </a>
@@ -191,10 +188,10 @@
                             <div class="mt-10 pt-6 border-t border-white/10">
                                 <div x-data="{ langMenuOpen: false }" class="relative">
                                     <div class="text-right">
-                                        <a class="group inline-flex items-center justify-end text-xl text-white/90 hover:text-btcz-gold transition-all duration-300 cursor-pointer mb-2 hover:translate-x-[-8px] transform"
+                                        <a class="group inline-flex items-center justify-end text-xl text-white/90 hover:text-btcz-gold transition-all duration-200 cursor-pointer mb-2 hover:translate-x-[-8px] transform"
                                            @click="langMenuOpen = !langMenuOpen">
                                             {{ .Site.Language.LanguageName }}
-                                            <svg class="inline-block w-4 h-4 transform transition-transform duration-300 ml-2 opacity-70 group-hover:opacity-100"
+                                            <svg class="inline-block w-4 h-4 transform transition-transform duration-200 ml-2 opacity-70 group-hover:opacity-100"
                                                  :class="{'rotate-180': langMenuOpen}"
                                                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
@@ -207,7 +204,7 @@
                                         {{ range .Site.Home.AllTranslations }}
                                         <div class="text-right">
                                             <a href="{{ .Permalink }}" 
-                                               class="inline-block py-2 text-lg text-white/70 hover:text-btcz-gold transition-all duration-300 hover:translate-x-[-8px] transform {{ if eq .Language $.Site.Language }}text-btcz-gold{{ end }}"
+                                               class="inline-block py-2 text-lg text-white/70 hover:text-btcz-gold transition-all duration-200 hover:translate-x-[-8px] transform {{ if eq .Language $.Site.Language }}text-btcz-gold{{ end }}"
                                                @click="mobileMenuOpen = false">
                                                 {{ .Language.LanguageName }}
                                             </a>
@@ -225,6 +222,7 @@
         <!-- Scripts -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="{{ "css/animations.css" | relURL }}">
         {{ $css := resources.Get "css/main.css" }}
         {{ $style := $css | css.Sass | resources.Minify }}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}">
