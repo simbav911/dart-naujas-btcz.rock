@@ -1,0 +1,60 @@
+{{ define "main" }}
+<div class="bg-btcz-gray-950 min-h-screen">
+    <div class="relative py-12 sm:py-16 lg:py-20">
+        <div class="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+            <div class="glass-effect rounded-3xl p-8 md:p-10 lg:p-12">
+                <div class="prose prose-invert prose-lg max-w-none">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.glass-effect {
+    background: rgba(13, 17, 23, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prose h1 {
+    color: #FFD700;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.prose h2 {
+    color: #FFD700;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.prose strong {
+    color: #FFD700;
+}
+
+.prose p {
+    color: #E5E7EB;
+}
+
+.prose ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.prose ul li {
+    color: #E5E7EB;
+    display: flex;
+    align-items: start;
+    margin-top: 1rem;
+}
+
+.prose ul li:before {
+    content: "•";
+    color: #FFD700;
+    margin-right: 0.5rem;
+}
+</style>
+{{ end }}
