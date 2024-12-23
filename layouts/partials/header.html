@@ -4,8 +4,19 @@
             <!-- Logo and Mobile Price -->
             <div class="flex items-center">
                 <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center">
-                    <img src="{{ "images/btcz-logo.png" | relURL }}" alt="BitcoinZ Logo" class="h-12 w-auto">
-                    <span class="font-heading font-bold text-xl text-white ml-2">BitcoinZ</span>
+                    <div class="logo-container">
+                        <img src="{{ "images/btcz-logo.png" | relURL }}" alt="BitcoinZ Logo" class="h-12 w-auto">
+                    </div>
+                    <div class="animated-logo ml-2">
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0s;">B</span>
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0.1s;">i</span>
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0.2s;">t</span>
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0.3s;">c</span>
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0.4s;">o</span>
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0.5s;">i</span>
+                        <span class="animated-letter font-heading font-bold text-xl text-white" style="animation-delay: 0.6s;">n</span>
+                        <span class="animated-letter special-z font-heading font-bold text-xl" style="animation-delay: 0.7s;">Z</span>
+                    </div>
                 </a>
                 <!-- Mobile Price Ticker -->
                 <div class="md:hidden flex items-center ml-2">
@@ -222,11 +233,13 @@
         <!-- Scripts -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="{{ "css/logo-animation.css" | relURL }}">
         <link rel="stylesheet" href="{{ "css/animations.css" | relURL }}">
         {{ $css := resources.Get "css/main.css" }}
         {{ $style := $css | css.Sass | resources.Minify }}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}">
         <script src="{{ "js/price-ticker.js" | relURL }}"></script>
         <script src="{{ "js/scroll-handler.js" | relURL }}"></script>
+        <script src="{{ "js/main.js" | relURL }}" defer></script>
     </div>
 </header>
