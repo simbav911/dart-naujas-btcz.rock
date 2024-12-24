@@ -1,11 +1,13 @@
-baseURL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
+baseURL = "https://btcz.rocks/"
 # baseURL = "http://localhost:1313/"
 languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = "PaperMod"
 
+
 [pagination]
   pagerSize = 30
+
 
 # Site Settings
 [params]
@@ -13,11 +15,13 @@ theme = "PaperMod"
   keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
 
+
   # Social Media Links
   github = "https://github.com/simbav911/dart-naujas-btcz.rock"
   twitter = "https://twitter.com/bitcoinz_team"
   telegram = "https://t.me/bitcoinzcommunity"
   discord = "https://discord.gg/bitcoinz"
+
 
 # Language Configuration
 [languages]
@@ -62,6 +66,7 @@ theme = "PaperMod"
         url = "/en/roadmap/"
         weight = 7
 
+
   [languages.es]
     languageName = "Español"
     weight = 2
@@ -72,120 +77,3 @@ theme = "PaperMod"
         name = "Inicio"
         url = "/es/"
         weight = 1
-      [[languages.es.menu.main]]
-        identifier = "why-bitcoinz"
-        name = "Por qué BitcoinZ"
-        url = "/es/why-bitcoinz/"
-        weight = 2
-      [[languages.es.menu.main]]
-        identifier = "wallets"
-        name = "Billeteras"
-        url = "/es/wallets/"
-        weight = 3
-      [[languages.es.menu.main]]
-        identifier = "buy"
-        name = "Dónde Comprar"
-        url = "/es/buy/"
-        weight = 4
-      [[languages.es.menu.main]]
-        identifier = "learn-crypto"
-        name = "Aprender Crypto"
-        url = "/es/learn/"
-        weight = 5
-      [[languages.es.menu.main]]
-        identifier = "news"
-        name = "Noticias"
-        url = "/es/news/"
-        weight = 6
-      [[languages.es.menu.main]]
-        identifier = "roadmap"
-        name = "Hoja de Ruta"
-        url = "/es/roadmap/"
-        weight = 7
-
-  [languages.zh]
-    languageName = "中文"
-    weight = 3
-    contentDir = "content/zh"
-    [languages.zh.menu]
-      [[languages.zh.menu.main]]
-        identifier = "home"
-        name = "首页"
-        url = "/zh/"
-        weight = 1
-      [[languages.zh.menu.main]]
-        identifier = "why-bitcoinz"
-        name = "为什么选择BitcoinZ"
-        url = "/zh/why-bitcoinz/"
-        weight = 2
-      [[languages.zh.menu.main]]
-        identifier = "wallets"
-        name = "钱包"
-        url = "/zh/wallets/"
-        weight = 3
-      [[languages.zh.menu.main]]
-        identifier = "buy"
-        name = "购买"
-        url = "/zh/buy/"
-        weight = 4
-      [[languages.zh.menu.main]]
-        identifier = "learn-crypto"
-        name = "学习加密货币"
-        url = "/zh/learn/"
-        weight = 5
-      [[languages.zh.menu.main]]
-        identifier = "news"
-        name = "新闻"
-        url = "/zh/news/"
-        weight = 6
-      [[languages.zh.menu.main]]
-        identifier = "roadmap"
-        name = "路线图"
-        url = "/zh/roadmap/"
-        weight = 7
-
-# Build Settings
-[build]
-  writeStats = true
-
-# CSS Processing
-[module]
-  [module.hugoVersion]
-    extended = true
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.mounts]]
-    source = "static"
-    target = "static"
-
-# Markup Settings
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-
-# Performance Optimization
-[minify]
-  disableCSS = false
-  disableHTML = false
-  disableJS = false
-  disableSVG = false
-  minifyOutput = true
-
-# SEO Settings
-[taxonomies]
-  category = "categories"
-  tag = "tags"
-
-# Deployment Settings
-[deployment]
-  [[deployment.targets]]
-    name = "github-pages"
-    URL = "https://simbav911.github.io/dart-naujas-btcz.rock/"
-
-# Sitemap Configuration
-[sitemap]
-  changefreq = "weekly"
-  priority = 0.5
-  filename = "sitemap.xml"
