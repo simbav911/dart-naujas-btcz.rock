@@ -35,7 +35,7 @@
                     <div class="flex items-center justify-center mb-8">
                         <div class="w-32 h-32 rounded-2xl p-4 bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 
                                   shadow-lg flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                            <img src="{{ .icon }}" alt="{{ .name }} logo" class="w-24 h-24 object-contain">
+                            <img src="{{ .icon | relURL }}" alt="{{ .name }} logo" class="w-24 h-24 object-contain">
                         </div>
                     </div>
                     
