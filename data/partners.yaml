@@ -1,5 +1,5 @@
 - name: "Freedom Voice X (Twitter)"
-  icon: "/images/partners/x.png"
+  icon: "images/partners/x.png"
   rating: 5
   description: "X, formerly known as Twitter, is a pioneering social media platform renowned for its commitment to open dialogue and the free exchange of ideas. In the spirit of BitcoinZ, X promotes unrestricted communication, privacy, and a vibrant, community-driven environment. Together, we champion a digital space where voices are heard, innovation thrives, and fundamental freedoms remain protected."
   tags: ["Free Speech", "Privacy", "Decentralization", "Digital Rights", "Community"]
@@ -7,7 +7,7 @@
   order: 1
 
 - name: "TradeOgre"
-  icon: "/images/partners/tradeogre.png"
+  icon: "images/partners/tradeogre.png"
   rating: 5
   description: "TradeOgre is a highly rated cryptocurrency exchange platform that supports BitcoinZ trading. Renowned for its simple, efficient interface, TradeOgre prioritizes user privacy and offers seamless trading without requiring KYC verification."
   tags: ["Exchange Partner", "Highly Rated", "Trading", "Privacy"]
@@ -15,7 +15,7 @@
   order: 2
 
 - name: "Open Partnership Invite"
-  icon: "/images/partners/partnership.png"
+  icon: "images/partners/partnership.png"
   rating: 5
   description: "Discover the power of true decentralization by becoming a BitcoinZ Partner. We invite like-minded individuals and organizations to support and collaborate with us, championing privacy, freedom, and community-driven innovation. Join us on this journey and help shape a future where financial sovereignty is accessible to all."
   tags: ["Partnership", "Community", "Decentralization", "Privacy", "Freedom"]

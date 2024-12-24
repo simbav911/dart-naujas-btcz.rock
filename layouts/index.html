@@ -1,9 +1,27 @@
 {{ define "main" }}
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
 <!-- Hero Section with Enhanced Animation -->
-<section class="relative bg-gradient-to-br from-btcz-gray-900 to-btcz-gray-800 overflow-hidden">
+<section class="relative bg-gradient-to-br from-btcz-gray-900 to-btcz-gray-800 overflow-hidden fade-in min-h-screen">
     <div class="absolute inset-0 bg-gradient-to-r from-btcz-gold/10 to-transparent opacity-50 animate-pulse"></div>
-    <div class="container mx-auto px-4 py-16 md:py-24 lg:py-40 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <div style="padding-top: 5cm" class="container mx-auto px-4 py-16 md:py-24 lg:py-32 relative z-10 min-h-[calc(100vh-80px)] flex flex-col">
+        <!-- Hero Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 mt-80">
             <div class="space-y-6 md:space-y-8 text-white">
                 <h1 class="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white animate-gradient-x leading-tight">
                     {{ i18n "heroTitle" | default "Empowering Decentralization with BitcoinZ" }}
@@ -36,78 +54,74 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Features Section with Enhanced Interactivity -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24">
-    <div class="container mx-auto px-4">
-        <a href="{{ "en/why-bitcoinz" | relLangURL }}" class="block">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 md:mb-12 bg-gradient-to-r from-btcz-gold via-yellow-400 to-btcz-gold bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+        <!-- Why BitcoinZ Features -->
+        <div class="mt-16 lg:mt-24">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 md:mb-12 bg-gradient-to-r from-btcz-gold via-yellow-400 to-btcz-gold bg-clip-text text-transparent">
                 {{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}
             </h2>
-        </a>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-            <!-- Decentralization -->
-            <a href="{{ "en/decentralization" | relLangURL }}" class="block h-full">
-                <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
-                    <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                        <i class="fa-solid fa-crosshairs text-2xl md:text-3xl text-btcz-gold"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                <!-- Decentralization -->
+                <a href="{{ "en/decentralization" | relLangURL }}" class="block h-full">
+                    <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
+                        <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                            <i class="fa-solid fa-crosshairs text-2xl md:text-3xl text-btcz-gold"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "decentralization" | default "Decentralization" }}</h3>
+                        <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
+                            {{ i18n "decentralizationDesc" | default "True decentralization with community-driven development and fair launch." }}
+                        </p>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "decentralization" | default "Decentralization" }}</h3>
-                    <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
-                        {{ i18n "decentralizationDesc" | default "True decentralization with community-driven development and fair launch." }}
-                    </p>
-                </div>
-            </a>
+                </a>
 
-            <!-- Privacy -->
-            <a href="{{ "en/privacy" | relLangURL }}" class="block h-full">
-                <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
-                    <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                        <i class="fa-solid fa-shield-halved text-2xl md:text-3xl text-btcz-gold"></i>
+                <!-- Privacy -->
+                <a href="{{ "en/privacy" | relLangURL }}" class="block h-full">
+                    <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
+                        <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                            <i class="fa-solid fa-shield-halved text-2xl md:text-3xl text-btcz-gold"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "privacy" | default "Privacy" }}</h3>
+                        <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
+                            {{ i18n "privacyDesc" | default "Enhanced privacy features with zk-SNARKs technology." }}
+                        </p>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "privacy" | default "Privacy" }}</h3>
-                    <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
-                        {{ i18n "privacyDesc" | default "Enhanced privacy features with zk-SNARKs technology." }}
-                    </p>
-                </div>
-            </a>
+                </a>
 
-            <!-- Community -->
-            <a href="{{ "en/community" | relLangURL }}" class="block h-full">
-                <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
-                    <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                        <i class="fa-solid fa-users text-2xl md:text-3xl text-btcz-gold"></i>
+                <!-- Community -->
+                <a href="{{ "en/community" | relLangURL }}" class="block h-full">
+                    <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
+                        <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                            <i class="fa-solid fa-users text-2xl md:text-3xl text-btcz-gold"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "community" | default "Community" }}</h3>
+                        <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
+                            {{ i18n "communityDesc" | default "Strong and active community driving the project forward." }}
+                        </p>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "community" | default "Community" }}</h3>
-                    <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
-                        {{ i18n "communityDesc" | default "Strong and active community driving the project forward." }}
-                    </p>
-                </div>
-            </a>
+                </a>
 
-            <!-- Scalability -->
-            <a href="{{ "en/scalability" | relLangURL }}" class="block h-full">
-                <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
-                    <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                        <i class="fa-solid fa-gauge-high text-2xl md:text-3xl text-btcz-gold"></i>
+                <!-- Scalability -->
+                <a href="{{ "en/scalability" | relLangURL }}" class="block h-full">
+                    <div class="feature-card group bg-gradient-to-b from-btcz-gray-900 to-btcz-gray-800 border border-btcz-gray-800 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
+                        <div class="bg-btcz-gray-800/50 rounded-xl p-3 md:p-4 mb-4 md:mb-6 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                            <i class="fa-solid fa-gauge-high text-2xl md:text-3xl text-btcz-gold"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "scalability" | default "Scalability" }}</h3>
+                        <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
+                            {{ i18n "scalabilityDesc" | default "Near-zero fees and fast transactions, no matter the network load." }}
+                        </p>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-btcz-gold">{{ i18n "scalability" | default "Scalability" }}</h3>
-                    <p class="text-base md:text-lg text-btcz-gray-200/90 leading-relaxed line-clamp-3">
-                        {{ i18n "scalabilityDesc" | default "Near-zero fees and fast transactions, no matter the network load." }}
-                    </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- Get Started Section with Improved Readability -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24">
+<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
     <div class="container mx-auto px-4">
         <div class="text-center max-w-3xl mx-auto">
-            <h2 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-5xl mb-8">
+            <h2 class="text-5xl mb-8">
                 {{ i18n "getStartedTitle" | default "Get Started with BitcoinZ" }}
             </h2>
             <p class="text-xl mb-16 text-btcz-gray-200 leading-relaxed">
@@ -146,7 +160,7 @@
 </section>
 
 <!-- Latest News Section with Improved Contrast -->
-<section class="section bg-btcz-gray-950 py-12">
+<section class="section bg-btcz-gray-950 py-12 fade-in">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-4xl">
@@ -179,7 +193,7 @@
 {{ partial "partners-section.html" . }}
 
 <!-- Community Section with Enhanced Visibility -->
-<section id="community" class="section bg-btcz-gray-900 py-16 md:py-24">
+<section id="community" class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
             {{ i18n "joinOurCommunity" | default "Join Our Community" }}
@@ -305,4 +319,23 @@
     </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Add fade-in class to sections
+    document.querySelectorAll('section').forEach((section) => {
+        section.classList.add('fade-in');
+        observer.observe(section);
+    });
+});
+</script>
 {{ end }}
