@@ -89,6 +89,7 @@
                            (mode === 'completed' && '{{ .Params.status }}' === 'completed') || 
                            (mode === 'upcoming' && '{{ .Params.status }}' !== 'completed')"
                     class="group">
+                    <a href="{{ .RelPermalink }}" class="block h-full">
                     <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
                         <!-- Status Badge -->
                         <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
@@ -157,20 +158,21 @@
                                 </div>
                             </div>
 
-                            <!-- Read More Link -->
+                            <!-- Date and Read More -->
                             <div class="flex items-center justify-between text-sm mt-6 pt-4 border-t border-btcz-gray-800">
                                 <span class="text-btcz-gray-400">
                                     {{ .Date.Format "January 2006" }}
                                 </span>
-                                <a href="{{ .RelPermalink }}" class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
+                                <span class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
                                     Read More
                                     <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
-                                </a>
+                                </span>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </article>
                 {{ end }}
                 {{ end }}
