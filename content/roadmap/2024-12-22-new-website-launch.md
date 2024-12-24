@@ -1,4 +1,3 @@
-```markdown
 ---
 title: "New BitcoinZ Website Launch by Simbav"
 description: "Community-driven website redesign showcasing true decentralization"
