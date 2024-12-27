@@ -19,13 +19,11 @@
                     </div>
                 </a>
                 <!-- Mobile Price Ticker -->
-                <div class="flex items-center md:hidden">
-                    <div class="price-ticker bg-btcz-gray-800/50 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-btcz-gold/20 shadow-lg">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-btcz-gold font-medium text-sm">$0.00005104</span>
-                            <span class="text-red-500 text-xs">-4.19%</span>
-                            <span class="text-gray-400 text-xs">24h</span>
-                        </div>
+                <div class="price-ticker bg-btcz-gray-800/50 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-btcz-gold/20 shadow-lg md:hidden">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-btcz-gold font-medium text-sm" id="btcz-price-mobile">$0.00000000</span>
+                        <span class="text-xs" id="btcz-change-mobile-24h">0.00%</span>
+                        <span class="text-gray-400 text-xs">24h</span>
                     </div>
                 </div>
             </div>
