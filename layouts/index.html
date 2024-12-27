@@ -14,6 +14,55 @@ html {
     opacity: 1;
     transform: translateY(0);
 }
+
+.subscription-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.subscription-message .message-content {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid #ffd700;
+    text-align: center;
+}
+
+.subscription-message p {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.subscription-message button {
+    background: #ffd700;
+    color: #1a1a1a;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.subscription-message button:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 </style>
 
 <!-- Hero Section with Enhanced Animation -->
@@ -351,6 +400,7 @@ html {
     </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
@@ -396,7 +446,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (response.ok) {
-                    alert('Thank you for subscribing!');
+                    // Create and show message
+                    const message = document.createElement('div');
+                    message.className = 'subscription-message';
+                    message.innerHTML = `
+                        <div class="message-content">
+                            <p>Thank you for subscribing!</p>
+                            <button onclick="this.parentElement.parentElement.remove()">OK</button>
+                        </div>
+                    `;
+                    form.parentElement.appendChild(message);
+                    
+                    // Trigger confetti
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                    
                     form.reset();
                 } else {
                     throw new Error('Subscription failed');
