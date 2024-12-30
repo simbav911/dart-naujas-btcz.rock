@@ -1,4 +1,9 @@
-baseURL = "/"
+# Production URL
+baseURL = "https://getbtcz.com/"
+
+# Development URL (uncomment for local testing)
+# baseURL = "http://localhost:1313/"
+
 languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = "PaperMod"
