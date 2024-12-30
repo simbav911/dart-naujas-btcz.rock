@@ -1,13 +1,10 @@
-baseURL = "https://btcz.rocks/"
-# baseURL = "http://localhost:1313/"
+baseURL = "/"
 languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = "PaperMod"
 
-
 [pagination]
   pagerSize = 30
-
 
 # Site Settings
 [params]
@@ -15,13 +12,11 @@ theme = "PaperMod"
   keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
 
-
   # Social Media Links
   github = "https://github.com/simbav911/dart-naujas-btcz.rock"
   twitter = "https://twitter.com/bitcoinz_team"
   telegram = "https://t.me/bitcoinzcommunity"
   discord = "https://discord.gg/bitcoinz"
-
 
 # Language Configuration
 [languages]
@@ -65,7 +60,6 @@ theme = "PaperMod"
         name = "Roadmap"
         url = "/en/roadmap/"
         weight = 7
-
 
   [languages.es]
     languageName = "Español"
