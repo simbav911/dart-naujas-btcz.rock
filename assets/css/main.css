@@ -1,3 +1,21 @@
+/* Google Translate elements */
+.goog-te-banner-frame, .goog-te-gadget-icon {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* Language selector animations */
+.translate-enter-active {
+    transition: all 0.2s ease-out;
+}
+
+.translate-leave-active {
+    transition: all 0.15s ease-in;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

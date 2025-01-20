@@ -11,6 +11,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+
 // Animation Control
 document.addEventListener('DOMContentLoaded', () => {
     const ANIMATION_COOLDOWN = 4 * 60 * 1000; // 4 minutes
