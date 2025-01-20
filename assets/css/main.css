@@ -22,16 +22,18 @@ body {
 
 /* Glass Effect */
 .glass-effect {
-    @apply bg-clip-padding backdrop-filter;
+    @apply bg-clip-padding;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 /* Button Styles */
 .btn-primary {
     @apply inline-flex items-center justify-center px-8 py-3 text-lg font-medium rounded-xl;
-    @apply transform transition-all duration-300;
+    @apply transition-all duration-300;
     @apply shadow-lg shadow-btcz-gold/20;
+    transform: translateZ(0);
 }
 
 .btn-secondary {
@@ -44,7 +46,8 @@ body {
 /* Button Hover Effects */
 .btn-primary:hover {
     @apply shadow-xl shadow-btcz-gold/30;
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateZ(0);
+    will-change: transform, box-shadow;
 }
 
 .btn-secondary:hover {
@@ -55,6 +58,8 @@ body {
 /* Year Timeline */
 .year-timeline {
     @apply fixed top-1/4 left-4 z-50;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .year-timeline-line {
@@ -68,17 +73,23 @@ body {
 /* Smooth Scroll Behavior */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+    scroll-snap-type: y proximity;
 }
 
 /* Year Section */
 .year-section {
     scroll-margin-top: 2rem;
+    scroll-behavior: smooth;
+    scroll-snap-align: start;
 }
 
 /* Mobile Timeline */
 @media (max-width: 768px) {
     .year-timeline {
-        @apply fixed bottom-4 left-0 right-0 top-auto flex justify-center items-center bg-btcz-gray-950 py-2 px-4 space-x-2 overflow-x-auto;
+        @apply fixed bottom-4 left-0 right-0 top-auto flex justify-center items-center bg-btcz-gray-950/95 py-2 px-4 space-x-2 overflow-x-auto;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
     
     .year-timeline-line {
@@ -95,7 +106,9 @@ html {
     @apply p-4 rounded-lg shadow-lg;
     max-width: 400px;
     margin: auto;
-    background-color: #1a1a1a;
+    background-color: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .group.bg-btcz-gray-900 img {
