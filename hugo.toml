@@ -38,41 +38,30 @@ theme = "PaperMod"
       [[languages.en.menu.main]]
         identifier = "why-bitcoinz"
         name = "Why BitcoinZ"
-        url = "/en/why-bitcoinz/"
+        url = "/why-bitcoinz/"
         weight = 2
       [[languages.en.menu.main]]
         identifier = "wallets"
         name = "Wallets"
-        url = "/en/wallets/"
+        url = "/wallets/"
         weight = 3
       [[languages.en.menu.main]]
         identifier = "buy"
         name = "Where to Buy"
-        url = "/en/buy/"
+        url = "/buy/"
         weight = 4
       [[languages.en.menu.main]]
         identifier = "learn-crypto"
         name = "Learn Crypto"
-        url = "/en/learn/"
+        url = "/learn/"
         weight = 5
       [[languages.en.menu.main]]
         identifier = "news"
         name = "News"
-        url = "/en/news/"
+        url = "/news/"
         weight = 6
       [[languages.en.menu.main]]
         identifier = "roadmap"
         name = "Roadmap"
-        url = "/en/roadmap/"
+        url = "/roadmap/"
         weight = 7
-
-  [languages.es]
-    languageName = "Español"
-    weight = 2
-    contentDir = "content/es"
-    [languages.es.menu]
-      [[languages.es.menu.main]]
-        identifier = "home"
-        name = "Inicio"
-        url = "/es/"
-        weight = 1
