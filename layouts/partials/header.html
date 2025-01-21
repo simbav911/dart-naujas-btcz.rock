@@ -72,10 +72,11 @@
                     </button>
                     <div x-show="langOpen"
                          @click.away="langOpen = false"
-                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 rounded-lg shadow-xl backdrop-blur-sm z-50"
+                         class="absolute right-0 mt-2 py-2 w-64 bg-black/95 rounded-lg shadow-xl backdrop-blur-sm z-50"
+                         style="max-height: 400px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #555 transparent;"
                          x-on:click.stop>
                         <button onclick="translatePage('en')"
-                                class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+                                class="block px-4 py-3 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 w-full text-left transition-colors duration-200 mb-1">
                             English
                         </button>
                         <button onclick="translatePage('es')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Español</button>
@@ -96,67 +97,47 @@
                         <button onclick="translatePage('no')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Norsk</button>
                         <button onclick="translatePage('da')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Dansk</button>
                         <button onclick="translatePage('ar')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">العربية</button>
-                        <button onclick="translatePage('pt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Português</button>
-                        <button onclick="translatePage('hi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">हिन्दी</button>
-                        <button onclick="translatePage('es')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Español</button>
-                        <button onclick="translatePage('fr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Français</button>
-                        <button onclick="translatePage('de')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Deutsch</button>
-                        <button onclick="translatePage('zh-CN')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">中文 (简体)</button>
-                        <button onclick="translatePage('ja')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">日本語</button>
-                        <button onclick="translatePage('ru')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Русский</button>
-                        <button onclick="translatePage('ar')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">العربية</button>
-                        <button onclick="translatePage('pt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Português</button>
-                        <button onclick="translatePage('hi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">हिन्दी</button>
-                        <button onclick="translatePage('it')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Italiano</button>
-                        <button onclick="translatePage('nl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Nederlands</button>
-                        <button onclick="translatePage('ko')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">한국어</button>
-                        <button onclick="translatePage('tr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Türkçe</button>
-                        <button onclick="translatePage('pl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Polski</button>
-                        <button onclick="translatePage('sv')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Svenska</button>
-                        <button onclick="translatePage('fi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Suomi</button>
-                        <button onclick="translatePage('no')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Norsk</button>
-                        <button onclick="translatePage('da')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Dansk</button>
-                        <button @click="translateLanguage('id')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Bahasa Indonesia</button>
-                        <button @click="translateLanguage('vi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Tiếng Việt</button>
-                        <button @click="translateLanguage('he')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">עברית</button>
-                        <button @click="translateLanguage('th')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ไทย</button>
-                        <button @click="translateLanguage('ms')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Bahasa Melayu</button>
-                        <button @click="translateLanguage('uk')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Українська</button>
-                        <button @click="translateLanguage('hu')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Magyar</button>
-                        <button @click="translateLanguage('el')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Ελληνικά</button>
-                        <button @click="translateLanguage('cs')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Čeština</button>
-                        <button @click="translateLanguage('ro')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Română</button>
-                        <button @click="translateLanguage('sk')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Slovenčina</button>
-                        <button @click="translateLanguage('hr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Hrvatski</button>
-                        <button @click="translateLanguage('bg')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Български</button>
-                        <button @click="translateLanguage('lt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Lietuvių</button>
-                        <button @click="translateLanguage('sl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Slovenščina</button>
-                        <button @click="translateLanguage('et')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Eesti</button>
-                        <button @click="translateLanguage('lv')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Latviešu</button>
-                        <button @click="translateLanguage('sr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Српски</button>
-                        <button @click="translateLanguage('ca')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Català</button>
-                        <button @click="translateLanguage('fil')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Filipino</button>
-                        <button @click="translateLanguage('is')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Íslenska</button>
-                        <button @click="translateLanguage('af')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Afrikaans</button>
-                        <button @click="translateLanguage('sw')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Kiswahili</button>
-                        <button @click="translateLanguage('eu')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Euskara</button>
-                        <button @click="translateLanguage('gl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Galego</button>
-                        <button @click="translateLanguage('sq')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Shqip</button>
-                        <button @click="translateLanguage('hy')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Հայերեն</button>
-                        <button @click="translateLanguage('ka')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ქართული</button>
-                        <button @click="translateLanguage('ml')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">മലയാളം</button>
-                        <button @click="translateLanguage('ta')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">தமிழ்</button>
-                        <button @click="translateLanguage('te')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">తెలుగు</button>
-                        <button @click="translateLanguage('kn')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ಕನ್ನಡ</button>
-                        <button @click="translateLanguage('mr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">मराठी</button>
-                        <button @click="translateLanguage('gu')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ગુજરાતી</button>
-                        <button @click="translateLanguage('pa')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ਪੰਜਾਬੀ</button>
-                        <button @click="translateLanguage('bn')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">বাংলা</button>
-                        <button @click="translateLanguage('ne')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">नेपाली</button>
-                        <button @click="translateLanguage('si')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">සිංහල</button>
-                        <button @click="translateLanguage('km')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ខ្មែរ</button>
-                        <button @click="translateLanguage('lo')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ລາວ</button>
-                        <button @click="translateLanguage('my')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">မြန်မာ</button>
+                        <button onclick="translatePage('id')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Bahasa Indonesia</button>
+                        <button onclick="translatePage('vi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Tiếng Việt</button>
+                        <button onclick="translatePage('he')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">עברית</button>
+                        <button onclick="translatePage('th')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ไทย</button>
+                        <button onclick="translatePage('ms')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Bahasa Melayu</button>
+                        <button onclick="translatePage('uk')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Українська</button>
+                        <button onclick="translatePage('hu')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Magyar</button>
+                        <button onclick="translatePage('el')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Ελληνικά</button>
+                        <button onclick="translatePage('cs')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Čeština</button>
+                        <button onclick="translatePage('ro')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Română</button>
+                        <button onclick="translatePage('sk')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Slovenčina</button>
+                        <button onclick="translatePage('hr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Hrvatski</button>
+                        <button onclick="translatePage('bg')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Български</button>
+                        <button onclick="translatePage('lt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Lietuvių</button>
+                        <button onclick="translatePage('sl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Slovenščina</button>
+                        <button onclick="translatePage('et')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Eesti</button>
+                        <button onclick="translatePage('lv')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Latviešu</button>
+                        <button onclick="translatePage('sr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Српски</button>
+                        <button onclick="translatePage('ca')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Català</button>
+                        <button onclick="translatePage('fil')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Filipino</button>
+                        <button onclick="translatePage('is')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Íslenska</button>
+                        <button onclick="translatePage('af')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Afrikaans</button>
+                        <button onclick="translatePage('sw')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Kiswahili</button>
+                        <button onclick="translatePage('eu')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Euskara</button>
+                        <button onclick="translatePage('gl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Galego</button>
+                        <button onclick="translatePage('sq')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Shqip</button>
+                        <button onclick="translatePage('hy')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Հայերեն</button>
+                        <button onclick="translatePage('ka')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ქართული</button>
+                        <button onclick="translatePage('ml')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">മലയാളം</button>
+                        <button onclick="translatePage('ta')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">தமிழ்</button>
+                        <button onclick="translatePage('te')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">తెలుగు</button>
+                        <button onclick="translatePage('kn')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ಕನ್ನಡ</button>
+                        <button onclick="translatePage('mr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">मराठी</button>
+                        <button onclick="translatePage('gu')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ગુજરાતી</button>
+                        <button onclick="translatePage('pa')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ਪੰਜਾਬੀ</button>
+                        <button onclick="translatePage('bn')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">বাংলা</button>
+                        <button onclick="translatePage('ne')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">नेपाली</button>
+                        <button onclick="translatePage('si')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">සිංහල</button>
+                        <button onclick="translatePage('km')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ខ្មែរ</button>
+                        <button onclick="translatePage('lo')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">ລາວ</button>
+                        <button onclick="translatePage('my')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">မြန်မာ</button>
                     </div>
                     <!-- Price Ticker (Positioned absolutely under language selector) -->
                     <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center bg-btcz-gray-800/50 rounded-lg px-3 py-1 glass-effect shadow-lg transition-all duration-200 z-40">
@@ -306,6 +287,7 @@
         <!-- Scripts -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.1.0/css/flag-icons.min.css">
         <link rel="stylesheet" href="{{ "css/logo-animation.css" | relURL }}">
         <link rel="stylesheet" href="{{ "css/animations.css" | relURL }}">
         {{ $css := resources.Get "css/main.css" }}
