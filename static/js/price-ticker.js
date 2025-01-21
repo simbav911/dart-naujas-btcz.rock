@@ -106,7 +106,8 @@ function updateChangeElement(elementId, changeValue) {
     if (element && changeValue !== undefined && changeValue !== null) {
         const isPositive = changeValue >= 0;
         element.textContent = `${isPositive ? '+' : ''}${changeValue.toFixed(2)}%`;
-        element.className = `ml-1 ${isPositive ? 'text-green-500' : 'text-red-500'}`;
+        element.style.color = isPositive ? 'green' : '';
+        element.className = `ml-1`;
     }
 }
 
