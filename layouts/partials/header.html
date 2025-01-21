@@ -64,8 +64,12 @@
             <div class="hidden md:flex items-center space-x-4">
                 <div x-data="{ langMenuOpen: false }" class="relative">
                     <button @click="langMenuOpen = !langMenuOpen" class="flex items-center space-x-2 text-white hover:text-btcz-gold transition-colors duration-200">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 9h16.8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 15h16.8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3a22 22 0 000 18"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c1.657 2.333 2.5 5.167 2.5 8.5s-.843 6.167-2.5 8.5"></path>
                         </svg>
                         <span class="ml-2 text-white">Language</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,9 +122,9 @@
                             }
                         </style>
                         <button onclick="
-                        const loading = document.querySelector('.translate-loading');
-                        if (loading) {
-                            loading.remove();
+                        const desktopLoading = document.querySelector('.translate-loading');
+                        if (desktopLoading) {
+                            desktopLoading.remove();
                         }
                         localStorage.setItem('selectedLang', 'en');
                         window.location.reload();
@@ -164,38 +168,6 @@
                         <button onclick="translatePage('pt')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
                             <span class="fi fi-pt"></span>
                             <span class="ml-3">Português</span>
-                        </button>
-                        <button onclick="translatePage('hi')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-in"></span>
-                            <span class="ml-3">हिन्दी</span>
-                        </button>
-                        <button onclick="translatePage('it')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-it"></span>
-                            <span class="ml-3">Italiano</span>
-                        </button>
-                        <button onclick="translatePage('nl')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-nl"></span>
-                            <span class="ml-3">Nederlands</span>
-                        </button>
-                        <button onclick="translatePage('ko')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-kr"></span>
-                            <span class="ml-3">한국어</span>
-                        </button>
-                        <button onclick="translatePage('pl')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-pl"></span>
-                            <span class="ml-3">Polski</span>
-                        </button>
-                        <button onclick="translatePage('sv')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-se"></span>
-                            <span class="ml-3">Svenska</span>
-                        </button>
-                        <button onclick="translatePage('no')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-no"></span>
-                            <span class="ml-3">Norsk</span>
-                        </button>
-                        <button onclick="translatePage('da')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
-                            <span class="fi fi-dk"></span>
-                            <span class="ml-3">Dansk</span>
                         </button>
                         <button onclick="translatePage('ar')" class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
                            <span class="fi fi-sa"></span>
@@ -483,9 +455,9 @@
                                     </style>
                                     <div class="mobile-lang-menu py-2">
                                         <button onclick="
-                                            const loading = document.querySelector('.translate-loading');
-                                            if (loading) {
-                                                loading.remove();
+                                            const mobileLoading = document.querySelector('.translate-loading');
+                                            if (mobileLoading) {
+                                                mobileLoading.remove();
                                             }
                                             localStorage.setItem('selectedLang', 'en');
                                             window.location.reload();
@@ -654,9 +626,49 @@
                                             <span class="fi fi-in"></span>
                                             <span class="ml-3">தமிழ்</span>
                                         </button>
+                                        <button onclick="translatePage('te')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-in"></span>
+                                            <span class="ml-3">తెలుగు</span>
+                                        </button>
+                                        <button onclick="translatePage('kn')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-in"></span>
+                                            <span class="ml-3">ಕನ್ನಡ</span>
+                                        </button>
                                         <button onclick="translatePage('mr')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
                                             <span class="fi fi-in"></span>
                                             <span class="ml-3">मराठी</span>
+                                        </button>
+                                        <button onclick="translatePage('gu')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-in"></span>
+                                            <span class="ml-3">ગુજરાતી</span>
+                                        </button>
+                                        <button onclick="translatePage('pa')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-in"></span>
+                                            <span class="ml-3">ਪੰਜਾਬੀ</span>
+                                        </button>
+                                        <button onclick="translatePage('bn')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-bd"></span>
+                                            <span class="ml-3">বাংলা</span>
+                                        </button>
+                                        <button onclick="translatePage('ne')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-np"></span>
+                                            <span class="ml-3">नेपाली</span>
+                                        </button>
+                                        <button onclick="translatePage('si')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-lk"></span>
+                                            <span class="ml-3">සිංහල</span>
+                                        </button>
+                                        <button onclick="translatePage('km')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-kh"></span>
+                                            <span class="ml-3">ខ្មែរ</span>
+                                        </button>
+                                        <button onclick="translatePage('lo')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-la"></span>
+                                            <span class="ml-3">ລາວ</span>
+                                        </button>
+                                        <button onclick="translatePage('my')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                            <span class="fi fi-mm"></span>
+                                            <span class="ml-3">မြန်မာ</span>
                                         </button>
                                     </div>
                                 </div>
