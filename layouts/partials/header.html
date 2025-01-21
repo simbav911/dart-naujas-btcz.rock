@@ -97,7 +97,14 @@
                                  flex: 1;
                              }
                          </style>
-                        <button onclick="translatePage('en')"
+                        <button onclick="
+                        const loading = document.querySelector('.translate-loading');
+                        if (loading) {
+                            loading.remove();
+                        }
+                        localStorage.setItem('selectedLang', 'en');
+                        window.location.reload();
+                        "
                                 class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 w-full text-left transition-colors duration-200">
                             <span class="fi fi-us"></span>
                             <span class="ml-3">English</span>
@@ -346,8 +353,8 @@
                         </div>
                         <div class="flex items-center space-x-2 text-xs ml-2">
                             <div class="flex items-center">
-                                <span class="text-gray-400">24 H</span>
-                                <span id="change-24h" class="ml-1">0.00%</span>
+                                <span class="text-gray-400 ml-1" style="display: inline-block;">24 H</span>
+                                <span id="change-24h" class="ml-1" style="display: inline-block;">0.00%</span>
                             </div>
                             <div class="flex items-center ml-2">
                                 <span class="text-gray-400">7d</span>
@@ -469,6 +476,14 @@
         <script>
         let translateInitialized = false;
         function translatePage(lang) {
+            if (lang === 'en') {
+                const loading = document.querySelector('.translate-loading');
+                if (loading) {
+                    loading.remove();
+                }
+                window.location.reload();
+                return;
+            }
             // Show loading indicator
             const loading = document.createElement('div');
             loading.className = 'translate-loading';
@@ -542,7 +557,11 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const storedLang = localStorage.getItem('selectedLang');
                 if (storedLang) {
-                    translatePage(storedLang);
+                    if (storedLang !== 'en') {
+                        translatePage(storedLang);
+                    }
+                } else {
+                    translatePage('en');
                 }
             });
         </script>
