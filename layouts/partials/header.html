@@ -480,15 +480,10 @@
             loading.textContent = 'Translating...';
             document.body.appendChild(loading);
 
-            // Fallback to server-side language if translation fails
-            const fallback = () => {
-                window.location.href = `/${lang}`;
-            };
-
-            // Set timeout for translation response
+            // Handle translation timeout
             const translationTimeout = setTimeout(() => {
                 console.error('Translation timed out');
-                fallback();
+                showErrorToast('Translation taking longer than expected');
             }, 5000);
 
             // Get all text nodes in the document
