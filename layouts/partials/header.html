@@ -73,7 +73,8 @@
                     <div x-cloak
                          x-show="langMenuOpen"
                          @click.away="langMenuOpen = false"
-                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 overflow-y-auto max-h-[80vh] z-50">
+                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 z-50"
+                         style="max-height: 500px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #FFD700 rgba(0,0,0,0.3);">
                         <style>
                             .lang-button {
                                 display: flex !important;
@@ -81,6 +82,10 @@
                                 padding: 0.75rem 1rem !important;
                                 width: 100% !important;
                                 justify-content: flex-start !important;
+                                transition: all 0.2s ease-in-out;
+                            }
+                            .lang-button:hover {
+                                background-color: rgba(31, 41, 55, 0.8);
                             }
                             .lang-button .fi {
                                 flex-shrink: 0;
@@ -93,6 +98,21 @@
                             .lang-button span:last-child {
                                 margin-left: 0.75rem;
                                 flex: 1;
+                            }
+                            /* Scrollbar Styles */
+                            div[x-show="langMenuOpen"]::-webkit-scrollbar {
+                                width: 6px;
+                            }
+                            div[x-show="langMenuOpen"]::-webkit-scrollbar-track {
+                                background: rgba(0,0,0,0.3);
+                                border-radius: 3px;
+                            }
+                            div[x-show="langMenuOpen"]::-webkit-scrollbar-thumb {
+                                background: #FFD700;
+                                border-radius: 3px;
+                            }
+                            div[x-show="langMenuOpen"]::-webkit-scrollbar-thumb:hover {
+                                background: #ffd900d1;
                             }
                         </style>
                         <button onclick="
