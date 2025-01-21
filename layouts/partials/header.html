@@ -474,21 +474,22 @@
         <script src="{{ "js/main.js" | relURL }}" defer></script>
         
         <script>
-        let translateInitialized = false;
         function translatePage(lang) {
-            if (lang === 'en') {
-                const loading = document.querySelector('.translate-loading');
-                if (loading) {
-                    loading.remove();
-                }
-                window.location.reload();
-                return;
-            }
-            // Show loading indicator
             const loading = document.createElement('div');
             loading.className = 'translate-loading';
             loading.textContent = 'Translating...';
             document.body.appendChild(loading);
+
+            // Fallback to server-side language if translation fails
+            const fallback = () => {
+                window.location.href = `/${lang}`;
+            };
+
+            // Set timeout for translation response
+            const translationTimeout = setTimeout(() => {
+                console.error('Translation timed out');
+                fallback();
+            }, 5000);
 
             // Get all text nodes in the document
             const textNodes = [];
