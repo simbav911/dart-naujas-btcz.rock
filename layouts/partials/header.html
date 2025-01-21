@@ -62,41 +62,39 @@
 
             <!-- Language Selector -->
             <div class="hidden md:flex items-center space-x-4">
-                <div class="relative" x-data="{ langOpen: false }">
-                    <button @click="langOpen = !langOpen; $dispatch('close-mobile-lang')"
-                            class="flex items-center space-x-2 text-white hover:text-btcz-gold transition-colors duration-200">
-                        <i class="fas fa-globe text-lg"></i>
-                        <span>Language</span>
+                <div x-data="{ langMenuOpen: false }" class="relative">
+                    <button @click="langMenuOpen = !langMenuOpen" class="flex items-center space-x-2 text-white hover:text-btcz-gold transition-colors duration-200">
+                        <span class="fi fi-{{ .Site.Language.Params.flag }}"></span>
+                        <span class="ml-2">{{ .Site.Language.LanguageName }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div x-show="langOpen"
-                         @click.away="langOpen = false"
-                         class="absolute right-0 mt-2 py-2 w-72 bg-black/95 rounded-lg shadow-xl backdrop-blur-sm z-50"
-                         style="max-height: 400px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #555 transparent;"
-                         x-on:click.stop>
-                         <style>
-                             .lang-button {
-                                 display: flex !important;
-                                 align-items: center !important;
-                                 padding: 0.75rem 1rem !important;
-                                 width: 100% !important;
-                                 justify-content: flex-start !important;
-                             }
-                             .lang-button .fi {
-                                 flex-shrink: 0;
-                                 width: 1.5rem;
-                                 height: 1rem;
-                                 display: inline-flex;
-                                 justify-content: center;
-                                 align-items: center;
-                             }
-                             .lang-button span:last-child {
-                                 margin-left: 0.75rem;
-                                 flex: 1;
-                             }
-                         </style>
+                    <div x-cloak
+                         x-show="langMenuOpen"
+                         @click.away="langMenuOpen = false"
+                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 overflow-y-auto max-h-[80vh] z-50">
+                        <style>
+                            .lang-button {
+                                display: flex !important;
+                                align-items: center !important;
+                                padding: 0.75rem 1rem !important;
+                                width: 100% !important;
+                                justify-content: flex-start !important;
+                            }
+                            .lang-button .fi {
+                                flex-shrink: 0;
+                                width: 1.5rem;
+                                height: 1rem;
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                            .lang-button span:last-child {
+                                margin-left: 0.75rem;
+                                flex: 1;
+                            }
+                        </style>
                         <button onclick="
                         const loading = document.querySelector('.translate-loading');
                         if (loading) {
