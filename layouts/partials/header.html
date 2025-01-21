@@ -480,16 +480,15 @@
             loading.textContent = 'Translating...';
             document.body.appendChild(loading);
 
-            // Store original text content for elements with special rendering
             const specialElements = document.querySelectorAll('[class*="text-transparent"], [class*="bg-clip-text"]');
             const originalContent = new Map();
             specialElements.forEach(el => {
                 originalContent.set(el, el.textContent);
             });
 
-            // Function to translate a single text node or element
             async function translateText(text) {
                 try {
+                    if (!text.trim()) return '';
                     const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)}`);
                     if (!response.ok) throw new Error('Translation request failed');
                     const data = await response.json();
@@ -500,34 +499,46 @@
                 }
             }
 
-            // Function to process an element and its children
             async function processElement(element) {
-                // Skip script and style elements
                 if (element.tagName === 'SCRIPT' || element.tagName === 'STYLE') {
                     return;
                 }
 
-                // Handle special elements with gradient text
+                if (element.classList && element.classList.contains('notranslate')) {
+                    return;
+                }
+
                 if (element.matches('[class*="text-transparent"], [class*="bg-clip-text"]')) {
                     try {
                         const translated = await translateText(element.textContent.trim());
-                        element.textContent = translated;
+                        if (translated) element.textContent = translated;
                     } catch (error) {
                         console.error('Error translating special element:', error);
                     }
                     return;
                 }
 
-                // Handle text nodes
                 const walker = document.createTreeWalker(
                     element,
                     NodeFilter.SHOW_TEXT,
                     {
                         acceptNode: function(node) {
-                            return node.parentElement &&
-                                   node.parentElement.tagName !== 'SCRIPT' &&
-                                   node.parentElement.tagName !== 'STYLE' &&
-                                   node.textContent.trim() !== ''
+                            const parent = node.parentElement;
+                            if (!parent) return NodeFilter.FILTER_REJECT;
+                            
+                            let current = parent;
+                            while (current) {
+                                if (current.classList && current.classList.contains('notranslate')) {
+                                    return NodeFilter.FILTER_REJECT;
+                                }
+                                current = current.parentElement;
+                            }
+
+                            return (parent.tagName !== 'SCRIPT' &&
+                                   parent.tagName !== 'STYLE' &&
+                                   parent.tagName !== 'NOSCRIPT' &&
+                                   !parent.classList?.contains('notranslate') &&
+                                   node.textContent.trim() !== '')
                                 ? NodeFilter.FILTER_ACCEPT
                                 : NodeFilter.FILTER_REJECT;
                         }
@@ -540,30 +551,30 @@
                     textNodes.push(node);
                 }
 
-                // Translate text nodes in parallel
                 await Promise.all(textNodes.map(async (node) => {
                     const originalText = node.textContent.trim();
                     if (originalText) {
                         try {
                             const translated = await translateText(originalText);
-                            node.textContent = translated;
+                            if (translated) node.textContent = translated;
                         } catch (error) {
                             console.error('Error translating text node:', error);
                         }
                     }
                 }));
 
-                // Handle attributes that need translation
                 const translatableAttrs = ['placeholder', 'title', 'alt'];
                 const elementsWithAttrs = element.querySelectorAll('[placeholder], [title], [alt]');
                 
                 await Promise.all([...elementsWithAttrs].map(async (el) => {
+                    if (el.classList && el.classList.contains('notranslate')) return;
+                    
                     for (const attr of translatableAttrs) {
                         if (el.hasAttribute(attr)) {
                             const originalText = el.getAttribute(attr);
                             try {
                                 const translated = await translateText(originalText);
-                                el.setAttribute(attr, translated);
+                                if (translated) el.setAttribute(attr, translated);
                             } catch (error) {
                                 console.error(`Error translating ${attr} attribute:`, error);
                             }
@@ -572,23 +583,27 @@
                 }));
             }
 
-            // Start translation process
+            const style = document.createElement('style');
+            style.textContent = '.notranslate { display: none !important; }';
+            document.head.appendChild(style);
+
             processElement(document.body)
                 .then(() => {
-                    // Update language in localStorage
                     localStorage.setItem('selectedLang', lang);
-                    // Remove loading indicator
                     loading.remove();
+                    style.remove();
+                    const errorMessages = document.querySelectorAll('a[href*="translate.google.com/translate_error"]');
+                    errorMessages.forEach(el => el.remove());
                 })
                 .catch(error => {
                     console.error('Translation failed:', error);
                     showErrorToast('Translation failed. Please try again.');
-                    // Restore original content for special elements if translation fails
                     specialElements.forEach(el => {
                         if (originalContent.has(el)) {
                             el.textContent = originalContent.get(el);
                         }
                     });
+                    style.remove();
                     loading.remove();
                 });
         }
