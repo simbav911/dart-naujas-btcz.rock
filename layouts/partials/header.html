@@ -538,5 +538,13 @@
             setTimeout(() => toast.remove(), 5000);
         }
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const storedLang = localStorage.getItem('selectedLang');
+                if (storedLang) {
+                    translatePage(storedLang);
+                }
+            });
+        </script>
     </div>
 </header>
