@@ -434,10 +434,13 @@
                                      x-transition:leave="transition ease-in duration-150"
                                      x-transition:leave-start="opacity-100 transform translate-y-0"
                                      x-transition:leave-end="opacity-0 transform -translate-y-2"
-                                     class="mt-2 bg-black/80 backdrop-blur-md rounded-lg border border-white/10 overflow-hidden"
-                                     style="max-height: 60vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #FFD700 rgba(0,0,0,0.3);">
+                                     class="mobile-lang-menu mt-2 bg-black/95 backdrop-blur-md rounded-lg border border-btcz-gray-700/50"
+                                     style="max-height: 60vh; overflow-y: auto;">
                                     <style>
-                                        /* Mobile scrollbar styles */
+                                        .mobile-lang-menu {
+                                            scrollbar-width: thin;
+                                            scrollbar-color: #FFD700 rgba(0,0,0,0.3);
+                                        }
                                         .mobile-lang-menu::-webkit-scrollbar {
                                             width: 4px;
                                         }
@@ -453,7 +456,7 @@
                                             background: #ffd900d1;
                                         }
                                     </style>
-                                    <div class="mobile-lang-menu py-2">
+                                    <div class="py-2">
                                         <button onclick="
                                             const mobileLoading = document.querySelector('.translate-loading');
                                             if (mobileLoading) {
