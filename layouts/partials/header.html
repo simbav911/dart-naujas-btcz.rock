@@ -556,12 +556,8 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const storedLang = localStorage.getItem('selectedLang');
-                if (storedLang) {
-                    if (storedLang !== 'en') {
-                        translatePage(storedLang);
-                    }
-                } else {
-                    translatePage('en');
+                if (storedLang && storedLang !== 'en') {
+                    translatePage(storedLang);
                 }
             });
         </script>
