@@ -65,7 +65,7 @@
                 <div x-data="{ langMenuOpen: false }" class="relative">
                     <button @click="langMenuOpen = !langMenuOpen" class="flex items-center space-x-2 text-white hover:text-btcz-gold transition-colors duration-200">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                         </svg>
                         <span class="ml-2 text-white">Language</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -433,51 +433,220 @@
                         </div>
                         
                         <!-- Menu Content -->
-                        <div class="flex-1 p-8 space-y-6">
+                        <div class="p-6">
+                            <!-- Navigation Links -->
                             {{ range .Site.Menus.main }}
-                                {{ if .HasChildren }}
-                                    <div class="py-2" x-data="{ subMenuOpen: false }">
-                                        <div class="text-right">
-                                            <a class="group inline-flex items-center justify-end text-xl text-white/90 hover:text-btcz-gold transition-all duration-200 cursor-pointer mb-2 hover:translate-x-[-8px] transform"
-                                               @click="subMenuOpen = !subMenuOpen">
-                                                {{ .Name }}
-                                                <svg class="inline-block w-4 h-4 transform transition-transform duration-200 ml-2 opacity-70 group-hover:opacity-100" 
-                                                     :class="{'rotate-180': subMenuOpen}"
-                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
-                                            </svg>
-                                           </a>
-                                           <div x-show="subMenuOpen"
-                                                x-collapse
-                                                class="space-y-2 pr-4">
-                                               {{ range .Children }}
-                                                   <div class="text-right">
-                                                       <a href="{{ .URL | relLangURL }}"
-                                                          class="inline-block py-2 text-lg text-white/70 hover:text-btcz-gold transition-all duration-200 hover:translate-x-[-8px] transform"
-                                                          @click="mobileMenuOpen = false">
-                                                           {{ .Name }}
-                                                       </a>
-                                                   </div>
-                                               {{ end }}
-                                           </div>
-                                       </div>
-                                   {{ else }}
-                                       <div class="text-right py-2">
-                                           <a href="{{ .URL | relLangURL }}"
-                                              class="inline-block text-xl text-white/90 hover:text-btcz-gold transition-all duration-200 hover:translate-x-[-8px] transform"
-                                              @click="mobileMenuOpen = false">
-                                               {{ .Name }}
-                                           </a>
-                                       </div>
-                                   {{ end }}
-                               {{ end }}
-                           </div>
-                       </nav>
-                   </div>
-               </div>
-           </div>
-       </nav>
-   </div>
+                                <a href="{{ .URL | relLangURL }}" 
+                                   class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200 
+                                          {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}">
+                                    {{ .Name }}
+                                </a>
+                            {{ end }}
+                            
+                            <!-- Language Selector for Mobile -->
+                            <div class="mt-6 pt-6 border-t border-white/10" x-data="{ langMenuOpen: false }">
+                                <button @click="langMenuOpen = !langMenuOpen" 
+                                    class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-colors duration-200 py-2">
+                                    <span class="text-lg">Select Language</span>
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" 
+                                         :class="{'rotate-180': langMenuOpen}"
+                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                
+                                <div x-show="langMenuOpen" 
+                                     x-transition:enter="transition ease-out duration-200"
+                                     x-transition:enter-start="opacity-0 transform -translate-y-2"
+                                     x-transition:enter-end="opacity-100 transform translate-y-0"
+                                     x-transition:leave="transition ease-in duration-150"
+                                     x-transition:leave-start="opacity-100 transform translate-y-0"
+                                     x-transition:leave-end="opacity-0 transform -translate-y-2"
+                                     class="mt-2 space-y-2 max-h-[60vh] overflow-y-auto">
+                                    <button onclick="
+                                        const loading = document.querySelector('.translate-loading');
+                                        if (loading) {
+                                            loading.remove();
+                                        }
+                                        localStorage.setItem('selectedLang', 'en');
+                                        window.location.reload();
+                                        "
+                                        class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-us"></span>
+                                        <span class="ml-3">English</span>
+                                    </button>
+                                    <button onclick="translatePage('es')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-es"></span>
+                                        <span class="ml-3">Español</span>
+                                    </button>
+                                    <button onclick="translatePage('fr')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-fr"></span>
+                                        <span class="ml-3">Français</span>
+                                    </button>
+                                    <button onclick="translatePage('de')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-de"></span>
+                                        <span class="ml-3">Deutsch</span>
+                                    </button>
+                                    <button onclick="translatePage('zh-CN')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-cn"></span>
+                                        <span class="ml-3">中文 (简体)</span>
+                                    </button>
+                                    <button onclick="translatePage('ja')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-jp"></span>
+                                        <span class="ml-3">日本語</span>
+                                    </button>
+                                    <button onclick="translatePage('ru')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-ru"></span>
+                                        <span class="ml-3">Русский</span>
+                                    </button>
+                                    <button onclick="translatePage('tr')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-tr"></span>
+                                        <span class="ml-3">Türkçe</span>
+                                    </button>
+                                    <button onclick="translatePage('fi')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-fi"></span>
+                                        <span class="ml-3">Suomi</span>
+                                    </button>
+                                    <button onclick="translatePage('pt')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-pt"></span>
+                                        <span class="ml-3">Português</span>
+                                    </button>
+                                    <button onclick="translatePage('ar')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-sa"></span>
+                                        <span class="ml-3">العربية</span>
+                                    </button>
+                                    <button onclick="translatePage('id')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-id"></span>
+                                        <span class="ml-3">Bahasa Indonesia</span>
+                                    </button>
+                                    <button onclick="translatePage('vi')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-vn"></span>
+                                        <span class="ml-3">Tiếng Việt</span>
+                                    </button>
+                                    <button onclick="translatePage('he')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-il"></span>
+                                        <span class="ml-3">עברית</span>
+                                    </button>
+                                    <button onclick="translatePage('th')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-th"></span>
+                                        <span class="ml-3">ไทย</span>
+                                    </button>
+                                    <button onclick="translatePage('ms')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-my"></span>
+                                        <span class="ml-3">Bahasa Melayu</span>
+                                    </button>
+                                    <button onclick="translatePage('uk')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-ua"></span>
+                                        <span class="ml-3">Українська</span>
+                                    </button>
+                                    <button onclick="translatePage('hu')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-hu"></span>
+                                        <span class="ml-3">Magyar</span>
+                                    </button>
+                                    <button onclick="translatePage('el')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-gr"></span>
+                                        <span class="ml-3">Ελληνικά</span>
+                                    </button>
+                                    <button onclick="translatePage('cs')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-cz"></span>
+                                        <span class="ml-3">Čeština</span>
+                                    </button>
+                                    <button onclick="translatePage('ro')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-ro"></span>
+                                        <span class="ml-3">Română</span>
+                                    </button>
+                                    <button onclick="translatePage('sk')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-sk"></span>
+                                        <span class="ml-3">Slovenčina</span>
+                                    </button>
+                                    <button onclick="translatePage('hr')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-hr"></span>
+                                        <span class="ml-3">Hrvatski</span>
+                                    </button>
+                                    <button onclick="translatePage('bg')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-bg"></span>
+                                        <span class="ml-3">Български</span>
+                                    </button>
+                                    <button onclick="translatePage('lt')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-lt"></span>
+                                        <span class="ml-3">Lietuvių</span>
+                                    </button>
+                                    <button onclick="translatePage('sl')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-si"></span>
+                                        <span class="ml-3">Slovenščina</span>
+                                    </button>
+                                    <button onclick="translatePage('et')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-ee"></span>
+                                        <span class="ml-3">Eesti</span>
+                                    </button>
+                                    <button onclick="translatePage('lv')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-lv"></span>
+                                        <span class="ml-3">Latviešu</span>
+                                    </button>
+                                    <button onclick="translatePage('sr')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-rs"></span>
+                                        <span class="ml-3">Српски</span>
+                                    </button>
+                                    <button onclick="translatePage('ca')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-es-ct"></span>
+                                        <span class="ml-3">Català</span>
+                                    </button>
+                                    <button onclick="translatePage('fil')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-ph"></span>
+                                        <span class="ml-3">Filipino</span>
+                                    </button>
+                                    <button onclick="translatePage('is')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-is"></span>
+                                        <span class="ml-3">Íslenska</span>
+                                    </button>
+                                    <button onclick="translatePage('af')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-za"></span>
+                                        <span class="ml-3">Afrikaans</span>
+                                    </button>
+                                    <button onclick="translatePage('sw')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-tz"></span>
+                                        <span class="ml-3">Kiswahili</span>
+                                    </button>
+                                    <button onclick="translatePage('eu')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-es-pv"></span>
+                                        <span class="ml-3">Euskara</span>
+                                    </button>
+                                    <button onclick="translatePage('gl')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-es-ga"></span>
+                                        <span class="ml-3">Galego</span>
+                                    </button>
+                                    <button onclick="translatePage('sq')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-al"></span>
+                                        <span class="ml-3">Shqip</span>
+                                    </button>
+                                    <button onclick="translatePage('hy')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-am"></span>
+                                        <span class="ml-3">Հայերեն</span>
+                                    </button>
+                                    <button onclick="translatePage('ka')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-ge"></span>
+                                        <span class="ml-3">ქართული</span>
+                                    </button>
+                                    <button onclick="translatePage('ml')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-in"></span>
+                                        <span class="ml-3">മലയാളം</span>
+                                    </button>
+                                    <button onclick="translatePage('ta')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-in"></span>
+                                        <span class="ml-3">தமிழ்</span>
+                                    </button>
+                                    <button onclick="translatePage('mr')" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+                                        <span class="fi fi-in"></span>
+                                        <span class="ml-3">मराठी</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+    </div>
 </header>
 
         <!-- Scripts -->
