@@ -63,7 +63,7 @@
             <!-- Language Selector -->
             <div class="hidden md:flex items-center space-x-4">
                 <div class="relative group" x-data="{ langOpen: false }">
-                    <button @click="langOpen = !langOpen"
+                    <button @click="langOpen = !langOpen; $dispatch('close-mobile-lang')"
                             class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200">
                         <span>{{ .Site.Language.LanguageName }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,29 +72,29 @@
                     </button>
                     <div x-show="langOpen"
                          @click.away="langOpen = false"
-                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 rounded-lg shadow-xl backdrop-blur-sm z-50">
-                        <div id="google_translate_element" class="hidden"></div>
-                        <button onclick="translateToLanguage('en')"
+                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 rounded-lg shadow-xl backdrop-blur-sm z-50"
+                         x-on:click.stop>
+                        <button onclick="translatePage('en')"
                                 class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
                             English
                         </button>
-                        <button onclick="translateToLanguage('es')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Español</button>
-                        <button onclick="translateToLanguage('fr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Français</button>
-                        <button onclick="translateToLanguage('de')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Deutsch</button>
-                        <button onclick="translateToLanguage('zh-CN')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">中文 (简体)</button>
-                        <button onclick="translateToLanguage('ja')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">日本語</button>
-                        <button onclick="translateToLanguage('ru')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Русский</button>
-                        <button onclick="translateToLanguage('tr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Türkçe</button>
-                        <button onclick="translateToLanguage('fi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Suomi</button>
-                        <button onclick="translateToLanguage('pt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Português</button>
-                        <button onclick="translateToLanguage('hi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">हिन्दी</button>
-                        <button onclick="translateToLanguage('it')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Italiano</button>
-                        <button onclick="translateToLanguage('nl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Nederlands</button>
-                        <button onclick="translateToLanguage('ko')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">한국어</button>
-                        <button onclick="translateToLanguage('pl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Polski</button>
-                        <button onclick="translateToLanguage('sv')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Svenska</button>
-                        <button onclick="translateToLanguage('no')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Norsk</button>
-                        <button onclick="translateToLanguage('da')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Dansk</button>
+                        <button onclick="translatePage('es')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Español</button>
+                        <button onclick="translatePage('fr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Français</button>
+                        <button onclick="translatePage('de')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Deutsch</button>
+                        <button onclick="translatePage('zh-CN')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">中文 (简体)</button>
+                        <button onclick="translatePage('ja')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">日本語</button>
+                        <button onclick="translatePage('ru')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Русский</button>
+                        <button onclick="translatePage('tr')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Türkçe</button>
+                        <button onclick="translatePage('fi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Suomi</button>
+                        <button onclick="translatePage('pt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Português</button>
+                        <button onclick="translatePage('hi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">हिन्दी</button>
+                        <button onclick="translatePage('it')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Italiano</button>
+                        <button onclick="translatePage('nl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Nederlands</button>
+                        <button onclick="translatePage('ko')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">한국어</button>
+                        <button onclick="translatePage('pl')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Polski</button>
+                        <button onclick="translatePage('sv')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Svenska</button>
+                        <button onclick="translatePage('no')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Norsk</button>
+                        <button onclick="translatePage('da')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Dansk</button>
                         <button @click="translateLanguage('ar')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">العربية</button>
                         <button @click="translateLanguage('pt')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">Português</button>
                         <button @click="translateLanguage('hi')" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">हिन्दी</button>
@@ -267,10 +267,12 @@
 
                             <!-- Mobile Language Selector -->
                             <div class="mt-10 pt-6 border-t border-white/10">
-                                <div x-data="{ langMenuOpen: false }" class="relative">
+                                <div x-data="{ langMenuOpen: false }"
+                                     x-on:close-mobile-lang.window="langMenuOpen = false"
+                                     class="relative">
                                     <div class="text-right">
                                         <a class="group inline-flex items-center justify-end text-xl text-white/90 hover:text-btcz-gold transition-all duration-200 cursor-pointer mb-2 hover:translate-x-[-8px] transform"
-                                           @click="langMenuOpen = !langMenuOpen">
+                                           @click="langMenuOpen = !langMenuOpen; $dispatch('close-desktop-lang')">
                                             {{ .Site.Language.LanguageName }}
                                             <svg class="inline-block w-4 h-4 transform transition-transform duration-200 ml-2 opacity-70 group-hover:opacity-100"
                                                  :class="{'rotate-180': langMenuOpen}"
@@ -281,7 +283,8 @@
                                     </div>
                                     <div x-show="langMenuOpen"
                                          x-collapse
-                                         class="space-y-2 pr-4">
+                                         class="space-y-2 pr-4"
+                                         x-on:click.stop>
                                         {{ range .Site.Home.AllTranslations }}
                                         <div class="text-right">
                                             <a href="{{ .Permalink }}" 
@@ -311,75 +314,70 @@
         <script src="{{ "js/price-ticker.js" | relURL }}"></script>
         <script src="{{ "js/scroll-handler.js" | relURL }}"></script>
         <script src="{{ "js/main.js" | relURL }}" defer></script>
-        <style>
-        .goog-te-banner-frame.skiptranslate {
-            display: none !important;
-        }
-        body {
-            top: 0 !important;
-        }
-        .goog-te-menu-frame {
-            max-width: 100% !important;
-        }
-        .goog-te-menu-value span {
-            display: none;
-        }
-        .goog-te-menu-value:before {
-            content: 'Select Language';
-            color: #fff;
-        }
-        </style>
         
         <script>
         let translateInitialized = false;
-        
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'af,ar,az,bn,ca,cs,da,de,el,en,es,eu,fa,fi,fr,gl,gu,hi,hr,hu,hy,id,it,iw,ja,ka,kn,ko,lt,lv,ml,mr,ms,nl,no,pl,pt,ro,ru,sk,sl,sq,sr,sv,sw,ta,te,th,tl,tr,uk,ur,vi,zh-CN,zh-TW,fi,tr,ru,ar,pt,hi,it,nl,ko,pl,sv,no,da,is,af,sw,eu,gl,sq,hy,ka,ml,ta,te,kn,mr,gu,pa,bn,ne,si,km,lo,my',
-                autoDisplay: false,
-                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
-            }, 'google_translate_element');
-            
-            // Hide Google's default UI
-            const style = document.createElement('style');
-            style.textContent = `
-                .goog-te-banner-frame.skiptranslate { display: none !important; }
-                body { top: 0 !important; }
-                .goog-te-menu-value span { display: none; }
-                .goog-te-menu-value:before { content: 'Select Language'; color: #fff; }
-            `;
-            document.head.appendChild(style);
-            
-            translateInitialized = true;
-        }
+        function translatePage(lang) {
+            // Show loading indicator
+            const loading = document.createElement('div');
+            loading.className = 'translate-loading';
+            loading.textContent = 'Translating...';
+            document.body.appendChild(loading);
 
-        function translateToLanguage(lang, attempt = 1) {
-            if (!translateInitialized) {
-                console.error('Google Translate not initialized yet');
-                return;
+            // Get all text nodes in the document
+            const textNodes = [];
+            const walker = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            let node;
+            while ((node = walker.nextNode())) {
+                if (node.nodeValue.trim()) {
+                    textNodes.push(node);
+                }
             }
 
-            // Ensure the translate element is visible
-            const translateElement = document.getElementById('google_translate_element');
-            if (translateElement) {
-                translateElement.style.display = 'block';
-            }
-
-            // Try to find the select element
-            const select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = lang;
-                select.dispatchEvent(new Event('change'));
+            // Translate each text node
+            Promise.all(textNodes.map(node => {
+                const originalText = node.nodeValue;
+                return fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(originalText)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        node.nodeValue = data[0][0][0];
+                    });
+            }))
+            .then(() => {
+                // Update language in localStorage
                 localStorage.setItem('selectedLang', lang);
-            } else if (attempt < 5) {
-                // Retry after a short delay if element not found
-                setTimeout(() => translateToLanguage(lang, attempt + 1), 200 * attempt);
-            } else {
-                console.error('Google Translate select element not found after multiple attempts');
-                showErrorToast('Translation service not ready. Please try again.');
-            }
+            })
+            .catch(error => {
+                console.error('Translation error:', error);
+                alert('Translation failed. Please try again.');
+            })
+            .finally(() => {
+                // Remove loading indicator
+                loading.remove();
+            });
         }
+
+        // Add loading indicator styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .translate-loading {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                border-radius: 4px;
+                z-index: 1000;
+            }
+        `;
+        document.head.appendChild(style);
 
         function showErrorToast(message) {
             const toast = document.createElement('div');
@@ -389,6 +387,5 @@
             setTimeout(() => toast.remove(), 5000);
         }
         </script>
-        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </div>
 </header>
