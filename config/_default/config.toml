@@ -16,11 +16,11 @@ theme = "PaperMod"
   discord = "https://discord.gg/bitcoinz"
 
 # Language Configuration
-[languages]
-  [languages.en]
-    languageName = "English"
-    weight = 1
-    contentDir = "content"
+# [languages]
+#   [languages.en]
+#     languageName = "English"
+#     weight = 1
+#     contentDir = "content"
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "home"
