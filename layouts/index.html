@@ -427,44 +427,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = await fetch('https://a7ec1480.sibforms.com/serve/MUIFAJG7FPruu9Hk1stTNXFYcgVRy2aohT3PjK-vpm0SvBgkMdTf2yNmdgUbzCEGtLsgaz4nMWXVJU2EykqQHWOoJG3AC2AK-sDy9V09Bv1-1q9wWa2c--sG-CMB3QhvVt3JH6pEhbkpntB2gEH1Un2p98voo2Q_sez4YCxcldZSf1MCN8QvnQhauCsgD-honWqic564oUPzLQWP', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'api-key': '{{ .Site.Params.brevo_api_key }}'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
-                    body: new URLSearchParams({
-                        'EMAIL': email,
-                        'email_address_check': '',
-                        'locale': 'en',
-                        'id3': true
+                    body: JSON.stringify({
+                        listIds: [parseInt('{{ .Site.Params.brevo_list_id }}')],
+                        updateEnabled: true,
+                        email: email,
+                        attributes: {
+                            WEBSITE: window.location.hostname
+                        },
+                        emailBlacklisted: false,
+                        smsBlacklisted: false,
+                        redirectionUrl: '',
+                        api_key: '{{ .Site.Params.brevo_api_key }}'
                     })
                 });
 
-                if (response.ok) {
-                    // Create and show message
-                    const message = document.createElement('div');
-                    message.className = 'subscription-message';
-                    message.innerHTML = `
-                        <div class="message-content">
-                            <p>Thank you for subscribing!</p>
-                            <button onclick="this.parentElement.parentElement.remove()">OK</button>
-                        </div>
-                    `;
-                    form.parentElement.appendChild(message);
-                    
-                    // Trigger confetti
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 }
-                    });
-                    
-                    form.reset();
-                } else {
+                if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.message || 'Subscription failed');
                 }
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                // Create and show message
+                const message = document.createElement('div');
+                message.className = 'subscription-message';
+                message.innerHTML = `
+                    <div class="message-content">
+                        <p>Thank you for subscribing!</p>
+                        <button onclick="this.parentElement.parentElement.remove()">OK</button>
+                    </div>
+                `;
+                form.parentElement.appendChild(message);
+                
+                // Trigger confetti
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                
+                form.reset();
             } catch (error) {
-                alert('Subscription failed. Please try again later.');
                 console.error('Subscription error:', error);
+                alert('Subscription failed. Please try again later.');
             } finally {
                 button.disabled = false;
                 button.textContent = originalButtonText;

@@ -8,6 +8,9 @@ theme = "PaperMod"
   keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
   author = "BitcoinZ Community"
   mainSections = ["roadmap"]
+  # Brevo (formerly Sendinblue) configuration
+  brevo_enabled = true
+  brevo_list_id = "2"  # Your newsletter list ID
 
   # Social Media Links
   github = "https://github.com/simbav911/dart-naujas-btcz.rock"
