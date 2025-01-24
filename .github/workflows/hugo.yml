@@ -1,41 +1,18 @@
-name: Deploy Hugo site to Pages
+name: Hugo Build and Deploy
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches:
+      - master
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
-    environment: 
-      name: production
-      url: ${{ steps.pages.outputs.base_url }}
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    env:
-      HUGO_ENVIRONMENT: production
-      HUGO_ENV: production
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
-          submodules: recursive
+          submodules: true
           fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install Dependencies
-        run: npm install
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -43,67 +20,19 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
+      - name: Install Node.js dependencies
+        run: npm install
 
-      - name: Create base config
-        shell: bash
-        run: |
-          mkdir -p config/production
-          cat > config/production/config.toml << EOL
-          baseURL = "/"
-          
-          [params]
-            brevo_enabled = false
-            brevo_list_id = "2"
-          EOL
-
-      - name: Configure Brevo API
-        if: ${{ env.BREVO_API_KEY != '' }}
-        shell: bash
-        run: |
-          echo "Configuring Brevo API..."
-          sed -i 's/brevo_enabled = false/brevo_enabled = true/' config/production/config.toml
-          echo '  brevo_api_key = "'$BREVO_API_KEY'"' >> config/production/config.toml
+      - name: Build
         env:
+          HUGO_ENV: production
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+        run: hugo --minify
 
-      - name: List files and environment
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "\nNode version:"
-          node --version
-          echo "\nNPM version:"
-          npm --version
-          echo "\nHugo version:"
-          hugo version
-          echo "\nTheme directory contents:"
-          ls -la themes/PaperMod || echo "Theme directory not found"
-
-      - name: Build with Hugo
-        run: |
-          echo "Building with Hugo..."
-          hugo --logLevel debug \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/" \
-            --environment production
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./public
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          cname: getbtcz.com

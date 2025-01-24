@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@material-design-icons/svg": "^0.14.13",
-    "marked": "^9.1.6"
+    "marked": "^9.1.6",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",

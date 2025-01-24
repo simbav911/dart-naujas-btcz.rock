@@ -23,6 +23,10 @@ theme = "PaperMod"
   telegram = "https://t.me/bitcoinzcommunity"
   discord = "https://discord.gg/bitcoinz"
 
+  # Brevo API Configuration (using GitHub Secrets)
+  brevo_api_key = "{{ getenv "BREVO_API_KEY" }}"
+  brevo_list_id = "{{ getenv "BREVO_LIST_ID" }}"
+
 # Language Configuration
 [languages]
   [languages.en]
