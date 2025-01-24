@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'api-key': '{{ getenv "BREVO_API_KEY" }}'
+                        'api-key': '{{ .Site.Params.brevo_api_key }}'
                     },
                     body: new URLSearchParams({
                         'EMAIL': email,
