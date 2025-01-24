@@ -18,6 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: github-pages
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,6 +44,12 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
+
+      - name: Create config file
+        run: |
+          mkdir -p config/production
+          echo "params:" > config/production/config.yaml
+          echo "  brevo_api_key: '${{ secrets.BREVO_API_KEY }}'" >> config/production/config.yaml
 
       - name: List files and environment
         run: |
