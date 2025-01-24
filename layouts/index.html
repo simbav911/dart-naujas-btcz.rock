@@ -424,23 +424,19 @@ document.addEventListener('DOMContentLoaded', function() {
             button.textContent = 'Subscribing...';
             
             try {
-                const response = await fetch('https://a7ec1480.sibforms.com/serve/MUIFAJG7FPruu9Hk1stTNXFYcgVRy2aohT3PjK-vpm0SvBgkMdTf2yNmdgUbzCEGtLsgaz4nMWXVJU2EykqQHWOoJG3AC2AK-sDy9V09Bv1-1q9wWa2c--sG-CMB3QhvVt3JH6pEhbkpntB2gEH1Un2p98voo2Q_sez4YCxcldZSf1MCN8QvnQhauCsgD-honWqic564oUPzLQWP', {
+                const response = await fetch('https://api.brevo.com/v3/contacts', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'accept': 'application/json',
+                        'content-type': 'application/json',
+                        'api-key': '{{ .Site.Params.brevo_api_key }}'
                     },
                     body: JSON.stringify({
-                        listIds: [parseInt('{{ .Site.Params.brevo_list_id }}')],
-                        updateEnabled: true,
                         email: email,
+                        listIds: [parseInt('{{ .Site.Params.brevo_list_id }}')],
                         attributes: {
                             WEBSITE: window.location.hostname
-                        },
-                        emailBlacklisted: false,
-                        smsBlacklisted: false,
-                        redirectionUrl: '',
-                        api_key: '{{ .Site.Params.brevo_api_key }}'
+                        }
                     })
                 });
 
