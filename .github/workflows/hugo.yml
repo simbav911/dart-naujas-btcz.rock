@@ -59,6 +59,7 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
         run: |
           hugo --logLevel debug \
             --minify \
