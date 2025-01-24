@@ -1,2 +1,0 @@
-params:
-  brevo_api_key: {{ getenv "BREVO_API_KEY" }}
