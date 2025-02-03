@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Exchange platform base -->
+  <path d="M3 3h18v18H3z"/>
+  <!-- Multiple trading pairs -->
+  <path d="M6 8l2-2 2 2M6 12l2-2 2 2M6 16l2-2 2 2" opacity="0.8"/>
+  <!-- Currency symbols -->
+  <path d="M14 8h4v2h-4zm0 4h4v2h-4zm0 4h4v2h-4z" opacity="0.7"/>
+  <!-- Platform frame -->
+  <path d="M21 3c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3zm-2 18H5V3h14v18z" opacity="0.9"/>
+</svg>

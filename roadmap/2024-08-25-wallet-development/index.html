@@ -1,0 +1,475 @@
+<!doctype html><html lang=en class=scroll-smooth><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>BTCZ Wallet Development | BitcoinZ - Community-Driven Cryptocurrency</title><style>:root{--btcz-gold:#FFD700;--btcz-black:#000000;--btcz-white:#FFFFFF}*,::after,::before{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:open sans,ui-sans-serif,system-ui;color:var(--btcz-white);background-color:var(--btcz-black)}[x-cloak]{display:none!important}.ad-sidebar{position:fixed;width:300px;background:rgba(26,26,26,.95);border:2px solid gold;border-radius:15px;padding:20px;box-shadow:0 4px 6px rgba(0,0,0,.1);z-index:100;top:50%;transform:translateY(-50%);transition:opacity .3s,transform .3s}.ad-sidebar-right{right:20px}.ad-sidebar-left{left:20px}.ad-sidebar .ad-header{color:gold;font-size:.9rem;text-align:center;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,215,0,.3);position:relative}.ad-close-btn{position:absolute;top:-10px;right:-10px;width:24px;height:24px;background:gold;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;transition:all .3s}.ad-close-btn:hover{background:#fff;transform:scale(1.1)}.ad-sidebar .transparency-link{display:block;text-align:center;color:gold;font-size:.8rem;margin-top:10px;text-decoration:underline;opacity:.8;transition:opacity .3s}.ad-sidebar .transparency-link:hover{opacity:1}@media(max-width:1400px){.ad-sidebar{display:none}}.show-ads-btn{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:gold;color:#000;padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-weight:700;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:all .3s;z-index:100}.show-ads-btn:hover{background:#fff;transform:translateX(-50%)scale(1.05)}</style><script defer src=https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js></script><script>document.addEventListener("alpine:init",()=>{Alpine.store("ads",{leftVisible:localStorage.getItem("leftAdVisible")!=="false",rightVisible:localStorage.getItem("rightAdVisible")!=="false",hideLeft(){this.leftVisible=!1,localStorage.setItem("leftAdVisible","false")},hideRight(){this.rightVisible=!1,localStorage.setItem("rightAdVisible","false")},showAll(){this.leftVisible=!0,this.rightVisible=!0,localStorage.setItem("leftAdVisible","true"),localStorage.setItem("rightAdVisible","true")}})})</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><meta name=description content="Enhanced wallet solutions across all platforms"><meta name=keywords content="BitcoinZ,cryptocurrency,decentralization,privacy,blockchain"><meta name=author content="BitcoinZ Community"><meta property="og:title" content="BTCZ Wallet Development | BitcoinZ - Community-Driven Cryptocurrency"><meta property="og:description" content="Enhanced wallet solutions across all platforms"><meta property="og:type" content="website"><meta property="og:url" content="/roadmap/2024-08-25-wallet-development/"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="BTCZ Wallet Development | BitcoinZ - Community-Driven Cryptocurrency"><meta name=twitter:description content="Enhanced wallet solutions across all platforms"><link rel=icon type=image/png href=/favicon.png><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel=stylesheet media=print onload='this.media="all"'><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/mobile-menu.css><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"BitcoinZ","description":"A decentralized, community-driven cryptocurrency focused on privacy and security","url":"\/roadmap\/2024-08-25-wallet-development\/","logo":"\//images/bitcoinz-logo.svg","foundingDate":"2017","founders":[{"@type":"Person","name":"Community Contributors"}],"sameAs":["https:\/\/twitter.com\/bitcoinz_team","https:\/\/t.me\/bitcoinzcommunity","https:\/\/discord.gg\/bitcoinz","https:\/\/github.com\/simbav911\/dart-naujas-btcz.rock"]}</script></head><body class="min-h-screen flex flex-col"><header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-50 w-full glass-effect border-b border-btcz-gray-800/50"><div class="container mx-auto"><nav class="flex items-center justify-between py-2"><div class="flex items-center space-x-4 pl-2 md:pl-0"><a href=/ class="flex items-center group transition-transform duration-300 hover:scale-105"><div class="logo-container group-hover:opacity-90 transition-opacity duration-300"><img src=/images/btcz-logo.png alt="BitcoinZ Logo" class="h-10 w-auto"></div><div class="animated-logo ml-3 md:ml-4"><span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300" style=animation-delay:0s>B</span>
+<span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.1s>i</span>
+<span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.2s>t</span>
+<span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.3s>c</span>
+<span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.4s>o</span>
+<span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.5s>i</span>
+<span class="animated-letter font-heading font-bold text-lg md:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.6s>n</span>
+<span class="animated-letter special-z font-heading font-bold text-lg md:text-xl group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.7s>Z</span></div></a><div class="price-ticker bg-btcz-gray-800/50 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-btcz-gold/20 shadow-lg md:hidden"><div class="flex items-center space-x-2"><span class="text-btcz-gold font-medium text-sm" id=btcz-price-mobile>$0.00000000</span>
+<span class=text-xs id=btcz-change-mobile-24h>0.00%</span>
+<span class="text-gray-400 text-xs">24 H</span></div></div></div><div class="hidden md:flex items-center space-x-8"><a href=/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Home
+</a><a href=/en/why-bitcoinz/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Why BitcoinZ
+</a><a href=/en/wallets/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Wallets
+</a><a href=/en/buy/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Where to Buy
+</a><a href=/en/learn/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Learn Crypto
+</a><a href=/en/news/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">News
+</a><a href=/roadmap/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Roadmap
+</a><a href=/en/ecosystem/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Ecosystem</a></div><div class="hidden md:flex items-center space-x-4"><div x-data="{ langMenuOpen: false }" class=relative><button @click="langMenuOpen = !langMenuOpen" class="flex items-center space-x-2 text-white hover:text-btcz-gold transition-colors duration-200">
+<svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 9h16.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 15h16.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3a22 22 0 000 18"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c1.657 2.333 2.5 5.167 2.5 8.5s-.843 6.167-2.5 8.5"/></svg>
+<span class="ml-2 text-white">Language</span><svg class="w-4 h-4" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-cloak x-show=langMenuOpen @click.away="langMenuOpen = false" class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 z-50" style="max-height:500px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#FFD700 rgba(0,0,0,.3)"><style>.lang-button{display:flex!important;align-items:center!important;padding:.75rem 1rem!important;width:100%!important;justify-content:flex-start!important;transition:all .2s ease-in-out}.lang-button:hover{background-color:rgba(31,41,55,.8)}.lang-button .fi{flex-shrink:0;width:1.5rem;height:1rem;display:inline-flex;justify-content:center;align-items:center}.lang-button span:last-child{margin-left:.75rem;flex:1}div[x-show=langMenuOpen]::-webkit-scrollbar{width:6px}div[x-show=langMenuOpen]::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:3px}div[x-show=langMenuOpen]::-webkit-scrollbar-thumb{background:gold;border-radius:3px}div[x-show=langMenuOpen]::-webkit-scrollbar-thumb:hover{background:#ffd900d1}</style><button onclick='const desktopLoading=document.querySelector(".translate-loading");desktopLoading&&desktopLoading.remove(),localStorage.setItem("selectedLang","en"),window.location.reload()' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 w-full text-left transition-colors duration-200">
+<span class="fi fi-us"></span>
+<span class=ml-3>English</span>
+</button>
+<button onclick='translatePage("es")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es"></span>
+<span class=ml-3>Español</span>
+</button>
+<button onclick='translatePage("fr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-fr"></span>
+<span class=ml-3>Français</span>
+</button>
+<button onclick='translatePage("de")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-de"></span>
+<span class=ml-3>Deutsch</span>
+</button>
+<button onclick='translatePage("zh-CN")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-cn"></span>
+<span class=ml-3>中文 (简体)</span>
+</button>
+<button onclick='translatePage("ja")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-jp"></span>
+<span class=ml-3>日本語</span>
+</button>
+<button onclick='translatePage("ru")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ru"></span>
+<span class=ml-3>Русский</span>
+</button>
+<button onclick='translatePage("tr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-tr"></span>
+<span class=ml-3>Türkçe</span>
+</button>
+<button onclick='translatePage("fi")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-fi"></span>
+<span class=ml-3>Suomi</span>
+</button>
+<button onclick='translatePage("pt")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-pt"></span>
+<span class=ml-3>Português</span>
+</button>
+<button onclick='translatePage("ar")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-sa"></span>
+<span class=ml-3>العربية</span>
+</button>
+<button onclick='translatePage("id")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-id"></span>
+<span class=ml-3>Bahasa Indonesia</span>
+</button>
+<button onclick='translatePage("vi")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-vn"></span>
+<span class=ml-3>Tiếng Việt</span>
+</button>
+<button onclick='translatePage("he")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-il"></span>
+<span class=ml-3>עברית</span>
+</button>
+<button onclick='translatePage("th")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-th"></span>
+<span class=ml-3>ไทย</span>
+</button>
+<button onclick='translatePage("ms")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-my"></span>
+<span class=ml-3>Bahasa Melayu</span>
+</button>
+<button onclick='translatePage("uk")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ua"></span>
+<span class=ml-3>Українська</span>
+</button>
+<button onclick='translatePage("hu")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-hu"></span>
+<span class=ml-3>Magyar</span>
+</button>
+<button onclick='translatePage("el")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-gr"></span>
+<span class=ml-3>Ελληνικά</span>
+</button>
+<button onclick='translatePage("cs")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-cz"></span>
+<span class=ml-3>Čeština</span>
+</button>
+<button onclick='translatePage("ro")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ro"></span>
+<span class=ml-3>Română</span>
+</button>
+<button onclick='translatePage("sk")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-sk"></span>
+<span class=ml-3>Slovenčina</span>
+</button>
+<button onclick='translatePage("hr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-hr"></span>
+<span class=ml-3>Hrvatski</span>
+</button>
+<button onclick='translatePage("bg")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-bg"></span>
+<span class=ml-3>Български</span>
+</button>
+<button onclick='translatePage("lt")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-lt"></span>
+<span class=ml-3>Lietuvių</span>
+</button>
+<button onclick='translatePage("sl")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-si"></span>
+<span class=ml-3>Slovenščina</span>
+</button>
+<button onclick='translatePage("et")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ee"></span>
+<span class=ml-3>Eesti</span>
+</button>
+<button onclick='translatePage("lv")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-lv"></span>
+<span class=ml-3>Latviešu</span>
+</button>
+<button onclick='translatePage("sr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-rs"></span>
+<span class=ml-3>Српски</span>
+</button>
+<button onclick='translatePage("ca")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es-ct"></span>
+<span class=ml-3>Català</span>
+</button>
+<button onclick='translatePage("fil")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ph"></span>
+<span class=ml-3>Filipino</span>
+</button>
+<button onclick='translatePage("is")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-is"></span>
+<span class=ml-3>Íslenska</span>
+</button>
+<button onclick='translatePage("af")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-za"></span>
+<span class=ml-3>Afrikaans</span>
+</button>
+<button onclick='translatePage("sw")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-tz"></span>
+<span class=ml-3>Kiswahili</span>
+</button>
+<button onclick='translatePage("eu")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es-pv"></span>
+<span class=ml-3>Euskara</span>
+</button>
+<button onclick='translatePage("gl")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es-ga"></span>
+<span class=ml-3>Galego</span>
+</button>
+<button onclick='translatePage("sq")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-al"></span>
+<span class=ml-3>Shqip</span>
+</button>
+<button onclick='translatePage("hy")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-am"></span>
+<span class=ml-3>Հայերեն</span>
+</button>
+<button onclick='translatePage("ka")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ge"></span>
+<span class=ml-3>ქართული</span>
+</button>
+<button onclick='translatePage("ml")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>മലയാളം</span>
+</button>
+<button onclick='translatePage("ta")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>தமிழ்</span>
+</button>
+<button onclick='translatePage("te")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>తెలుగు</span>
+</button>
+<button onclick='translatePage("kn")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>ಕನ್ನಡ</span>
+</button>
+<button onclick='translatePage("mr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>मराठी</span>
+</button>
+<button onclick='translatePage("gu")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>ગુજરાતી</span>
+</button>
+<button onclick='translatePage("pa")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>ਪੰਜਾਬੀ</span>
+</button>
+<button onclick='translatePage("bn")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-bd"></span>
+<span class=ml-3>বাংলা</span>
+</button>
+<button onclick='translatePage("ne")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-np"></span>
+<span class=ml-3>नेपाली</span>
+</button>
+<button onclick='translatePage("si")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-lk"></span>
+<span class=ml-3>සිංහල</span>
+</button>
+<button onclick='translatePage("km")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-kh"></span>
+<span class=ml-3>ខ្មែរ</span>
+</button>
+<button onclick='translatePage("lo")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-la"></span>
+<span class=ml-3>ລາວ</span>
+</button>
+<button onclick='translatePage("my")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-mm"></span>
+<span class=ml-3>မြန်မာ</span></button></div><div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center rounded-lg px-3 py-1 glass-effect shadow-lg z-40 border border-btcz-gray-700"><div class="flex items-center"><span class="text-sm font-bold text-btcz-gold" id=btcz-price>$0.00000000</span></div><div class="flex items-center space-x-2 text-xs ml-2"><div class="flex items-center" style=white-space:nowrap><span class=ml-1 style=display:inline-block><span>24 H</span></span>
+<span id=change-24h class=ml-1 style=display:inline-block>0.00%</span></div><div class="flex items-center ml-2"><span>7d</span>
+<span id=change-7d class=ml-1>0.00%</span></div><div class="flex items-center ml-2"><span>30d</span>
+<span id=change-30d class=ml-1>0.00%</span></div></div></div></div></div><div class="flex items-center space-x-4 md:hidden"><button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden flex items-center p-2 rounded-lg hover:bg-btcz-gray-800/50 transition-all duration-200" :aria-expanded=mobileMenuOpen aria-label="Toggle mobile menu"><svg class="w-6 h-6 text-white transform transition-transform duration-200" :class="{ 'rotate-90': mobileMenuOpen }" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button></div><div x-show=mobileMenuOpen x-transition:enter="transition-opacity ease-out duration-200" x-transition:enter-start=opacity-0 x-transition:enter-end=opacity-100 x-transition:leave="transition-opacity ease-in duration-200" x-transition:leave-start=opacity-100 x-transition:leave-end=opacity-0 x-cloak class="fixed inset-0 bg-black/80 backdrop-blur-sm md:hidden z-40"><div x-show=mobileMenuOpen x-bind:class="{ 'slide-in': mobileMenuOpen }" @click.away="mobileMenuOpen = false" class="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden z-50 bg-black/90 backdrop-blur-md border-l border-white/5 shadow-2xl transform" style="background:linear-gradient(to bottom right,rgba(0,0,0,.95),rgba(0,0,0,.9))"><nav class="h-full w-full overflow-y-auto flex flex-col"><div class="flex justify-end items-center p-6 border-b border-white/10"><button @click="mobileMenuOpen = false" class="p-2 text-white/80 hover:text-btcz-gold transition-all duration-200 hover:rotate-90 transform"><svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18 18 6M6 6l12 12"/></svg></button></div><div class=p-6><a href=/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Home
+</a><a href=/en/why-bitcoinz/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Why BitcoinZ
+</a><a href=/en/wallets/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Wallets
+</a><a href=/en/buy/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Where to Buy
+</a><a href=/en/learn/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Learn Crypto
+</a><a href=/en/news/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">News
+</a><a href=/roadmap/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Roadmap
+</a><a href=/en/ecosystem/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Ecosystem</a><div class="mt-6 pt-6 border-t border-white/10" x-data="{ langMenuOpen: false }"><button @click="langMenuOpen = !langMenuOpen" class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-colors duration-200 py-2">
+<span class=text-lg>Select Language</span><svg class="w-5 h-5 transform transition-transform duration-200" :class="{'rotate-180': langMenuOpen}" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-show=langMenuOpen x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="mobile-lang-menu mt-2 bg-black/95 backdrop-blur-md rounded-lg border border-btcz-gray-700/50" style=max-height:60vh;overflow-y:auto><style>.mobile-lang-menu{scrollbar-width:thin;scrollbar-color:#FFD700 rgba(0,0,0,.3)}.mobile-lang-menu::-webkit-scrollbar{width:4px}.mobile-lang-menu::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:2px}.mobile-lang-menu::-webkit-scrollbar-thumb{background:gold;border-radius:2px}.mobile-lang-menu::-webkit-scrollbar-thumb:hover{background:#ffd900d1}</style><div class=py-2><button onclick='const mobileLoading=document.querySelector(".translate-loading");mobileLoading&&mobileLoading.remove(),localStorage.setItem("selectedLang","en"),window.location.reload()' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-us"></span>
+<span class=ml-3>English</span>
+</button>
+<button onclick='translatePage("es")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es"></span>
+<span class=ml-3>Español</span>
+</button>
+<button onclick='translatePage("fr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-fr"></span>
+<span class=ml-3>Français</span>
+</button>
+<button onclick='translatePage("de")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-de"></span>
+<span class=ml-3>Deutsch</span>
+</button>
+<button onclick='translatePage("zh-CN")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-cn"></span>
+<span class=ml-3>中文 (简体)</span>
+</button>
+<button onclick='translatePage("ja")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-jp"></span>
+<span class=ml-3>日本語</span>
+</button>
+<button onclick='translatePage("ru")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ru"></span>
+<span class=ml-3>Русский</span>
+</button>
+<button onclick='translatePage("tr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-tr"></span>
+<span class=ml-3>Türkçe</span>
+</button>
+<button onclick='translatePage("fi")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-fi"></span>
+<span class=ml-3>Suomi</span>
+</button>
+<button onclick='translatePage("pt")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-pt"></span>
+<span class=ml-3>Português</span>
+</button>
+<button onclick='translatePage("ar")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-sa"></span>
+<span class=ml-3>العربية</span>
+</button>
+<button onclick='translatePage("id")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-id"></span>
+<span class=ml-3>Bahasa Indonesia</span>
+</button>
+<button onclick='translatePage("vi")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-vn"></span>
+<span class=ml-3>Tiếng Việt</span>
+</button>
+<button onclick='translatePage("he")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-il"></span>
+<span class=ml-3>עברית</span>
+</button>
+<button onclick='translatePage("th")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-th"></span>
+<span class=ml-3>ไทย</span>
+</button>
+<button onclick='translatePage("ms")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-my"></span>
+<span class=ml-3>Bahasa Melayu</span>
+</button>
+<button onclick='translatePage("uk")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ua"></span>
+<span class=ml-3>Українська</span>
+</button>
+<button onclick='translatePage("hu")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-hu"></span>
+<span class=ml-3>Magyar</span>
+</button>
+<button onclick='translatePage("el")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-gr"></span>
+<span class=ml-3>Ελληνικά</span>
+</button>
+<button onclick='translatePage("cs")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-cz"></span>
+<span class=ml-3>Čeština</span>
+</button>
+<button onclick='translatePage("ro")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ro"></span>
+<span class=ml-3>Română</span>
+</button>
+<button onclick='translatePage("sk")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-sk"></span>
+<span class=ml-3>Slovenčina</span>
+</button>
+<button onclick='translatePage("hr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-hr"></span>
+<span class=ml-3>Hrvatski</span>
+</button>
+<button onclick='translatePage("bg")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-bg"></span>
+<span class=ml-3>Български</span>
+</button>
+<button onclick='translatePage("lt")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-lt"></span>
+<span class=ml-3>Lietuvių</span>
+</button>
+<button onclick='translatePage("sl")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-si"></span>
+<span class=ml-3>Slovenščina</span>
+</button>
+<button onclick='translatePage("et")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ee"></span>
+<span class=ml-3>Eesti</span>
+</button>
+<button onclick='translatePage("lv")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-lv"></span>
+<span class=ml-3>Latviešu</span>
+</button>
+<button onclick='translatePage("sr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-rs"></span>
+<span class=ml-3>Српски</span>
+</button>
+<button onclick='translatePage("ca")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es-ct"></span>
+<span class=ml-3>Català</span>
+</button>
+<button onclick='translatePage("fil")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ph"></span>
+<span class=ml-3>Filipino</span>
+</button>
+<button onclick='translatePage("is")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-is"></span>
+<span class=ml-3>Íslenska</span>
+</button>
+<button onclick='translatePage("af")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-za"></span>
+<span class=ml-3>Afrikaans</span>
+</button>
+<button onclick='translatePage("sw")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-tz"></span>
+<span class=ml-3>Kiswahili</span>
+</button>
+<button onclick='translatePage("eu")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es-pv"></span>
+<span class=ml-3>Euskara</span>
+</button>
+<button onclick='translatePage("gl")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es-ga"></span>
+<span class=ml-3>Galego</span>
+</button>
+<button onclick='translatePage("sq")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-al"></span>
+<span class=ml-3>Shqip</span>
+</button>
+<button onclick='translatePage("hy")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-am"></span>
+<span class=ml-3>Հայերեն</span>
+</button>
+<button onclick='translatePage("ka")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ge"></span>
+<span class=ml-3>ქართული</span>
+</button>
+<button onclick='translatePage("ml")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>മലയാളം</span>
+</button>
+<button onclick='translatePage("ta")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>தமிழ்</span>
+</button>
+<button onclick='translatePage("te")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>తెలుగు</span>
+</button>
+<button onclick='translatePage("kn")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>ಕನ್ನಡ</span>
+</button>
+<button onclick='translatePage("mr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>मराठी</span>
+</button>
+<button onclick='translatePage("gu")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>ગુજરાતી</span>
+</button>
+<button onclick='translatePage("pa")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>ਪੰਜਾਬੀ</span>
+</button>
+<button onclick='translatePage("bn")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-bd"></span>
+<span class=ml-3>বাংলা</span>
+</button>
+<button onclick='translatePage("ne")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-np"></span>
+<span class=ml-3>नेपाली</span>
+</button>
+<button onclick='translatePage("si")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-lk"></span>
+<span class=ml-3>සිංහල</span>
+</button>
+<button onclick='translatePage("km")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-kh"></span>
+<span class=ml-3>ខ្មែរ</span>
+</button>
+<button onclick='translatePage("lo")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-la"></span>
+<span class=ml-3>ລາວ</span>
+</button>
+<button onclick='translatePage("my")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-mm"></span>
+<span class=ml-3>မြန်မာ</span></button></div></div></div></div></nav></div></div></nav></div></header><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#000000"><meta name=apple-mobile-web-app-status-bar-style content="black"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.1.0/css/flag-icons.min.css><link rel=stylesheet href=/css/logo-animation.css><link rel=stylesheet href=/css/animations.css><link rel=stylesheet href=/css/main.min.css><script src=/js/price-ticker.js></script><script src=/js/scroll-handler.js></script><script src=/js/main.js defer></script><script>function translatePage(e){const t=document.createElement("div");t.className="translate-loading",t.textContent="Translating...",document.body.appendChild(t);const i=document.querySelectorAll('[class*="text-transparent"], [class*="bg-clip-text"]'),s=new Map;i.forEach(e=>{s.set(e,e.textContent)});async function o(t){try{if(!t.trim())return"";const n=await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${e}&dt=t&q=${encodeURIComponent(t)}`);if(!n.ok)throw new Error("Translation request failed");const s=await n.json();return s[0][0][0]}catch(e){throw console.error("Translation error:",e),e}}async function a(e){if(e.tagName==="SCRIPT"||e.tagName==="STYLE")return;if(e.classList&&e.classList.contains("notranslate"))return;if(e.matches('[class*="text-transparent"], [class*="bg-clip-text"]')){try{const t=await o(e.textContent.trim());t&&(e.textContent=t)}catch(e){console.error("Error translating special element:",e)}return}const s=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,{acceptNode:function(e){const t=e.parentElement;if(!t)return NodeFilter.FILTER_REJECT;let n=t;for(;n;){if(n.classList&&n.classList.contains("notranslate"))return NodeFilter.FILTER_REJECT;n=n.parentElement}return t.tagName!=="SCRIPT"&&t.tagName!=="STYLE"&&t.tagName!=="NOSCRIPT"&&!t.classList?.contains("notranslate")&&e.textContent.trim()!==""?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),t=[];let n;for(;n=s.nextNode();)t.push(n);await Promise.all(t.map(async e=>{const t=e.textContent.trim();if(t)try{const n=await o(t);n&&(e.textContent=n)}catch(e){console.error("Error translating text node:",e)}}));const i=["placeholder","title","alt"],a=e.querySelectorAll("[placeholder], [title], [alt]");await Promise.all([...a].map(async e=>{if(e.classList&&e.classList.contains("notranslate"))return;for(const t of i)if(e.hasAttribute(t)){const n=e.getAttribute(t);try{const s=await o(n);s&&e.setAttribute(t,s)}catch(e){console.error(`Error translating ${t} attribute:`,e)}}}))}const n=document.createElement("style");n.textContent=".notranslate { display: none !important; }",document.head.appendChild(n),a(document.body).then(()=>{localStorage.setItem("selectedLang",e),t.remove(),n.remove();const s=document.querySelectorAll('a[href*="translate.google.com/translate_error"]');s.forEach(e=>e.remove())}).catch(e=>{console.error("Translation failed:",e),showErrorToast("Translation failed. Please try again."),i.forEach(e=>{s.has(e)&&(e.textContent=s.get(e))}),n.remove(),t.remove()})}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=localStorage.getItem("selectedLang");e&&e!=="en"&&translatePage(e)})</script></div></header><main class=flex-grow role=main><article class="section bg-btcz-gray-950 py-24"><div class="container mx-auto px-4 max-w-4xl"><div class=mb-8><a href=/roadmap/ class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1"><svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3"/></svg>
+Back to Roadmap</a></div><header class="text-center mb-12"><h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-4xl md:text-5xl mb-6">BTCZ Wallet Development</h1><div class="flex justify-center items-center space-x-6 text-btcz-gray-400"><div class="flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5A2 2 0 003 7v12a2 2 0 002 2z"/></svg>
+<time class=text-sm>August 25, 2024</time></div><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-btcz-gray-800 text-btcz-gray-200 text-xs rounded-full">Wallet</span>
+<span class="px-3 py-1 bg-btcz-gray-800 text-btcz-gray-200 text-xs rounded-full">Development</span>
+<span class="px-3 py-1 bg-btcz-gray-800 text-btcz-gray-200 text-xs rounded-full">GUI</span></div></div></header><div class="prose prose-invert prose-lg max-w-none"><div class="text-btcz-gray-200 leading-relaxed space-y-6"><div class=relative><h1 id=wallet-development-progress>Wallet Development Progress</h1><p>Expanding BitcoinZ&rsquo;s accessibility through improved wallet solutions:</p><h2 id=cross-platform-gui-updates>Cross-Platform GUI Updates</h2><ul><li>Successfully tested and released for:<ul><li>Mac (ARM & Intel)</li><li>Windows</li><li>Linux</li></ul></li><li>New binaries available with latest versions</li><li>Enhanced user interface and experience</li></ul><h2 id=vidulum-integration>Vidulum Integration</h2><ul><li>Added wBTCZ support in VDL Wallet</li><li>Implemented direct fiat purchase capability</li><li>Simplified onboarding for new BTCZ users</li><li>Improved overall accessibility</li></ul><h2 id=infrastructure>Infrastructure</h2><ul><li>Continuous Electrum server maintenance</li><li>Enhanced stability for lightweight wallets</li><li>Improved server uptime and reliability</li><li>Regular performance optimizations</li></ul><p>These developments significantly improve the user experience and make BTCZ more accessible to newcomers.</p></div></div></div><div class="mt-16 border-t border-btcz-gray-800 pt-8 flex justify-between items-center"><a href=/roadmap/2024-08-28-marketing-liquidity/ class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1"><svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3"/></svg>
+Previous Article
+</a><a href=/roadmap/2024-08-20-collaborations-bridges/ class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:translate-x-1">Next Article<svg class="w-5 h-5 ml-2" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3"/></svg></a></div></div></article></main><div x-data x-show=$store.ads.rightVisible x-transition.opacity.duration.500ms class="ad-sidebar ad-sidebar-right"><div class=ad-header><button @click=$store.ads.hideRight() class=ad-close-btn title="Close ad">×</button>
+Ads fund BitcoinZ education campaigns</div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2885837671474125" crossorigin=anonymous></script><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-2885837671474125 data-ad-slot=3955727349 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><a href=/en/transparency class=transparency-link>View Our Transparency Report</a></div><div x-data x-show=$store.ads.leftVisible x-transition.opacity.duration.500ms class="ad-sidebar ad-sidebar-left"><div class=ad-header><button @click=$store.ads.hideLeft() class=ad-close-btn title="Close ad">×</button>
+Ads fund BitcoinZ education campaigns</div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2885837671474125" crossorigin=anonymous></script><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-2885837671474125 data-ad-slot=1325694570 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><a href=/en/transparency class=transparency-link>View Our Transparency Report</a></div><div x-data x-show="!$store.ads.leftVisible || !$store.ads.rightVisible"><button @click=$store.ads.showAll() class=show-ads-btn>
+Show Ads</button></div><footer class="bg-btcz-black border-t border-btcz-gray-800 py-12"><div class="container mx-auto px-4"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"><div class=space-y-4><div class="flex items-center space-x-2"><div class="logo-container group-hover:opacity-90 transition-opacity duration-300"><img src=/images/btcz-logo.png alt="BitcoinZ Logo" class="h-12 w-auto"></div><span class="font-heading font-bold text-xl text-btcz-gold">BitcoinZ</span></div><p class=text-btcz-gray-400>A community-driven cryptocurrency focused on decentralization, privacy, and accessibility for everyone.</p></div><div><h4 class="font-heading font-bold text-lg mb-4 text-btcz-gold">Quick Links</h4><ul class=space-y-2><li><a href=/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Home</a></li><li><a href=/en/why-bitcoinz/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Why BitcoinZ</a></li><li><a href=/en/wallets/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Wallets</a></li><li><a href=/en/buy/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Where to Buy</a></li><li><a href=/en/learn/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Learn Crypto</a></li><li><a href=/en/news/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">News</a></li><li><a href=/roadmap/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Roadmap</a></li><li><a href=/en/ecosystem/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Ecosystem</a></li></ul></div><div class=lg:col-span-2><h4 class="font-heading font-bold text-lg mb-4 text-btcz-gold">Community</h4><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"><a href=https://discord.gg/K59mxyf target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-discord text-xl text-btcz-gold"></i>
+<span>Discord</span>
+</a><a href=https://t.me/bitcoinzcommunity target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-telegram text-xl text-btcz-gold"></i>
+<span>Telegram</span>
+</a><a href=https://twitter.com/BTCZOfficial target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-twitter text-xl text-btcz-gold"></i>
+<span>Twitter</span>
+</a><a href=https://github.com/btcz/bitcoinz target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-github text-xl text-btcz-gold"></i>
+<span>GitHub</span>
+</a><a href=https://www.reddit.com/r/BTCZCommunity/ target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-reddit text-xl text-btcz-gold"></i>
+<span>Reddit</span>
+</a><a href=https://www.instagram.com/bitcoinzofficial/ target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-instagram text-xl text-btcz-gold"></i>
+<span>Instagram</span>
+</a><a href=https://www.youtube.com/channel/UC2MBhoVK45Eqp2cMb2bFuUA target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-youtube text-xl text-btcz-gold"></i>
+<span>YouTube</span>
+</a><a href="https://www.tiktok.com/@bitcoinz_community?lang=en" target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-tiktok text-xl text-btcz-gold"></i>
+<span>TikTok</span>
+</a><a href=https://www.pinterest.co.uk/bitcoinzcommunity/bitcoinz-community/ target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-pinterest text-xl text-btcz-gold"></i>
+<span>Pinterest</span>
+</a><a href="https://bitcointalk.org/index.php?topic=3086664.0" target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-solid fa-b text-xl text-btcz-gold"></i>
+<span>BitcoinTalk</span>
+</a><a href=https://www.floyx.com/profile/bitcoinz/posts target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-solid fa-hashtag text-xl text-btcz-gold"></i>
+<span>Floyx</span>
+</a><a href=https://www.radioking.com/radio/bitcoinz-radio target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-solid fa-radio text-xl text-btcz-gold"></i>
+<span>Radio</span></a></div></div></div><div class="mt-12 pt-8 border-t border-btcz-gray-800"><div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"><div class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">&copy; 2025 BitcoinZ. All Rights Reserved.</div><div class="flex space-x-6"><a href=/en/privacy-police class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Privacy Policy
+</a><a href=/en/terms-off-service class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Terms of Service</a></div></div></div></div></footer><script defer src=/js/price-ticker.js></script><script defer src=/js/scroll-handler.js></script></body></html>

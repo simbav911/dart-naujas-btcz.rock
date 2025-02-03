@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Medal base -->
+  <path d="M12 2l3 6 7 1-5 4 2 7-7-4-7 4 2-7-5-4 7-1z"/>
+  <!-- Rank stripes -->
+  <path d="M4 18h4v2H4zm6 0h4v2h-4zm6 0h4v2h-4z" opacity="0.8"/>
+  <!-- Community stars -->
+  <path d="M6 14l1-1 1 1-1 1zm5 0l1-1 1 1-1 1zm5 0l1-1 1 1-1 1z" opacity="0.7"/>
+  <!-- Achievement ribbon -->
+  <path d="M11 10h2v4h-2z" opacity="0.6"/>
+</svg>

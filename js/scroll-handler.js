@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const priceTicker = document.querySelector('.price-ticker-container');
+    const priceTickers = document.querySelectorAll('.price-ticker-container');
+    const SCROLL_THRESHOLD = 377.95; // 10 cm in pixels
     
     function updateTickerVisibility() {
         const scrollPosition = window.scrollY;
-        const heroHeight = window.innerHeight; // Assuming hero section is full viewport height
         
-        if (scrollPosition > heroHeight * 0.15) { // Start hiding at 15% of hero height
-            priceTicker.style.opacity = '0';
-            priceTicker.style.pointerEvents = 'none';
-        } else {
-            priceTicker.style.opacity = '1';
-            priceTicker.style.pointerEvents = 'auto';
-        }
+        priceTickers.forEach(ticker => {
+            if (scrollPosition > SCROLL_THRESHOLD) {
+                ticker.style.opacity = '0';
+                ticker.style.transform = 'translateY(-20px)';
+                ticker.style.pointerEvents = 'none';
+                ticker.style.visibility = 'hidden';
+            } else {
+                ticker.style.opacity = '1';
+                ticker.style.transform = 'translateY(0)';
+                ticker.style.pointerEvents = 'auto';
+                ticker.style.visibility = 'visible';
+            }
+        });
     }
 
     window.addEventListener('scroll', updateTickerVisibility);

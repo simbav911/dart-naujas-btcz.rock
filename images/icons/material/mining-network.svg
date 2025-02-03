@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Mining pickaxe -->
+  <path d="M14.5 8.5l-2-2 5-5 2 2z"/>
+  <!-- Network nodes -->
+  <path d="M4 14c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm16 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-8 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" opacity="0.8"/>
+  <!-- Network connections -->
+  <path d="M6 12h12M12 14v4" opacity="0.6"/>
+  <!-- Hash rate indicator -->
+  <path d="M8 8h8l-4 4z" opacity="0.7"/>
+</svg>

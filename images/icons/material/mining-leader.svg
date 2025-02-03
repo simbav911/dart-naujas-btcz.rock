@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Trophy cup -->
+  <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2z"/>
+  <!-- Mining pickaxe -->
+  <path d="M7 10l2-2 2 2" opacity="0.8"/>
+  <!-- Number one rank -->
+  <path d="M11 7h2v6h-2z" opacity="0.7"/>
+  <!-- Star decoration -->
+  <path d="M12 4l1 2-1 2-1-2z" opacity="0.6"/>
+</svg>

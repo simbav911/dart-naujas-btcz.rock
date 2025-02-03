@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    path {
+      fill: #FFD700;
+    }
+  </style>
+  <!-- Wallet base -->
+  <path d="M21 7.28V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-2.28c.59-.35 1-.98 1-1.72V9c0-.74-.41-1.37-1-1.72z"/>
+  <!-- Platform icons -->
+  <path d="M17.5 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" opacity="0.8"/>
+  <!-- Development/update symbol -->
+  <path d="M6 10h3v1H6v-1zm0 3h3v1H6v-1z" opacity="0.6"/>
+  <!-- Cross-platform indicator -->
+  <path d="M16 5v2H8V5h8zm0 12v2H8v-2h8z" opacity="0.7"/>
+</svg>
