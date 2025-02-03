@@ -84,6 +84,23 @@ html {
     scroll-snap-align: start;
 }
 
+/* Cookie Consent Banner */
+#cookie-consent {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 50;
+    opacity: 1;
+}
+
+#cookie-consent.translate-y-full {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#cookie-consent[style*="display: none"] {
+    display: none !important;
+}
+
 /* Mobile Timeline */
 @media (max-width: 768px) {
     .year-timeline {

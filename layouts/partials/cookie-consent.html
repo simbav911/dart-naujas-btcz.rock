@@ -104,9 +104,21 @@
             // Save preferences
             localStorage.setItem('cookieConsent', JSON.stringify(preferences));
             
-            // Hide banner and modal
-            cookieConsent.classList.add('translate-y-full');
-            cookieSettingsModal.classList.add('hidden');
+            // Hide banner and modal with proper animation
+            const cookieConsent = document.getElementById('cookie-consent');
+            const cookieSettingsModal = document.getElementById('cookie-settings-modal');
+            
+            if (cookieConsent) {
+                cookieConsent.classList.add('translate-y-full');
+                // Remove the element after animation completes
+                cookieConsent.addEventListener('transitionend', function() {
+                    cookieConsent.style.display = 'none';
+                }, { once: true });
+            }
+            
+            if (cookieSettingsModal) {
+                cookieSettingsModal.classList.add('hidden');
+            }
             
             // Handle Google AdSense
             if (typeof window.adsbygoogle !== 'undefined') {
