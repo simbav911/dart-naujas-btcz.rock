@@ -1,3 +1,4 @@
+
 <!-- Cookie Consent Banner -->
 <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-btcz-gray-900 border-t border-btcz-gray-800 transform translate-y-full transition-transform duration-300 z-50">
     <div class="container mx-auto px-4 py-6">
@@ -121,23 +122,16 @@
                 if (window.location.hostname !== 'localhost' && 
                     window.location.hostname !== '127.0.0.1') {
                     try {
-                        // Clear existing ads
-                        const adElements = document.querySelectorAll('.adsbygoogle');
-                        adElements.forEach(ad => {
-                            // Remove the element completely
-                            const parent = ad.parentNode;
-                            const adClone = ad.cloneNode(true);
-                            adClone.innerHTML = '';
-                            // Remove all event listeners and ad-related data
-                            parent.replaceChild(adClone, ad);
-                            
-                            // Wait for next tick to reinitialize
-                            setTimeout(() => {
-                                if (preferences.advertising) {
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                }
-                            }, 250);
-                        });
+                        // Refresh the page to properly reinitialize ads
+                        if (preferences.advertising) {
+                            location.reload();
+                        } else {
+                            // If ads are disabled, remove them from the page
+                            const adElements = document.querySelectorAll('.adsbygoogle');
+                            adElements.forEach(ad => {
+                                ad.style.display = 'none';
+                            });
+                        }
                     } catch (e) {
                         console.log('AdSense refresh error:', e);
                     }

@@ -274,7 +274,14 @@
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
+            try {
+                const preferences = JSON.parse(localStorage.getItem('cookieConsent'));
+                if (preferences && preferences.advertising) {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                }
+            } catch (e) {
+                console.log('Error initializing ad:', e);
+            }
         </script>
         
         <a href="{{ "en/transparency" | relLangURL }}" class="transparency-link">
@@ -307,7 +314,14 @@
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
+            try {
+                const preferences = JSON.parse(localStorage.getItem('cookieConsent'));
+                if (preferences && preferences.advertising) {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                }
+            } catch (e) {
+                console.log('Error initializing ad:', e);
+            }
         </script>
         
         <a href="{{ "en/transparency" | relLangURL }}" class="transparency-link">
