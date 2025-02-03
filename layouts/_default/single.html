@@ -31,7 +31,7 @@
                 </svg>
                 Back to Home
             </a>
-            {{ else if eq .File.BaseFileName "privacy-policy" }}
+            {{ else if in .RelPermalink "/privacy-policy/" }}
             <a href="{{ "/" | relLangURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

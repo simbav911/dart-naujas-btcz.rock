@@ -1,22 +1,22 @@
 
 <!-- Cookie Consent Banner -->
 <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-btcz-gray-900 border-t border-btcz-gray-800 transform translate-y-full transition-transform duration-300 z-50 hidden">
-    <div class="container mx-auto px-4 py-4">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div class="text-btcz-gray-200 max-w-3xl text-sm leading-relaxed pr-4">
+    <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-btcz-gray-200 max-w-2xl">
                 {{ i18n "cookieMessage" | default "We use cookies and similar technologies to enhance your experience and show relevant content. This includes Google AdSense for personalized advertising. By using our website, you agree to our use of cookies." }}
-                <a href="{{ "en/privacy-policy" | relLangURL }}" class="text-btcz-gold hover:text-btcz-gray-200 transition-colors duration-200 ml-1 whitespace-nowrap">
+                <a href="{{ "en/privacy-policy" | relLangURL }}" class="text-btcz-gold hover:text-btcz-gray-200 transition-colors duration-200 ml-1">
                     {{ i18n "learnMore" | default "Learn More" }}
                 </a>
             </div>
-            <div class="flex flex-wrap items-center gap-2">
-                <button id="cookie-accept" class="min-w-[90px] px-4 py-1.5 bg-btcz-gold text-btcz-gray-900 rounded hover:bg-white transition-colors duration-200 text-sm font-medium">
+            <div class="flex flex-wrap gap-2">
+                <button id="cookie-accept" class="px-4 py-2 bg-btcz-gold text-btcz-gray-900 rounded-lg hover:bg-white transition-colors duration-200 font-semibold">
                     {{ i18n "acceptAll" | default "Accept All" }}
                 </button>
-                <button id="cookie-reject" class="min-w-[90px] px-4 py-1.5 border border-btcz-gold text-btcz-gold rounded hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-200 text-sm font-medium">
+                <button id="cookie-reject" class="px-4 py-2 border border-btcz-gold text-btcz-gold rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-200 font-semibold">
                     {{ i18n "rejectAll" | default "Reject All" }}
                 </button>
-                <button id="cookie-settings" class="min-w-[90px] px-4 py-1.5 border border-btcz-gray-400 text-btcz-gray-400 rounded hover:border-btcz-gold hover:text-btcz-gold transition-colors duration-200 text-sm">
+                <button id="cookie-settings" class="px-4 py-2 border border-btcz-gray-400 text-btcz-gray-400 rounded-lg hover:border-btcz-gold hover:text-btcz-gold transition-colors duration-200">
                     {{ i18n "manageSettings" | default "Manage Settings" }}
                 </button>
             </div>

@@ -2,6 +2,7 @@
 title: "Privacy Policy"
 date: 2025-02-03
 draft: false
+layout: privacy-policy
 description: "BitcoinZ Privacy Policy - Learn how we handle and protect your data"
 ---
 
