@@ -12,10 +12,136 @@
         html{scroll-behavior:smooth}
         body{font-family:'Open Sans',ui-sans-serif,system-ui;color:var(--btcz-white);background-color:var(--btcz-black)}
         [x-cloak] { display: none !important; }
+
+        /* Ad Sidebar Styles */
+        .ad-sidebar {
+            position: fixed;
+            width: 300px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .ad-sidebar-right {
+            right: 20px;
+        }
+
+        .ad-sidebar-left {
+            left: 20px;
+        }
+
+        .ad-sidebar .ad-header {
+            color: #ffd700;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+
+        .ad-close-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 24px;
+            height: 24px;
+            background: #ffd700;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .ad-close-btn:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+
+        .ad-sidebar .transparency-link {
+            display: block;
+            text-align: center;
+            color: #ffd700;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            text-decoration: underline;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .ad-sidebar .transparency-link:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 1400px) {
+            .ad-sidebar {
+                display: none;
+            }
+        }
+        
+        .show-ads-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffd700;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .show-ads-btn:hover {
+            background: #fff;
+            transform: translateX(-50%) scale(1.05);
+        }
     </style>
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Ads Management Script -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('ads', {
+                leftVisible: localStorage.getItem('leftAdVisible') !== 'false',
+                rightVisible: localStorage.getItem('rightAdVisible') !== 'false',
+                
+                hideLeft() {
+                    this.leftVisible = false;
+                    localStorage.setItem('leftAdVisible', 'false');
+                },
+                
+                hideRight() {
+                    this.rightVisible = false;
+                    localStorage.setItem('rightAdVisible', 'false');
+                },
+                
+                showAll() {
+                    this.leftVisible = true;
+                    this.rightVisible = true;
+                    localStorage.setItem('leftAdVisible', 'true');
+                    localStorage.setItem('rightAdVisible', 'true');
+                }
+            });
+        });
+    </script>
     
     <!-- Preload and Prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,7 +206,66 @@
     <main class="flex-grow" role="main">
         {{ block "main" . }}{{ end }}
     </main>
-    
+
+    <!-- Right Ad Sidebar -->
+    <div x-data x-show="$store.ads.rightVisible" x-transition.opacity.duration.500ms class="ad-sidebar ad-sidebar-right">
+        <div class="ad-header">
+            <button @click="$store.ads.hideRight()" class="ad-close-btn" title="Close ad">×</button>
+            Ads fund BitcoinZ education campaigns
+        </div>
+        
+        <!-- Google AdSense -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2885837671474125"
+             crossorigin="anonymous"></script>
+        <!-- BitcoinZ_Sidebar -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2885837671474125"
+             data-ad-slot="3955727349"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        
+        <a href="{{ "en/transparency" | relLangURL }}" class="transparency-link">
+            View Our Transparency Report
+        </a>
+    </div>
+
+    <!-- Left Ad Sidebar -->
+    <div x-data x-show="$store.ads.leftVisible" x-transition.opacity.duration.500ms class="ad-sidebar ad-sidebar-left">
+        <div class="ad-header">
+            <button @click="$store.ads.hideLeft()" class="ad-close-btn" title="Close ad">×</button>
+            Ads fund BitcoinZ education campaigns
+        </div>
+        
+        <!-- Google AdSense -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2885837671474125"
+             crossorigin="anonymous"></script>
+        <!-- BitcoinZ_Sidebar2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2885837671474125"
+             data-ad-slot="1325694570"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        
+        <a href="{{ "en/transparency" | relLangURL }}" class="transparency-link">
+            View Our Transparency Report
+        </a>
+    </div>
+
+    <!-- Show Ads Button -->
+    <div x-data x-show="!$store.ads.leftVisible || !$store.ads.rightVisible">
+        <button @click="$store.ads.showAll()" class="show-ads-btn">
+            Show Ads
+        </button>
+    </div>
+
     <!-- Footer -->
     {{ partial "footer.html" . }}
     
