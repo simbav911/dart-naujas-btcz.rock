@@ -89,6 +89,31 @@ html {
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     z-index: 50;
     opacity: 1;
+    box-shadow: 0 -2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+#cookie-consent .container {
+    max-width: 1440px;
+}
+
+#cookie-consent .text-btcz-gray-200 {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+#cookie-consent button {
+    white-space: nowrap;
+    min-height: 32px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+#cookie-consent button:hover {
+    transform: translateY(-1px);
+}
+
+#cookie-consent button:active {
+    transform: translateY(0);
 }
 
 #cookie-consent.translate-y-full {
@@ -99,6 +124,23 @@ html {
 
 #cookie-consent[style*="display: none"] {
     display: none !important;
+}
+
+@media (max-width: 768px) {
+    #cookie-consent .container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    #cookie-consent .flex-col {
+        gap: 1rem;
+    }
+    
+    #cookie-consent button {
+        padding: 0.5rem 1rem;
+        width: auto;
+        font-size: 0.875rem;
+    }
 }
 
 /* Mobile Timeline */
