@@ -124,12 +124,19 @@
                         // Clear existing ads
                         const adElements = document.querySelectorAll('.adsbygoogle');
                         adElements.forEach(ad => {
-                            ad.innerHTML = '';
-                            ad.classList.remove('adsbygoogle');
+                            // Remove the element completely
+                            const parent = ad.parentNode;
+                            const adClone = ad.cloneNode(true);
+                            adClone.innerHTML = '';
+                            // Remove all event listeners and ad-related data
+                            parent.replaceChild(adClone, ad);
+                            
+                            // Wait for next tick to reinitialize
                             setTimeout(() => {
-                                ad.classList.add('adsbygoogle');
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            }, 100);
+                                if (preferences.advertising) {
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                }
+                            }, 250);
                         });
                     } catch (e) {
                         console.log('AdSense refresh error:', e);
