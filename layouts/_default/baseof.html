@@ -329,5 +329,8 @@
     <script defer src="{{ "js/price-ticker.js" | relURL }}"></script>
     <script defer src="{{ "js/scroll-handler.js" | relURL }}"></script>
     {{ block "scripts" . }}{{ end }}
+    
+    <!-- Include cookie consent banner -->
+    {{ partial "cookie-consent.html" . }}
 </body>
 </html>

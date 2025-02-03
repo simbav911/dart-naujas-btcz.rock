@@ -1,0 +1,214 @@
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-btcz-gray-900 border-t border-btcz-gray-800 transform translate-y-full transition-transform duration-300 z-50">
+    <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-btcz-gray-200 max-w-2xl">
+                {{ i18n "cookieMessage" | default "We use cookies and similar technologies to enhance your experience and show relevant content. This includes Google AdSense for personalized advertising. By using our website, you agree to our use of cookies." }}
+                <a href="{{ "en/privacy-policy" | relLangURL }}" class="text-btcz-gold hover:text-btcz-gray-200 transition-colors duration-200 ml-1">
+                    {{ i18n "learnMore" | default "Learn More" }}
+                </a>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button id="cookie-accept" class="px-4 py-2 bg-btcz-gold text-btcz-gray-900 rounded-lg hover:bg-white transition-colors duration-200 font-semibold">
+                    {{ i18n "acceptAll" | default "Accept All" }}
+                </button>
+                <button id="cookie-reject" class="px-4 py-2 border border-btcz-gold text-btcz-gold rounded-lg hover:bg-btcz-gold hover:text-btcz-gray-900 transition-colors duration-200 font-semibold">
+                    {{ i18n "rejectAll" | default "Reject All" }}
+                </button>
+                <button id="cookie-settings" class="px-4 py-2 border border-btcz-gray-400 text-btcz-gray-400 rounded-lg hover:border-btcz-gold hover:text-btcz-gold transition-colors duration-200">
+                    {{ i18n "manageSettings" | default "Manage Settings" }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cookie Settings Modal -->
+<div id="cookie-settings-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="container mx-auto px-4 h-full flex items-center justify-center">
+        <div class="bg-btcz-gray-900 rounded-xl p-6 max-w-2xl w-full border border-btcz-gray-800">
+            <h3 class="text-2xl font-bold text-btcz-gold mb-4">{{ i18n "cookieSettings" | default "Cookie Settings" }}</h3>
+            
+            <div class="space-y-4 mb-6">
+                <!-- Essential Cookies -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="text-btcz-gold font-semibold">{{ i18n "essentialCookies" | default "Essential Cookies" }}</h4>
+                        <p class="text-btcz-gray-400 text-sm">{{ i18n "essentialCookiesDesc" | default "Required for basic website functionality" }}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="essential-cookies" checked disabled class="w-4 h-4 accent-btcz-gold">
+                    </div>
+                </div>
+                
+                <!-- Analytics Cookies -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="text-btcz-gold font-semibold">{{ i18n "analyticsCookies" | default "Analytics Cookies" }}</h4>
+                        <p class="text-btcz-gray-400 text-sm">{{ i18n "analyticsCookiesDesc" | default "Help us understand how visitors use our site" }}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="analytics-cookies" class="w-4 h-4 accent-btcz-gold">
+                    </div>
+                </div>
+                
+                <!-- Advertising Cookies -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="text-btcz-gold font-semibold">{{ i18n "advertisingCookies" | default "Advertising Cookies" }}</h4>
+                        <p class="text-btcz-gray-400 text-sm">{{ i18n "advertisingCookiesDesc" | default "Used to show you relevant advertisements" }}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="advertising-cookies" class="w-4 h-4 accent-btcz-gold">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end gap-2">
+                <button id="save-preferences" class="px-4 py-2 bg-btcz-gold text-btcz-gray-900 rounded-lg hover:bg-white transition-colors duration-200 font-semibold">
+                    {{ i18n "savePreferences" | default "Save Preferences" }}
+                </button>
+                <button id="close-settings" class="px-4 py-2 border border-btcz-gray-400 text-btcz-gray-400 rounded-lg hover:border-btcz-gold hover:text-btcz-gold transition-colors duration-200">
+                    {{ i18n "close" | default "Close" }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Cookie Consent Management
+(function() {
+    // Initialize variables
+    const cookieConsent = document.getElementById('cookie-consent');
+    const cookieSettingsModal = document.getElementById('cookie-settings-modal');
+    const acceptButton = document.getElementById('cookie-accept');
+    const rejectButton = document.getElementById('cookie-reject');
+    const settingsButton = document.getElementById('cookie-settings');
+    const closeSettingsButton = document.getElementById('close-settings');
+    const savePreferencesButton = document.getElementById('save-preferences');
+
+    // Show banner if no consent is stored
+    function showBannerIfNeeded() {
+        if (!localStorage.getItem('cookieConsent')) {
+            setTimeout(() => {
+                cookieConsent.classList.remove('translate-y-full');
+            }, 1000);
+        }
+    }
+
+    // Handle cookie preferences
+    function setCookiePreferences(preferences) {
+        try {
+            // Save preferences
+            localStorage.setItem('cookieConsent', JSON.stringify(preferences));
+            
+            // Hide banner and modal
+            cookieConsent.classList.add('translate-y-full');
+            cookieSettingsModal.classList.add('hidden');
+            
+            // Handle Google AdSense
+            if (typeof window.adsbygoogle !== 'undefined') {
+                if (preferences.advertising) {
+                    window.adsbygoogle.requestNonPersonalizedAds = 0;
+                    window.adsbygoogle.pauseAdRequests = 0;
+                } else {
+                    window.adsbygoogle.requestNonPersonalizedAds = 1;
+                    window.adsbygoogle.pauseAdRequests = 1;
+                }
+
+                // Don't try to reinitialize ads in development
+                if (window.location.hostname !== 'localhost' && 
+                    window.location.hostname !== '127.0.0.1') {
+                    try {
+                        // Clear existing ads
+                        const adElements = document.querySelectorAll('.adsbygoogle');
+                        adElements.forEach(ad => {
+                            ad.innerHTML = '';
+                            ad.classList.remove('adsbygoogle');
+                            setTimeout(() => {
+                                ad.classList.add('adsbygoogle');
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            }, 100);
+                        });
+                    } catch (e) {
+                        console.log('AdSense refresh error:', e);
+                    }
+                }
+            }
+        } catch (e) {
+            console.error('Error setting cookie preferences:', e);
+        }
+    }
+
+    // Event Listeners
+    if (acceptButton) {
+        acceptButton.addEventListener('click', () => {
+            setCookiePreferences({
+                essential: true,
+                analytics: true,
+                advertising: true
+            });
+        });
+    }
+
+    if (rejectButton) {
+        rejectButton.addEventListener('click', () => {
+            setCookiePreferences({
+                essential: true,
+                analytics: false,
+                advertising: false
+            });
+        });
+    }
+
+    if (settingsButton) {
+        settingsButton.addEventListener('click', () => {
+            cookieSettingsModal.classList.remove('hidden');
+        });
+    }
+
+    if (closeSettingsButton) {
+        closeSettingsButton.addEventListener('click', () => {
+            cookieSettingsModal.classList.add('hidden');
+        });
+    }
+
+    if (savePreferencesButton) {
+        savePreferencesButton.addEventListener('click', () => {
+            const preferences = {
+                essential: true,
+                analytics: document.getElementById('analytics-cookies').checked,
+                advertising: document.getElementById('advertising-cookies').checked
+            };
+            setCookiePreferences(preferences);
+        });
+    }
+
+    // Load saved preferences
+    function loadSavedPreferences() {
+        try {
+            const savedPreferences = JSON.parse(localStorage.getItem('cookieConsent') || '{"essential":true,"analytics":false,"advertising":false}');
+            const analyticsCookies = document.getElementById('analytics-cookies');
+            const advertisingCookies = document.getElementById('advertising-cookies');
+            
+            if (analyticsCookies) analyticsCookies.checked = savedPreferences.analytics;
+            if (advertisingCookies) advertisingCookies.checked = savedPreferences.advertising;
+            
+            // Apply saved preferences
+            if (savedPreferences.advertising === false && typeof window.adsbygoogle !== 'undefined') {
+                window.adsbygoogle.requestNonPersonalizedAds = 1;
+                window.adsbygoogle.pauseAdRequests = 1;
+            }
+        } catch (e) {
+            console.error('Error loading saved preferences:', e);
+        }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        loadSavedPreferences();
+        showBannerIfNeeded();
+    });
+})();
+</script>
