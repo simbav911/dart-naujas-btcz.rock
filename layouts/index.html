@@ -430,11 +430,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     headers: {
                         'accept': 'application/json',
                         'content-type': 'application/json',
-                        'api-key': '{{ .Site.Params.brevo_api_key }}'
+                        'api-key': {{ .Site.Params.brevo_api_key | jsonify }}
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [parseInt('{{ .Site.Params.brevo_list_id }}')],
+                        listIds: [{{ .Site.Params.brevo_list_id }}],
                         attributes: {
                             WEBSITE: window.location.hostname
                         }
