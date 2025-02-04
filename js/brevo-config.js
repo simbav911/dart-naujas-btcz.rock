@@ -1,5 +1,5 @@
-// Brevo API Configuration
 window.BREVO_CONFIG = {
-    API_KEY: '{{ .Site.Params.brevo_api_key }}',
-    LIST_ID: parseInt('{{ .Site.Params.brevo_list_id }}')
+  "listId": "3",
+  "apiUrl": "https://api.brevo.com/v3",
+  "apiKey": "c8a42a70c6c1eaf7d4ed98e1f77c8d55c29c4ca09a3a7909a34365675a4c2ed5-Rhva2S36Hsc27C9d"
 };
