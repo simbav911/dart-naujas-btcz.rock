@@ -393,6 +393,24 @@ html {
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+{{ with .Site.Params }}
+<script id="brevo-config" type="application/json"
+    data-enabled="{{ .brevo_enabled }}"
+    data-api-key="{{ .brevo_api_key }}"
+    data-list-id="{{ .brevo_list_id }}">
+</script>
+<script>
+(function() {
+    var config = document.getElementById('brevo-config');
+    if (config && config.dataset.enabled === 'true') {
+        window.BREVO_CONFIG = {
+            apiKey: config.dataset.apiKey,
+            listId: parseInt(config.dataset.listId, 10)
+        };
+    }
+})();
+</script>
+{{ end }}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
