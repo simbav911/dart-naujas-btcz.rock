@@ -252,21 +252,63 @@ html {
                 {{ i18n "viewAll" | default "View All" }}
             </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <style>
+            @keyframes glow {
+                0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2), 0 0 10px rgba(255, 215, 0, 0.1), 0 0 15px rgba(255, 215, 0, 0.05); }
+                50% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3), 0 0 16px rgba(255, 215, 0, 0.2), 0 0 24px rgba(255, 215, 0, 0.1); }
+                100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2), 0 0 10px rgba(255, 215, 0, 0.1), 0 0 15px rgba(255, 215, 0, 0.05); }
+            }
+            .book-tile {
+                perspective: 1000px;
+                height: 100%;
+            }
+            .book-content {
+                transform: rotateY(-10deg);
+                transform-style: preserve-3d;
+                box-shadow: 0 0 5px rgba(255, 215, 0, 0.2), 0 0 10px rgba(255, 215, 0, 0.1);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                animation: glow 6s ease-in-out infinite;
+            }
+            .book-content::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+            .book-content:hover {
+                transform: rotateY(0deg) translateY(-10px);
+                animation: none;
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.4),
+                            0 0 30px rgba(255, 215, 0, 0.3),
+                            0 0 45px rgba(255, 215, 0, 0.2);
+            }
+            .book-content:hover::before {
+                opacity: 1;
+            }
+            </style>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {{ $newsPages := .Site.GetPage "section" "news" }}
             {{ range first 4 ($newsPages.Pages.ByDate.Reverse) }}
-            <a href="{{ .RelPermalink }}" class="group bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-2 overflow-hidden block">
-                {{ with .Params.image }}
-                <div class="relative h-32 overflow-hidden">
-                    <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 brightness-75 group-hover:brightness-100">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/70 group-hover:opacity-75 transition-opacity"></div>
-                </div>
-                {{ end }}
-                <div class="p-2">
-                    <time class="text-[10px] text-btcz-gold block mb-1">{{ .Date.Format "Jan 2, 2006" }}</time>
-                    <h3 class="text-xs font-bold text-white">{{ .Title }}</h3>
-                </div>
-            </a>
+            <div class="book-tile">
+                <a href="{{ .RelPermalink }}" class="group book-content bg-btcz-gray-900 border-l-4 border-btcz-gold/50 rounded-r-xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 block overflow-hidden">
+                    {{ with .Params.image }}
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-btcz-gray-900/90"></div>
+                    </div>
+                    {{ end }}
+                    <div class="p-4 flex-1 flex flex-col">
+                        <time class="text-sm text-btcz-gold block mb-2">{{ .Date.Format "Jan 2, 2006" }}</time>
+                        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2">{{ .Title }}</h3>
+                        <p class="text-btcz-gray-300 text-sm line-clamp-3 flex-1">{{ .Summary }}</p>
+                    </div>
+                </a>
+            </div>
             {{ end }}
         </div>
     </div>
