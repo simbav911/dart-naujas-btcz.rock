@@ -444,8 +444,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 if (!window.BREVO_CONFIG || !window.BREVO_CONFIG.apiKey) {
+                    console.error('Debug - Brevo Config:', window.BREVO_CONFIG);
                     throw new Error('Brevo configuration is missing');
                 }
+
+                console.log('Debug - Attempting subscription with:', {
+                    apiKey: window.BREVO_CONFIG.apiKey.substring(0, 5) + '...',
+                    listId: window.BREVO_CONFIG.listId
+                });
                 
                 const response = await fetch('https://api.brevo.com/v3/contacts', {
                     method: 'POST',
@@ -456,22 +462,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [window.BREVO_CONFIG.listId],
+                        listIds: [parseInt(window.BREVO_CONFIG.listId, 10)],
+                        updateEnabled: true,
                         attributes: {
                             WEBSITE: window.location.hostname
                         }
                     })
                 });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Subscription failed');
+                let responseData;
+                const responseText = await response.text();
+                console.log('Debug - Raw Response:', responseText);
+                
+                try {
+                    responseData = JSON.parse(responseText);
+                    console.log('Debug - Parsed Response:', responseData);
+                } catch (e) {
+                    console.error('Debug - JSON Parse Error:', e);
+                    throw new Error('Invalid response format');
                 }
 
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error);
+                if (!response.ok) {
+                    console.error('Debug - Response not OK:', response.status, response.statusText);
+                    throw new Error(responseData.message || 'Subscription failed');
+                }
+
+                if (responseData.error) {
+                    console.error('Debug - API Error:', responseData.error);
+                    throw new Error(responseData.error);
                 }
 
                 // Create and show message
