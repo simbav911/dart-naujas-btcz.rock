@@ -434,6 +434,7 @@ html {
     </div>
 </section>
 
+<script src="/js/brevo-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -467,21 +468,20 @@ document.addEventListener('DOMContentLoaded', function() {
             button.textContent = 'Subscribing...';
             
             try {
-                const apiKey = "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";
-                if (!apiKey) {
-                    throw new Error('API key is missing');
+                if (!window.BREVO_CONFIG || !window.BREVO_CONFIG.apiKey) {
+                    throw new Error('Brevo configuration is missing');
                 }
 
-                const response = await fetch('https://api.brevo.com/v3/contacts', {
+                const response = await fetch(window.BREVO_CONFIG.apiUrl + '/contacts', {
                     method: 'POST',
                     headers: {
                         'accept': 'application/json',
                         'content-type': 'application/json',
-                        'api-key': apiKey
+                        'api-key': window.BREVO_CONFIG.apiKey
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [3],
+                        listIds: [parseInt(window.BREVO_CONFIG.listId)],
                         attributes: {
                             WEBSITE: window.location.hostname
                         }
@@ -528,7 +528,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 form.reset();
             } catch (error) {
                 console.error('Subscription error:', error);
-                alert('Subscription failed. Please try again later.');
+                const errorMessage = error.message || 'Subscription failed. Please try again later.';
+                const message = document.createElement('div');
+                message.className = 'subscription-message';
+                message.innerHTML = `
+                    <div class="message-content">
+                        <p class="text-red-500">${errorMessage}</p>
+                        <button onclick="this.parentElement.parentElement.remove()">Close</button>
+                    </div>
+                `;
+                form.parentElement.appendChild(message);
             } finally {
                 button.disabled = false;
                 button.textContent = originalButtonText;

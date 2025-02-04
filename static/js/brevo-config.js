@@ -1,5 +1,6 @@
-// Brevo API Configuration
+// This file will be populated during build time with actual values
 window.BREVO_CONFIG = {
-    API_KEY: '{{ .Site.Params.brevo_api_key }}',
-    LIST_ID: parseInt('{{ .Site.Params.brevo_list_id }}')
+  listId: process.env.BREVO_LIST_ID || '',
+  apiUrl: 'https://api.brevo.com/v3',
+  apiKey: process.env.BREVO_API_KEY || ''
 };

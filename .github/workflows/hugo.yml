@@ -20,14 +20,23 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Install Node.js dependencies
         run: npm install
+
+      - name: Generate Brevo Config
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+        run: node scripts/generate-brevo-config.js
 
       - name: Build
         env:
           HUGO_ENV: production
-          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
         run: hugo --minify
 
       - name: Deploy
