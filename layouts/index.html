@@ -466,18 +466,23 @@ document.addEventListener('DOMContentLoaded', function() {
             
             button.disabled = true;
             button.textContent = 'Subscribing...';
-            
             try {
-                if (!window.BREVO_CONFIG || !window.BREVO_CONFIG.apiKey) {
-                    throw new Error('Brevo configuration is missing');
+                if (!window.BREVO_CONFIG) {
+                    throw new Error('Brevo configuration is not loaded');
+                }
+                if (!window.BREVO_CONFIG.apiKey) {
+                    throw new Error('Brevo API key is missing');
+                }
+                if (!window.BREVO_CONFIG.listId) {
+                    throw new Error('Brevo list ID is missing');
                 }
 
-                const response = await fetch(window.BREVO_CONFIG.apiUrl + '/contacts', {
+                const response = await fetch(`${window.BREVO_CONFIG.apiUrl}/contacts`, {
                     method: 'POST',
                     headers: {
-                        'accept': 'application/json',
-                        'content-type': 'application/json',
-                        'api-key': window.BREVO_CONFIG.apiKey
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Api-Key': window.BREVO_CONFIG.apiKey
                     },
                     body: JSON.stringify({
                         email: email,
