@@ -78,7 +78,7 @@ We may update this policy occasionally. Significant changes will be notified thr
 
 For privacy-related inquiries:
 - Discord: [https://discord.gg/K59mxyf](https://discord.gg/K59mxyf)
-- Telegram: [https://t.me/bitcoinzcommunity](https://t.me/bitcoinzcommunity)
+- Telegram: [https://t.me/btczofficialgroup](https://t.me/btczofficialgroup)
 - Twitter: [@BTCZOfficial](https://twitter.com/BTCZOfficial)
 
 ## Additional Information
