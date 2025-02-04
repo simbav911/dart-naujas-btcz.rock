@@ -1,0 +1,11 @@
+{{ with .Site.Params }}
+{{ if and .brevo_enabled .brevo_api_key }}
+<script>
+window.BREVO_CONFIG = {
+    apiKey: {{ .brevo_api_key }},
+    listId: {{ .brevo_list_id }}
+};
+console.log('Brevo configuration loaded');
+</script>
+{{ end }}
+{{ end }}

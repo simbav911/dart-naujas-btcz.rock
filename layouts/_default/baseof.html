@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     
+    <!-- Brevo Configuration -->
+    {{ partial "brevo-config.html" . }}
+    
     <!-- Critical CSS -->
     <style>
         :root{--btcz-gold:#FFD700;--btcz-black:#000000;--btcz-white:#FFFFFF}
