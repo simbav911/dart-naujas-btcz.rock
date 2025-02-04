@@ -159,6 +159,62 @@
             });
         }
 
+        if (settingsButton && cookieSettingsModal) {
+            // Get references to the new buttons and checkboxes
+            const savePreferencesButton = document.getElementById('save-preferences');
+            const closeSettingsButton = document.getElementById('close-settings');
+            const analyticsCheckbox = document.getElementById('analytics-cookies');
+            const advertisingCheckbox = document.getElementById('advertising-cookies');
+
+            // Show modal when settings button is clicked
+            settingsButton.addEventListener('click', () => {
+                cookieSettingsModal.classList.remove('hidden');
+                // Set checkboxes based on current preferences
+                try {
+                    const savedPreferences = JSON.parse(localStorage.getItem('cookieConsent')) || {};
+                    if (analyticsCheckbox) analyticsCheckbox.checked = !!savedPreferences.analytics;
+                    if (advertisingCheckbox) advertisingCheckbox.checked = !!savedPreferences.advertising;
+                } catch (e) {
+                    console.error('Error loading saved preferences:', e);
+                }
+            });
+
+            // Close modal when clicking outside
+            cookieSettingsModal.addEventListener('click', (e) => {
+                if (e.target === cookieSettingsModal) {
+                    cookieSettingsModal.classList.add('hidden');
+                }
+            });
+
+            // Save preferences button functionality
+            if (savePreferencesButton) {
+                savePreferencesButton.addEventListener('click', () => {
+                    const preferences = {
+                        essential: true, // Always required
+                        analytics: analyticsCheckbox ? analyticsCheckbox.checked : false,
+                        advertising: advertisingCheckbox ? advertisingCheckbox.checked : false
+                    };
+                    setCookiePreferences(preferences);
+                });
+            }
+
+            // Close button functionality
+            if (closeSettingsButton) {
+                closeSettingsButton.addEventListener('click', () => {
+                    cookieSettingsModal.classList.add('hidden');
+                });
+            }
+
+            // Add close button to modal
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '×';
+            closeButton.className = 'absolute top-4 right-4 text-btcz-gray-400 hover:text-btcz-gold text-2xl font-bold';
+            closeButton.addEventListener('click', () => {
+                cookieSettingsModal.classList.add('hidden');
+            });
+            cookieSettingsModal.querySelector('.bg-btcz-gray-900').appendChild(closeButton);
+        }
+
         // Initialize
         showBannerIfNeeded();
     });
