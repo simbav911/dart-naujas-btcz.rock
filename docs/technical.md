@@ -1,5 +1,12 @@
 # Technical Specifications
 
+## Environment Variables
+### Required Environment Variables
+- `BREVO_API_KEY`: API key for Brevo (formerly Sendinblue) email service
+  - Used for newsletter functionality
+  - Must be set in your environment or deployment platform
+  - Never commit this value to version control
+
 ## Technology Stack
 - Static Site Generator: Hugo
 - CSS Framework: Tailwind CSS
@@ -109,6 +116,8 @@ screens: {
 - Implement proper escaping
 - Prevent XSS vulnerabilities
 - Secure menu configuration
+- Store sensitive API keys as environment variables
+- Never commit credentials to version control
 
 ## Development Tools
 - Hugo CLI
@@ -125,3 +134,4 @@ screens: {
 - Prerender navigation
 - Cache menu configurations
 - Minimize runtime overhead
+- Set required environment variables in deployment platform
