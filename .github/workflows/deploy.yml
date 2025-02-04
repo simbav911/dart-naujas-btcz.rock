@@ -19,8 +19,8 @@ jobs:
 
       - name: Build
         env:
-          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          BREVO_API_KEY: ${{ vars.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ vars.BREVO_LIST_ID }}
         run: hugo --minify
 
       - name: Deploy
