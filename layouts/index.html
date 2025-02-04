@@ -435,7 +435,6 @@ html {
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script src="/js/brevo-config.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
@@ -468,31 +467,44 @@ document.addEventListener('DOMContentLoaded', function() {
             button.textContent = 'Subscribing...';
             
             try {
+                const apiKey = "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";
+                if (!apiKey) {
+                    throw new Error('API key is missing');
+                }
+
                 const response = await fetch('https://api.brevo.com/v3/contacts', {
                     method: 'POST',
                     headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'api-key': window.BREVO_CONFIG.API_KEY
+                        'accept': 'application/json',
+                        'content-type': 'application/json',
+                        'api-key': apiKey
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [window.BREVO_CONFIG.LIST_ID],
+                        listIds: [3],
                         attributes: {
                             WEBSITE: window.location.hostname
                         }
                     })
                 });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Subscription failed');
+                let responseData;
+                try {
+                    responseData = await response.json();
+                } catch (e) {
+                    console.error('Failed to parse response:', e);
+                    throw new Error(`Failed to parse response: ${response.status} ${response.statusText}`);
                 }
 
-                const data = await response.json();
+                if (!response.ok) {
+                    console.error('Brevo API Error:', responseData);
+                    throw new Error(responseData.message || `Subscription failed: ${response.status} ${response.statusText}`);
+                }
+
+                console.log('Brevo API Success:', responseData);
                 
-                if (data.error) {
-                    throw new Error(data.error);
+                if (responseData.error) {
+                    throw new Error(responseData.error);
                 }
 
                 // Create and show message
