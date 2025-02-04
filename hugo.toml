@@ -23,9 +23,10 @@ theme = "PaperMod"
   telegram = "https://t.me/btczofficialgroup"
   discord = "https://discord.gg/bitcoinz"
 
-[brevo]
-  api_key = '{{ getenv "BREVO_API_KEY" }}'
-  list_id = '{{ getenv "BREVO_LIST_ID" }}'
+  # Brevo Newsletter Integration
+  brevo_enabled = true
+  brevo_api_key = "{{ getenv \"BREVO_API_KEY\" }}"
+  brevo_list_id = "{{ getenv \"BREVO_LIST_ID\" }}"
 
 # Language Configuration
 [languages]

@@ -1,1 +1,6 @@
 baseURL = "/"
+
+[params]
+  brevo_enabled = true
+  brevo_api_key = "{{ getenv \"BREVO_API_KEY\" }}"
+  brevo_list_id = "{{ getenv \"BREVO_LIST_ID\" }}"
