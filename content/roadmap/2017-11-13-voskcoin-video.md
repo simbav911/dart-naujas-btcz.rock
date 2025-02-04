@@ -1,19 +1,14 @@
 ---
 title: "Voskcoin Video Coverage"
-description: "Voskcoin creates BTCZ explanatory video"
-date: 2017-11-13T00:00:00Z
-section: "roadmap"
+date: "2024-12-08T17:50:34.205Z"
+draft: "false"
+progress: "50"
+icon: "planned"
+status: "gray"
 type: "roadmap"
-layout: "single"
-year: 2017
-status: "completed"
-progress: 100
-tags: ["Media", "Marketing"]
-icon: "images/icons/media.svg"
-priority: "high"
 ---
 
-# Media Coverage
+<p># Media Coverage
 
 Major cryptocurrency influencer Voskcoin creates BTCZ video:
 - Comprehensive project explanation
@@ -21,4 +16,4 @@ Major cryptocurrency influencer Voskcoin creates BTCZ video:
 - Professional coverage
 - Enhanced visibility
 
-This milestone brings significant media attention and exposure to the BTCZ project.
+This milestone brings significant media attention and exposure to the BTCZ project.</p>

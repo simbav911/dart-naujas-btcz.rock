@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Documentation", "International"]
-icon: "images/icons/community.svg"
+icon: "images/icons/document.svg"
 priority: "high"
 ---
 

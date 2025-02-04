@@ -1,1 +1,10 @@
-baseURL = "/"
+baseURL = "https://getbtcz.com"
+
+[permalinks]
+  why-bitcoinz = "/:sections/:filename/"
+
+[[redirects]]
+  from = "/en/*"
+  to = "/:splat"
+  status = 301
+  force = true

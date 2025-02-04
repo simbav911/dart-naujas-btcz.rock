@@ -1,23 +1,23 @@
 ---
 title: "Mining Pool Integration"
-description: "Mining pools like mining4, miningspeed, and equipool are now hosting BTCZ"
-date: 2017-09-14T00:00:00Z
+description: ""
+date: "2024-12-18T18:22:07.160Z"
+year: 2024
 section: "roadmap"
 type: "roadmap"
 layout: "single"
-year: 2017
-status: "completed"
-progress: 100
-tags: ["Mining"]
-icon: "images/icons/mining.svg"
+status: "planned"
+progress: 24
+tags: ["planned"]
+icon: ""
 priority: "high"
 ---
 
-# Mining Pool Integration
+<p># Mining Pool Integration
 
 Major mining pools begin hosting BTCZ:
 - Mining4
 - Miningspeed
 - Equipool
 
-This milestone marks a significant step in decentralizing BTCZ mining infrastructure and improving network security.
+This milestone marks a significant step in decentralizing BTCZ mining infrastructure and improving network security.</p>

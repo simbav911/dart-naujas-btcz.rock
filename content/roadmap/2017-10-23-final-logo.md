@@ -9,7 +9,7 @@ year: 2017
 status: "completed"
 progress: 100
 tags: ["Branding", "Design"]
-icon: "images/icons/app.svg"
+icon: "images/bitcoinz-logo.svg"
 priority: "high"
 ---
 

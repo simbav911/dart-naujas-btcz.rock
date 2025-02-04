@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["Payment", "Infrastructure"]
-icon: "images/icons/payment.svg"
+icon: "images/icons/update.svg"
 priority: "high"
 ---
 

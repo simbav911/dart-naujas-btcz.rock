@@ -9,7 +9,7 @@ year: 2018
 status: "completed"
 progress: 100
 tags: ["Adoption", "Marketing"]
-icon: "images/icons/launch.svg"
+icon: "images/icons/merchant.svg"
 priority: "high"
 ---
 

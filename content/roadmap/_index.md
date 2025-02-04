@@ -1,12 +1,10 @@
 ---
-title: "BitcoinZ Development Roadmap"
-description: "Our strategic vision and planned developments for the future of BitcoinZ"
-date: 2017-09-14T00:00:00Z
-section: "roadmap"
+title: "BitcoinZ Roadmap"
+description: "BitcoinZ development and community milestones"
+date: 2023-09-01
+draft: false
 type: "roadmap"
 layout: "section"
 ---
 
-# BitcoinZ Development Journey
-
-This roadmap showcases BitcoinZ's development milestones and achievements since its inception in September 2017. Each entry represents a significant step in our journey to create a truly decentralized, community-driven cryptocurrency.
+Welcome to the BitcoinZ roadmap! Here you can find all the major milestones and achievements in the BitcoinZ project's history.

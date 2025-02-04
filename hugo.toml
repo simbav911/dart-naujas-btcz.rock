@@ -1,20 +1,11 @@
-# Production URL
-baseURL = "https://getbtcz.com/"
-
-# Development URL (uncomment for local testing)
-# baseURL = "http://localhost:1313/"
-
+baseURL = "https://getbtcz.com"
 languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = "PaperMod"
 
-[pagination]
-  pagerSize = 30
-
-# Site Settings
 [params]
-  description = "BitcoinZ - A decentralized cryptocurrency focused on privacy, security, and true community governance"
-  keywords = "BitcoinZ, cryptocurrency, decentralization, privacy, blockchain"
+  description = "BitcoinZ - A decentralized cryptocurrency focused on privacy security and true community governance"
+  keywords = "BitcoinZ cryptocurrency decentralization privacy blockchain"
   author = "BitcoinZ Community"
 
   # Social Media Links
@@ -27,45 +18,50 @@ theme = "PaperMod"
   api_key = '{{ getenv "BREVO_API_KEY" }}'
   list_id = '{{ getenv "BREVO_LIST_ID" }}'
 
-# Language Configuration
-[languages]
-  [languages.en]
-    languageName = "English"
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
     weight = 1
-    contentDir = "content"
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "home"
-        name = "Home"
-        url = "/"
-        weight = 1
-      [[languages.en.menu.main]]
-        identifier = "why-bitcoinz"
-        name = "Why BitcoinZ"
-        url = "/why-bitcoinz/"
-        weight = 2
-      [[languages.en.menu.main]]
-        identifier = "wallets"
-        name = "Wallets"
-        url = "/wallets/"
-        weight = 3
-      [[languages.en.menu.main]]
-        identifier = "buy"
-        name = "Where to Buy"
-        url = "/buy/"
-        weight = 4
-      [[languages.en.menu.main]]
-        identifier = "learn-crypto"
-        name = "Learn Crypto"
-        url = "/learn/"
-        weight = 5
-      [[languages.en.menu.main]]
-        identifier = "news"
-        name = "News"
-        url = "/news/"
-        weight = 6
-      [[languages.en.menu.main]]
-        identifier = "roadmap"
-        name = "Roadmap"
-        url = "/roadmap/"
-        weight = 7
+  [[menu.main]]
+    identifier = "why-bitcoinz"
+    name = "Why BitcoinZ"
+    url = "/why-bitcoinz/"
+    weight = 2
+  [[menu.main]]
+    identifier = "wallets"
+    name = "Wallets"
+    url = "/wallets/"
+    weight = 3
+  [[menu.main]]
+    identifier = "buy"
+    name = "Where to Buy"
+    url = "/buy/"
+    weight = 4
+  [[menu.main]]
+    identifier = "learn-crypto"
+    name = "Learn Crypto"
+    url = "/learn/"
+    weight = 5
+  [[menu.main]]
+    identifier = "news"
+    name = "News"
+    url = "/news/"
+    weight = 6
+  [[menu.main]]
+    identifier = "roadmap"
+    name = "Roadmap"
+    url = "/roadmap/"
+    weight = 7
+
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
