@@ -1,5 +1,9 @@
 baseURL = "https://getbtcz.com"
 
+[params]
+  brevo_api_key = "{{ env.BREVO_API_KEY }}"
+  brevo_list_id = "{{ env.BREVO_LIST_ID }}"
+
 [permalinks]
   why-bitcoinz = "/:sections/:filename/"
 
