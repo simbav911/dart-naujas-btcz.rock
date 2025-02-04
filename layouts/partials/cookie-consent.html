@@ -159,6 +159,48 @@
             });
         }
 
+        if (settingsButton) {
+            settingsButton.addEventListener('click', () => {
+                cookieSettingsModal.classList.remove('hidden');
+                // Load saved preferences if they exist
+                try {
+                    const savedPreferences = JSON.parse(localStorage.getItem('cookieConsent'));
+                    if (savedPreferences) {
+                        document.getElementById('advertising-cookies').checked = savedPreferences.advertising;
+                    }
+                } catch (e) {
+                    console.error('Error loading saved preferences:', e);
+                }
+            });
+        }
+
+        // Close settings modal
+        const closeSettingsButton = document.getElementById('close-settings');
+        if (closeSettingsButton) {
+            closeSettingsButton.addEventListener('click', () => {
+                cookieSettingsModal.classList.add('hidden');
+            });
+        }
+
+        // Save preferences from modal
+        const savePreferencesButton = document.getElementById('save-preferences');
+        if (savePreferencesButton) {
+            savePreferencesButton.addEventListener('click', () => {
+                const advertisingConsent = document.getElementById('advertising-cookies').checked;
+                setCookiePreferences({
+                    essential: true,
+                    advertising: advertisingConsent
+                });
+            });
+        }
+
+        // Close modal when clicking outside
+        cookieSettingsModal.addEventListener('click', (e) => {
+            if (e.target === cookieSettingsModal) {
+                cookieSettingsModal.classList.add('hidden');
+            }
+        });
+
         // Initialize
         showBannerIfNeeded();
     });

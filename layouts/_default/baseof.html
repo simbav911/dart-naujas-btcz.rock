@@ -157,14 +157,19 @@
                     }
                 },
                 
-                hideLeft() {
+                hideAll() {
                     this.leftVisible = false;
+                    this.rightVisible = false;
                     localStorage.setItem('leftAdVisible', 'false');
+                    localStorage.setItem('rightAdVisible', 'false');
+                },
+                
+                hideLeft() {
+                    this.hideAll();
                 },
                 
                 hideRight() {
-                    this.rightVisible = false;
-                    localStorage.setItem('rightAdVisible', 'false');
+                    this.hideAll();
                 },
                 
                 showAll() {
@@ -263,7 +268,7 @@
     >
         <div class="ad-header">
             <button @click="$store.ads.hideRight()" class="ad-close-btn" title="Close ad">×</button>
-            Ads fund BitcoinZ education campaigns
+            These ads help fund our global, decentralized BitcoinZ mission
         </div>
         
         <!-- BitcoinZ_Sidebar -->
@@ -284,7 +289,7 @@
             }
         </script>
         
-        <a href="{{ "en/transparency" | relLangURL }}" class="transparency-link">
+        <a href="{{ "transparency" | relLangURL }}" class="transparency-link">
             View Our Transparency Report
         </a>
     </div>
@@ -303,7 +308,7 @@
     >
         <div class="ad-header">
             <button @click="$store.ads.hideLeft()" class="ad-close-btn" title="Close ad">×</button>
-            Ads fund BitcoinZ education campaigns
+            Your ad views propel BitcoinZ, championing a global, free community.
         </div>
         
         <!-- BitcoinZ_Sidebar2 -->
@@ -324,7 +329,7 @@
             }
         </script>
         
-        <a href="{{ "en/transparency" | relLangURL }}" class="transparency-link">
+        <a href="{{ "transparency" | relLangURL }}" class="transparency-link">
             View Our Transparency Report
         </a>
     </div>
