@@ -2,7 +2,7 @@
 {{ if and .brevo_enabled .brevo_api_key }}
 <script>
 window.BREVO_CONFIG = {
-    apiKey: {{ .brevo_api_key }},
+    apiKey: {{ .brevo_api_key | jsonify }},
     listId: {{ .brevo_list_id }}
 };
 console.log('Brevo configuration loaded');
