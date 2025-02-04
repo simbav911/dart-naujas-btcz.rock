@@ -1,8 +1,8 @@
 baseURL = "https://getbtcz.com"
 
 [params]
-  brevo_api_key = "${BREVO_API_KEY}"
-  brevo_list_id = "${BREVO_LIST_ID}"
+  brevo_api_key = "xkeysib-YOUR-API-KEY-HERE"
+  brevo_list_id = "YOUR-LIST-ID-HERE"
 
 [permalinks]
   why-bitcoinz = "/:sections/:filename/"

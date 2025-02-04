@@ -435,6 +435,7 @@ html {
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="/js/brevo-config.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
@@ -472,11 +473,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'api-key': '{{ .Site.Params.brevo_api_key | safeJS }}'
+                        'api-key': window.BREVO_CONFIG.API_KEY
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [parseInt('{{ .Site.Params.brevo_list_id }}')],
+                        listIds: [window.BREVO_CONFIG.LIST_ID],
                         attributes: {
                             WEBSITE: window.location.hostname
                         }

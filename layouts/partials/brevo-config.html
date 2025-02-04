@@ -1,0 +1,5 @@
+{{ $brevoConfig := dict "API_KEY" .Site.Params.brevo_api_key "LIST_ID" .Site.Params.brevo_list_id }}
+<script>
+window.BREVO_CONFIG = {{ $brevoConfig | jsonify | safeJS }};
+window.BREVO_CONFIG.LIST_ID = parseInt(window.BREVO_CONFIG.LIST_ID);
+</script>
