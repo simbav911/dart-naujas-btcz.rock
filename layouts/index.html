@@ -253,7 +253,7 @@ html {
             </a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {{ $newsPages := .Site.GetPage "section" "en/news" }}
+            {{ $newsPages := .Site.GetPage "section" "news" }}
             {{ range first 4 ($newsPages.Pages.ByDate.Reverse) }}
             <a href="{{ .RelPermalink }}" class="group bg-btcz-gray-900 border border-btcz-gray-800 rounded-xl shadow-lg hover:shadow-2xl hover:border-btcz-gold transition-all duration-300 transform hover:-translate-y-2 overflow-hidden block">
                 {{ with .Params.image }}
