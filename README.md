@@ -43,7 +43,7 @@ npm run dev
 
 ## Project Structure
 - `content/`: Website content
-  - `content/en/`: English content
+  - `content/`: English content
     - News articles
     - Roadmap items
     - Wallet information

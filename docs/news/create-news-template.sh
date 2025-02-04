@@ -21,7 +21,7 @@ DATE=$(date +%Y-%m-%d)
 FULL_FILENAME="$DATE-$FILENAME.md"
 
 # Create the news article file
-cat > "content/en/news/$FULL_FILENAME" << EOL
+cat > "content/news/$FULL_FILENAME" << EOL
 ---
 title: "$TITLE"
 date: ${DATE}T00:00:00Z
@@ -47,7 +47,7 @@ Add more details about your news here.
 Wrap up your article with a conclusion.
 EOL
 
-echo "Created news article template: content/en/news/$FULL_FILENAME"
+echo "Created news article template: content/news/$FULL_FILENAME"
 echo "Remember to:"
 echo "1. Add your content to the article"
 echo "2. Add your image to static/images/news/"

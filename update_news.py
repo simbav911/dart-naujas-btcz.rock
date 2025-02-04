@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 # Create necessary directories
 os.makedirs('static/images/news', exist_ok=True)
-os.makedirs('content/en/news', exist_ok=True)
+os.makedirs('content/news', exist_ok=True)
 
 def sanitize_filename(title):
     """Convert title to filename-friendly format"""
@@ -99,7 +99,7 @@ def process_article(article, base_url):
         
         # Create markdown file
         filename = f"{formatted_date}-{sanitize_filename(title)}.md"
-        filepath = f"content/en/news/{filename}"
+        filepath = f"content/news/{filename}"
         
         with open(filepath, 'w') as f:
             f.write(f"""---
@@ -170,7 +170,7 @@ Welcome to the BitcoinZ News Center. Here you'll find the latest updates about:
 - Partnership Announcements
 """
 
-with open('content/en/news/_index.md', 'w') as f:
+with open('content/news/_index.md', 'w') as f:
     f.write(index_content)
 
 logger.info("News update complete!")

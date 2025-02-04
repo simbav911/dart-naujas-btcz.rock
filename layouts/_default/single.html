@@ -4,14 +4,14 @@
         <!-- Top Back Button -->
         <div class="mb-8">
             {{ if eq .Type "wallet" }}
-            <a href="{{ "en/wallets/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+            <a href="{{ "wallets/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
                 Back to Wallets
             </a>
-            {{ else if in .RelPermalink "/en/learn/" }}
-            <a href="{{ "en/learn/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+            {{ else if in .RelPermalink "/learn/" }}
+            <a href="{{ "learn/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -39,7 +39,7 @@
                 Back to Home
             </a>
             {{ else }}
-            <a href="{{ "en/news/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+            <a href="{{ "news/" | relURL }}" class="inline-flex items-center px-4 py-2 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
                 <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -71,7 +71,7 @@
             </h1>
             
             <!-- Date and Tags -->
-            {{ if not (in .RelPermalink "/en/learn/") }}
+            {{ if not (in .RelPermalink "/learn/") }}
             <div class="flex justify-center items-center space-x-6 text-btcz-gray-400">
                 <div class="flex items-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -12,10 +12,10 @@
                     {{ i18n "heroSubtitle" | default "A Community-Driven Cryptocurrency for Everyone" }}
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
-                    <a href="/en/wallets/" class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white">
+                    <a href="/wallets/" class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white">
                         {{ i18n "downloadWallet" | default "Download Wallet" }}
                     </a>
-                    <a href="/en/why-bitcoinz/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900">
+                    <a href="/why-bitcoinz/" class="btn-secondary border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900">
                         {{ i18n "learnMore" | default "Learn More" }}
                     </a>
                 </div>
@@ -62,7 +62,7 @@
 <!-- Features Section with Enhanced Interactivity -->
 <section class="section bg-btcz-gray-950 py-24">
     <div class="container mx-auto px-4">
-        <a href="{{ "en/why-bitcoinz" | relLangURL }}" class="block">
+        <a href="{{ "why-bitcoinz" | relLangURL }}" class="block">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-btcz-gold via-yellow-400 to-btcz-gold bg-clip-text text-transparent hover:opacity-80 transition-opacity">
                 {{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}
             </h2>

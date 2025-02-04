@@ -4,7 +4,7 @@ baseURL = "https://getbtcz.com"
   why-bitcoinz = "/:sections/:filename/"
 
 [[redirects]]
-  from = "/en/*"
+  from = "/*"
   to = "/:splat"
   status = 301
   force = true

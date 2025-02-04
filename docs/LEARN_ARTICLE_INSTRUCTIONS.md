@@ -6,7 +6,7 @@ This guide explains how to properly add or edit articles in the Learn Crypto sec
 
 Articles are located in:
 ```
-content/en/learn/your-article-name.md
+content/learn/your-article-name.md
 ```
 
 Images should be placed in:
@@ -16,7 +16,7 @@ static/images/learn-crypto/your-image-name.jpg
 
 ## Creating a New Article
 
-1. Create a new markdown file in `content/en/learn/` with a descriptive name, for example: `what-is-mining.md`
+1. Create a new markdown file in `content/learn/` with a descriptive name, for example: `what-is-mining.md`
 
 2. Start with the required front matter:
 ```yaml

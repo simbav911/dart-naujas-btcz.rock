@@ -2,7 +2,7 @@
 
 # Create necessary directories
 mkdir -p static/images/news
-mkdir -p content/en/news
+mkdir -p content/news
 
 # Function to convert title to filename
 to_filename() {
@@ -38,7 +38,7 @@ curl -s https://getbtcz.com/news/ | while IFS= read -r line; do
                     read -r content_line
                     
                     # Create markdown file
-                    cat > "content/en/news/$filename" << EOF
+                    cat > "content/news/$filename" << EOF
 ---
 title: "$title"
 date: ${formatted_date}T00:00:00Z
@@ -57,7 +57,7 @@ EOF
 done
 
 # Create _index.md if it doesn't exist
-cat > content/en/news/_index.md << EOF
+cat > content/news/_index.md << EOF
 ---
 title: "Latest News & Updates"
 description: "Stay up to date with the latest BitcoinZ developments, community updates, and announcements"

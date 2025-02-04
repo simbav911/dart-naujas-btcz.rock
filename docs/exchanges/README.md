@@ -4,7 +4,7 @@
 
 To add a new exchange to the BitcoinZ homepage, follow these steps:
 
-1. Navigate to the `content/en/buy/exchanges/` directory
+1. Navigate to the `content/buy/exchanges/` directory
 2. Create a new Markdown file with the exchange name, e.g., `newexchange.md`
 3. Use the following template for the exchange file:
 
@@ -52,7 +52,7 @@ Additional details about the exchange can be added here.
 
 ## Editing Existing Exchanges
 
-1. Locate the exchange file in `content/en/buy/exchanges/`
+1. Locate the exchange file in `content/buy/exchanges/`
 2. Open the file and make necessary updates
 3. Ensure all fields are accurate and up-to-date
 

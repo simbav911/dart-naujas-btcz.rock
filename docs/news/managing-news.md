@@ -4,7 +4,7 @@ This guide explains how to add and manage news articles on the BitcoinZ website.
 
 ## Directory Structure
 
-News articles are stored in the `content/en/news` directory. Each article is a Markdown file with a specific naming convention and front matter.
+News articles are stored in the `content/news` directory. Each article is a Markdown file with a specific naming convention and front matter.
 
 ## Creating a New Article
 
@@ -109,12 +109,12 @@ Join our community channels for more updates and trading discussions!
 
 ## Publishing Process
 
-1. Create your article file in `content/en/news/`
+1. Create your article file in `content/news/`
 2. Add your image to `static/images/news/`
 3. Test locally using `hugo server`
 4. Commit and push your changes:
    ```bash
-   git add content/en/news/your-article.md static/images/news/your-image.jpg
+   git add content/news/your-article.md static/images/news/your-image.jpg
    git commit -m "feat: add new article about [topic]"
    git push
    ```
