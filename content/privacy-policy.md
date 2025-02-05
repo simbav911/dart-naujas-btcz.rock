@@ -14,45 +14,43 @@ Last updated: February 3, 2025
 
 BitcoinZ (getbtcz.com) respects your privacy and is committed to protecting your personal data. This privacy policy explains how we handle your data when you visit our website.
 
-## Information We Collect
+## Information Collection
 
-### Google AdSense
+### Static Website
 
-We use Google AdSense to display advertisements on our website. Google AdSense may collect and process data about you, including:
+Our website is completely static and does not collect or store any personal information. We do not:
+- Use analytics tools
+- Track user behavior
+- Store cookies for tracking
+- Collect personal data
 
-- IP address
-- Cookie identifiers
-- Device identifiers
-- Client identifiers
-- Usage data
-- Browsing activity
-- Geographic location
-- Language preferences
+### Anonymous Advertising
 
-This information is used to serve personalized advertisements based on your interests. Google's use of this data is governed by [Google's Privacy Policy](https://policies.google.com/privacy).
+We use Anonymous Ads (a-ads.com) to display advertisements on our website. A-ADS:
+- Does not collect personal data
+- Does not use cookies for tracking
+- Does not profile users
+- Respects user privacy
 
-### Cookies and Similar Technologies
+For more information about A-ADS privacy practices, visit [A-ADS Privacy Policy](https://a-ads.com/privacy_policy).
 
-Our website uses:
+### Cookies
 
-1. **Essential Cookies**: Required for basic website functionality
-2. **Analytics Cookies**: To understand how visitors use our site
-3. **Advertising Cookies**: Used by Google AdSense to display relevant ads
+Our website only uses essential cookies required for basic functionality. We do not use:
+- Analytics cookies
+- Tracking cookies
+- Advertising cookies
+- Third-party cookies
 
-You can manage your cookie preferences through our consent banner.
+## Privacy Rights
 
-## Your GDPR Rights
+Since we do not collect any personal data, there is no personal information to:
+- Access
+- Correct
+- Delete
+- Export
 
-Under GDPR, you have the following rights:
-
-- Access your personal data
-- Correct inaccurate data
-- Request deletion of your data
-- Object to data processing
-- Data portability
-- Withdraw consent
-
-To exercise these rights, please contact us through our community channels.
+Your privacy is protected by default through our static website approach and use of privacy-respecting advertising.
 
 ## Data Security
 
@@ -60,11 +58,11 @@ We implement appropriate security measures to protect your data. However, no int
 
 ## Third-Party Services
 
-### Google AdSense
-- Purpose: Display personalized advertisements
-- Data Collected: Browsing behavior, demographics, interests
-- Privacy Policy: [https://policies.google.com/privacy](https://policies.google.com/privacy)
-- Opt-out: [https://adssettings.google.com](https://adssettings.google.com)
+### Anonymous Ads (A-ADS)
+- Purpose: Display privacy-respecting advertisements
+- Data Collection: None
+- Privacy Policy: [https://a-ads.com/privacy_policy](https://a-ads.com/privacy_policy)
+- No opt-out needed as no personal data is collected
 
 ## Children's Privacy
 
@@ -83,14 +81,10 @@ For privacy-related inquiries:
 
 ## Additional Information
 
-### Cookie Management
-You can control cookies through:
-1. Our consent banner
-2. Your browser settings
-3. Third-party opt-out tools
+### Technical Information
+- Our website is static and hosted on GitHub Pages
+- No user data is collected or stored
+- No cookies are used for tracking
+- No data is transferred internationally
 
-### Data Retention
-We retain data only as long as necessary for the purposes described in this policy.
-
-### International Transfers
-Your data may be transferred and processed in countries outside your residence, including where Google AdSense operates.
+This approach ensures maximum privacy and transparency for our users.
