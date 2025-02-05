@@ -1,42 +1,4 @@
-<!-- AADS Advertisements -->
-<!-- Top Banner Ad -->
+<!-- AADS Top Banner Ad -->
 <div class="aads-container flex flex-col items-center my-4">
-    <iframe data-aa='2380126' src='//ad.a-ads.com/2380126' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-</div>
-
-<!-- Left Sidebar Ad -->
-<div class="ad-sidebar ad-sidebar-left transition duration-300 ease-out" x-data x-show="$store.ads.leftVisible"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0 transform -translate-x-full"
-    x-transition:enter-end="opacity-100 transform translate-x-0"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="opacity-100 transform translate-x-0"
-    x-transition:leave-end="opacity-0 transform -translate-x-full">
-    <div class="ad-header">
-        <button @click="$store.ads.hideLeft()" class="ad-close-btn" title="Close ad">×</button>
-        Your ad views propel BitcoinZ, championing a global, free community.
-    </div>
-    <iframe data-aa='2380132' src='//ad.a-ads.com/2380132?size=160x600' style='width:160px; height:600px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-    <a href='{{ "transparency" | relLangURL }}' class="transparency-link">View Our Transparency Report</a>
-</div>
-
-<!-- Right Sidebar Ad -->
-<div class="ad-sidebar ad-sidebar-right transition duration-300 ease-out" x-data x-show="$store.ads.rightVisible"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0 transform translate-x-full"
-    x-transition:enter-end="opacity-100 transform translate-x-0"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="opacity-100 transform translate-x-0"
-    x-transition:leave-end="opacity-0 transform translate-x-full">
-    <div class="ad-header">
-        <button @click="$store.ads.hideRight()" class="ad-close-btn" title="Close ad">×</button>
-        These ads help fuel our growth, maintaining clean blockchain ethics.
-    </div>
-    <iframe data-aa='2380133' src='//ad.a-ads.com/2380133?size=160x600' style='width:160px; height:600px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-    <a href='{{ "transparency" | relLangURL }}' class="transparency-link">View Our Transparency Report</a>
-</div>
-
-<!-- Show Ads Button -->
-<div x-data x-show="!$store.ads.leftVisible || !$store.ads.rightVisible">
-    <button @click="$store.ads.showAll()" class="show-ads-btn">Show Ads</button>
+    <iframe data-aa='2380126' src='//ad.a-ads.com/2380126?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
 </div>

@@ -16,16 +16,20 @@
         /* Ad Sidebar Styles */
         .ad-sidebar {
             position: fixed;
-            width: 300px;
+            width: 180px;
             background: rgba(26, 26, 26, 0.95);
             border: 2px solid #ffd700;
             border-radius: 15px;
-            padding: 20px;
+            padding: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 100;
             top: 50%;
             transform: translateY(-50%);
             transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         /* Transition classes */
@@ -274,23 +278,8 @@
             These ads help fund our global, decentralized BitcoinZ mission
         </div>
         
-        <!-- BitcoinZ_Sidebar -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2885837671474125"
-             data-ad-slot="3955727349"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            try {
-                const preferences = JSON.parse(localStorage.getItem('cookieConsent'));
-                if (preferences && preferences.advertising) {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                }
-            } catch (e) {
-                console.log('Error initializing ad:', e);
-            }
-        </script>
+        <!-- AADS Right Sidebar Ad -->
+        <iframe data-aa='2380133' src='//ad.a-ads.com/2380133?size=160x600' style='width:160px; height:600px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
         
         <a href="{{ "transparency" | relLangURL }}" class="transparency-link">
             View Our Transparency Report
@@ -314,23 +303,8 @@
             Your ad views propel BitcoinZ, championing a global, free community.
         </div>
         
-        <!-- BitcoinZ_Sidebar2 -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2885837671474125"
-             data-ad-slot="1325694570"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            try {
-                const preferences = JSON.parse(localStorage.getItem('cookieConsent'));
-                if (preferences && preferences.advertising) {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                }
-            } catch (e) {
-                console.log('Error initializing ad:', e);
-            }
-        </script>
+        <!-- AADS Left Sidebar Ad -->
+        <iframe data-aa='2380132' src='//ad.a-ads.com/2380132?size=160x600' style='width:160px; height:600px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
         
         <a href="{{ "transparency" | relLangURL }}" class="transparency-link">
             View Our Transparency Report
