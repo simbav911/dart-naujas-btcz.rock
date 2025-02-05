@@ -23,6 +23,11 @@
 
 ## Integration Requirements
 ### Brevo Newsletter Integration
+- Requires GitHub Secrets configuration:
+  * BREVO_API_KEY: Production API key from Brevo dashboard
+  * BREVO_LIST_ID: ID of the contact list in Brevo
+- API key injected during CI/CD build
+- Config generated at: static/js/brevo-config.js
 - Configuration:
   - API Key stored in GitHub repository secrets
   - List ID stored in GitHub repository secrets

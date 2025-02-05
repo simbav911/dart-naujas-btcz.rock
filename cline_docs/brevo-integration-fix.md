@@ -11,9 +11,9 @@
 ### 1. GitHub Repository Configuration
 Set up repository secrets in GitHub:
 1. Go to repository Settings > Secrets and variables > Actions
-2. Add repository variables:
-   - `BREVO_API_KEY`: Your Brevo API key
-   - `BREVO_LIST_ID`: Your Brevo list ID
+2. Add repository secrets:
+   - `BREVO_API_KEY`: Your Brevo API key (as a secret for security)
+   - `BREVO_LIST_ID`: Your Brevo list ID (as a secret)
 
 ### 2. GitHub Action for Build-time Integration
 Create/update GitHub Action workflow to inject configuration during build:
@@ -41,9 +41,9 @@ jobs:
       - name: Generate Config
         run: |
           echo "window.BREVO_CONFIG = {" > static/js/brevo-config.js
-          echo "  listId: '${{ vars.BREVO_LIST_ID }}'," >> static/js/brevo-config.js
+          echo "  listId: '${{ secrets.BREVO_LIST_ID }}'," >> static/js/brevo-config.js
           echo "  apiUrl: 'https://api.brevo.com/v3'," >> static/js/brevo-config.js
-          echo "  apiKey: '${{ vars.BREVO_API_KEY }}'" >> static/js/brevo-config.js
+          echo "  apiKey: '${{ secrets.BREVO_API_KEY }}'" >> static/js/brevo-config.js
           echo "};" >> static/js/brevo-config.js
           
       - name: Build
