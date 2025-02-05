@@ -1,15 +1,15 @@
 ---
 title: "BitcoinZ Transparency"
-description: "BitcoinZ Transparency & Our Use of Google Ads"
+description: "BitcoinZ Transparency & Our Use of Privacy-Respecting Ads"
 date: 2025-02-03
 draft: false
 layout: "single"
 type: "transparency"
 ---
 
-# BitcoinZ Transparency & Our Use of Google Ads
+# BitcoinZ Transparency & Our Use of Privacy-Respecting Ads
 
-At BitcoinZ, we believe in true decentralization—one free of donations, blockchain taxes, or hidden fees. To sustain our community initiatives, we've chosen to display non-intrusive Google Ads. Here's what makes our approach both ethical and effective:
+At BitcoinZ, we believe in true decentralization—one free of donations, blockchain taxes, or hidden fees. To sustain our community initiatives, we've chosen to display non-intrusive, privacy-respecting ads through Anonymous Ads (A-ADS). Here's what makes our approach both ethical and effective:
 
 ## Community-Powered Funding
 

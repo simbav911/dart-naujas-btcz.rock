@@ -4,7 +4,7 @@
     <div class="container mx-auto px-4 py-6">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="text-btcz-gray-200 max-w-2xl">
-                {{ i18n "cookieMessage" | default "We use cookies and similar technologies to enhance your experience and show relevant content. This includes Google AdSense for personalized advertising. By using our website, you agree to our use of cookies." }}
+                {{ i18n "cookieMessage" | default "We use only essential cookies to enhance your experience. Our ads are privacy-respecting and do not track you. By using our website, you agree to our use of essential cookies." }}
                 <a href="{{ "privacy-policy" | relLangURL }}" class="text-btcz-gold hover:text-btcz-gray-200 transition-colors duration-200 ml-1">
                     {{ i18n "learnMore" | default "Learn More" }}
                 </a>
@@ -119,22 +119,7 @@
                     cookieSettingsModal.classList.add('hidden');
                 }
                 
-                // Handle Google AdSense
-                if (typeof window.adsbygoogle !== 'undefined') {
-                    if (preferences.advertising) {
-                        window.adsbygoogle.requestNonPersonalizedAds = 0;
-                        window.adsbygoogle.pauseAdRequests = 0;
-                        location.reload();
-                    } else {
-                        window.adsbygoogle.requestNonPersonalizedAds = 1;
-                        window.adsbygoogle.pauseAdRequests = 1;
-                        // Hide ads if rejected
-                        const adElements = document.querySelectorAll('.adsbygoogle');
-                        adElements.forEach(ad => {
-                            ad.style.display = 'none';
-                        });
-                    }
-                }
+                // No special handling needed for AADS as they respect privacy by default
             } catch (e) {
                 console.error('Error setting cookie preferences:', e);
             }
