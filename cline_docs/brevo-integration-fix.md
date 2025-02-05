@@ -183,8 +183,9 @@ document.addEventListener('DOMContentLoaded', function() {
    - Check published files for exposed secrets
 
 3. Error Handling
-   - Sanitize error messages
-   - Implement proper user feedback
-   - Log errors appropriately
+    - Sanitize error messages
+    - Implement proper user feedback
+    - Log errors appropriately
+    - Use correct case for API headers ('api-key' instead of 'Api-Key')
 
 This revised architecture leverages GitHub Pages and Actions to securely handle the Brevo integration while maintaining functionality and user experience.
