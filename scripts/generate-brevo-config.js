@@ -30,6 +30,11 @@ const configContent = `window.BREVO_CONFIG = ${JSON.stringify(config, null, 2)};
 try {
     fs.writeFileSync(outputPath, configContent);
     console.log('Brevo config generated successfully');
+    console.log('Config values:', {
+        listId: listId ? 'present' : 'missing',
+        apiKey: apiKey ? 'present' : 'missing',
+        outputPath
+    });
 } catch (error) {
     console.error('Error writing config file:', error);
     process.exit(1);

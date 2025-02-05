@@ -153,8 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
 ## Implementation Steps
 
 1. GitHub Configuration
-   - Add repository variables for Brevo API key and list ID
+   - Add repository secrets for Brevo API key and list ID
    - Update GitHub Actions workflow file
+   
+2. Debug Points
+   - Build script logs presence of environment variables
+   - Workflow verifies config file generation
+   - Workflow checks built files before deployment
+   - Frontend logs config loading status
 
 2. Frontend Update
    - Add brevo-config.js script inclusion

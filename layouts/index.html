@@ -434,9 +434,17 @@ html {
     </div>
 </section>
 
+<!-- Load configuration first -->
 <script src="/js/brevo-config.js"></script>
+<!-- Then load dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<!-- Finally load our application code -->
 <script>
+// Verify Brevo config is loaded
+console.log('Initial Brevo config check:', {
+    configExists: typeof window.BREVO_CONFIG !== 'undefined',
+    configPath: '/js/brevo-config.js'
+});
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -470,6 +478,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!window.BREVO_CONFIG) {
                     throw new Error('Brevo configuration is not loaded');
                 }
+                
+                console.log('Brevo config loaded:', {
+                    apiKeyPresent: !!window.BREVO_CONFIG.apiKey,
+                    listIdPresent: !!window.BREVO_CONFIG.listId,
+                    apiUrl: window.BREVO_CONFIG.apiUrl
+                });
+                
                 if (!window.BREVO_CONFIG.apiKey) {
                     throw new Error('Brevo API key is missing');
                 }

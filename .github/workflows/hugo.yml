@@ -34,10 +34,31 @@ jobs:
           BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
         run: node scripts/generate-brevo-config.js
 
+      - name: Verify Brevo Config
+        run: |
+          if [ ! -f "static/js/brevo-config.js" ]; then
+            echo "Error: brevo-config.js was not generated"
+            exit 1
+          fi
+          echo "Verifying brevo-config.js structure..."
+          grep -q "window.BREVO_CONFIG" static/js/brevo-config.js || (echo "Error: Missing BREVO_CONFIG object" && exit 1)
+          echo "brevo-config.js verification completed"
+
       - name: Build
         env:
           HUGO_ENV: production
         run: hugo --minify
+
+      - name: Verify Built Files
+        run: |
+          echo "Checking built files..."
+          if [ ! -f "public/js/brevo-config.js" ]; then
+            echo "Error: brevo-config.js not found in build output"
+            echo "Contents of public/js/:"
+            ls -la public/js/ || echo "js directory not found"
+            exit 1
+          fi
+          echo "Built files verification completed"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

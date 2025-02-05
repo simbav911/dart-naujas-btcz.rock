@@ -14,10 +14,6 @@ theme = "PaperMod"
   telegram = "https://t.me/bitcoinzcommunity"
   discord = "https://discord.gg/bitcoinz"
 
-  # Brevo Settings
-  brevo_api_key = '{{ getenv "BREVO_API_KEY" }}'
-  brevo_list_id = '{{ getenv "BREVO_LIST_ID" }}'
-
 [menu]
   [[menu.main]]
     identifier = "home"
