@@ -1,3 +1,1 @@
-ezoic.ai, 755c64ded8cf0f9eb49ecd3521d6eceb, DIRECT
-ezoic.ai, 945822e8b90e8ae72eeb66e7af0a9ef4, DIRECT
-ezoic.co.uk, 945822e8b90e8ae72eeb66e7af0a9ef4, DIRECT
+google.com, pub-2885837671474125, DIRECT, f08c47fec0942fa0
