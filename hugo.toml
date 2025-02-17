@@ -3,6 +3,13 @@ languageCode = "en-us"
 title = "BitcoinZ - Community-Driven Cryptocurrency"
 theme = "PaperMod"
 
+# Ignore raw HTML warnings
+ignoreLogs = ['warning-goldmark-raw-html']
+
+# Enable raw HTML in markdown
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   description = "BitcoinZ - A decentralized cryptocurrency focused on privacy security and true community governance"
   keywords = "BitcoinZ cryptocurrency decentralization privacy blockchain"

@@ -1,48 +1,55 @@
 ---
 title: "Privacy Policy"
-date: 2025-02-03
+date: 2025-02-17
 draft: false
 layout: privacy-policy
-description: "BitcoinZ Privacy Policy - Learn how we handle and protect your data"
+description: "BitcoinZ Privacy Policy"
 ---
 
 # Privacy Policy
 
-Last updated: February 3, 2025
+Last updated: February 17, 2025
 
 ## Overview
 
-BitcoinZ (getbtcz.com) respects your privacy and is committed to protecting your personal data. This privacy policy explains how we handle your data when you visit our website.
+BitcoinZ (getbtcz.com) is committed to protecting your privacy. Our website is completely static and does not collect, store, or process any personal information.
 
-## Information Collection
+## No Data Collection
 
 ### Static Website
 
-Our website is completely static and does not collect or store any personal information. We do not:
-- Use analytics tools
-- Track user behavior
-- Store cookies for tracking
-- Collect personal data
+Our website is entirely static and:
+- Does not collect any personal information
+- Does not use any analytics tools
+- Does not track user behavior
+- Does not use any cookies
+- Does not use any advertising
+- Does not store any user data
 
-### Anonymous Advertising
+### No Third-Party Services
 
-We use Anonymous Ads (a-ads.com) to display advertisements on our website. A-ADS:
-- Does not collect personal data
-- Does not use cookies for tracking
-- Does not profile users
-- Respects user privacy
+We do not use:
+- Third-party analytics
+- Advertising services
+- User tracking tools
+- Data collection services
 
-For more information about A-ADS privacy practices, visit [A-ADS Privacy Policy](https://a-ads.com/privacy_policy).
+Our website is purely informational and operates without collecting any user data.
 
-### Cookies
+## Your Privacy
 
-Our website only uses essential cookies required for basic functionality. We do not use:
-- Analytics cookies
-- Tracking cookies
-- Advertising cookies
-- Third-party cookies
+When you visit getbtcz.com:
+- No personal information is collected
+- No cookies are used
+- No tracking occurs
+- No data is shared with third parties
 
-## Privacy Rights
+## Contact
+
+If you have any questions about our privacy practices, you can reach the BitcoinZ community through our official channels:
+- GitHub: https://github.com/simbav911/dart-naujas-btcz.rock
+- Telegram: https://t.me/bitcoinzcommunity
+- Discord: https://discord.gg/bitcoinz
 
 Since we do not collect any personal data, there is no personal information to:
 - Access
