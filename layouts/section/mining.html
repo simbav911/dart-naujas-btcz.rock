@@ -1,0 +1,112 @@
+{{ define "main" }}
+<div class="bg-btcz-gray-950 min-h-screen py-24">
+    <div class="container mx-auto px-4">
+        <div class="mb-8">
+            <a href="{{ "/ecosystem/" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+                <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                Back to Ecosystem
+            </a>
+        </div>
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white font-bold text-5xl mb-6">
+                Mining
+            </h1>
+            <p class="text-btcz-gray-400 text-lg">Discover how to mine BitcoinZ and join our mining community - from solo mining to pool mining opportunities</p>
+        </div>
+
+        <!-- Mining Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <!-- How to Mine -->
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <div class="relative h-48">
+                    <img src="{{ "images/mining/how-to-mine.png" | relURL }}" alt="How to Mine BitcoinZ" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">How to Mine BitcoinZ</h3>
+                    <p class="text-btcz-gray-300 mb-6">Learn the basics of mining BitcoinZ - from setting up your mining rig to optimizing your mining performance</p>
+                    <a href="{{ "/ecosystem/mining/how-to-mine" | relURL }}"
+                       class="group relative inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            Learn More
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mining Video Guide -->
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <div class="relative h-48">
+                    <img src="{{ "images/mining/mining-video.png" | relURL }}" alt="Mining Video Guide" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">Mining Video Guide</h3>
+                    <p class="text-btcz-gray-300 mb-6">Comprehensive video tutorials on BitcoinZ mining - perfect for visual learners</p>
+                    <a href="{{ "/ecosystem/mining/mining-video-guide" | relURL }}"
+                       class="group relative inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            Learn More
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mining Pools -->
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <div class="relative h-48">
+                    <img src="{{ "images/mining/mining-pools.png" | relURL }}" alt="Mining Pools" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">Mining Pools</h3>
+                    <p class="text-btcz-gray-300 mb-6">Explore BitcoinZ mining pools - join the community and increase your mining rewards</p>
+                    <a href="{{ "/ecosystem/mining/mining-pools" | relURL }}"
+                       class="group relative inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            Learn More
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mining Calculator -->
+            <div class="bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:shadow-btcz-gold/20 transition-all duration-500 transform hover:-translate-y-1">
+                <div class="relative h-48">
+                    <img src="{{ "images/mining/mining-calculator.png" | relURL }}" alt="Mining Calculator" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">Mining Calculator</h3>
+                    <p class="text-btcz-gray-300 mb-6">Calculate your potential BitcoinZ mining rewards based on your hardware and current network conditions</p>
+                    <a href="{{ "/ecosystem/mining/mining-calculator" | relURL }}"
+                       class="group relative inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-btcz-gold border border-btcz-gold rounded-lg hover:text-black transition-all duration-300">
+                        <span class="relative flex items-center gap-2 group-hover:text-black">
+                            Learn More
+                            <svg class="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 rounded-lg transition-all duration-300 bg-gradient-to-r from-yellow-400 to-btcz-gold opacity-0 group-hover:opacity-100 -z-10"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="bg-btcz-gray-950 min-h-screen py-24">
+    <div class="container mx-auto px-4">
+        <div class="mb-8">
+            <a href="{{ "/ecosystem/mining/" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1">
+                <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                Back to Mining
+            </a>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-btcz-gray-900 rounded-2xl shadow-xl overflow-hidden">
+            <div class="relative h-96">
+                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-btcz-gray-900 to-transparent"></div>
+            </div>
+            
+            <div class="p-8">
+                <h1 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-yellow-400">
+                    {{ .Title }}
+                </h1>
+                
+                <div class="prose prose-invert prose-lg max-w-none">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
