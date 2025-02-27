@@ -1,41 +1,96 @@
 {{ define "main" }}
-<div class="min-h-[200px] bg-gradient-to-b from-black to-btcz-gray-900 relative overflow-hidden">
-    <div class="container mx-auto px-6 py-12">
-        <div class="mb-6">
-            <a href="{{ "ecosystem" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1 hover:shadow-[0_0_30px_rgba(255,215,0,0.4)]">
-                <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<div class="relative min-h-screen bg-gradient-to-b from-black to-btcz-gray-900 py-12">
+    <!-- Paper Texture Overlay -->
+    <div class="absolute inset-0 opacity-5 mix-blend-overlay pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]"></div>
+    
+    <!-- Header Navigation -->
+    <div class="container mx-auto px-6 mb-8">
+        <div class="flex justify-between items-center">
+            <a href="{{ "ecosystem" | relURL }}" class="inline-flex items-center px-5 py-2 text-sm border border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1 hover:shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+                <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
                 Back to Ecosystem
             </a>
+            
+            <div class="flex items-center gap-2">
+                <span class="text-sm text-gray-400">Version 1.0.7</span>
+                <span class="text-btcz-gold">•</span>
+                <span class="text-sm text-gray-400">September 2018</span>
+            </div>
         </div>
-        <h1 class="text-4xl font-bold text-white mb-3">{{ .Title }}</h1>
-        <p class="text-xl text-gray-300 max-w-3xl">{{ .Description }}</p>
+        
+        <!-- Original Whitepaper Link -->
+        <div class="mt-6 p-4 bg-gradient-to-r from-black/80 to-btcz-gray-900/80 border border-btcz-gold/20 rounded-lg">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="text-gray-300">
+                    <p class="text-sm md:text-base">Experience the untouched original whitepaper from the community's beginning. After almost 8 years, BitcoinZ still upholds these founding principles.</p>
+                </div>
+                <a href="https://drive.google.com/file/d/19eJ09gwba5Ix9k3Y8Kk7NqdTbnUTFXDj/edit" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-2 bg-btcz-gold text-btcz-gray-900 hover:bg-btcz-gold/90 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    View Original Whitepaper
+                </a>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="container mx-auto px-6 py-12">
-    <article class="prose prose-invert prose-lg max-w-4xl mx-auto bg-black/30 p-8 rounded-xl border border-btcz-gray-800/50">
-        <div class="prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-8 prose-h1:text-btcz-gold
-                    prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-btcz-gold/90
-                    prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-btcz-gold/80
-                    prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
-                    prose-ul:text-gray-300 prose-ul:mt-4 prose-ul:mb-6
-                    prose-li:mt-2 prose-li:ml-4
-                    prose-strong:text-btcz-gold/90">
-            {{ .Content }}
+    
+    <!-- White Paper Document -->
+    <div class="container mx-auto px-6">
+        <!-- Cover Page -->
+        <div class="max-w-4xl mx-auto mb-16 text-center">
+            <div class="mb-6 flex justify-center">
+                <img src="/images/btcz-logo.png" alt="BitcoinZ Logo" class="w-32 h-32 mb-4">
+            </div>
+            <h1 class="text-5xl font-extrabold tracking-tight text-btcz-gold mb-4 bg-clip-text">{{ .Title }}</h1>
+            <div class="w-24 h-1 bg-btcz-gold mx-auto mb-6"></div>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">{{ .Description }}</p>
         </div>
-    </article>
-
-    <div class="max-w-4xl mx-auto mt-12 pt-6 border-t border-btcz-gray-800">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-sm text-gray-400"> 2018 BitcoinZ Community. All rights reserved. v1.0.7 – 04/09/2018</div>
-            <a href="{{ "ecosystem" | relURL }}" class="inline-flex items-center px-6 py-3 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1 hover:shadow-[0_0_30px_rgba(255,215,0,0.4)]">
-                <svg class="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-                Back to Ecosystem
-            </a>
+        
+        <!-- White Paper Content -->
+        <div class="max-w-4xl mx-auto">
+            <!-- Paper Background with Shadow -->
+            <div class="bg-gradient-to-br from-btcz-gray-900/80 to-black/95 rounded-xl shadow-[0_10px_50px_rgba(0,0,0,0.8)] border border-btcz-gray-800/30 overflow-hidden backdrop-blur-sm">
+                <!-- Gold Top Border -->
+                <div class="h-1 w-full bg-gradient-to-r from-btcz-gold/20 via-btcz-gold to-btcz-gold/20"></div>
+                
+                <!-- Content Container -->
+                <div class="p-10 md:p-16">
+                    <article class="prose prose-invert prose-lg mx-auto">
+                        <div class="prose-headings:font-semibold
+                                    prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-8 prose-h1:text-btcz-gold prose-h1:border-b prose-h1:border-btcz-gold/20 prose-h1:pb-4
+                                    prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-btcz-gold/90 prose-h2:border-b prose-h2:border-btcz-gold/10 prose-h2:pb-2
+                                    prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-btcz-gold/80
+                                    prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
+                                    prose-ul:text-gray-300 prose-ul:mt-4 prose-ul:mb-6
+                                    prose-li:mt-2 prose-li:ml-4
+                                    prose-strong:text-btcz-gold/90
+                                    prose-a:text-btcz-gold prose-a:no-underline hover:prose-a:underline
+                                    prose-blockquote:border-l-4 prose-blockquote:border-btcz-gold/30 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-400">
+                            {{ .Content }}
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Gold Bottom Border -->
+                <div class="h-1 w-full bg-gradient-to-r from-btcz-gold/20 via-btcz-gold to-btcz-gold/20"></div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-10 mb-12 flex flex-col md:flex-row justify-between items-center gap-6 px-4">
+                <div class="flex items-center gap-3">
+                    <img src="/images/btcz-logo.png" alt="BitcoinZ Logo" class="w-8 h-8">
+                    <div class="text-sm text-gray-400">© 2018 BitcoinZ Community. All rights reserved.</div>
+                </div>
+                
+                <a href="{{ "ecosystem" | relURL }}" class="inline-flex items-center px-5 py-2 text-sm border border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-lg transition-all duration-300 transform hover:-translate-x-1 hover:shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+                    <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                    Return to Ecosystem
+                </a>
+            </div>
         </div>
     </div>
 </div>
