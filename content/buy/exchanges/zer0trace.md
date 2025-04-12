@@ -21,13 +21,10 @@ trading_pairs:
   - "BTCZ/XMR (Monero)"
   - "BTCZ/SHIB (Shiba Inu)"
   - "BTCZ/SOL (Solana)"
-  - "BTCZ/USDT-BEP20 (Tether on BSC)"
-  - "BTCZ/USDT-ERC20 (Tether on ETH)"
-  - "BTCZ/USDT-TRC20 (Tether on TRON)"
+  - "BTCZ/USDT (Tether on BEP20/ERC20/TRC20)"
   - "BTCZ/TON (Toncoin)"
   - "BTCZ/TRX (TRON)"
-  - "BTCZ/USDC-BEP20 (USD Coin on BSC)"
-  - "BTCZ/USDC-ERC20 (USD Coin on ETH)"
+  - "BTCZ/USDC (USD Coin on BEP20/ERC20)"
 is_centralized: false
 website: "https://zer0trace.com/"
 kyc_required: false
