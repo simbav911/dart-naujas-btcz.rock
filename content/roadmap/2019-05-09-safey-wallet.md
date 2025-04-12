@@ -9,7 +9,7 @@ year: 2019
 status: "completed"
 progress: 100
 tags: ["Wallet", "Mobile"]
-icon: "images/icons/wallet.svg"
+icon: "images/icons/material/secure-wallet.svg"
 priority: "high"
 ---
 
