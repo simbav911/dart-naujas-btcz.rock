@@ -63,7 +63,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENABLEGITINFO: true
         run: |
-          hugo --logLevel debug --verbose --minify --gc
+          hugo --logLevel debug --minify
 
       - name: Check Build Output
         if: always()
@@ -76,6 +76,8 @@ jobs:
             echo "public directory not found!"
             echo "Current directory contents:"
             ls -la
+            echo "Hugo error log:"
+            hugo --logLevel debug
           fi
 
       - name: Deploy
