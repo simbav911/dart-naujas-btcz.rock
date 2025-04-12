@@ -8,6 +8,10 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    env:
+      HUGO_ENV: production
+      HUGO_VERSION: 0.140.0
+      
     steps:
       - uses: actions/checkout@v3
         with:
@@ -17,7 +21,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.140.0'
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
       - name: Verify Hugo Installation
@@ -32,17 +36,16 @@ jobs:
         run: npm install
 
       - name: Generate Brevo Config
-        if: ${{ env.BREVO_API_KEY != '' && env.BREVO_LIST_ID != '' }}
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
-        run: node scripts/generate-brevo-config.js
-
-      - name: Create Empty Brevo Config
-        if: ${{ env.BREVO_API_KEY == '' || env.BREVO_LIST_ID == '' }}
         run: |
           mkdir -p static/js
-          echo "window.BREVO_CONFIG = { disabled: true };" > static/js/brevo-config.js
+          if [ ! -z "$BREVO_API_KEY" ] && [ ! -z "$BREVO_LIST_ID" ]; then
+            node scripts/generate-brevo-config.js
+          else
+            echo "window.BREVO_CONFIG = { disabled: true };" > static/js/brevo-config.js
+          fi
 
       - name: List Project Structure
         run: |
@@ -57,9 +60,10 @@ jobs:
 
       - name: Build with Debug
         env:
-          HUGO_ENV: production
+          HUGO_ENVIRONMENT: production
+          HUGO_ENABLEGITINFO: true
         run: |
-          hugo --logLevel debug --verbose --minify
+          hugo --debug --verbose --minify --gc --printPathWarnings --printUnusedTemplates
         
       - name: Check Build Output
         if: always()
@@ -70,9 +74,8 @@ jobs:
             ls -la public/
           else
             echo "public directory not found!"
-            echo "Hugo build logs:"
-            echo "===================="
-            cat $(find . -name "hugo_*.log" -type f 2>/dev/null) || echo "No Hugo log files found"
+            echo "Current directory contents:"
+            ls -la
           fi
 
       - name: Deploy
@@ -81,4 +84,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          publish_branch: gh-pages
           cname: getbtcz.com
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
