@@ -67,3 +67,6 @@
                 {{ i18n "whyBitcoinZ" | default "Why BitcoinZ?" }}
             </h2>
         </a>
+    </div>
+</section>
+{{ end }}
