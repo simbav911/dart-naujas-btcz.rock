@@ -59,6 +59,77 @@ html {
     transform: scale(1.05);
 }
 
+/* Buy BitcoinZ Dropdown Styles */
+.buy-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.buy-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #1a1a1a;
+    border: 2px solid #ffd700;
+    border-radius: 1rem;
+    z-index: 100;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.buy-dropdown-content.show {
+    display: block;
+}
+
+.buy-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    transition: all 0.2s;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.buy-option:last-child {
+    border-bottom: none;
+}
+
+.buy-option:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+}
+
+.buy-option i {
+    margin-right: 0.75rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+.buy-option-info {
+    flex: 1;
+}
+
+.buy-option-title {
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 0.25rem;
+}
+
+.buy-option-desc {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.crypto-supported {
+    font-size: 0.75rem;
+    color: #ffd700;
+    opacity: 0.8;
+    text-align: right;
+    margin-left: 0.5rem;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -86,6 +157,31 @@ html {
                     <a href="{{ "why-bitcoinz" | relLangURL }}" class="btn-secondary w-full sm:w-auto text-center px-8 py-4 border-2 border-btcz-gold text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-xl font-semibold transition-all">
                         {{ i18n "learnMore" | default "Learn More" }}
                     </a>
+                </div>
+                <!-- Buy BitcoinZ Dropdown -->
+                <div class="mt-4 buy-dropdown">
+                    <button id="buyBtcBtn" class="w-full sm:w-auto text-center px-8 py-4 border-2 border-btcz-gold bg-btcz-gray-800 text-btcz-gold hover:bg-btcz-gold hover:text-btcz-gray-900 rounded-xl font-semibold transition-all">
+                        <i class="fas fa-coins mr-2"></i> {{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }} <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                    <div id="buyBtcDropdown" class="buy-dropdown-content">
+                        <!-- Instant Buy Option -->
+                        <a href="https://zer0trace.com/" target="_blank" rel="noopener noreferrer" class="buy-option">
+                            <i class="fas fa-bolt text-btcz-gold"></i>
+                            <div class="buy-option-info">
+                                <div class="buy-option-title">{{ i18n "instantBuy" | default "Instant Buy (No KYC)" }}</div>
+                                <div class="buy-option-desc">{{ i18n "instantBuyDesc" | default "Quick purchase, no registration" }}</div>
+                            </div>
+                            <div class="crypto-supported">15 crypto supported</div>
+                        </a>
+                        <!-- Other Options -->
+                        <a href="https://getbtcz.com/buy/" target="_blank" rel="noopener noreferrer" class="buy-option">
+                            <i class="fas fa-exchange-alt text-btcz-gold"></i>
+                            <div class="buy-option-info">
+                                <div class="buy-option-title">{{ i18n "otherOptions" | default "Other Options" }}</div>
+                                <div class="buy-option-desc">{{ i18n "otherOptionsDesc" | default "Exchanges and other methods" }}</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="hidden lg:block transform hover:scale-105 transition-transform duration-500">
@@ -187,15 +283,6 @@ html {
                     <p class="text-btcz-gray-200">{{ i18n "downloadWalletDesc" | default "Get your BitcoinZ wallet" }}</p>
                 </a>
 
-                <!-- Buy BitcoinZ -->
-                <a href="{{ "buy" | relLangURL }}" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                        <i class="fas fa-coins text-4xl text-btcz-gold"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-btcz-gold">{{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }}</h3>
-                    <p class="text-btcz-gray-200">{{ i18n "buyBitcoinZDesc" | default "Purchase from exchanges" }}</p>
-                </a>
-
                 <!-- Join Community -->
                 <a href="#community" class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
@@ -204,6 +291,18 @@ html {
                     <h3 class="text-2xl font-bold mb-4 text-btcz-gold">{{ i18n "joinCommunity" | default "Join Community" }}</h3>
                     <p class="text-btcz-gray-200">{{ i18n "joinCommunityDesc" | default "Connect with others" }}</p>
                 </a>
+
+                <!-- Buy BitcoinZ -->
+                <div class="group bg-btcz-gray-800 border border-btcz-gray-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
+                        <i class="fas fa-coins text-4xl text-btcz-gold"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-btcz-gold">{{ i18n "buyBitcoinZ" | default "Buy BitcoinZ" }}</h3>
+                    <p class="text-btcz-gray-200">{{ i18n "buyBitcoinZDesc" | default "Purchase from exchanges" }}</p>
+                    <a href="{{ "buy" | relLangURL }}" class="inline-block mt-4 px-6 py-2 bg-btcz-gold text-btcz-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-all duration-300 focus:outline-none">
+                        {{ i18n "viewOptions" | default "View Options" }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -561,6 +660,24 @@ document.addEventListener('DOMContentLoaded', function() {
             } finally {
                 button.disabled = false;
                 button.textContent = originalButtonText;
+            }
+        });
+    }
+
+    // Buy BitcoinZ dropdown functionality
+    const buyBtcBtn = document.getElementById('buyBtcBtn');
+    const buyBtcDropdown = document.getElementById('buyBtcDropdown');
+    
+    if (buyBtcBtn && buyBtcDropdown) {
+        buyBtcBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            buyBtcDropdown.classList.toggle('show');
+        });
+        
+        // Close the dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!buyBtcBtn.contains(e.target) && !buyBtcDropdown.contains(e.target)) {
+                buyBtcDropdown.classList.remove('show');
             }
         });
     }
