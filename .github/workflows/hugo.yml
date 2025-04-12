@@ -50,14 +50,17 @@ jobs:
           ls -la
           echo "Theme directory:"
           ls -la themes/PaperMod
+          echo "Layouts directory:"
+          ls -la layouts/
+          echo "Partials directory:"
+          ls -la layouts/partials/
 
       - name: Build with Debug
         env:
           HUGO_ENV: production
-          HUGO_LOGFILE: hugo.log
         run: |
-          hugo --logFile hugo.log --verbose --debug --minify || (cat hugo.log && exit 1)
-
+          hugo --logLevel debug --verbose --minify
+        
       - name: Check Build Output
         if: always()
         run: |
@@ -67,6 +70,9 @@ jobs:
             ls -la public/
           else
             echo "public directory not found!"
+            echo "Hugo build logs:"
+            echo "===================="
+            cat $(find . -name "hugo_*.log" -type f 2>/dev/null) || echo "No Hugo log files found"
           fi
 
       - name: Deploy
