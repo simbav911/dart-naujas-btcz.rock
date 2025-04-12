@@ -58,13 +58,13 @@ jobs:
           echo "Partials directory:"
           ls -la layouts/partials/
 
-      - name: Build with Debug
+      - name: Build Hugo Site
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENABLEGITINFO: true
         run: |
-          hugo --debug --verbose --minify --gc --printPathWarnings --printUnusedTemplates
-        
+          hugo --logLevel debug --verbose --minify --gc
+
       - name: Check Build Output
         if: always()
         run: |
