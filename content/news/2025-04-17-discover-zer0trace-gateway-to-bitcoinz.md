@@ -1,6 +1,6 @@
 ---
 title: "Discover zer0trace.com: Your Simple Gateway to BitcoinZ"
-date: 2025-04-17
+date: 2025-04-16
 description: "Learn how zer0trace.com, a gift from the BitcoinZ team, offers a simple, fast, and anonymous way to buy BTCZ."
 image: "/images/news/zer0trace/main.png" # Suggested featured image
 draft: false
