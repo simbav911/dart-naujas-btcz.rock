@@ -1,0 +1,337 @@
+---
+title: "BitcoinZ Halving"
+date: 2023-05-10T10:00:00-00:00
+draft: false
+description: "Visualizing the BitcoinZ halving event with an interactive 3D visualization"
+---
+
+<div class="halving-section">
+    <h2 class="section-title">Visualizing the BitcoinZ Halving</h2>
+    <p class="section-description">
+        The BitcoinZ halving is a significant event where the block reward is reduced by half, 
+        decreasing the rate at which new coins are created. This visualization demonstrates the 
+        impact of the upcoming halving on the BitcoinZ ecosystem.
+    </p>
+
+    <!-- Key Information -->
+    <div class="key-info">
+        <h3>Halving Countdown</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <h4>Estimated Halving Block</h4>
+                <p>1,680,000</p>
+            </div>
+            <div class="info-item">
+                <h4>Current Block</h4>
+                <p>1,558,521</p>
+                <small>as of May 10, 2025 10:53:54 PM</small>
+            </div>
+            <div class="info-item">
+                <h4>Blocks Remaining</h4>
+                <p>~121,479</p>
+            </div>
+            <div class="info-item">
+                <h4>Block Time</h4>
+                <p>2.5 minutes</p>
+            </div>
+            <div class="info-item">
+                <h4>Estimated Halving Date</h4>
+                <p>December 7th-8th, 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D Visualization -->
+    <div class="visualization-container">
+        <div class="reward-label current-reward">Current Reward: 6,250 BTCZ</div>
+        <div class="reward-label future-reward">Future Reward: 3,125 BTCZ</div>
+        <canvas id="visualization-canvas"></canvas>
+    </div>
+</div>
+
+<style>
+/* Halving Section Styles */
+.halving-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #FFD700;
+    text-align: center;
+}
+
+.section-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.key-info {
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.key-info h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    background-color: #1a1a1a;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid #FFD700;
+}
+
+.info-item h4 {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+/* Visualization Container */
+.visualization-container {
+    position: relative;
+    height: 500px;
+    background-color: #111111;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+}
+
+#visualization-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.reward-label {
+    position: absolute;
+    padding: 0.5rem 1rem;
+    background-color: rgba(10, 10, 10, 0.8);
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.current-reward {
+    top: 20px;
+    left: 20px;
+}
+
+.future-reward {
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .visualization-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .visualization-container {
+        height: 300px;
+    }
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+// Initialize the 3D visualization when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js library not loaded.');
+        showFallbackContent();
+        return;
+    }
+    
+    try {
+        initVisualization();
+    } catch (error) {
+        console.error('Error initializing 3D visualization:', error);
+        showFallbackContent();
+    }
+});
+
+function initVisualization() {
+    // Get the canvas element
+    const canvas = document.getElementById('visualization-canvas');
+    
+    // Create the scene
+    const scene = new THREE.Scene();
+    
+    // Create the camera
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    camera.position.set(0, 5, 10);
+    
+    // Create the renderer
+    const renderer = new THREE.WebGLRenderer({ 
+        canvas: canvas, 
+        antialias: true,
+        alpha: true 
+    });
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setClearColor(0x111111);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
+    
+    // Add OrbitControls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 5;
+    controls.maxDistance = 20;
+    
+    // Set up lighting
+    // Ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    
+    // Directional light with shadows
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 10, 7);
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
+    
+    // Add point lights for better metallic effect
+    const pointLight1 = new THREE.PointLight(0xffd700, 1, 100);
+    pointLight1.position.set(-5, 5, 5);
+    scene.add(pointLight1);
+    
+    const pointLight2 = new THREE.PointLight(0xffd700, 0.5, 100);
+    pointLight2.position.set(5, -5, 5);
+    scene.add(pointLight2);
+    
+    // Create gold material
+    const goldMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffd700,
+        metalness: 0.9,
+        roughness: 0.1,
+        emissive: 0x222200,
+        emissiveIntensity: 0.2
+    });
+    
+    // Create the current reward coin (larger)
+    const currentRewardGeometry = new THREE.CylinderGeometry(3, 3, 0.5, 64);
+    const currentRewardCoin = new THREE.Mesh(currentRewardGeometry, goldMaterial);
+    currentRewardCoin.position.set(-4, 0, 0);
+    currentRewardCoin.rotation.x = Math.PI / 2;
+    currentRewardCoin.castShadow = true;
+    scene.add(currentRewardCoin);
+    
+    // Add edge to current coin
+    const currentCoinEdgeGeometry = new THREE.TorusGeometry(3, 0.2, 16, 100);
+    const currentCoinEdge = new THREE.Mesh(currentCoinEdgeGeometry, goldMaterial);
+    currentCoinEdge.position.set(-4, 0, 0);
+    currentCoinEdge.rotation.x = Math.PI / 2;
+    scene.add(currentCoinEdge);
+    
+    // Create the future reward coin (smaller)
+    const futureRewardGeometry = new THREE.CylinderGeometry(1.5, 1.5, 0.5, 64);
+    const futureRewardCoin = new THREE.Mesh(futureRewardGeometry, goldMaterial);
+    futureRewardCoin.position.set(4, 0, 0);
+    futureRewardCoin.rotation.x = Math.PI / 2;
+    futureRewardCoin.castShadow = true;
+    scene.add(futureRewardCoin);
+    
+    // Add edge to future coin
+    const futureCoinEdgeGeometry = new THREE.TorusGeometry(1.5, 0.2, 16, 100);
+    const futureCoinEdge = new THREE.Mesh(futureCoinEdgeGeometry, goldMaterial);
+    futureCoinEdge.position.set(4, 0, 0);
+    futureCoinEdge.rotation.x = Math.PI / 2;
+    scene.add(futureCoinEdge);
+    
+    // Add a platform/floor
+    const floorGeometry = new THREE.PlaneGeometry(30, 30);
+    const floorMaterial = new THREE.MeshStandardMaterial({ 
+        color: 0x111111,
+        roughness: 0.8,
+        metalness: 0.2,
+        side: THREE.DoubleSide
+    });
+    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+    floor.rotation.x = Math.PI / 2;
+    floor.position.y = -3;
+    floor.receiveShadow = true;
+    scene.add(floor);
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        
+        renderer.setSize(width, height);
+    });
+    
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Add subtle rotation to the coins
+        currentRewardCoin.rotation.z += 0.005;
+        currentCoinEdge.rotation.z += 0.005;
+        futureRewardCoin.rotation.z += 0.005;
+        futureCoinEdge.rotation.z += 0.005;
+        
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    
+    // Start the animation loop
+    animate();
+}
+
+function showFallbackContent() {
+    const container = document.querySelector('.visualization-container');
+    container.innerHTML = `
+        <div style="display: flex; height: 100%; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 20px;">
+            <h3 style="color: #FFD700; margin-bottom: 15px;">BitcoinZ Halving Visualization</h3>
+            <p>The 3D visualization requires JavaScript and Three.js to be enabled.</p>
+            <div style="display: flex; margin-top: 20px; width: 100%; justify-content: space-around;">
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; background: linear-gradient(145deg, #ffd700, #b8860b); border-radius: 50%; margin: 0 auto;"></div>
+                    <p style="margin-top: 10px;">Current Reward:<br>6,250 BTCZ</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 50px; height: 50px; background: linear-gradient(145deg, #ffd700, #b8860b); border-radius: 50%; margin: 25px auto;"></div>
+                    <p style="margin-top: 10px;">Future Reward:<br>3,125 BTCZ</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+</script>

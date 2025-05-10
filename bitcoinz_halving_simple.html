@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitcoinZ Halving Visualization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #111111;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #FFD700;
+        }
+        
+        nav a.active {
+            color: #FFD700;
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #FFD700;
+        }
+        
+        /* Halving Section Styles */
+        .halving-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            text-align: center;
+        }
+        
+        .section-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .key-info {
+            background-color: #111111;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .key-info h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .info-item {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #FFD700;
+        }
+        
+        .info-item h4 {
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Visualization Container */
+        .visualization-container {
+            position: relative;
+            height: 400px;
+            background-color: #111111;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .coin-comparison {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .coin {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .coin-circle {
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffd700, #b8860b);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coin-circle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+            border-radius: 50%;
+        }
+        
+        .current-coin .coin-circle {
+            width: 200px;
+            height: 200px;
+            animation: pulse 3s infinite alternate;
+        }
+        
+        .future-coin .coin-circle {
+            width: 100px;
+            height: 100px;
+            animation: pulse 3s infinite alternate-reverse;
+        }
+        
+        .coin-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .coin-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .coin-arrow {
+            font-size: 3rem;
+            color: #FFD700;
+            margin: 0 2rem;
+            align-self: center;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+            }
+            100% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .visualization-container {
+                height: auto;
+                padding: 2rem 0;
+            }
+            
+            .current-coin .coin-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .future-coin .coin-circle {
+                width: 75px;
+                height: 75px;
+            }
+            
+            .coin-arrow {
+                font-size: 2rem;
+                margin: 0 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .coin-comparison {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .coin-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            .current-coin .coin-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .future-coin .coin-circle {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">BitcoinZ</a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Why BitcoinZ</a></li>
+                    <li><a href="#">Ecosystem</a></li>
+                    <li><a href="#">Wallets</a></li>
+                    <li><a href="#">Where to Buy</a></li>
+                    <li><a href="#">Learn Crypto</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Roadmap</a></li>
+                    <li><a href="#" class="active">Halving</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Halving Visualization Section -->
+    <section class="halving-section">
+        <h2 class="section-title">Visualizing the BitcoinZ Halving</h2>
+        <p class="section-description">
+            The BitcoinZ halving is a significant event where the block reward is reduced by half, 
+            decreasing the rate at which new coins are created. This visualization demonstrates the 
+            impact of the upcoming halving on the BitcoinZ ecosystem.
+        </p>
+
+        <!-- Key Information -->
+        <div class="key-info">
+            <h3>Halving Countdown</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>Estimated Halving Block</h4>
+                    <p>1,680,000</p>
+                </div>
+                <div class="info-item">
+                    <h4>Current Block</h4>
+                    <p>1,558,521</p>
+                    <small>as of May 10, 2025 10:53:54 PM</small>
+                </div>
+                <div class="info-item">
+                    <h4>Blocks Remaining</h4>
+                    <p>~121,479</p>
+                </div>
+                <div class="info-item">
+                    <h4>Block Time</h4>
+                    <p>2.5 minutes</p>
+                </div>
+                <div class="info-item">
+                    <h4>Estimated Halving Date</h4>
+                    <p>December 7th-8th, 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS-based Visualization -->
+        <div class="visualization-container">
+            <div class="coin-comparison">
+                <div class="coin current-coin">
+                    <div class="coin-circle"></div>
+                    <div class="coin-label">Current Reward</div>
+                    <div class="coin-value">6,250 BTCZ</div>
+                </div>
+                <div class="coin-arrow">→</div>
+                <div class="coin future-coin">
+                    <div class="coin-circle"></div>
+                    <div class="coin-label">Future Reward</div>
+                    <div class="coin-value">3,125 BTCZ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simple animation to make the page more interactive
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to coins
+            const coins = document.querySelectorAll('.coin-circle');
+            coins.forEach(coin => {
+                coin.addEventListener('mouseover', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                coin.addEventListener('mouseout', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Add this to your Hugo config.toml file to add the Halving link to your navigation menu
+
+[[menu.main]]
+name = "Halving"
+url = "/halving/"
+weight = 90  # Adjust this number to control the position in the menu

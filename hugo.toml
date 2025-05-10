@@ -62,6 +62,11 @@ ignoreLogs = ['warning-goldmark-raw-html']
     name = "Roadmap"
     url = "/roadmap/"
     weight = 8
+  [[menu.main]]
+    identifier = "halving"
+    name = "Halving"
+    url = "/halving/"
+    weight = 9
 
 [outputs]
   home = ["HTML"]
