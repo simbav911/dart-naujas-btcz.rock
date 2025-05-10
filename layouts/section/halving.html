@@ -159,7 +159,7 @@
     /* Countdown Overlay */
     .countdown-overlay {
         position: absolute;
-        top: 50%;
+        top: 30%; /* Moved up from 50% */
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 20;
@@ -196,6 +196,161 @@
         margin-top: 0.3rem;
     }
 
+    /* Content Styles */
+    .halving-content {
+        max-width: 1000px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: rgba(17, 17, 17, 0.7);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .halving-content h2 {
+        font-size: 2.2rem;
+        color: #FFD700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .halving-content h3 {
+        font-size: 1.8rem;
+        color: #FFD700;
+        margin: 2rem 0 1rem;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        padding-bottom: 0.5rem;
+    }
+
+    .halving-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .importance-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .importance-item {
+        background-color: rgba(26, 26, 26, 0.7);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 3px solid #FFD700;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .importance-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .importance-item h4 {
+        color: #FFD700;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+    }
+
+    .importance-item p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .timeline {
+        position: relative;
+        margin: 2rem 0;
+        padding-left: 2rem;
+    }
+
+    .timeline:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #FFD700, rgba(255, 215, 0, 0.3));
+        border-radius: 2px;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 1.5rem;
+    }
+
+    .timeline-icon {
+        position: absolute;
+        left: -2.3rem;
+        top: 0;
+        width: 2rem;
+        height: 2rem;
+        background-color: #111;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFD700;
+        border: 2px solid #FFD700;
+    }
+
+    .timeline-content {
+        background-color: rgba(26, 26, 26, 0.7);
+        padding: 1.2rem;
+        border-radius: 8px;
+        border-left: 3px solid #FFD700;
+    }
+
+    .timeline-content h4 {
+        color: #FFD700;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .timeline-item.completed .timeline-icon {
+        background-color: #FFD700;
+        color: #111;
+    }
+
+    .timeline-item.current .timeline-icon {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        }
+    }
+
+    .learn-more {
+        margin-top: 3rem;
+        text-align: center;
+        padding: 1.5rem;
+        background-color: rgba(26, 26, 26, 0.7);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .learn-link {
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .learn-link:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
     /* Responsive Styles */
     @media (max-width: 768px) {
         .section-title {
@@ -217,6 +372,20 @@
 
         .countdown-item span {
             font-size: 1.4rem;
+        }
+
+        .importance-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .timeline {
+            padding-left: 1.5rem;
+        }
+
+        .timeline-icon {
+            left: -1.8rem;
+            width: 1.5rem;
+            height: 1.5rem;
         }
     }
 
@@ -412,10 +581,10 @@
             emissiveIntensity: 0.4
         });
 
-        // Create the current reward coin (larger)
+        // Create the current reward coin (larger) - positioned higher
         const currentRewardGeometry = new THREE.CylinderGeometry(3, 3, 0.5, 64);
         const currentRewardCoin = new THREE.Mesh(currentRewardGeometry, goldMaterial);
-        currentRewardCoin.position.set(-4, 0, 0);
+        currentRewardCoin.position.set(-4, 1.5, 0); // Raised position to match future coin
         currentRewardCoin.rotation.x = Math.PI / 2;
         currentRewardCoin.castShadow = true;
         scene.add(currentRewardCoin);
@@ -423,7 +592,7 @@
         // Add edge to current coin with enhanced material
         const currentCoinEdgeGeometry = new THREE.TorusGeometry(3, 0.2, 16, 100);
         const currentCoinEdge = new THREE.Mesh(currentCoinEdgeGeometry, goldEdgeMaterial);
-        currentCoinEdge.position.set(-4, 0, 0);
+        currentCoinEdge.position.set(-4, 1.5, 0); // Raised position to match coin
         currentCoinEdge.rotation.x = Math.PI / 2;
         scene.add(currentCoinEdge);
 
@@ -437,14 +606,14 @@
 
         const textGeometry = new THREE.CylinderGeometry(2, 2, 0.1, 32);
         const textMesh = new THREE.Mesh(textGeometry, btczTexture);
-        textMesh.position.set(-4, 0.26, 0);
+        textMesh.position.set(-4, 1.76, 0); // Raised position to match coin
         textMesh.rotation.x = Math.PI / 2;
         scene.add(textMesh);
 
-        // Create the future reward coin (smaller)
+        // Create the future reward coin (smaller) - positioned higher
         const futureRewardGeometry = new THREE.CylinderGeometry(1.5, 1.5, 0.5, 64);
         const futureRewardCoin = new THREE.Mesh(futureRewardGeometry, goldMaterial);
-        futureRewardCoin.position.set(4, 0, 0);
+        futureRewardCoin.position.set(4, 1.5, 0); // Raised position
         futureRewardCoin.rotation.x = Math.PI / 2;
         futureRewardCoin.castShadow = true;
         scene.add(futureRewardCoin);
@@ -452,14 +621,14 @@
         // Add edge to future coin with enhanced material
         const futureCoinEdgeGeometry = new THREE.TorusGeometry(1.5, 0.2, 16, 100);
         const futureCoinEdge = new THREE.Mesh(futureCoinEdgeGeometry, goldEdgeMaterial);
-        futureCoinEdge.position.set(4, 0, 0);
+        futureCoinEdge.position.set(4, 1.5, 0); // Raised position to match coin
         futureCoinEdge.rotation.x = Math.PI / 2;
         scene.add(futureCoinEdge);
 
         // Add BTCZ text to future coin
         const smallTextGeometry = new THREE.CylinderGeometry(1, 1, 0.1, 32);
         const smallTextMesh = new THREE.Mesh(smallTextGeometry, btczTexture);
-        smallTextMesh.position.set(4, 0.26, 0);
+        smallTextMesh.position.set(4, 1.76, 0); // Raised position to match coin
         smallTextMesh.rotation.x = Math.PI / 2;
         scene.add(smallTextMesh);
 
@@ -515,7 +684,7 @@
             side: THREE.DoubleSide
         });
         const glow1 = new THREE.Mesh(glowGeometry1, glowMaterial1);
-        glow1.position.set(-4, -2.9, 0);
+        glow1.position.set(-4, -2.5, 0); // Adjusted position for better visibility
         glow1.rotation.x = Math.PI / 2;
         scene.add(glow1);
 
@@ -527,7 +696,7 @@
             side: THREE.DoubleSide
         });
         const glow2 = new THREE.Mesh(glowGeometry2, glowMaterial2);
-        glow2.position.set(4, -2.9, 0);
+        glow2.position.set(4, -2.5, 0); // Adjusted position for better visibility
         glow2.rotation.x = Math.PI / 2;
         scene.add(glow2);
 
@@ -557,14 +726,14 @@
             futureCoinEdge.rotation.z += 0.005;
             smallTextMesh.rotation.z += 0.005;
 
-            // Add floating animation to coins
-            currentRewardCoin.position.y = Math.sin(time) * 0.1;
-            currentCoinEdge.position.y = Math.sin(time) * 0.1;
-            textMesh.position.y = 0.26 + Math.sin(time) * 0.1;
+            // Add floating animation to coins (with new base positions)
+            currentRewardCoin.position.y = 1.5 + Math.sin(time) * 0.1;
+            currentCoinEdge.position.y = 1.5 + Math.sin(time) * 0.1;
+            textMesh.position.y = 1.76 + Math.sin(time) * 0.1;
 
-            futureRewardCoin.position.y = Math.sin(time + 1) * 0.1;
-            futureCoinEdge.position.y = Math.sin(time + 1) * 0.1;
-            smallTextMesh.position.y = 0.26 + Math.sin(time + 1) * 0.1;
+            futureRewardCoin.position.y = 1.5 + Math.sin(time + 1) * 0.1;
+            futureCoinEdge.position.y = 1.5 + Math.sin(time + 1) * 0.1;
+            smallTextMesh.position.y = 1.76 + Math.sin(time + 1) * 0.1;
 
             // Rotate particles for a dynamic effect
             particlesMesh.rotation.y += 0.001;
@@ -688,6 +857,8 @@
     }
     </script>
 
-    {{ .Content }}
+    <div class="halving-content">
+        {{ .Content | safeHTML }}
+    </div>
 </div>
 {{ end }}
