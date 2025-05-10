@@ -40,6 +40,26 @@
         <div class="visualization-container">
             <div class="reward-label current-reward">Current Reward: 6,250 BTCZ</div>
             <div class="reward-label future-reward">Future Reward: 3,125 BTCZ</div>
+            <div class="countdown-overlay">
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <span id="days">365</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours">12</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">30</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">45</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
             <canvas id="visualization-canvas"></canvas>
         </div>
     </div>
@@ -136,6 +156,46 @@
         right: 20px;
     }
 
+    /* Countdown Overlay */
+    .countdown-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+        pointer-events: none;
+    }
+
+    .countdown-timer {
+        display: flex;
+        gap: 1rem;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .countdown-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 60px;
+    }
+
+    .countdown-item span {
+        color: #FFD700;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .countdown-label {
+        font-size: 0.8rem !important;
+        opacity: 0.8;
+        margin-top: 0.3rem;
+    }
+
     /* Responsive Styles */
     @media (max-width: 768px) {
         .section-title {
@@ -144,6 +204,19 @@
 
         .visualization-container {
             height: 400px;
+        }
+
+        .countdown-timer {
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+        }
+
+        .countdown-item {
+            min-width: 50px;
+        }
+
+        .countdown-item span {
+            font-size: 1.4rem;
         }
     }
 
@@ -155,9 +228,32 @@
         .visualization-container {
             height: 300px;
         }
+
+        .countdown-timer {
+            gap: 0.3rem;
+            padding: 0.5rem;
+        }
+
+        .countdown-item {
+            min-width: 40px;
+        }
+
+        .countdown-item span {
+            font-size: 1.2rem;
+        }
+
+        .countdown-label {
+            font-size: 0.7rem !important;
+        }
+
+        .reward-label {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
     }
     </style>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
@@ -298,13 +394,22 @@
         pointLight2.position.set(5, -5, 5);
         scene.add(pointLight2);
 
-        // Create gold material
+        // Create gold material with enhanced properties
         const goldMaterial = new THREE.MeshStandardMaterial({
             color: 0xffd700,
             metalness: 0.9,
             roughness: 0.1,
             emissive: 0x222200,
-            emissiveIntensity: 0.2
+            emissiveIntensity: 0.3
+        });
+
+        // Create a more reflective gold material for the edges
+        const goldEdgeMaterial = new THREE.MeshStandardMaterial({
+            color: 0xffdf00,
+            metalness: 1.0,
+            roughness: 0.05,
+            emissive: 0x332200,
+            emissiveIntensity: 0.4
         });
 
         // Create the current reward coin (larger)
@@ -315,12 +420,26 @@
         currentRewardCoin.castShadow = true;
         scene.add(currentRewardCoin);
 
-        // Add edge to current coin
+        // Add edge to current coin with enhanced material
         const currentCoinEdgeGeometry = new THREE.TorusGeometry(3, 0.2, 16, 100);
-        const currentCoinEdge = new THREE.Mesh(currentCoinEdgeGeometry, goldMaterial);
+        const currentCoinEdge = new THREE.Mesh(currentCoinEdgeGeometry, goldEdgeMaterial);
         currentCoinEdge.position.set(-4, 0, 0);
         currentCoinEdge.rotation.x = Math.PI / 2;
         scene.add(currentCoinEdge);
+
+        // Add BTCZ text to current coin
+        const loader = new THREE.TextureLoader();
+        const btczTexture = new THREE.MeshStandardMaterial({
+            color: 0x111111,
+            roughness: 0.4,
+            metalness: 0.6
+        });
+
+        const textGeometry = new THREE.CylinderGeometry(2, 2, 0.1, 32);
+        const textMesh = new THREE.Mesh(textGeometry, btczTexture);
+        textMesh.position.set(-4, 0.26, 0);
+        textMesh.rotation.x = Math.PI / 2;
+        scene.add(textMesh);
 
         // Create the future reward coin (smaller)
         const futureRewardGeometry = new THREE.CylinderGeometry(1.5, 1.5, 0.5, 64);
@@ -330,26 +449,87 @@
         futureRewardCoin.castShadow = true;
         scene.add(futureRewardCoin);
 
-        // Add edge to future coin
+        // Add edge to future coin with enhanced material
         const futureCoinEdgeGeometry = new THREE.TorusGeometry(1.5, 0.2, 16, 100);
-        const futureCoinEdge = new THREE.Mesh(futureCoinEdgeGeometry, goldMaterial);
+        const futureCoinEdge = new THREE.Mesh(futureCoinEdgeGeometry, goldEdgeMaterial);
         futureCoinEdge.position.set(4, 0, 0);
         futureCoinEdge.rotation.x = Math.PI / 2;
         scene.add(futureCoinEdge);
 
-        // Add a platform/floor
-        const floorGeometry = new THREE.PlaneGeometry(30, 30);
+        // Add BTCZ text to future coin
+        const smallTextGeometry = new THREE.CylinderGeometry(1, 1, 0.1, 32);
+        const smallTextMesh = new THREE.Mesh(smallTextGeometry, btczTexture);
+        smallTextMesh.position.set(4, 0.26, 0);
+        smallTextMesh.rotation.x = Math.PI / 2;
+        scene.add(smallTextMesh);
+
+        // Add particles for a more dynamic effect
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 200;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 20;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0xffd700,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Add an enhanced platform/floor with grid
+        const floorGeometry = new THREE.PlaneGeometry(30, 30, 30, 30);
         const floorMaterial = new THREE.MeshStandardMaterial({
             color: 0x111111,
-            roughness: 0.8,
-            metalness: 0.2,
-            side: THREE.DoubleSide
+            roughness: 0.7,
+            metalness: 0.3,
+            side: THREE.DoubleSide,
+            wireframe: false
         });
+
+        // Create grid lines on the floor
+        const gridHelper = new THREE.GridHelper(30, 30, 0x444444, 0x222222);
+        gridHelper.position.y = -2.99;
+        scene.add(gridHelper);
+
         const floor = new THREE.Mesh(floorGeometry, floorMaterial);
         floor.rotation.x = Math.PI / 2;
         floor.position.y = -3;
         floor.receiveShadow = true;
         scene.add(floor);
+
+        // Add a subtle glow effect around the coins
+        const glowGeometry1 = new THREE.CircleGeometry(4, 32);
+        const glowMaterial1 = new THREE.MeshBasicMaterial({
+            color: 0xffd700,
+            transparent: true,
+            opacity: 0.1,
+            side: THREE.DoubleSide
+        });
+        const glow1 = new THREE.Mesh(glowGeometry1, glowMaterial1);
+        glow1.position.set(-4, -2.9, 0);
+        glow1.rotation.x = Math.PI / 2;
+        scene.add(glow1);
+
+        const glowGeometry2 = new THREE.CircleGeometry(2, 32);
+        const glowMaterial2 = new THREE.MeshBasicMaterial({
+            color: 0xffd700,
+            transparent: true,
+            opacity: 0.1,
+            side: THREE.DoubleSide
+        });
+        const glow2 = new THREE.Mesh(glowGeometry2, glowMaterial2);
+        glow2.position.set(4, -2.9, 0);
+        glow2.rotation.x = Math.PI / 2;
+        scene.add(glow2);
 
         // Handle window resize
         window.addEventListener('resize', function() {
@@ -362,18 +542,61 @@
             renderer.setSize(width, height);
         });
 
-        // Animation loop
+        // Animation loop with enhanced effects
+        let time = 0;
         function animate() {
             requestAnimationFrame(animate);
+            time += 0.01;
 
             // Add subtle rotation to the coins
             currentRewardCoin.rotation.z += 0.005;
             currentCoinEdge.rotation.z += 0.005;
+            textMesh.rotation.z += 0.005;
+
             futureRewardCoin.rotation.z += 0.005;
             futureCoinEdge.rotation.z += 0.005;
+            smallTextMesh.rotation.z += 0.005;
+
+            // Add floating animation to coins
+            currentRewardCoin.position.y = Math.sin(time) * 0.1;
+            currentCoinEdge.position.y = Math.sin(time) * 0.1;
+            textMesh.position.y = 0.26 + Math.sin(time) * 0.1;
+
+            futureRewardCoin.position.y = Math.sin(time + 1) * 0.1;
+            futureCoinEdge.position.y = Math.sin(time + 1) * 0.1;
+            smallTextMesh.position.y = 0.26 + Math.sin(time + 1) * 0.1;
+
+            // Rotate particles for a dynamic effect
+            particlesMesh.rotation.y += 0.001;
+
+            // Pulse the glow
+            glow1.material.opacity = 0.05 + Math.abs(Math.sin(time * 0.5)) * 0.1;
+            glow2.material.opacity = 0.05 + Math.abs(Math.sin(time * 0.5 + 1)) * 0.1;
 
             renderer.render(scene, camera);
         }
+
+        // Update countdown timer
+        function updateCountdown() {
+            const halvingDate = new Date('December 7, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = halvingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            setTimeout(updateCountdown, 1000);
+        }
+
+        // Start the countdown
+        updateCountdown();
 
         // Start the animation loop
         animate();
