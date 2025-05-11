@@ -819,13 +819,41 @@
                 halvingDateElement.textContent = estimatedHalvingDate.toLocaleDateString(undefined, dateOptions);
             }
 
-            // Update every second
-            setTimeout(updateCountdown, 1000);
+            // Store the halving time for continuous countdown
+            window.halvingTimeInSeconds = timeRemainingSeconds;
+            window.lastUpdateTime = Date.now();
         }
 
         // Start the countdown
         updateCountdown();
-
+        
+        // Update the block calculation every 2.5 minutes to keep it accurate
+        setInterval(updateCountdown, 2.5 * 60 * 1000);
+        
+        // Update the display every second for a continuous countdown
+        setInterval(function() {
+            if (window.halvingTimeInSeconds) {
+                // Calculate elapsed time since last update
+                const now = Date.now();
+                const elapsedSeconds = (now - window.lastUpdateTime) / 1000;
+                
+                // Calculate current remaining time
+                const currentRemainingTime = Math.max(0, window.halvingTimeInSeconds - elapsedSeconds);
+                
+                // Convert to days, hours, minutes, seconds
+                const days = Math.floor(currentRemainingTime / (24 * 60 * 60));
+                const hours = Math.floor((currentRemainingTime % (24 * 60 * 60)) / (60 * 60));
+                const minutes = Math.floor((currentRemainingTime % (60 * 60)) / 60);
+                const seconds = Math.floor(currentRemainingTime % 60);
+                
+                // Update countdown display with leading zeros for better readability
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            }
+        }, 1000);
+        
         // Start the animation loop
         animate();
     }
