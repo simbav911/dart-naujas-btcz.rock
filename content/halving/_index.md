@@ -64,7 +64,7 @@ The BitcoinZ halving is a significant event in the cryptocurrency's lifecycle wh
 </div>
 
 <div class="learn-more">
-  <p>For more information about BitcoinZ's economic model and how halving affects the ecosystem, visit our <a href="/learn-crypto" class="learn-link">Learn Crypto</a> section.</p>
+  <p>For more information about BitcoinZ's economic model and how halving affects the ecosystem, visit our <a href="/learn/" class="learn-link">Learn Crypto</a> section.</p>
 </div>
 
 
