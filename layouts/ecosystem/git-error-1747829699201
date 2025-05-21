@@ -1,0 +1,8 @@
+> git push origin main:main
+remote: error: Trace: 4e068c3978e0757eb02a0a144b2c5eee325c9556cbedc1009aa8f8f66379c3f3        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File dump/dump.sql is 233.96 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/simbav911/dart-naujas-btcz.rock.git
+ ! [remote rejected]   main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/simbav911/dart-naujas-btcz.rock.git'
