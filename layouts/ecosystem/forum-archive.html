@@ -1,0 +1,152 @@
+{{ define "main" }}
+<style>
+    /* Enhanced styles for forum archive tiles */
+    .forum-category-tile {
+        background: linear-gradient(to bottom, rgba(37, 37, 37, 0.9), rgba(25, 25, 25, 0.9));
+        border: 1px solid rgba(240, 196, 25, 0.1);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .forum-category-tile:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        border-color: rgba(240, 196, 25, 0.4);
+    }
+    
+    .forum-category-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #f0c419;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(240, 196, 25, 0.3);
+        padding-bottom: 0.5rem;
+        text-shadow: 0 0 10px rgba(240, 196, 25, 0.3);
+    }
+    
+    .forum-category-description {
+        color: #ccc;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+    
+    .forum-category-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        color: #888;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 0.75rem;
+        margin-top: auto;
+    }
+    
+    .forum-category-date {
+        font-style: italic;
+    }
+</style>
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-yellow-400 mb-6">BitcoinZ Official Forum Archive</h1>
+    
+    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm mb-6">
+        <h3 class="text-xl font-bold text-btcz-gold mb-3">
+            BitcoinZ Forum Archive
+        </h3>
+        <p class="text-gray-300">
+            An archive of the official BitcoinZ forum, preserving the community's history and discussions.
+        </p>
+        <p class="text-btcz-gold font-bold mt-4">
+            UNDER CONSTRUCTION - COMING SOON
+        </p>
+    </div>
+    
+    <div class="bg-gray-900 rounded-lg p-6 mb-8">
+        <p class="text-white mb-4">This is a static archive of the official BitcoinZ forum, preserving the community's history and valuable discussions. The original forum has been closed, but its content remains accessible here in a read-only format.</p>
+        <p class="text-white">Browse through the categories below to explore the archived forum content.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Category: Community Feedback -->
+        <a href="/ecosystem/forum-archive/categories/15-community-feedback/" class="block">
+            <div class="forum-category-tile">
+                <h2 class="forum-category-title">Community Feedback</h2>
+                <p class="forum-category-description">BitcoinZ Community Feedback discussions</p>
+                <div class="forum-category-stats">
+                    <span>0 topics</span>
+                    <span class="forum-category-date">Archived: May 2025</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Category: Wallets -->
+        <a href="/ecosystem/forum-archive/categories/6-wallets/" class="block">
+            <div class="forum-category-tile">
+                <h2 class="forum-category-title">Wallets</h2>
+                <p class="forum-category-description">BitcoinZ Wallets discussions</p>
+                <div class="forum-category-stats">
+                    <span>13 topics</span>
+                    <span class="forum-category-date">Last updated: April 2025</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Category: Proposals -->
+        <a href="/ecosystem/forum-archive/categories/9-proposals/" class="block">
+            <div class="forum-category-tile">
+                <h2 class="forum-category-title">Proposals</h2>
+                <p class="forum-category-description">BitcoinZ Proposals discussions</p>
+                <div class="forum-category-stats">
+                    <span>30 topics</span>
+                    <span class="forum-category-date">Last updated: March 2025</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Category: Marketing -->
+        <a href="/ecosystem/forum-archive/categories/8-marketing/" class="block">
+            <div class="forum-category-tile">
+                <h2 class="forum-category-title">Marketing</h2>
+                <p class="forum-category-description">BitcoinZ Marketing discussions</p>
+                <div class="forum-category-stats">
+                    <span>30 topics</span>
+                    <span class="forum-category-date">Last updated: February 2025</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Category: Exchanges -->
+        <a href="/ecosystem/forum-archive/categories/7-exchanges/" class="block">
+            <div class="forum-category-tile">
+                <h2 class="forum-category-title">Exchanges</h2>
+                <p class="forum-category-description">BitcoinZ Exchanges discussions</p>
+                <div class="forum-category-stats">
+                    <span>0 topics</span>
+                    <span class="forum-category-date">Archived: January 2025</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Category: Mining -->
+        <a href="/ecosystem/forum-archive/categories/5-mining/" class="block">
+            <div class="forum-category-tile">
+                <h2 class="forum-category-title">Mining</h2>
+                <p class="forum-category-description">BitcoinZ Mining discussions</p>
+                <div class="forum-category-stats">
+                    <span>0 topics</span>
+                    <span class="forum-category-date">Archived: December 2024</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+{{ end }}

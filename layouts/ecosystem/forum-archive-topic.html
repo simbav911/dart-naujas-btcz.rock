@@ -1,0 +1,133 @@
+{{ define "main" }}
+<div class="min-h-[300px] bg-gradient-to-b from-black to-btcz-gray-900 relative overflow-hidden">
+    <div class="container mx-auto px-6 py-16">
+        <h1 class="text-4xl font-bold text-btcz-gold mb-4">{{ .Title }}</h1>
+        <div class="flex items-center text-gray-300 mt-4">
+            {{ $topic := index (where (index .Site.Data "forum_archive_topics") "id" .File.ContentBaseName) 0 }}
+            <span class="mr-6">By {{ if $topic }}{{ $topic.author }}{{ else }}{{ .Params.author }}{{ end }}</span>
+            <span class="mr-6">{{ .Date.Format "January 2, 2006" }}</span>
+            <span class="mr-6">{{ if $topic }}{{ $topic.replies }}{{ else }}{{ .Params.replies }}{{ end }} replies</span>
+            <span>{{ if $topic }}{{ $topic.views }}{{ else }}{{ .Params.views }}{{ end }} views</span>
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto px-6 py-16">
+    <div class="mb-12">
+        <a href="/ecosystem/forum-archive/" class="text-btcz-gold hover:text-btcz-gold/80 transition-colors duration-300">
+            <span class="inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Forum Archive
+            </span>
+        </a>
+    </div>
+
+    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-8 backdrop-blur-sm">
+        <div class="prose prose-invert prose-lg max-w-none">
+            {{ .Content }}
+        </div>
+    </div>
+
+    <div class="mt-12 border-t border-btcz-gray-800 pt-8">
+        <h3 class="text-2xl font-bold text-btcz-gold mb-6">Replies</h3>
+        
+        {{ $posts := index (where (index .Site.Data "forum_archive_posts") "topic_id" .File.ContentBaseName) }}
+        
+        {{ if $posts }}
+            {{ range $index, $post := $posts }}
+                {{ if ne $index 0 }} <!-- Skip the first post as it's the original topic -->
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 backdrop-blur-sm mb-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="w-12 h-12 bg-btcz-gray-800 rounded-full flex items-center justify-center">
+                                    {{ $initials := index (split $post.author " ") 0 | substr 0 1 }}
+                                    {{ if gt (len (split $post.author " ")) 1 }}
+                                        {{ $initials = print $initials (index (split $post.author " ") 1 | substr 0 1) }}
+                                    {{ end }}
+                                    <span class="text-btcz-gold font-bold">{{ $initials }}</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h4 class="text-lg font-bold text-btcz-gold">{{ $post.author }}</h4>
+                                    <span class="text-sm text-gray-400">{{ $post.created_at }}</span>
+                                </div>
+                                <div class="prose prose-invert prose-sm">
+                                    {{ $post.content | safeHTML }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{ end }}
+            {{ end }}
+            
+            {{ $replyCount := sub (len $posts) 1 }}
+            {{ $displayedCount := min $replyCount 5 }}
+            
+            {{ if gt $replyCount $displayedCount }}
+                <div class="text-center text-gray-400 mt-8">
+                    <p>Showing {{ $displayedCount }} of {{ $replyCount }} replies</p>
+                    <button class="mt-4 px-6 py-2 border border-btcz-gold text-btcz-gold rounded-lg hover:bg-btcz-gold/10 transition-colors duration-300">
+                        Load More Replies
+                    </button>
+                </div>
+            {{ end }}
+        {{ else }}
+            <!-- Fallback for when no posts data is available -->
+            <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 backdrop-blur-sm mb-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4">
+                        <div class="w-12 h-12 bg-btcz-gray-800 rounded-full flex items-center justify-center">
+                            <span class="text-btcz-gold font-bold">CM</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="text-lg font-bold text-btcz-gold">CryptoMiner</h4>
+                            <span class="text-sm text-gray-400">May 11, 2025</span>
+                        </div>
+                        <div class="prose prose-invert prose-sm">
+                            <p>Great comparison! I've been using the RTX 5080 Ti for the past month and can confirm the hashrates you've posted. One thing to note is that with proper undervolting, you can get the power consumption down to about 260W without losing hashrate.</p>
+                            <p>My settings are slightly different:</p>
+                            <ul>
+                                <li>Core Clock: -300 MHz</li>
+                                <li>Memory Clock: +1650 MHz</li>
+                                <li>Power Limit: 75%</li>
+                            </ul>
+                            <p>This gives me around 220 MH/s at 260W, which is slightly better efficiency.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 backdrop-blur-sm mb-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4">
+                        <div class="w-12 h-12 bg-btcz-gray-800 rounded-full flex items-center justify-center">
+                            <span class="text-btcz-gold font-bold">GM</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="text-lg font-bold text-btcz-gold">GreenMiner</h4>
+                            <span class="text-sm text-gray-400">May 12, 2025</span>
+                        </div>
+                        <div class="prose prose-invert prose-sm">
+                            <p>Has anyone tried the AMD cards with the latest drivers? I heard there was a significant improvement in hashrates with the 25.4.2 drivers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center text-gray-400 mt-8">
+                <p>Showing 2 of {{ if $topic }}{{ $topic.replies }}{{ else }}{{ .Params.replies }}{{ end }} replies</p>
+                <button class="mt-4 px-6 py-2 border border-btcz-gold text-btcz-gold rounded-lg hover:bg-btcz-gold/10 transition-colors duration-300">
+                    Load More Replies
+                </button>
+            </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,3 @@
+{{ $path := .Get 0 }}
+{{ $content := readFile (printf "content/%s" $path) | safeHTML }}
+{{ $content }}
