@@ -12,15 +12,227 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {{ range .Pages }}
-        <a href="{{ .RelPermalink }}" class="group">
-            <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
-                       hover:border-btcz-gold/50 transition-all duration-300
-                       backdrop-blur-sm">
-                <h3 class="text-xl font-bold text-btcz-gold mb-3">{{ .Title }}</h3>
-                <p class="text-gray-300">{{ .Description }}</p>
-            </div>
-        </a>
+        {{ if eq .Section "ecosystem" }}
+            {{ if eq .CurrentSection.Title "BitcoinZ Forum Archive" }}
+                <!-- Special handling for forum archive -->
+                <a href="/ecosystem/forum-archive/categories/15-community-feedback/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Community Feedback</h3>
+                        <p class="text-gray-300">BitcoinZ Community Feedback discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">18 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: May 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/6-wallets/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Wallets</h3>
+                        <p class="text-gray-300">BitcoinZ Wallets discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">13 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: April 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/9-proposals/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Proposals</h3>
+                        <p class="text-gray-300">BitcoinZ Proposals discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">30 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: March 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/8-marketing/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Marketing</h3>
+                        <p class="text-gray-300">BitcoinZ Marketing discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">30 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: February 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/7-exchanges/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Exchanges</h3>
+                        <p class="text-gray-300">BitcoinZ Exchanges discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">23 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: January 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/5-mining/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Mining</h3>
+                        <p class="text-gray-300">BitcoinZ Mining discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">27 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: March 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Additional categories -->
+                <a href="/ecosystem/forum-archive/categories/4-development/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Development</h3>
+                        <p class="text-gray-300">BitcoinZ core development and technical discussions</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">25 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: May 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/3-announcements/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Announcements</h3>
+                        <p class="text-gray-300">Official BitcoinZ announcements and news</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">18 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: April 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/2-trading/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Trading</h3>
+                        <p class="text-gray-300">BitcoinZ trading discussions and market analysis</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">22 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: March 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/1-general/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">General</h3>
+                        <p class="text-gray-300">General discussions about BitcoinZ</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">45 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: May 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/10-security/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Security</h3>
+                        <p class="text-gray-300">Security discussions and best practices</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">15 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: February 2025</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/ecosystem/forum-archive/categories/11-tutorials/" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">Tutorials</h3>
+                        <p class="text-gray-300">Guides and tutorials for BitcoinZ users</p>
+                        <div class="flex justify-between items-center mt-4 pt-3 border-t border-btcz-gray-800">
+                            <span class="text-sm text-gray-400">12 topics</span>
+                            <span class="text-sm text-gray-400 italic">Last updated: January 2025</span>
+                        </div>
+                    </div>
+                </a>
+            {{ else }}
+                <!-- Regular ecosystem pages -->
+                {{ range .Pages }}
+                <a href="{{ .RelPermalink }}" class="group">
+                    <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                            hover:border-btcz-gold/50 transition-all duration-300
+                            backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-btcz-gold mb-3">
+                            {{ if .Title }}
+                                {{ .Title }}
+                            {{ else if .Params.name }}
+                                {{ .Params.name }}
+                            {{ else }}
+                                {{ .File.ContentBaseName }}
+                            {{ end }}
+                        </h3>
+                        <p class="text-gray-300">
+                            {{ if .Description }}
+                                {{ .Description }}
+                            {{ else if .Params.description }}
+                                {{ .Params.description }}
+                            {{ else if .Summary }}
+                                {{ .Summary | truncate 120 }}
+                            {{ end }}
+                        </p>
+                        {{ if eq .Title "BitcoinZ Forum Archive" }}
+                            <p class="text-btcz-gold font-bold mt-4">
+                                UNDER CONSTRUCTION - COMING SOON
+                            </p>
+                        {{ end }}
+                    </div>
+                </a>
+                {{ end }}
+            {{ end }}
+        {{ else }}
+            <!-- Default handling for non-ecosystem sections -->
+            {{ range .Pages }}
+            <a href="{{ .RelPermalink }}" class="group">
+                <div class="bg-black/50 border border-btcz-gray-800 rounded-lg p-6 
+                        hover:border-btcz-gold/50 transition-all duration-300
+                        backdrop-blur-sm">
+                    <h3 class="text-xl font-bold text-btcz-gold mb-3">
+                        {{ if .Title }}
+                            {{ .Title }}
+                        {{ else if .Params.name }}
+                            {{ .Params.name }}
+                        {{ else }}
+                            {{ .File.ContentBaseName }}
+                        {{ end }}
+                    </h3>
+                    <p class="text-gray-300">
+                        {{ if .Description }}
+                            {{ .Description }}
+                        {{ else if .Params.description }}
+                            {{ .Params.description }}
+                        {{ else if .Summary }}
+                            {{ .Summary | truncate 120 }}
+                        {{ end }}
+                    </p>
+                </div>
+            </a>
+            {{ end }}
         {{ end }}
     </div>
 </div>
