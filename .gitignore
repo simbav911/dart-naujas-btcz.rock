@@ -4,3 +4,7 @@ node_modules/
 .DS_Store
 *.log
 public/
+
+# Large files
+dump/dump.sql
+dump/*.sql
