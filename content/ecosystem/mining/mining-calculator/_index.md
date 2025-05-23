@@ -31,30 +31,44 @@ layout: "mining-single"
     <div class="calculator-form bg-btcz-gray-800 p-6 rounded-lg mb-6">
         <h2 class="text-xl font-semibold mb-4">Mining Setup</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="input-group">
-                <label for="gpuSelect" class="block mb-2">GPU Model</label>
-                <select id="gpuSelect" class="w-full p-2 bg-btcz-gray-700 border border-btcz-gray-600 rounded-lg">
-                    <option value="custom">Custom Hashrate</option>
-                    <!-- GPU options will be populated by JavaScript -->
-                </select>
+        <div id="gpuSetupContainer">
+            <!-- GPU setups will be added here dynamically -->
+            <div class="gpu-setup mb-4 p-4 bg-btcz-gray-700 rounded-lg">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold">GPU Setup 1</h3>
+                    <button type="button" class="remove-gpu-btn px-2 py-1 bg-red-600 text-white rounded hidden">Remove</button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="input-group">
+                        <label for="gpuSelect-0" class="block mb-2">GPU Model</label>
+                        <select id="gpuSelect-0" class="gpu-select w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg">
+                            <option value="custom">Custom Hashrate</option>
+                            <!-- GPU options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="gpuCount-0" class="block mb-2">Number of GPUs</label>
+                        <input type="number" id="gpuCount-0" class="gpu-count w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg" value="1" min="1">
+                    </div>
+                    
+                    <div class="input-group custom-hashrate-group">
+                        <label for="customHashrate-0" class="block mb-2">Hashrate (Sol/s)</label>
+                        <input type="number" id="customHashrate-0" class="custom-hashrate w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg" value="100">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="powerConsumption-0" class="block mb-2">Power Consumption (W)</label>
+                        <input type="number" id="powerConsumption-0" class="power-consumption w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg" value="150">
+                    </div>
+                </div>
             </div>
-            
-            <div class="input-group">
-                <label for="gpuCount" class="block mb-2">Number of GPUs</label>
-                <input type="number" id="gpuCount" class="w-full p-2 bg-btcz-gray-700 border border-btcz-gray-600 rounded-lg" value="1" min="1">
-            </div>
-            
-            <div class="input-group" id="customHashrateGroup">
-                <label for="customHashrate" class="block mb-2">Hashrate (Sol/s)</label>
-                <input type="number" id="customHashrate" class="w-full p-2 bg-btcz-gray-700 border border-btcz-gray-600 rounded-lg" value="100">
-            </div>
-            
-            <div class="input-group">
-                <label for="powerConsumption" class="block mb-2">Power Consumption (W)</label>
-                <input type="number" id="powerConsumption" class="w-full p-2 bg-btcz-gray-700 border border-btcz-gray-600 rounded-lg" value="150">
-            </div>
-            
+        </div>
+        
+        <button id="addGpuButton" class="mt-2 mb-4 px-4 py-2 bg-btcz-gray-600 text-white rounded-lg hover:bg-btcz-gray-500 transition-colors">+ Add Another GPU</button>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             <div class="input-group">
                 <label for="powerCost" class="block mb-2">Electricity Cost ($/kWh)</label>
                 <input type="number" id="powerCost" class="w-full p-2 bg-btcz-gray-700 border border-btcz-gray-600 rounded-lg" value="0.1" step="0.01">
@@ -284,9 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cache DOM elements
     cacheElements();
     
-    // Populate GPU select dropdown
-    populateGPUSelect();
-    
     // Fetch network data
     fetchNetworkData();
     
@@ -302,11 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Cache DOM elements for better performance
 function cacheElements() {
-    elements.gpuSelect = document.getElementById('gpuSelect');
-    elements.gpuCount = document.getElementById('gpuCount');
-    elements.customHashrate = document.getElementById('customHashrate');
-    elements.customHashrateGroup = document.getElementById('customHashrateGroup');
-    elements.powerConsumption = document.getElementById('powerConsumption');
+    elements.gpuSetupContainer = document.getElementById('gpuSetupContainer');
+    elements.addGpuButton = document.getElementById('addGpuButton');
     elements.powerCost = document.getElementById('powerCost');
     elements.poolFee = document.getElementById('poolFee');
     elements.calculateButton = document.getElementById('calculateButton');
@@ -338,13 +346,13 @@ function cacheElements() {
     elements.gpuTableBody = document.getElementById('gpuTableBody');
 }
 
-// Populate GPU select dropdown
-function populateGPUSelect() {
+// Populate GPU select dropdown for a specific select element
+function populateGPUSelect(selectElement) {
     Object.keys(gpuData).forEach(gpu => {
         const option = document.createElement('option');
         option.value = gpu;
         option.textContent = `${gpu} (${gpuData[gpu].hashrate} Sol/s)`;
-        elements.gpuSelect.appendChild(option);
+        selectElement.appendChild(option);
     });
 }
 
@@ -387,46 +395,162 @@ function updateNetworkDataUI() {
 // Add event listeners
 function addEventListeners() {
     elements.calculateButton.addEventListener('click', calculateProfits);
+    elements.addGpuButton.addEventListener('click', addGpuSetup);
     
-    elements.gpuSelect.addEventListener('change', () => {
-        const selectedGPU = elements.gpuSelect.value;
+    // Add event listener for the first GPU setup
+    setupGpuEventListeners(document.querySelector('.gpu-setup'));
+    
+    // Add event listeners for remove buttons
+    document.querySelectorAll('.remove-gpu-btn').forEach(btn => {
+        btn.addEventListener('click', removeGpuSetup);
+    });
+}
+
+// Set up event listeners for a GPU setup
+function setupGpuEventListeners(gpuSetup) {
+    const gpuSelect = gpuSetup.querySelector('.gpu-select');
+    const customHashrateGroup = gpuSetup.querySelector('.custom-hashrate-group');
+    const customHashrate = gpuSetup.querySelector('.custom-hashrate');
+    const powerConsumption = gpuSetup.querySelector('.power-consumption');
+    
+    // Populate the GPU select dropdown
+    populateGPUSelect(gpuSelect);
+    
+    // Add change event listener for GPU select
+    gpuSelect.addEventListener('change', () => {
+        const selectedGPU = gpuSelect.value;
         
         if (selectedGPU === 'custom') {
-            elements.customHashrateGroup.style.display = 'block';
-            elements.powerConsumption.value = 150;
+            customHashrateGroup.style.display = 'block';
+            powerConsumption.value = 150;
         } else {
-            elements.customHashrateGroup.style.display = 'none';
-            elements.customHashrate.value = gpuData[selectedGPU].hashrate;
-            elements.powerConsumption.value = gpuData[selectedGPU].power;
+            customHashrateGroup.style.display = 'none';
+            customHashrate.value = gpuData[selectedGPU].hashrate;
+            powerConsumption.value = gpuData[selectedGPU].power;
         }
     });
     
     // Trigger change event to set initial state
-    elements.gpuSelect.dispatchEvent(new Event('change'));
+    gpuSelect.dispatchEvent(new Event('change'));
+}
+
+// Add a new GPU setup
+function addGpuSetup() {
+    const gpuSetups = document.querySelectorAll('.gpu-setup');
+    const newIndex = gpuSetups.length;
+    
+    // Create a new GPU setup element
+    const newGpuSetup = document.createElement('div');
+    newGpuSetup.className = 'gpu-setup mb-4 p-4 bg-btcz-gray-700 rounded-lg';
+    
+    newGpuSetup.innerHTML = `
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="text-lg font-semibold">GPU Setup ${newIndex + 1}</h3>
+            <button type="button" class="remove-gpu-btn px-2 py-1 bg-red-600 text-white rounded">Remove</button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="input-group">
+                <label for="gpuSelect-${newIndex}" class="block mb-2">GPU Model</label>
+                <select id="gpuSelect-${newIndex}" class="gpu-select w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg">
+                    <option value="custom">Custom Hashrate</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="gpuCount-${newIndex}" class="block mb-2">Number of GPUs</label>
+                <input type="number" id="gpuCount-${newIndex}" class="gpu-count w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg" value="1" min="1">
+            </div>
+            
+            <div class="input-group custom-hashrate-group">
+                <label for="customHashrate-${newIndex}" class="block mb-2">Hashrate (Sol/s)</label>
+                <input type="number" id="customHashrate-${newIndex}" class="custom-hashrate w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg" value="100">
+            </div>
+            
+            <div class="input-group">
+                <label for="powerConsumption-${newIndex}" class="block mb-2">Power Consumption (W)</label>
+                <input type="number" id="powerConsumption-${newIndex}" class="power-consumption w-full p-2 bg-btcz-gray-800 border border-btcz-gray-600 rounded-lg" value="150">
+            </div>
+        </div>
+    `;
+    
+    // Add the new GPU setup to the container
+    elements.gpuSetupContainer.appendChild(newGpuSetup);
+    
+    // Set up event listeners for the new GPU setup
+    setupGpuEventListeners(newGpuSetup);
+    
+    // Add event listener for the remove button
+    const removeButton = newGpuSetup.querySelector('.remove-gpu-btn');
+    removeButton.addEventListener('click', removeGpuSetup);
+    
+    // Show remove buttons if there are multiple GPU setups
+    updateRemoveButtons();
+}
+
+// Remove a GPU setup
+function removeGpuSetup(event) {
+    const gpuSetup = event.target.closest('.gpu-setup');
+    gpuSetup.remove();
+    
+    // Update the titles of remaining GPU setups
+    const gpuSetups = document.querySelectorAll('.gpu-setup');
+    gpuSetups.forEach((setup, index) => {
+        setup.querySelector('h3').textContent = `GPU Setup ${index + 1}`;
+    });
+    
+    // Hide remove buttons if there's only one GPU setup left
+    updateRemoveButtons();
+}
+
+// Update the visibility of remove buttons
+function updateRemoveButtons() {
+    const gpuSetups = document.querySelectorAll('.gpu-setup');
+    const removeButtons = document.querySelectorAll('.remove-gpu-btn');
+    
+    if (gpuSetups.length > 1) {
+        removeButtons.forEach(btn => btn.classList.remove('hidden'));
+    } else {
+        removeButtons.forEach(btn => btn.classList.add('hidden'));
+    }
 }
 
 // Calculate mining profits
 function calculateProfits() {
-    // Get input values
-    const selectedGPU = elements.gpuSelect.value;
-    const gpuCount = parseInt(elements.gpuCount.value) || 1;
+    // Get global input values
     const powerCost = parseFloat(elements.powerCost.value) || 0.1;
     const poolFeePercent = parseFloat(elements.poolFee.value) || 1;
     
-    // Get hashrate and power consumption
-    let hashrate, powerConsumption;
+    // Get all GPU setups
+    const gpuSetups = document.querySelectorAll('.gpu-setup');
     
-    if (selectedGPU === 'custom') {
-        hashrate = parseFloat(elements.customHashrate.value) || 100;
-        powerConsumption = parseFloat(elements.powerConsumption.value) || 150;
-    } else {
-        hashrate = gpuData[selectedGPU].hashrate;
-        powerConsumption = gpuData[selectedGPU].power;
-    }
+    // Initialize totals
+    let totalHashrate = 0;
+    let totalPowerConsumption = 0;
+    let totalInvestment = 0;
     
-    // Calculate total hashrate and power consumption
-    const totalHashrate = hashrate * gpuCount;
-    const totalPowerConsumption = powerConsumption * gpuCount;
+    // Calculate totals from all GPU setups
+    gpuSetups.forEach(setup => {
+        const gpuSelect = setup.querySelector('.gpu-select');
+        const gpuCount = parseInt(setup.querySelector('.gpu-count').value) || 1;
+        const selectedGPU = gpuSelect.value;
+        
+        let setupHashrate, setupPowerConsumption, setupInvestment = 0;
+        
+        if (selectedGPU === 'custom') {
+            setupHashrate = parseFloat(setup.querySelector('.custom-hashrate').value) || 100;
+            setupPowerConsumption = parseFloat(setup.querySelector('.power-consumption').value) || 150;
+        } else {
+            setupHashrate = gpuData[selectedGPU].hashrate;
+            setupPowerConsumption = gpuData[selectedGPU].power;
+            setupInvestment = gpuData[selectedGPU].price * gpuCount;
+        }
+        
+        // Add to totals
+        totalHashrate += setupHashrate * gpuCount;
+        totalPowerConsumption += setupPowerConsumption * gpuCount;
+        totalInvestment += setupInvestment;
+    });
     
     // Calculate daily power cost in USD
     const dailyPowerCostUSD = (totalPowerConsumption * 24 * powerCost) / 1000;
@@ -456,9 +580,9 @@ function calculateProfits() {
     updateResultsUI(dailyBTCZ, dailyRevenueUSD, dailyPowerCostUSD, dailyPoolFeesUSD, dailyNetProfitUSD, 
                    weeklyBTCZ, weeklyUSD, monthlyBTCZ, monthlyUSD);
     
-    // Calculate break-even if GPU is selected
-    if (selectedGPU !== 'custom') {
-        calculateBreakEven(gpuData[selectedGPU].price * gpuCount, dailyNetProfitUSD);
+    // Calculate break-even if there's investment data
+    if (totalInvestment > 0) {
+        calculateBreakEven(totalInvestment, dailyNetProfitUSD);
     } else {
         elements.breakEvenTime.textContent = 'ROI Period: N/A (custom hashrate)';
         elements.breakEvenPrice.textContent = 'Break-even BTCZ Price: N/A';
@@ -498,16 +622,36 @@ function calculateBreakEven(investment, dailyProfit) {
         elements.breakEvenTime.textContent = 'ROI Period: Never (not profitable)';
         
         // Calculate break-even price
-        const selectedGPU = elements.gpuSelect.value;
-        const gpuCount = parseInt(elements.gpuCount.value) || 1;
         const powerCost = parseFloat(elements.powerCost.value) || 0.1;
         const poolFeePercent = parseFloat(elements.poolFee.value) || 1;
         
-        const hashrate = gpuData[selectedGPU].hashrate;
-        const powerConsumption = gpuData[selectedGPU].power;
+        // Get all GPU setups
+        const gpuSetups = document.querySelectorAll('.gpu-setup');
         
-        const totalHashrate = hashrate * gpuCount;
-        const totalPowerConsumption = powerConsumption * gpuCount;
+        // Initialize totals
+        let totalHashrate = 0;
+        let totalPowerConsumption = 0;
+        
+        // Calculate totals from all GPU setups
+        gpuSetups.forEach(setup => {
+            const gpuSelect = setup.querySelector('.gpu-select');
+            const gpuCount = parseInt(setup.querySelector('.gpu-count').value) || 1;
+            const selectedGPU = gpuSelect.value;
+            
+            let setupHashrate, setupPowerConsumption;
+            
+            if (selectedGPU === 'custom') {
+                setupHashrate = parseFloat(setup.querySelector('.custom-hashrate').value) || 100;
+                setupPowerConsumption = parseFloat(setup.querySelector('.power-consumption').value) || 150;
+            } else {
+                setupHashrate = gpuData[selectedGPU].hashrate;
+                setupPowerConsumption = gpuData[selectedGPU].power;
+            }
+            
+            // Add to totals
+            totalHashrate += setupHashrate * gpuCount;
+            totalPowerConsumption += setupPowerConsumption * gpuCount;
+        });
         
         const dailyPowerCostUSD = (totalPowerConsumption * 24 * powerCost) / 1000;
         
