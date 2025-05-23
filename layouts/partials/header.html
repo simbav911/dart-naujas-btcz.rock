@@ -25,6 +25,16 @@
                         <span class="text-xs" id="btcz-change-mobile-24h">0.00%</span>
                         <span class="text-gray-400 text-xs">24 H</span>
                     </div>
+                    <div class="flex flex-col text-xs mt-1 border-t border-btcz-gray-700/30 pt-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-xs mr-2">Current Supply:</span>
+                            <span class="text-btcz-gold text-xs font-medium" id="btcz-current-supply-mobile">0</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-xs mr-2">Max Supply:</span>
+                            <span class="text-btcz-gold text-xs font-medium" id="btcz-max-supply-mobile">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -407,22 +417,24 @@
                         </button>
                     </div>
                     <!-- Price Ticker (Positioned absolutely under language selector) -->
-                    <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex items-center rounded-lg px-3 py-1 glass-effect shadow-lg z-40 border border-btcz-gray-700">
+                    <div class="price-ticker-container absolute top-full mt-6 right-5 hidden md:flex flex-col rounded-lg px-4 py-2 glass-effect shadow-lg z-40 border border-btcz-gray-700" style="min-width: 340px;">
                         <div class="flex items-center">
-                            <span class="text-sm font-bold text-btcz-gold" id="btcz-price">$0.00000000</span>
+                            <span class="text-lg font-bold text-btcz-gold" id="btcz-price">$0.00000000</span>
+                            <span class="text-gray-400 text-sm ml-2">24H</span>
+                            <span id="change-24h" class="text-sm ml-1">0.00%</span>
+                            <span class="text-gray-400 text-sm ml-2">7d</span>
+                            <span id="change-7d" class="text-sm ml-1">0.00%</span>
+                            <span class="text-gray-400 text-sm ml-2">30d</span>
+                            <span id="change-30d" class="text-sm ml-1">0.00%</span>
                         </div>
-                        <div class="flex items-center space-x-2 text-xs ml-2">
-                            <div class="flex items-center" style="white-space: nowrap;">
-                                <span class="ml-1" style="display: inline-block;"><span>24 H</span></span>
-                                <span id="change-24h" class="ml-1" style="display: inline-block;">0.00%</span>
+                        <div class="flex flex-col text-xs mt-1 border-t border-btcz-gray-700/30 pt-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400 mr-2">Current Supply:</span>
+                                <span class="text-btcz-gold font-medium" id="btcz-current-supply">0</span>
                             </div>
-                            <div class="flex items-center ml-2">
-                                <span>7d</span>
-                                <span id="change-7d" class="ml-1">0.00%</span>
-                            </div>
-                            <div class="flex items-center ml-2">
-                                <span>30d</span>
-                                <span id="change-30d" class="ml-1">0.00%</span>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400 mr-2">Max Supply:</span>
+                                <span class="text-btcz-gold font-medium" id="btcz-max-supply">0</span>
                             </div>
                         </div>
                     </div>
@@ -837,6 +849,7 @@
         <!-- Scripts -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#000000">
+        <script src="{{ "js/supply-info.js" | relURL }}"></script>
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.1.0/css/flag-icons.min.css">
