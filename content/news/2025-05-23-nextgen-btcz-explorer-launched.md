@@ -1,6 +1,6 @@
 ---
 title: "NextGen BTCZ Explorer: Your New Favorite Blockchain Tool"
-date: 2025-05-23
+date: 2025-05-23T14:25:00+01:00
 description: "Discover the new NextGen BTCZ Explorer - a modern, user-friendly tool for exploring the BitcoinZ blockchain with real-time updates and interactive analytics."
 image: "/images/news/explorer/image1.png"
 draft: false
