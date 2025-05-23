@@ -2,7 +2,7 @@
 title: "NextGen BTCZ Explorer: Your New Favorite Blockchain Tool"
 date: 2025-05-23T14:25:00+01:00
 description: "Discover the new NextGen BTCZ Explorer - a modern, user-friendly tool for exploring the BitcoinZ blockchain with real-time updates and interactive analytics."
-image: "/images/news/explorer/image1.png"
+image: "images/news/explorer/main.png"
 draft: false
 author: "BitcoinZ Team"
 categories: ["Update"]
@@ -25,7 +25,7 @@ It's a modern web application that gives you complete visibility into the Bitcoi
 * **Price tracking** - Check the latest BitcoinZ prices directly from CoinMarketCap
 * **Lightning-fast search** - Find anything on the blockchain in seconds
 
-![Explorer Interface](/images/news/explorer/image1.png)
+![Explorer Interface](images/news/explorer/interface.png)
 
 ## Core Features That Make It Special
 
@@ -35,12 +35,12 @@ The explorer provides full details on every aspect of the blockchain, making it 
 ### Powerful Analytics
 Interactive charts help you visualize trends and patterns in the BitcoinZ network, perfect for miners who want to optimize their operations or investors tracking network growth.
 
-![Analytics Dashboard](/images/news/explorer/image3.png)
+![Analytics Dashboard](images/news/explorer/analytics.png)
 
 ### Real-Time Updates
 Thanks to socket.io integration, you'll see new blocks and transactions as they happen - no more refreshing the page to get the latest information.
 
-![Blocks List](/images/news/explorer/image4.png)
+![Blocks List](images/news/explorer/blocks_list.png)
 
 ### User-Friendly Design
 With a clean, modern interface built on React and Tailwind CSS, the explorer is intuitive and accessible for everyone, regardless of technical expertise.
@@ -62,7 +62,7 @@ The NextGen BTCZ Explorer leverages modern technologies to deliver a seamless ex
 
 One of the standout features is the wealth distribution analysis, which provides insights into how BitcoinZ is distributed across addresses. This promotes transparency and helps the community understand the ecosystem better.
 
-![Wealth Distribution](/images/news/explorer/image2.png)
+![Wealth Distribution](images/news/explorer/wealth_distribution.png)
 
 ## Developer Resources
 

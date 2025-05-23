@@ -2,7 +2,7 @@
 title: "Enhanced BitcoinZ Mining Calculator Launched"
 date: 2025-05-23
 description: "BitcoinZ Community launches enhanced Mining Profitability Calculator with multiple GPU support and visual profit indicators."
-image: "/images/news/mining-calculator/main.png"
+image: "images/news/mining-calculator/main.png"
 draft: false
 author: "BitcoinZ Team"
 categories: ["Update"]
@@ -26,7 +26,7 @@ The new BitcoinZ Mining Calculator includes several important improvements:
 * **Detailed Breakdown** - See comprehensive analysis of revenue, costs, and net profit
 * **Break-even Analysis** - Calculate ROI period and break-even BTCZ price
 
-![Multiple GPU Selection](/images/news/mining-calculator/multiple-gpu.png)
+![Multiple GPU Selection](images/news/mining-calculator/multiple-gpu.png)
 
 ## Why This Matters for Miners
 
@@ -34,7 +34,7 @@ Mining profitability can fluctuate based on many factors including electricity c
 
 The calculator provides daily, weekly, and monthly projections based on current network difficulty, hashrate, and BTCZ price, giving miners all the information they need to make informed decisions.
 
-![Profit Breakdown](/images/news/mining-calculator/profit-breakdown.png)
+![Profit Breakdown](images/news/mining-calculator/profit-breakdown.png)
 
 ## Try It Today
 
