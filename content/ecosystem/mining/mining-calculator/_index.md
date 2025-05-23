@@ -9,21 +9,26 @@ layout: "mining-single"
 {{< rawhtml >}}
 
 <div class="mining-calculator-container">
-    <h1 class="text-3xl font-bold mb-6">BitcoinZ Mining Profitability Calculator</h1>
+    <div class="quote-container bg-gradient-to-r from-btcz-gray-800 to-btcz-gray-900 p-6 rounded-lg mb-6 border-l-4 border-btcz-gold shadow-lg">
+        <p class="text-lg md:text-xl italic text-gray-300 leading-relaxed"><span class="text-btcz-gold font-semibold">BTCZ Mining:</span> Profitability ebbs and flows, but true miners build for the surge. It's not just about cash-out, it's about the long game.</p>
+        <div class="mt-2 text-right">
+            <span class="text-sm text-gray-400">— BitcoinZ Community</span>
+        </div>
+    </div>
     
     <div class="network-stats bg-btcz-gray-800 p-4 rounded-lg mb-6">
-        <h2 class="text-xl font-semibold mb-3">Current Network Statistics</h2>
+        <h2 class="text-xl font-semibold mb-3 text-btcz-gold">Current Network Statistics</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="stat-card p-3 bg-btcz-gray-700 rounded-lg">
-                <div class="text-sm text-gray-400">Network Difficulty</div>
+            <div class="stat-card p-4 bg-btcz-gray-700 rounded-lg border border-btcz-gray-600 hover:border-btcz-gold transition-colors">
+                <div class="text-sm text-gray-400 mb-1">Network Difficulty</div>
                 <div id="networkDifficulty" class="text-lg font-bold">Loading...</div>
             </div>
-            <div class="stat-card p-3 bg-btcz-gray-700 rounded-lg">
-                <div class="text-sm text-gray-400">Network Hashrate</div>
+            <div class="stat-card p-4 bg-btcz-gray-700 rounded-lg border border-btcz-gray-600 hover:border-btcz-gold transition-colors">
+                <div class="text-sm text-gray-400 mb-1">Network Hashrate</div>
                 <div id="networkHashrate" class="text-lg font-bold">Loading...</div>
             </div>
-            <div class="stat-card p-3 bg-btcz-gray-700 rounded-lg">
-                <div class="text-sm text-gray-400">BTCZ Price (USD)</div>
+            <div class="stat-card p-4 bg-btcz-gray-700 rounded-lg border border-btcz-gray-600 hover:border-btcz-gold transition-colors">
+                <div class="text-sm text-gray-400 mb-1">BTCZ Price (USD)</div>
                 <div id="btczPrice" class="text-lg font-bold">Loading...</div>
             </div>
         </div>
@@ -95,7 +100,7 @@ layout: "mining-single"
                     </div>
                     <div>
                         <div class="text-sm">USD:</div>
-                        <div id="dailyUSD" class="text-lg font-bold">$0.00</div>
+                        <div id="dailyUSD" class="text-lg font-bold rounded px-2 py-1 text-white" style="background-color: #e53e3e;">$0.00</div>
                     </div>
                 </div>
             </div>
@@ -109,7 +114,7 @@ layout: "mining-single"
                     </div>
                     <div>
                         <div class="text-sm">USD:</div>
-                        <div id="weeklyUSD" class="text-lg font-bold">$0.00</div>
+                        <div id="weeklyUSD" class="text-lg font-bold rounded px-2 py-1 text-white" style="background-color: #e53e3e;">$0.00</div>
                     </div>
                 </div>
             </div>
@@ -123,7 +128,7 @@ layout: "mining-single"
                     </div>
                     <div>
                         <div class="text-sm">USD:</div>
-                        <div id="monthlyUSD" class="text-lg font-bold">$0.00</div>
+                        <div id="monthlyUSD" class="text-lg font-bold rounded px-2 py-1 text-white" style="background-color: #e53e3e;">$0.00</div>
                     </div>
                 </div>
             </div>
@@ -148,7 +153,7 @@ layout: "mining-single"
                     </div>
                     <div class="flex justify-between py-2">
                         <span>Net Profit:</span>
-                        <span id="dailyNetProfit" class="font-semibold">$0.00</span>
+                        <span id="dailyNetProfit" class="font-semibold rounded px-2 py-1 text-white" style="background-color: #e53e3e;">$0.00</span>
                     </div>
                 </div>
                 
@@ -183,6 +188,8 @@ layout: "mining-single"
     </div>
 </div>
 
+<style>
+.nav-button {
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -193,93 +200,47 @@ layout: "mining-single"
     background: #0056b3;
     text-decoration: none;
 }
-
-.mining-calculator {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.calculator-section {
-    margin-bottom: 2rem;
-}
-
-.input-group {
-    margin-bottom: 1.5rem;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.results {
-    margin-top: 2rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.result-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.result-item:last-child {
-    border-bottom: none;
-}
-
-.network-info {
-    margin-top: 2rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.info-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-}
 </style>
 
 <script>
 // GPU data from the provided list
 const gpuData = {
-    "GeForce RTX 4080": { hashrate: 188.00, power: 240, price: 1498.07 },
-    "GeForce RTX 4070 Ti": { hashrate: 135.00, power: 160, price: 909.03 },
-    "GeForce RTX 4080 Super": { hashrate: 185.00, power: 240, price: 1099.99 },
-    "GeForce RTX 4070": { hashrate: 105.00, power: 130, price: 589.99 },
-    "GeForce RTX 4070 Super": { hashrate: 133.00, power: 180, price: 847.13 },
-    "GeForce RTX 4090": { hashrate: 180.00, power: 260, price: 2153.94 },
-    "GeForce RTX 4070 Ti Super": { hashrate: 140.00, power: 200, price: 1701.19 },
-    "GeForce RTX 4060 Ti": { hashrate: 90.00, power: 130, price: 599.99 },
-    "Radeon RX 7900 XTX": { hashrate: 155.00, power: 230, price: 1152.89 },
-    "GeForce RTX 4060": { hashrate: 70.00, power: 110, price: 351.99 },
-    "Radeon RX 6600 XT": { hashrate: 40.00, power: 70, price: 439.99 },
-    "Radeon RX 6600": { hashrate: 38.00, power: 70, price: 269.99 },
-    "GeForce RTX 3070 Ti": { hashrate: 110.00, power: 180, price: 871.20 },
-    "Radeon RX 6800 XT": { hashrate: 93.00, power: 160, price: 639.99 },
-    "Radeon RX 6800": { hashrate: 93.00, power: 160, price: 834.37 },
-    "Radeon RX 6950 XT": { hashrate: 90.00, power: 160, price: 999.99 },
-    "GeForce RTX 3070 LHR": { hashrate: 100.00, power: 180, price: 500.00 },
-    "GeForce RTX 3070": { hashrate: 100.00, power: 180, price: 500.00 },
-    "GeForce GTX 1660 Ti": { hashrate: 39.00, power: 90, price: 435.00 },
-    "Radeon RX 6700 XT": { hashrate: 57.00, power: 120, price: 943.93 }
+    // RTX 5000 Series (2025)
+    "GeForce RTX 5090": { hashrate: 280.00, power: 250, price: 1999.99 },
+    "GeForce RTX 5080": { hashrate: 240.00, power: 220, price: 1199.99 },
+    "GeForce RTX 5070 Ti": { hashrate: 210.00, power: 190, price: 899.99 },
+    "GeForce RTX 5070": { hashrate: 180.00, power: 170, price: 699.99 },
+    "GeForce RTX 5060 Ti": { hashrate: 150.00, power: 140, price: 499.99 },
+    "GeForce RTX 5060": { hashrate: 120.00, power: 120, price: 349.99 },
+    
+    // RTX 4000 Series (Updated prices 2025)
+    "GeForce RTX 4090": { hashrate: 180.00, power: 260, price: 1299.99 },
+    "GeForce RTX 4080 Super": { hashrate: 185.00, power: 240, price: 899.99 },
+    "GeForce RTX 4080": { hashrate: 188.00, power: 240, price: 799.99 },
+    "GeForce RTX 4070 Ti Super": { hashrate: 140.00, power: 200, price: 749.99 },
+    "GeForce RTX 4070 Ti": { hashrate: 135.00, power: 160, price: 649.99 },
+    "GeForce RTX 4070 Super": { hashrate: 133.00, power: 180, price: 599.99 },
+    "GeForce RTX 4070": { hashrate: 105.00, power: 130, price: 499.99 },
+    "GeForce RTX 4060 Ti": { hashrate: 90.00, power: 130, price: 349.99 },
+    "GeForce RTX 4060": { hashrate: 70.00, power: 110, price: 279.99 },
+    
+    // AMD 7000 Series (Updated prices 2025)
+    "Radeon RX 7900 XTX": { hashrate: 155.00, power: 230, price: 799.99 },
+    "Radeon RX 7900 XT": { hashrate: 140.00, power: 210, price: 699.99 },
+    "Radeon RX 7800 XT": { hashrate: 120.00, power: 180, price: 499.99 },
+    "Radeon RX 7700 XT": { hashrate: 100.00, power: 150, price: 399.99 },
+    "Radeon RX 7600": { hashrate: 70.00, power: 120, price: 249.99 },
+    
+    // Older models (discounted prices)
+    "Radeon RX 6950 XT": { hashrate: 90.00, power: 160, price: 399.99 },
+    "Radeon RX 6800 XT": { hashrate: 93.00, power: 160, price: 349.99 },
+    "Radeon RX 6800": { hashrate: 93.00, power: 160, price: 299.99 },
+    "Radeon RX 6700 XT": { hashrate: 57.00, power: 120, price: 249.99 },
+    "Radeon RX 6600 XT": { hashrate: 40.00, power: 70, price: 199.99 },
+    "Radeon RX 6600": { hashrate: 38.00, power: 70, price: 179.99 },
+    "GeForce RTX 3070 Ti": { hashrate: 110.00, power: 180, price: 329.99 },
+    "GeForce RTX 3070": { hashrate: 100.00, power: 180, price: 299.99 },
+    "GeForce GTX 1660 Ti": { hashrate: 39.00, power: 90, price: 179.99 }
 };
 
 // Network data and calculation variables
@@ -306,6 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Populate GPU comparison table
     populateGPUTable();
+    
+    // Trigger initial calculation
+    setTimeout(() => {
+        calculateProfits();
+    }, 1000);
     
     // Set up auto-refresh
     setInterval(fetchNetworkData, 300000); // Refresh every 5 minutes
@@ -395,10 +361,22 @@ function updateNetworkDataUI() {
 // Add event listeners
 function addEventListeners() {
     elements.calculateButton.addEventListener('click', calculateProfits);
-    elements.addGpuButton.addEventListener('click', addGpuSetup);
+    
+    // Make sure the Add GPU button works correctly
+    if (elements.addGpuButton) {
+        elements.addGpuButton.addEventListener('click', addGpuSetup);
+        console.log('Add GPU button listener attached');
+    } else {
+        console.error('Add GPU button not found');
+    }
     
     // Add event listener for the first GPU setup
-    setupGpuEventListeners(document.querySelector('.gpu-setup'));
+    const firstGpuSetup = document.querySelector('.gpu-setup');
+    if (firstGpuSetup) {
+        setupGpuEventListeners(firstGpuSetup);
+    } else {
+        console.error('First GPU setup not found');
+    }
     
     // Add event listeners for remove buttons
     document.querySelectorAll('.remove-gpu-btn').forEach(btn => {
@@ -594,11 +572,40 @@ function updateResultsUI(dailyBTCZ, dailyRevenueUSD, dailyPowerCostUSD, dailyPoo
                         weeklyBTCZ, weeklyUSD, monthlyBTCZ, monthlyUSD) {
     // Update BTCZ and USD values
     elements.dailyBTCZ.textContent = dailyBTCZ.toFixed(2);
-    elements.dailyUSD.textContent = `$${dailyNetProfitUSD.toFixed(2)}`;
     elements.weeklyBTCZ.textContent = weeklyBTCZ.toFixed(2);
-    elements.weeklyUSD.textContent = `$${weeklyUSD.toFixed(2)}`;
     elements.monthlyBTCZ.textContent = monthlyBTCZ.toFixed(2);
+    
+    // Update USD values with color coding
+    elements.dailyUSD.textContent = `$${dailyNetProfitUSD.toFixed(2)}`;
+    elements.weeklyUSD.textContent = `$${weeklyUSD.toFixed(2)}`;
     elements.monthlyUSD.textContent = `$${monthlyUSD.toFixed(2)}`;
+    
+    // Add color coding for USD profit/loss values
+    if (dailyNetProfitUSD > 0) {
+        // Daily profit - green
+        elements.dailyUSD.style.backgroundColor = '#059669'; // green-600
+        
+        // Weekly profit - green
+        elements.weeklyUSD.style.backgroundColor = '#059669'; // green-600
+        
+        // Monthly profit - green
+        elements.monthlyUSD.style.backgroundColor = '#059669'; // green-600
+        
+        // Net profit in breakdown - green
+        elements.dailyNetProfit.style.backgroundColor = '#059669'; // green-600
+    } else {
+        // Daily profit - red
+        elements.dailyUSD.style.backgroundColor = '#dc2626'; // red-600
+        
+        // Weekly profit - red
+        elements.weeklyUSD.style.backgroundColor = '#dc2626'; // red-600
+        
+        // Monthly profit - red
+        elements.monthlyUSD.style.backgroundColor = '#dc2626'; // red-600
+        
+        // Net profit in breakdown - red
+        elements.dailyNetProfit.style.backgroundColor = '#dc2626'; // red-600
+    }
     
     // Update profit breakdown
     elements.dailyRevenue.textContent = `$${dailyRevenueUSD.toFixed(2)}`;
