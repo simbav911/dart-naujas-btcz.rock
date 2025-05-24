@@ -51,16 +51,42 @@ const elements = {};
 
 // Initialize the calculator
 document.addEventListener('DOMContentLoaded', () => {
+    // Wait a bit to ensure DOM is fully loaded
+    setTimeout(() => {
+        initializeMiningCalculator();
+    }, 300);
+});
+
+// Function to initialize the mining calculator
+function initializeMiningCalculator() {
+    console.log('Attempting to initialize mining calculator...');
+    
     // Cache DOM elements
     cacheElements();
     
     // Check if we're on the mining calculator page by looking for key elements
-    const isCalculatorPage = document.getElementById('gpuSetupContainer') || 
-                            document.getElementById('networkDifficulty');
+    // Use multiple potential selectors for more robust detection
+    const calculatorSelectors = [
+        '#gpuSetupContainer', 
+        '#networkDifficulty',
+        '.mining-calculator-container',
+        '.calculator-form',
+        '#calculateButton'
+    ];
+    
+    const isCalculatorPage = calculatorSelectors.some(selector => 
+        document.querySelector(selector) !== null
+    );
     
     // Only proceed with initialization if we're on the calculator page
     if (isCalculatorPage) {
         console.log('Mining calculator page detected, initializing calculator');
+        
+        // Ensure all necessary elements are cached
+        if (Object.keys(elements).length === 0) {
+            console.log('Re-caching elements...');
+            cacheElements();
+        }
         
         // Fetch network data
         fetchNetworkData();
@@ -80,46 +106,57 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(fetchNetworkData, 300000); // Refresh every 5 minutes
     } else {
         console.log('Not on mining calculator page, skipping initialization');
+        
+        // If we're not on the calculator page but the URL contains mining-calculator,
+        // it's possible the elements haven't loaded yet, so retry after a delay
+        if (window.location.href.includes('mining-calculator')) {
+            console.log('URL suggests mining calculator page, will retry initialization in 1 second');
+            setTimeout(initializeMiningCalculator, 1000);
+        }
     }
-});
+}
 
 // Cache DOM elements for better performance
 function cacheElements() {
     try {
-        // Main calculator elements
-        elements.gpuSetupContainer = document.getElementById('gpuSetupContainer');
-        elements.addGpuButton = document.getElementById('addGpuButton');
-        elements.powerCost = document.getElementById('powerCost');
-        elements.poolFee = document.getElementById('poolFee');
-        elements.calculateButton = document.getElementById('calculateButton');
+        // List of element IDs to cache
+        const elementIds = [
+            // Main calculator elements
+            'gpuSetupContainer', 'addGpuButton', 'powerCost', 'poolFee', 'calculateButton',
+            // Network stats elements
+            'networkDifficulty', 'networkHashrate', 'btczPrice',
+            // Results elements
+            'dailyBTCZ', 'dailyUSD', 'weeklyBTCZ', 'weeklyUSD', 'monthlyBTCZ', 'monthlyUSD',
+            // Profit breakdown elements
+            'dailyRevenue', 'dailyPowerCost', 'dailyPoolFees', 'dailyNetProfit',
+            // Break-even elements
+            'breakEvenTime', 'breakEvenPrice',
+            // GPU table
+            'gpuTableBody'
+        ];
         
-        // Network stats elements
-        elements.networkDifficulty = document.getElementById('networkDifficulty');
-        elements.networkHashrate = document.getElementById('networkHashrate');
-        elements.btczPrice = document.getElementById('btczPrice');
+        // Cache each element, tracking how many were found
+        let foundCount = 0;
+        elementIds.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                elements[id] = element;
+                foundCount++;
+            }
+        });
         
-        // Results elements
-        elements.dailyBTCZ = document.getElementById('dailyBTCZ');
-        elements.dailyUSD = document.getElementById('dailyUSD');
-        elements.weeklyBTCZ = document.getElementById('weeklyBTCZ');
-        elements.weeklyUSD = document.getElementById('weeklyUSD');
-        elements.monthlyBTCZ = document.getElementById('monthlyBTCZ');
-        elements.monthlyUSD = document.getElementById('monthlyUSD');
+        console.log(`Successfully cached ${foundCount}/${elementIds.length} DOM elements`);
         
-        // Profit breakdown elements
-        elements.dailyRevenue = document.getElementById('dailyRevenue');
-        elements.dailyPowerCost = document.getElementById('dailyPowerCost');
-        elements.dailyPoolFees = document.getElementById('dailyPoolFees');
-        elements.dailyNetProfit = document.getElementById('dailyNetProfit');
+        // If we found at least some elements but not all, that's probably okay
+        // We may be on a page that only has some of the calculator functionality
+        if (foundCount > 0 && foundCount < elementIds.length / 2) {
+            console.warn('Some mining calculator elements were not found, but will continue with partial functionality');
+        }
         
-        // Break-even elements
-        elements.breakEvenTime = document.getElementById('breakEvenTime');
-        elements.breakEvenPrice = document.getElementById('breakEvenPrice');
-        
-        // GPU table
-        elements.gpuTableBody = document.getElementById('gpuTableBody');
+        return foundCount > 0; // Return true if we found at least one element
     } catch (error) {
         console.error('Error caching DOM elements:', error);
+        return false;
     }
 }
 
@@ -339,51 +376,21 @@ function setupGpuEventListeners(gpuSetup) {
     gpuSetup.querySelector('.gpu-count').addEventListener('change', calculateProfits);
 }
 
-// Calculate mining profits
-function calculateProfits() {
-    // Get global input values
-    const powerCost = parseFloat(elements.powerCost.value) || 0.1;
-    const poolFeePercent = parseFloat(elements.poolFee.value) || 1;
+// Function to calculate profits with default values (fallback when elements are missing)
+function calculateWithDefaultValues(powerCost, poolFeePercent) {
+    console.log('Using default values for mining calculator');
     
-    // Get all GPU setups
-    const gpuSetups = document.querySelectorAll('.gpu-setup');
-    
-    // Initialize totals
-    let totalHashrate = 0;
-    let totalPowerConsumption = 0;
-    let totalInvestment = 0;
-    
-    // Calculate totals from all GPU setups
-    gpuSetups.forEach(setup => {
-        const gpuSelect = setup.querySelector('.gpu-select');
-        const gpuCount = parseInt(setup.querySelector('.gpu-count').value) || 1;
-        const selectedGPU = gpuSelect.value;
-        
-        let setupHashrate, setupPowerConsumption, setupInvestment;
-        
-        if (selectedGPU === 'custom') {
-            setupHashrate = parseFloat(setup.querySelector('.custom-hashrate').value) || 100;
-            setupPowerConsumption = parseFloat(setup.querySelector('.power-consumption').value) || 150;
-            setupInvestment = 0; // No investment calculation for custom setup
-        } else {
-            setupHashrate = gpuData[selectedGPU].hashrate;
-            setupPowerConsumption = gpuData[selectedGPU].power;
-            setupInvestment = gpuData[selectedGPU].price;
-        }
-        
-        // Add to totals
-        totalHashrate += setupHashrate * gpuCount;
-        totalPowerConsumption += setupPowerConsumption * gpuCount;
-        totalInvestment += setupInvestment * gpuCount;
-    });
+    // Default values for calculation
+    const defaultHashrate = 100; // Sol/s
+    const defaultPowerConsumption = 150; // Watts
     
     // Calculate daily power cost in USD
-    const dailyPowerCostUSD = (totalPowerConsumption * 24 * powerCost) / 1000;
+    const dailyPowerCostUSD = (defaultPowerConsumption * 24 * powerCost) / 1000;
     
     // Calculate daily BTCZ mined
     const blocksPerDay = 24 * 60 * 60 / 150;
     const blockReward = 12500;
-    const dailyBTCZ = (totalHashrate / networkData.networkHashrate) * blocksPerDay * blockReward;
+    const dailyBTCZ = (defaultHashrate / networkData.networkHashrate) * blocksPerDay * blockReward;
     
     // Calculate weekly and monthly BTCZ
     const weeklyBTCZ = dailyBTCZ * 7;
@@ -403,12 +410,127 @@ function calculateProfits() {
     // Update UI with calculated values
     updateResultsUI(
         dailyBTCZ, dailyRevenueUSD, dailyPowerCostUSD, dailyPoolFeesUSD, dailyNetProfitUSD,
-        weeklyBTCZ, weeklyUSD * 7, monthlyBTCZ, monthlyUSD * 30
+        weeklyBTCZ, weeklyUSD, monthlyBTCZ, monthlyUSD
     );
     
-    // Calculate break-even time if investment is available
-    if (totalInvestment > 0) {
+    // Calculate break-even time (ROI)
+    // We're using a default investment of $500 for this calculation
+    calculateBreakEven(500, dailyNetProfitUSD);
+}
+
+// Calculate mining profits
+function calculateProfits() {
+    try {
+        console.log('Calculating mining profits...');
+        
+        // Get global input values with safe defaults
+        const powerCost = elements.powerCost ? parseFloat(elements.powerCost.value) || 0.1 : 0.1;
+        const poolFeePercent = elements.poolFee ? parseFloat(elements.poolFee.value) || 1 : 1;
+        
+        // Get all GPU setups
+        const gpuSetups = document.querySelectorAll('.gpu-setup');
+        
+        // If no GPU setups are found, try to use default values
+        if (!gpuSetups || gpuSetups.length === 0) {
+            console.warn('No GPU setups found, using default values for calculation');
+            // Use a predefined default setup for calculations
+            calculateWithDefaultValues(powerCost, poolFeePercent);
+            return;
+        }
+        
+        // Initialize totals
+        let totalHashrate = 0;
+        let totalPowerConsumption = 0;
+        let totalInvestment = 0;
+        
+        // Calculate totals from all GPU setups
+        gpuSetups.forEach(setup => {
+            try {
+                const gpuSelect = setup.querySelector('.gpu-select');
+                if (!gpuSelect) {
+                    console.warn('GPU select not found in setup, skipping');
+                    return;
+                }
+                
+                const gpuCountElement = setup.querySelector('.gpu-count');
+                const gpuCount = gpuCountElement ? (parseInt(gpuCountElement.value) || 1) : 1;
+                const selectedGPU = gpuSelect.value;
+                
+                let setupHashrate, setupPowerConsumption, setupInvestment;
+                
+                if (selectedGPU === 'custom') {
+                    const customHashrateElement = setup.querySelector('.custom-hashrate');
+                    const powerConsumptionElement = setup.querySelector('.power-consumption');
+                    
+                    setupHashrate = customHashrateElement ? (parseFloat(customHashrateElement.value) || 100) : 100;
+                    setupPowerConsumption = powerConsumptionElement ? (parseFloat(powerConsumptionElement.value) || 150) : 150;
+                    setupInvestment = 0; // No investment calculation for custom setup
+                } else if (gpuData[selectedGPU]) {
+                    setupHashrate = gpuData[selectedGPU].hashrate;
+                    setupPowerConsumption = gpuData[selectedGPU].power;
+                    setupInvestment = gpuData[selectedGPU].price;
+                } else {
+                    // Fallback to default values if GPU data is missing
+                    console.warn(`GPU data not found for ${selectedGPU}, using defaults`);
+                    setupHashrate = 100;
+                    setupPowerConsumption = 150;
+                    setupInvestment = 500;
+                }
+                
+                // Add to totals
+                totalHashrate += setupHashrate * gpuCount;
+                totalPowerConsumption += setupPowerConsumption * gpuCount;
+                totalInvestment += setupInvestment * gpuCount;
+            } catch (setupError) {
+                console.error('Error processing GPU setup:', setupError);
+                // Continue with other setups
+            }
+        });
+        
+        // If we ended up with no hashrate (due to errors), use default values
+        if (totalHashrate <= 0) {
+            console.warn('No valid hashrate calculated, using default values');
+            calculateWithDefaultValues(powerCost, poolFeePercent);
+            return;
+        }
+        
+        // Calculate daily power cost in USD
+        const dailyPowerCostUSD = (totalPowerConsumption * 24 * powerCost) / 1000;
+        
+        // Calculate daily BTCZ mined
+        const blocksPerDay = 24 * 60 * 60 / 150;
+        const blockReward = 12500;
+        const dailyBTCZ = (totalHashrate / networkData.networkHashrate) * blocksPerDay * blockReward;
+        
+        // Calculate weekly and monthly BTCZ
+        const weeklyBTCZ = dailyBTCZ * 7;
+        const monthlyBTCZ = dailyBTCZ * 30;
+        
+        // Calculate revenue
+        const dailyRevenueUSD = dailyBTCZ * networkData.btczPriceUSD;
+        const weeklyUSD = weeklyBTCZ * networkData.btczPriceUSD;
+        const monthlyUSD = monthlyBTCZ * networkData.btczPriceUSD;
+        
+        // Calculate pool fees
+        const dailyPoolFeesUSD = dailyRevenueUSD * (poolFeePercent / 100);
+        
+        // Calculate net profit
+        const dailyNetProfitUSD = dailyRevenueUSD - dailyPowerCostUSD - dailyPoolFeesUSD;
+        
+        // Update UI with calculated values
+        updateResultsUI(
+            dailyBTCZ, dailyRevenueUSD, dailyPowerCostUSD, dailyPoolFeesUSD, dailyNetProfitUSD,
+            weeklyBTCZ, weeklyUSD, monthlyBTCZ, monthlyUSD
+        );
+        
+        // Calculate break-even time (ROI)
         calculateBreakEven(totalInvestment, dailyNetProfitUSD);
+    } catch (error) {
+        console.error('Error calculating mining profits:', error);
+        // Use default values as fallback
+        const powerCost = elements.powerCost ? parseFloat(elements.powerCost.value) || 0.1 : 0.1;
+        const poolFeePercent = elements.poolFee ? parseFloat(elements.poolFee.value) || 1 : 1;
+        calculateWithDefaultValues(powerCost, poolFeePercent);
     }
 }
 
