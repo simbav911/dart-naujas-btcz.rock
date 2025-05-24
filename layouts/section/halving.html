@@ -11,19 +11,19 @@
         <!-- Key Information -->
         <div class="key-info">
             <h3>Halving Countdown</h3>
-            <div class="info-grid">
+            <div class="countdown-grid">
                 <div class="info-item">
-                    <h4>Estimated Halving Block</h4>
+                    <h4>Halving Block</h4>
                     <p>1,680,000</p>
                 </div>
                 <div class="info-item">
                     <h4>Current Block</h4>
-                    <p>1,558,521</p>
-                    <small>as of May 10, 2025 10:53:54 PM</small>
+                    <p id="current-block">0</p>
+                    <small id="block-update-status">updating...</small>
                 </div>
                 <div class="info-item">
                     <h4>Blocks Remaining</h4>
-                    <p>~121,479</p>
+                    <p id="blocks-remaining">0</p>
                 </div>
                 <div class="info-item">
                     <h4>Block Time</h4>
@@ -745,41 +745,92 @@
             renderer.render(scene, camera);
         }
 
-        // Update countdown timer based on block calculation
+        // Store global state for the countdown
+        const halvingState = {
+            halvingBlock: 1680000,
+            blockTimeInSeconds: 2.5 * 60, // 2.5 minutes in seconds
+            currentBlock: 0,
+            remainingBlocks: 0,
+            lastFetchTime: 0
+        };
+
+        // Update countdown timer based on real-time block data from API
         function updateCountdown() {
-            // Known reference point
+            // Fetch the latest block from the API
+            fetch('https://explorer.getbtcz.com/api/blocks/latest')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Get the current block height from the API response
+                    halvingState.currentBlock = data.height;
+                    
+                    // Calculate remaining blocks to halving
+                    halvingState.remainingBlocks = halvingState.halvingBlock - halvingState.currentBlock;
+                    
+                    // Update last fetch time
+                    halvingState.lastFetchTime = Date.now();
+                    
+                    // Update UI with real block data
+                    updateUI();
+                    
+                    console.log('Updated with real block data:', halvingState.currentBlock);
+                })
+                .catch(error => {
+                    console.error('Error fetching block data:', error);
+                    // Fallback to estimation if API fails
+                    fallbackEstimation();
+                });
+        }
+
+        // Fallback to estimation if API fails
+        function fallbackEstimation() {
+            // Known reference point for fallback
             const knownBlock = 1558521;
             const knownBlockDate = new Date('May 10, 2025 22:53:54').getTime();
-            const halvingBlock = 1680000;
-            const blocksRemaining = halvingBlock - knownBlock;
-            const blockTimeInSeconds = 2.5 * 60; // 2.5 minutes in seconds
-
+            
             // Calculate time elapsed since the known block date
             const now = new Date().getTime();
             const timeElapsedMs = now - knownBlockDate;
             const timeElapsedSeconds = timeElapsedMs / 1000;
 
             // Calculate estimated blocks mined since the known date
-            const estimatedBlocksMined = Math.floor(timeElapsedSeconds / blockTimeInSeconds);
+            const estimatedBlocksMined = Math.floor(timeElapsedSeconds / halvingState.blockTimeInSeconds);
 
             // Calculate current block and remaining blocks
-            const currentBlock = knownBlock + estimatedBlocksMined;
-            const remainingBlocks = halvingBlock - currentBlock;
+            halvingState.currentBlock = knownBlock + estimatedBlocksMined;
+            halvingState.remainingBlocks = halvingState.halvingBlock - halvingState.currentBlock;
+            
+            // Update last fetch time
+            halvingState.lastFetchTime = Date.now();
+            
+            // Update UI with estimated data
+            updateUI();
+            
+            console.log('Updated with estimated block data:', halvingState.currentBlock);
+        }
+
+        // Update UI elements with block data
+        function updateUI() {
 
             // Update current block display if element exists
             const currentBlockElement = document.querySelector('.info-item:nth-child(2) p');
             if (currentBlockElement) {
-                currentBlockElement.textContent = currentBlock.toLocaleString();
+                currentBlockElement.textContent = halvingState.currentBlock.toLocaleString();
             }
 
             // Update blocks remaining display if element exists
             const blocksRemainingElement = document.querySelector('.info-item:nth-child(3) p');
             if (blocksRemainingElement) {
-                blocksRemainingElement.textContent = '~' + remainingBlocks.toLocaleString();
+                // Real data from API so no need for ~ approximation
+                blocksRemainingElement.textContent = halvingState.remainingBlocks.toLocaleString();
             }
 
             // Calculate time remaining in seconds
-            const timeRemainingSeconds = remainingBlocks * blockTimeInSeconds;
+            const timeRemainingSeconds = halvingState.remainingBlocks * halvingState.blockTimeInSeconds;
 
             // Convert to days, hours, minutes, seconds
             const days = Math.floor(timeRemainingSeconds / (24 * 60 * 60));
@@ -787,11 +838,11 @@
             const minutes = Math.floor((timeRemainingSeconds % (60 * 60)) / 60);
             const seconds = Math.floor(timeRemainingSeconds % 60);
 
-            // Update countdown display
+            // Update countdown display with leading zeros for better readability
             document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
+            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
 
             // Update timestamp
             const currentTimeElement = document.querySelector('.info-item:nth-child(2) small');
@@ -810,6 +861,7 @@
             // Calculate and update estimated halving date
             const halvingDateElement = document.querySelector('.info-item:nth-child(5) p');
             if (halvingDateElement) {
+                const now = new Date().getTime();
                 const estimatedHalvingDate = new Date(now + (timeRemainingSeconds * 1000));
                 const dateOptions = {
                     year: 'numeric',
@@ -819,38 +871,30 @@
                 halvingDateElement.textContent = estimatedHalvingDate.toLocaleDateString(undefined, dateOptions);
             }
 
-            // Store the halving time for continuous countdown
-            window.halvingTimeInSeconds = timeRemainingSeconds;
-            window.lastUpdateTime = Date.now();
         }
 
-        // Start the countdown
+        // Initialize the countdown
         updateCountdown();
         
-        // Update the block calculation every 2.5 minutes to keep it accurate
-        setInterval(updateCountdown, 2.5 * 60 * 1000);
+        // Update the real block data from API every minute
+        setInterval(updateCountdown, 60000);
         
-        // Update the display every second for a continuous countdown
+        // Update the visual countdown every second (without API calls)
         setInterval(function() {
-            if (window.halvingTimeInSeconds) {
-                // Calculate elapsed time since last update
+            if (halvingState.lastFetchTime > 0) {
+                // Calculate how many blocks may have been mined since the last API fetch
                 const now = Date.now();
-                const elapsedSeconds = (now - window.lastUpdateTime) / 1000;
+                const secondsSinceLastFetch = (now - halvingState.lastFetchTime) / 1000;
+                const estimatedNewBlocks = Math.floor(secondsSinceLastFetch / halvingState.blockTimeInSeconds);
                 
-                // Calculate current remaining time
-                const currentRemainingTime = Math.max(0, window.halvingTimeInSeconds - elapsedSeconds);
+                if (estimatedNewBlocks > 0) {
+                    // Update the estimated current block and remaining blocks
+                    const estimatedCurrentBlock = halvingState.currentBlock + estimatedNewBlocks;
+                    halvingState.remainingBlocks = halvingState.halvingBlock - estimatedCurrentBlock;
+                }
                 
-                // Convert to days, hours, minutes, seconds
-                const days = Math.floor(currentRemainingTime / (24 * 60 * 60));
-                const hours = Math.floor((currentRemainingTime % (24 * 60 * 60)) / (60 * 60));
-                const minutes = Math.floor((currentRemainingTime % (60 * 60)) / 60);
-                const seconds = Math.floor(currentRemainingTime % 60);
-                
-                // Update countdown display with leading zeros for better readability
-                document.getElementById('days').textContent = days;
-                document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+                // Update the UI with the latest estimates
+                updateUI();
             }
         }, 1000);
         
