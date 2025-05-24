@@ -26,3 +26,10 @@
     </div>
 </div>
 {{ end }}
+
+{{ define "scripts" }}
+<!-- Include mining calculator script only on mining calculator pages -->
+{{ if eq .Page.File.Path "ecosystem/mining/mining-calculator/_index.md" }}
+<script defer src="{{ "js/mining-calculator.js" | relURL }}"></script>
+{{ end }}
+{{ end }}
