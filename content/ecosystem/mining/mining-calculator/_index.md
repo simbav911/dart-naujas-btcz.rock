@@ -202,6 +202,6 @@ layout: "mining-single"
 }
 </style>
 
-<script src="/js/mining-calculator.js"></script>
+<!-- Script is already loaded in the layout template -->
 
 {{< /rawhtml >}}
