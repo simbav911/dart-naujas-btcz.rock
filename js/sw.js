@@ -1,5 +1,5 @@
 // BitcoinZ Service Worker
-const CACHE_NAME = 'btcz-cache-v1';
+const CACHE_NAME = 'btcz-cache-v2'; // Updated cache version
 const urlsToCache = [
   '/',
   '/index.html',
@@ -10,13 +10,23 @@ const urlsToCache = [
   '/images/logo.png'
 ];
 
-// Install event - cache essential files
+// Install event - cache essential files with improved error handling
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        // Use individual cache.add() operations instead of cache.addAll()
+        // This way, if one resource fails, others can still be cached
+        return Promise.allSettled(
+          urlsToCache.map(url => 
+            cache.add(url).catch(error => {
+              console.warn(`Failed to cache ${url}: ${error.message}`);
+              // Continue despite the error
+              return Promise.resolve();
+            })
+          )
+        );
       })
   );
 });
