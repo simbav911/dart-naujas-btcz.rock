@@ -54,57 +54,73 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cache DOM elements
     cacheElements();
     
-    // Fetch network data
-    fetchNetworkData();
+    // Check if we're on the mining calculator page by looking for key elements
+    const isCalculatorPage = document.getElementById('gpuSetupContainer') || 
+                            document.getElementById('networkDifficulty');
     
-    // Add event listeners
-    addEventListeners();
-    
-    // Populate GPU comparison table
-    populateGPUTable();
-    
-    // Trigger initial calculation
-    setTimeout(() => {
-        calculateProfits();
-    }, 1000);
-    
-    // Set up auto-refresh
-    setInterval(fetchNetworkData, 300000); // Refresh every 5 minutes
+    // Only proceed with initialization if we're on the calculator page
+    if (isCalculatorPage) {
+        console.log('Mining calculator page detected, initializing calculator');
+        
+        // Fetch network data
+        fetchNetworkData();
+        
+        // Add event listeners
+        addEventListeners();
+        
+        // Populate GPU comparison table
+        populateGPUTable();
+        
+        // Trigger initial calculation
+        setTimeout(() => {
+            calculateProfits();
+        }, 1000);
+        
+        // Set up auto-refresh
+        setInterval(fetchNetworkData, 300000); // Refresh every 5 minutes
+    } else {
+        console.log('Not on mining calculator page, skipping initialization');
+    }
 });
 
 // Cache DOM elements for better performance
 function cacheElements() {
-    elements.gpuSetupContainer = document.getElementById('gpuSetupContainer');
-    elements.addGpuButton = document.getElementById('addGpuButton');
-    elements.powerCost = document.getElementById('powerCost');
-    elements.poolFee = document.getElementById('poolFee');
-    elements.calculateButton = document.getElementById('calculateButton');
-    
-    // Network stats elements
-    elements.networkDifficulty = document.getElementById('networkDifficulty');
-    elements.networkHashrate = document.getElementById('networkHashrate');
-    elements.btczPrice = document.getElementById('btczPrice');
-    
-    // Results elements
-    elements.dailyBTCZ = document.getElementById('dailyBTCZ');
-    elements.dailyUSD = document.getElementById('dailyUSD');
-    elements.weeklyBTCZ = document.getElementById('weeklyBTCZ');
-    elements.weeklyUSD = document.getElementById('weeklyUSD');
-    elements.monthlyBTCZ = document.getElementById('monthlyBTCZ');
-    elements.monthlyUSD = document.getElementById('monthlyUSD');
-    
-    // Profit breakdown elements
-    elements.dailyRevenue = document.getElementById('dailyRevenue');
-    elements.dailyPowerCost = document.getElementById('dailyPowerCost');
-    elements.dailyPoolFees = document.getElementById('dailyPoolFees');
-    elements.dailyNetProfit = document.getElementById('dailyNetProfit');
-    
-    // Break-even elements
-    elements.breakEvenTime = document.getElementById('breakEvenTime');
-    elements.breakEvenPrice = document.getElementById('breakEvenPrice');
-    
-    // GPU table
-    elements.gpuTableBody = document.getElementById('gpuTableBody');
+    try {
+        // Main calculator elements
+        elements.gpuSetupContainer = document.getElementById('gpuSetupContainer');
+        elements.addGpuButton = document.getElementById('addGpuButton');
+        elements.powerCost = document.getElementById('powerCost');
+        elements.poolFee = document.getElementById('poolFee');
+        elements.calculateButton = document.getElementById('calculateButton');
+        
+        // Network stats elements
+        elements.networkDifficulty = document.getElementById('networkDifficulty');
+        elements.networkHashrate = document.getElementById('networkHashrate');
+        elements.btczPrice = document.getElementById('btczPrice');
+        
+        // Results elements
+        elements.dailyBTCZ = document.getElementById('dailyBTCZ');
+        elements.dailyUSD = document.getElementById('dailyUSD');
+        elements.weeklyBTCZ = document.getElementById('weeklyBTCZ');
+        elements.weeklyUSD = document.getElementById('weeklyUSD');
+        elements.monthlyBTCZ = document.getElementById('monthlyBTCZ');
+        elements.monthlyUSD = document.getElementById('monthlyUSD');
+        
+        // Profit breakdown elements
+        elements.dailyRevenue = document.getElementById('dailyRevenue');
+        elements.dailyPowerCost = document.getElementById('dailyPowerCost');
+        elements.dailyPoolFees = document.getElementById('dailyPoolFees');
+        elements.dailyNetProfit = document.getElementById('dailyNetProfit');
+        
+        // Break-even elements
+        elements.breakEvenTime = document.getElementById('breakEvenTime');
+        elements.breakEvenPrice = document.getElementById('breakEvenPrice');
+        
+        // GPU table
+        elements.gpuTableBody = document.getElementById('gpuTableBody');
+    } catch (error) {
+        console.error('Error caching DOM elements:', error);
+    }
 }
 
 // Populate GPU select dropdown for a specific select element
@@ -179,14 +195,26 @@ async function fetchNetworkData() {
 
 // Update network data UI
 function updateNetworkDataUI() {
-    elements.networkDifficulty.textContent = networkData.difficulty.toFixed(2);
-    elements.networkHashrate.textContent = `${networkData.networkHashrate.toFixed(2)} Sol/s`;
-    elements.btczPrice.textContent = `$${networkData.btczPriceUSD.toFixed(8)} (${networkData.btczPrice24hChange > 0 ? '+' : ''}${networkData.btczPrice24hChange.toFixed(2)}%)`;
+    // Add null checks for each element
+    if (elements.networkDifficulty) {
+        elements.networkDifficulty.textContent = networkData.difficulty.toFixed(2);
+    }
+    
+    if (elements.networkHashrate) {
+        elements.networkHashrate.textContent = `${networkData.networkHashrate.toFixed(2)} Sol/s`;
+    }
+    
+    if (elements.btczPrice) {
+        elements.btczPrice.textContent = `$${networkData.btczPriceUSD.toFixed(8)} (${networkData.btczPrice24hChange > 0 ? '+' : ''}${networkData.btczPrice24hChange.toFixed(2)}%)`;
+    }
 }
 
 // Add event listeners
 function addEventListeners() {
-    elements.calculateButton.addEventListener('click', calculateProfits);
+    // Add null check before adding event listener
+    if (elements.calculateButton) {
+        elements.calculateButton.addEventListener('click', calculateProfits);
+    }
     
     // Make sure the Add GPU button works correctly
     if (elements.addGpuButton) {
