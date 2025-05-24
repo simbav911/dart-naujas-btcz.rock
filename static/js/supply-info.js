@@ -1,5 +1,5 @@
 // Cache management for supply data
-const SUPPLY_CACHE_KEY = 'btcz_supply_data';
+const SUPPLY_CACHE_KEY = 'btcz_supply_data_v2'; // Updated cache key to force refresh
 const SUPPLY_CACHE_DURATION = 180000; // 3 minutes in milliseconds as requested
 
 function getStoredSupplyData() {
@@ -30,6 +30,9 @@ function storeSupplyData(data) {
 }
 
 async function updateSupplyData(forceUpdate = false) {
+    // Only force update when explicitly requested
+    // This allows proper caching for 3 minutes
+    
     // Check cache first
     const cached = getStoredSupplyData();
     const now = Date.now();
@@ -54,6 +57,13 @@ async function updateSupplyData(forceUpdate = false) {
         console.log('API Response:', data);
         
         if (data) {
+            // Verify the data is in the correct format (15B and 21B)
+            if (data.totalSupply > 100000000000) {
+                console.warn('API returned old format with too many zeros, adjusting...');
+                data.totalSupply = data.totalSupply / 10;
+                data.maxSupply = data.maxSupply / 10;
+            }
+            
             storeSupplyData(data);
             updateSupplyUI(data);
         } else {
@@ -76,22 +86,20 @@ function updateSupplyUI(data) {
     }
 
     try {
-        // Get the actual values from the API response
+        // Get the exact values from the API response
         const currentSupply = data.totalSupply || 0;
         const maxSupply = data.maxSupply || 21000000000;
         
         console.log('Raw API values:', { currentSupply, maxSupply });
         
-        // Convert to full numbers
-        // Multiply current supply by 1000 to get the actual value based on our testing
-        const actualCurrentSupply = Math.round(currentSupply * 1000);
-        const actualMaxSupply = maxSupply;
+        // Use the exact values from the API without any modification
+        // The API now returns the correct values: 15037550000 and 21000000000
         
-        console.log('Actual values:', { actualCurrentSupply, actualMaxSupply });
+        // Format with commas for readability
+        const formattedCurrentSupply = currentSupply.toLocaleString('en-US');
+        const formattedMaxSupply = maxSupply.toLocaleString('en-US');
         
-        // Format the full numbers with commas for better readability
-        const formattedCurrentSupply = actualCurrentSupply.toLocaleString();
-        const formattedMaxSupply = actualMaxSupply.toLocaleString();
+        console.log('Display values:', { formattedCurrentSupply, formattedMaxSupply });
 
         // Update desktop supply info
         const desktopCurrentSupply = document.getElementById('btcz-current-supply');
@@ -127,9 +135,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateSupplyUI(cached.data);
     }
     
-    // Then fetch fresh data
-    await updateSupplyData(true);
+    // Then fetch fresh data if cache is expired or not available
+    await updateSupplyData(false);
     
     // Update supply data every 3 minutes
+    // Use false for forceUpdate to respect the cache duration
     setInterval(() => updateSupplyData(false), SUPPLY_CACHE_DURATION);
 });
