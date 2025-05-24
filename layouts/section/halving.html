@@ -753,6 +753,14 @@
             remainingBlocks: 0,
             lastFetchTime: 0
         };
+        
+        // Simple timer for countdown
+        let countdownTimer = {
+            days: 197,
+            hours: 3,
+            minutes: 50,
+            seconds: 0
+        };
 
         // Update countdown timer based on real-time block data from API
         function updateCountdown() {
@@ -813,9 +821,17 @@
             console.log('Updated with estimated block data:', halvingState.currentBlock);
         }
 
+        // Calculate and update time based on block data
+        function calculateTime() {
+            // Calculate time remaining in seconds
+            halvingState.timeRemainingSeconds = halvingState.remainingBlocks * halvingState.blockTimeInSeconds;
+            
+            // Store the start time for the countdown
+            halvingState.countdownStartTime = Date.now();
+        }
+        
         // Update UI elements with block data
         function updateUI() {
-
             // Update current block display if element exists
             const currentBlockElement = document.querySelector('.info-item:nth-child(2) p');
             if (currentBlockElement) {
@@ -828,22 +844,41 @@
                 // Real data from API so no need for ~ approximation
                 blocksRemainingElement.textContent = halvingState.remainingBlocks.toLocaleString();
             }
-
-            // Calculate time remaining in seconds
+            
+            // Update the estimated halving date based on blocks
+            updateHalvingDate();
+            
+            // Update the countdown display
+            updateCountdownDisplay();
+        }
+        
+        // Update the halving date estimate
+        function updateHalvingDate() {
+            // Calculate time remaining in seconds based on blocks
             const timeRemainingSeconds = halvingState.remainingBlocks * halvingState.blockTimeInSeconds;
-
-            // Convert to days, hours, minutes, seconds
-            const days = Math.floor(timeRemainingSeconds / (24 * 60 * 60));
-            const hours = Math.floor((timeRemainingSeconds % (24 * 60 * 60)) / (60 * 60));
-            const minutes = Math.floor((timeRemainingSeconds % (60 * 60)) / 60);
-            const seconds = Math.floor(timeRemainingSeconds % 60);
-
-            // Update countdown display with leading zeros for better readability
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-
+            
+            // Calculate and update estimated halving date
+            const halvingDateElement = document.querySelector('.info-item:nth-child(5) p');
+            if (halvingDateElement) {
+                const now = new Date().getTime();
+                const estimatedHalvingDate = new Date(now + (timeRemainingSeconds * 1000));
+                const dateOptions = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                };
+                halvingDateElement.textContent = estimatedHalvingDate.toLocaleDateString(undefined, dateOptions);
+            }
+        }
+        
+        // Separate function to update the countdown timer display
+        function updateCountdownDisplay() {
+            // Update the countdown display with the current timer values
+            document.getElementById('days').textContent = countdownTimer.days;
+            document.getElementById('hours').textContent = countdownTimer.hours < 10 ? '0' + countdownTimer.hours : countdownTimer.hours;
+            document.getElementById('minutes').textContent = countdownTimer.minutes < 10 ? '0' + countdownTimer.minutes : countdownTimer.minutes;
+            document.getElementById('seconds').textContent = countdownTimer.seconds < 10 ? '0' + countdownTimer.seconds : countdownTimer.seconds;
+            
             // Update timestamp
             const currentTimeElement = document.querySelector('.info-item:nth-child(2) small');
             if (currentTimeElement) {
@@ -857,20 +892,41 @@
                 };
                 currentTimeElement.textContent = 'as of ' + new Date().toLocaleDateString(undefined, options);
             }
-
-            // Calculate and update estimated halving date
-            const halvingDateElement = document.querySelector('.info-item:nth-child(5) p');
-            if (halvingDateElement) {
-                const now = new Date().getTime();
-                const estimatedHalvingDate = new Date(now + (timeRemainingSeconds * 1000));
-                const dateOptions = {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                };
-                halvingDateElement.textContent = estimatedHalvingDate.toLocaleDateString(undefined, dateOptions);
+        }
+        
+        // Function to decrement the countdown timer
+        function decrementTimer() {
+            // Decrement seconds
+            countdownTimer.seconds--;
+            
+            // Handle minute rollover
+            if (countdownTimer.seconds < 0) {
+                countdownTimer.seconds = 59;
+                countdownTimer.minutes--;
+                
+                // Handle hour rollover
+                if (countdownTimer.minutes < 0) {
+                    countdownTimer.minutes = 59;
+                    countdownTimer.hours--;
+                    
+                    // Handle day rollover
+                    if (countdownTimer.hours < 0) {
+                        countdownTimer.hours = 23;
+                        countdownTimer.days--;
+                        
+                        // Stop at zero
+                        if (countdownTimer.days < 0) {
+                            countdownTimer.days = 0;
+                            countdownTimer.hours = 0;
+                            countdownTimer.minutes = 0;
+                            countdownTimer.seconds = 0;
+                        }
+                    }
+                }
             }
-
+            
+            // Update the display
+            updateCountdownDisplay();
         }
 
         // Initialize the countdown
@@ -879,24 +935,17 @@
         // Update the real block data from API every minute
         setInterval(updateCountdown, 60000);
         
-        // Update the visual countdown every second (without API calls)
+        // Decrement the countdown timer every second
         setInterval(function() {
-            if (halvingState.lastFetchTime > 0) {
-                // Calculate how many blocks may have been mined since the last API fetch
-                const now = Date.now();
-                const secondsSinceLastFetch = (now - halvingState.lastFetchTime) / 1000;
-                const estimatedNewBlocks = Math.floor(secondsSinceLastFetch / halvingState.blockTimeInSeconds);
-                
-                if (estimatedNewBlocks > 0) {
-                    // Update the estimated current block and remaining blocks
-                    const estimatedCurrentBlock = halvingState.currentBlock + estimatedNewBlocks;
-                    halvingState.remainingBlocks = halvingState.halvingBlock - estimatedCurrentBlock;
-                }
-                
-                // Update the UI with the latest estimates
-                updateUI();
-            }
+            // Decrement the timer
+            decrementTimer();
         }, 1000);
+        
+        // Update block data every minute
+        setInterval(function() {
+            // Fetch new block data
+            updateCountdown();
+        }, 60000);
         
         // Start the animation loop
         animate();
