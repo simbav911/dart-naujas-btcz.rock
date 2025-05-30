@@ -64,7 +64,10 @@
             {{ end }}
             
             {{ $replyCount := sub (len $posts) 1 }}
-            {{ $displayedCount := min $replyCount 5 }}
+            {{ $displayedCount := 5 }}
+            {{ if lt $replyCount 5 }}
+                {{ $displayedCount = $replyCount }}
+            {{ end }}
             
             {{ if gt $replyCount $displayedCount }}
                 <div class="text-center text-gray-400 mt-8">
