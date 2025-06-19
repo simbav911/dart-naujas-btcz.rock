@@ -18,8 +18,6 @@ type: "news"
 
 Lightwalletd is a service that enables lightweight BitcoinZ wallets to function without downloading the entire blockchain. This technology dramatically reduces sync times from hours to seconds, making it ideal for mobile applications and new users.
 
-![Lightwalletd Server Infrastructure](/images/news/lightwalletd/lightwalletd-server-featured.png)
-
 ## Server Details
 
 - **Endpoint:** lightd.btcz.rocks:9067
