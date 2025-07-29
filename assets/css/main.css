@@ -52,12 +52,34 @@ body {
 
     /* Ensure logo doesn't get squeezed */
     .logo-container img {
-        min-width: 40px;
-        height: 40px;
+        min-width: 32px;
+        height: 32px;
+        flex-shrink: 0;
     }
 
     .animated-logo {
         margin-left: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    /* Logo area protection */
+    header nav > div:first-child {
+        min-width: 140px;
+        flex-shrink: 0;
+    }
+}
+
+/* Small screens - ensure logo visibility */
+@media (max-width: 1200px) {
+    header .container {
+        max-width: none;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    /* Force logo area to stay visible */
+    header nav > div:first-child a {
+        min-width: 120px;
     }
 }
 
@@ -70,6 +92,16 @@ body {
 
     .price-ticker {
         margin-right: 1cm !important;
+    }
+
+    /* Mobile logo protection */
+    header nav > div:first-child {
+        min-width: 100px !important;
+    }
+
+    .logo-container img {
+        height: 28px !important;
+        min-width: 28px !important;
     }
 }
 
