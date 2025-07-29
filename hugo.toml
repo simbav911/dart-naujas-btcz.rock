@@ -29,12 +29,12 @@ ignoreLogs = ['warning-goldmark-raw-html']
     weight = 1
   [[menu.main]]
     identifier = "why-bitcoinz"
-    name = "Why BitcoinZ"
+    name = "Why BTCZ"
     url = "/why-bitcoinz/"
     weight = 2
   [[menu.main]]
     identifier = "ecosystem"
-    name = "Ecosystem"
+    name = "Eco"
     url = "/ecosystem/"
     weight = 3
   [[menu.main]]
@@ -59,7 +59,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
     weight = 7
   [[menu.main]]
     identifier = "roadmap"
-    name = "Roadmap"
+    name = "Map"
     url = "/roadmap/"
     weight = 8
   [[menu.main]]

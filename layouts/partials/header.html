@@ -1,21 +1,21 @@
 <header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-50 w-full glass-effect border-b border-btcz-gray-800/50">
-    <div class="container mx-auto px-2 md:px-4">
-        <nav class="flex items-center justify-between py-2 min-h-[3rem]">
+    <div class="container mx-auto px-1 md:px-2">
+        <nav class="flex items-center justify-between py-0.5 min-h-[2rem]">
             <!-- Logo and Mobile Price -->
             <div class="flex items-center space-x-2 md:space-x-4 pl-1 md:pl-0">
                 <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center group transition-transform duration-300 hover:scale-105 flex-shrink-0">
                     <div class="logo-container group-hover:opacity-90 transition-opacity duration-300">
-                        <img src="{{ "images/btcz-logo.png" | relURL }}" alt="BitcoinZ Logo" class="h-8 md:h-10 w-auto">
+                        <img src="{{ "images/btcz-logo.png" | relURL }}" alt="BitcoinZ Logo" class="h-6 md:h-7 xl:h-8 w-auto">
                     </div>
-                    <div class="animated-logo ml-2 md:ml-3 lg:ml-4">
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300" style="animation-delay: 0s;">B</span>
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.1s;">i</span>
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.2s;">t</span>
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.3s;">c</span>
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.4s;">o</span>
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.5s;">i</span>
-                        <span class="animated-letter font-heading font-bold text-base md:text-lg lg:text-xl text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.6s;">n</span>
-                        <span class="animated-letter special-z font-heading font-bold text-base md:text-lg lg:text-xl group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.7s;">Z</span>
+                    <div class="animated-logo ml-1 md:ml-2 lg:ml-3 xl:ml-4">
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300" style="animation-delay: 0s;">B</span>
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.1s;">i</span>
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.2s;">t</span>
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.3s;">c</span>
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.4s;">o</span>
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.5s;">i</span>
+                        <span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.6s;">n</span>
+                        <span class="animated-letter special-z font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style="animation-delay: 0.7s;">Z</span>
                     </div>
                 </a>
                 <!-- Mobile Price Ticker -->
@@ -39,7 +39,7 @@
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
+            <div class="hidden md:flex items-center space-x-2 lg:space-x-6 xl:space-x-8 2xl:space-x-10">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
                     {{ if .HasChildren }}
@@ -71,7 +71,7 @@
             </div>
 
             <!-- Language, Bridge and Explorer Section -->
-            <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+            <div class="hidden md:flex items-center space-x-1 lg:space-x-3 xl:space-x-4">
                 <!-- Bridge Dropdown -->
                 <div x-data="{ bridgeMenuOpen: false }" class="relative mr-2">
                     <button @click="bridgeMenuOpen = !bridgeMenuOpen" class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200">
