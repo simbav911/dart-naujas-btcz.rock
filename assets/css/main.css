@@ -28,6 +28,42 @@ body {
     -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
+/* Price Ticker Positioning */
+.price-ticker-container {
+    top: 5rem !important;
+    right: 2cm !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    transform-origin: top right !important;
+}
+
+/* Mobile Price Ticker */
+.price-ticker {
+    margin-right: 2cm !important;
+    transform-origin: right center !important;
+}
+
+/* Responsive adjustments for price ticker */
+@media (max-width: 768px) {
+    .price-ticker-container {
+        top: 4rem !important;
+        right: 1cm !important;
+        transform: scale(0.7) !important;
+    }
+
+    .price-ticker {
+        margin-right: 1cm !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .price-ticker-container {
+        top: 5rem !important;
+        right: 2cm !important;
+        transform: scale(0.9) !important;
+    }
+}
+
 /* Button Styles */
 .btn-primary {
     @apply inline-flex items-center justify-center px-8 py-3 text-lg font-medium rounded-xl;
