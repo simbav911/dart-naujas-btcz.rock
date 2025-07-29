@@ -33,7 +33,7 @@ body {
     top: 5rem !important;
     right: 2cm !important;
     position: fixed !important;
-    z-index: 9999 !important;
+    z-index: 5 !important;
     transform-origin: top right !important;
 }
 
