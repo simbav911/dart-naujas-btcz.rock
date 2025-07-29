@@ -39,7 +39,7 @@
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
                     {{ if .HasChildren }}
@@ -71,7 +71,7 @@
             </div>
 
             <!-- Language, Bridge and Explorer Section -->
-            <div class="hidden md:flex items-center space-x-2">
+            <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
                 <!-- Bridge Dropdown -->
                 <div x-data="{ bridgeMenuOpen: false }" class="relative mr-2">
                     <button @click="bridgeMenuOpen = !bridgeMenuOpen" class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200">

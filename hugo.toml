@@ -44,12 +44,12 @@ ignoreLogs = ['warning-goldmark-raw-html']
     weight = 4
   [[menu.main]]
     identifier = "buy"
-    name = "Where to Buy"
+    name = "Buy"
     url = "/buy/"
     weight = 5
   [[menu.main]]
     identifier = "learn-crypto"
-    name = "Learn Crypto"
+    name = "Learn"
     url = "/learn/"
     weight = 6
   [[menu.main]]

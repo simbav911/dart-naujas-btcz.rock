@@ -43,7 +43,24 @@ body {
     transform-origin: right center !important;
 }
 
-/* Responsive adjustments for price ticker */
+/* Header responsive adjustments */
+@media (max-width: 1024px) {
+    .nav-link {
+        font-size: 0.875rem; /* 14px */
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Ensure logo doesn't get squeezed */
+    .logo-container img {
+        min-width: 40px;
+        height: 40px;
+    }
+
+    .animated-logo {
+        margin-left: 0.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .price-ticker-container {
         top: 4rem !important;
@@ -53,6 +70,19 @@ body {
 
     .price-ticker {
         margin-right: 1cm !important;
+    }
+}
+
+/* Medium screens (tablets and small laptops) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    header .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Reduce navigation spacing on medium screens */
+    .hidden.md\\:flex.items-center {
+        gap: 0.75rem;
     }
 }
 
