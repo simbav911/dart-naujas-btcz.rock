@@ -11,12 +11,13 @@
         <!-- Wallets Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {{ range where .Site.RegularPages "Type" "wallet" }}
-            <article class="group">
-                <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
+            <article class="group {{ if .Params.featured }}md:col-span-2 lg:col-span-3{{ end }}">
+                <div class="h-full {{ if .Params.official }}wallet-card-official{{ end }} bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl {{ if eq .Params.theme_color "blue" }}hover:border-blue-500{{ else }}hover:border-btcz-gold{{ end }} hover:-translate-y-1 {{ if .Params.featured }}lg:flex{{ end }}">
                     <!-- Wallet Image -->
-                    <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
+                    <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8 {{ if .Params.featured }}lg:w-1/3 lg:flex lg:items-center lg:justify-center{{ end }}">
                         <div class="flex justify-center items-center h-32">
-                            {{ with .Params.image }}
+                            {{ $imageUrl := .Params.icon | default .Params.image }}
+                            {{ with $imageUrl }}
                             <img 
                                 src="{{ . | relURL }}" 
                                 alt="{{ $.Title }}" 
@@ -30,22 +31,33 @@
                         </div>
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-6 {{ if .Params.featured }}lg:flex-1{{ end }}">
+                        {{ if .Params.official }}
+                        <div class="flex justify-center mb-4">
+                            <span class="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-400 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                                <svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                {{ with .Params.badge }}{{ . }}{{ else }}Official Wallet{{ end }}
+                            </span>
+                        </div>
+                        {{ end }}
                         <!-- Wallet Name -->
-                        <h2 class="text-2xl font-bold mb-3 text-btcz-gold">
+                        <h2 class="{{ if .Params.featured }}text-3xl lg:text-4xl{{ else }}text-2xl{{ end }} font-bold mb-3 {{ if eq .Params.theme_color "blue" }}text-blue-400{{ else }}text-btcz-gold{{ end }}">
                             {{ .Title }}
                         </h2>
 
                         <!-- Description -->
-                        <p class="text-btcz-gray-400 mb-6 line-clamp-2">
+                        <p class="text-btcz-gray-400 mb-6 {{ if not .Params.featured }}line-clamp-2{{ end }}">
                             {{ .Description }}
                         </p>
 
                         <!-- Features -->
                         <div class="space-y-2 mb-6">
+                            {{ $themeColor := .Params.theme_color }}
                             {{ range first 3 .Params.features }}
                             <div class="flex items-center text-btcz-gray-400">
-                                <svg class="w-4 h-4 mr-2 text-btcz-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 mr-2 {{ if eq $themeColor "blue" }}text-blue-400{{ else }}text-btcz-gold{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 <span class="text-sm">{{ . }}</span>
@@ -56,7 +68,7 @@
                         <!-- Download Buttons -->
                         <div class="space-y-2 mb-6">
                             {{ range .Params.platforms }}
-                            <a href="{{ .download_url }}" class="block w-full px-4 py-2 bg-btcz-gray-800 hover:bg-btcz-gold text-btcz-gray-200 hover:text-btcz-gray-900 rounded-lg transition-colors duration-300 text-center text-sm">
+                            <a href="{{ .download_url }}" class="block w-full px-4 py-2 bg-btcz-gray-800 hover:bg-btcz-gold text-btcz-gray-200 hover:text-btcz-gray-900 rounded-lg transition-colors duration-300 text-center text-sm font-medium">
                                 Download for {{ .name }} {{ with .version }}(v{{ . }}){{ end }}
                             </a>
                             {{ end }}
@@ -67,7 +79,7 @@
                             <span class="text-btcz-gray-400">
                                 {{ len .Params.platforms }} Platform{{ if gt (len .Params.platforms) 1 }}s{{ end }}
                             </span>
-                            <a href="{{ .RelPermalink }}" class="inline-flex items-center text-btcz-gold hover:text-white transition-colors duration-300">
+                            <a href="{{ .RelPermalink }}" class="inline-flex items-center {{ if eq .Params.theme_color "blue" }}text-blue-400 hover:text-blue-300{{ else }}text-btcz-gold hover:text-white{{ end }} transition-colors duration-300">
                                 Read More
                                 <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
