@@ -3,8 +3,8 @@ title: "BitcoinZ Blue - Official Light Wallet"
 description: "The official light wallet for BitcoinZ with instant sync, privacy features, and cross-platform support"
 date: 2025-08-02T10:00:00Z
 type: "wallet"
-image: "/images/wallets/bitcoinz-blue.webp"
-icon: "/images/wallets/icon_blue.png"
+image: "images/wallets/bitcoinz-blue.webp"
+icon: "images/wallets/icon_blue.png"
 official: true
 featured: true
 badge: "Official BitcoinZ Wallet"
