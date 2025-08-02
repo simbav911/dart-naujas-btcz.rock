@@ -52,6 +52,50 @@
   --tw-contain-style:  ;
 }
 
+/* Custom styles for Official BitcoinZ Blue Wallet */
+.wallet-card-official {
+  position: relative;
+  overflow: hidden;
+}
+
+.wallet-card-official::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Blue gradient background for official wallet */
+.bg-gradient-blue-official {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+}
+
+/* Hover effect for blue wallet buttons */
+.btn-blue-wallet {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  transition: all 0.3s ease;
+}
+
+.btn-blue-wallet:hover {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
 ::backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
