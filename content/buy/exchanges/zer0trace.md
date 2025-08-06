@@ -1,6 +1,6 @@
 ---
 title: "Zer0trace"
-description: "Instant, anonymous cryptocurrency exchange supporting BitcoinZ (BTCZ) swaps with multiple popular cryptocurrencies."
+description: "Instant, anonymous cryptocurrency exchange built specifically for BitcoinZ"
 date: 2025-04-12T00:00:00Z
 image: "images/exchanges/zer0trace.png"
 type: "exchange"

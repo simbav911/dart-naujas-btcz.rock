@@ -1,21 +1,21 @@
 ---
-title: "Xeggex"
-description: "A user-friendly cryptocurrency exchange providing secure and efficient trading for various digital assets. Xeggex offers low fees, no KYC requirements, and support for a wide range of trading pairs, making it an ideal platform for privacy-focused users."
-date: 2023-12-03T10:00:00Z
-image: "images/exchanges/XeggeX.png"
+title: "SafeTrade"
+description: "A privacy-focused cryptocurrency exchange with zero reported security incidents since 2018. SafeTrade was the first exchange to list BitcoinZ, creating a historic partnership built on trust and shared values."
+date: 2025-08-05T12:00:00Z
+image: "images/exchanges/SafeTrade.png"
 type: "exchange"
 categories: ["Exchange"]
 features:
   - "No KYC Required"
-  - "Low Trading Fees"
-  - "Secure Trading Environment"
-  - "Wide Range of Trading Pairs"
+  - "Zero Security Incidents Since 2018"
+  - "Historic BitcoinZ Partner"
+  - "Privacy-Focused Trading"
 trading_pairs:
   - "BTCZ/BTC"
   - "BTCZ/USDT"
-  - "BTCZ/XMR"
+  - "BTCZ/SAFE"
 is_centralized: true
-website: "https://xeggex.com/market/BTCZ_BTC"
-kyc_required: true
+website: "https://safetrade.com/exchange/BTCZ-USDT?type=basic"
+kyc_required: false
 draft: false
 ---

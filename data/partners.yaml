@@ -6,12 +6,12 @@
   website: "https://x.com/BTCZOfficial"
   order: 1
 
-- name: "TradeOgre"
-  icon: "images/partners/tradeogre.png"
+- name: "SafeTrade"
+  icon: "images/partners/safetrade.png"
   rating: 5
-  description: "TradeOgre is a highly rated cryptocurrency exchange platform that supports BitcoinZ trading. Renowned for its simple, efficient interface, TradeOgre prioritizes user privacy and offers seamless trading without requiring KYC verification."
-  tags: ["Exchange Partner", "Highly Rated", "Trading", "Privacy"]
-  website: "https://tradeogre.com"
+  description: "SafeTrade is BitcoinZ's historic exchange partner since 2018, when BTCZ was the first cryptocurrency they listed. With zero security incidents and no KYC requirements, SafeTrade exemplifies privacy-focused trading with proven reliability."
+  tags: ["Exchange Partner", "Historic Partner", "Trading", "Privacy", "No KYC"]
+  website: "https://safetrade.com"
   order: 2
 
 - name: "Open Partnership Invite"
