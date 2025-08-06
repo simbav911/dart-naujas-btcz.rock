@@ -55,23 +55,35 @@ draft: false
 
 BitcoinZ Blue is the official light wallet for BitcoinZ, developed and supported by the BitcoinZ community. This modern, user-friendly wallet provides instant access to your BTCZ funds while maintaining the highest standards of privacy and security.
 
+### Bulletproof Security Architecture
+
+**Your private keys never leave your device.** BitcoinZ Blue employs bulletproof technology that ensures your private keys are generated, stored, and managed exclusively on your local device. No sensitive cryptographic material is ever transmitted to servers or external services.
+
+**100% Non-Custodial Design:** The wallet operates on a completely non-custodial architecture where you maintain absolute control over your funds. Our bulletproof security model eliminates counterparty risk entirely - only you have access to your private keys, ensuring maximum security and financial sovereignty.
+
+**Local Cryptographic Operations:** All transaction signing and cryptographic operations are performed locally on your device using bulletproof encryption standards. The light wallet servers only provide blockchain synchronization data, never accessing or storing your private information.
+
 ### Key Features
 
+- **Bulletproof Security**: Private keys never leave your device - 100% non-custodial architecture
 - **Light Client Architecture**: No need to download the entire blockchain - connect instantly
 - **Privacy First**: Shielded transactions (z-addresses) by default for maximum privacy
+- **Local Key Management**: All cryptographic operations performed exclusively on your device
 - **Cross-Platform**: Available for Windows, macOS, and Linux
 - **User-Friendly**: Clean, intuitive interface designed for both beginners and advanced users
 - **Fast Sync**: Ready to use in seconds with instant blockchain synchronization
 - **Multi-Currency Display**: View your balance in multiple fiat currencies
 - **Contact Management**: Save and backup your frequently used addresses
-- **Secure**: PIN protection and encryption for your private keys
+- **Enterprise-Grade Encryption**: PIN protection and bulletproof encryption for your private keys
 
 ### Technical Specifications
 
+- **Security Model**: Bulletproof non-custodial architecture - private keys never transmitted
 - **Sapling Support**: Full support for shielded Sapling transactions
 - **Address Types**: Supports both transparent (t-addresses) and shielded (z-addresses)
-- **Network**: Connects to official BitcoinZ lightwalletd servers
-- **Open Source**: Fully auditable code available on GitHub
+- **Network**: Connects to official BitcoinZ lightwalletd servers for blockchain data only
+- **Cryptographic Operations**: All signing and key management performed locally
+- **Open Source**: Fully auditable code available on GitHub for transparency
 
 ### System Requirements
 
@@ -85,6 +97,29 @@ BitcoinZ Blue is the official light wallet for BitcoinZ, developed and supported
 - 8GB RAM
 - 1GB free disk space
 - Stable broadband connection
+
+## Security & Privacy Guarantee
+
+### Bulletproof Technology
+BitcoinZ Blue implements bulletproof security technology that ensures your private keys **never leave your device**. This non-custodial architecture provides 100% security by design:
+
+- **Local Key Generation**: Private keys are generated using cryptographically secure random number generation exclusively on your device
+- **Zero Server Transmission**: No private key data is ever sent to lightwalletd servers or any external service
+- **Local Transaction Signing**: All transactions are signed locally using your private keys before broadcasting to the network
+- **Complete User Control**: You maintain absolute sovereignty over your funds with no counterparty risk
+
+### Privacy Protection
+- **Shielded by Default**: z-addresses provide bulletproof privacy for your transactions
+- **No Data Collection**: The wallet does not collect, store, or transmit any personal information
+- **Anonymous Usage**: No registration, KYC, or identity verification required
+
+### Enterprise-Grade Security
+- **Military-Grade Encryption**: AES-256 encryption protects your wallet data
+- **Secure Key Storage**: Private keys are encrypted and stored locally using industry-standard security practices
+- **PIN Protection**: Additional layer of security with customizable PIN authentication
+- **Backup Security**: Encrypted seed phrase backups ensure recovery while maintaining security
+
+**Your funds are 100% safe with bulletproof technology - private keys never leave your device.**
 
 ## Terms and Conditions
 
