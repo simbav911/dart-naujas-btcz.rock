@@ -2,7 +2,7 @@
 title: "SafeTrade"
 description: "A privacy-focused cryptocurrency exchange with zero reported security incidents since 2018. SafeTrade was the first exchange to list BitcoinZ, creating a historic partnership built on trust and shared values."
 date: 2025-08-05T12:00:00Z
-image: "images/exchanges/SafeTrade.png"
+image: "images/exchanges/safetrade.png"
 type: "exchange"
 categories: ["Exchange"]
 features:
