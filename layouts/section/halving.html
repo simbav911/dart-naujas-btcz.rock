@@ -31,7 +31,7 @@
                 </div>
                 <div class="info-item">
                     <h4>Estimated Halving Date</h4>
-                    <p>December 7th-8th, 2025</p>
+                    <p id="estimated-halving-date">Calculating...</p>
                 </div>
             </div>
         </div>
@@ -893,9 +893,9 @@
         function updateHalvingDate() {
             // Calculate time remaining in seconds based on blocks
             const timeRemainingSeconds = halvingState.remainingBlocks * halvingState.blockTimeInSeconds;
-            
+
             // Calculate and update estimated halving date
-            const halvingDateElement = document.querySelector('.info-item:nth-child(5) p');
+            const halvingDateElement = document.getElementById('estimated-halving-date');
             if (halvingDateElement) {
                 const now = new Date().getTime();
                 const estimatedHalvingDate = new Date(now + (timeRemainingSeconds * 1000));
@@ -905,6 +905,7 @@
                     day: 'numeric'
                 };
                 halvingDateElement.textContent = estimatedHalvingDate.toLocaleDateString(undefined, dateOptions);
+                console.log('Updated estimated halving date:', estimatedHalvingDate.toLocaleDateString(undefined, dateOptions));
             }
         }
         
