@@ -10,7 +10,7 @@
 
         <!-- Exchange Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {{ range where .Site.RegularPages "Type" "exchange" }}
+            {{ range (where .Site.RegularPages "Type" "exchange").ByDate.Reverse }}
             <article class="group">
                 <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="block h-full">
                     <div class="h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
@@ -18,7 +18,7 @@
                         <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
                             <div class="absolute top-4 left-4">
                                 <span class="inline-block px-3 py-1 bg-btcz-gray-800/80 text-btcz-gold text-sm font-medium rounded-full">
-                                    {{ if .Params.kyc_required }}Centralized{{ else }}Decentralized{{ end }}
+                                    {{ if .Params.is_centralized }}Centralized{{ else }}Decentralized{{ end }}
                                 </span>
                             </div>
                             

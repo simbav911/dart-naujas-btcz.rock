@@ -1,7 +1,7 @@
 ---
 title: "Zer0trace"
 description: "Instant, anonymous cryptocurrency exchange built specifically for BitcoinZ"
-date: 2025-04-12T00:00:00Z
+date: 2025-08-17T00:00:00Z
 image: "images/exchanges/zer0trace.png"
 type: "exchange"
 categories: ["Exchange"]
