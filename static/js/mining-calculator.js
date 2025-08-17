@@ -57,61 +57,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
 });
 
+// Also try to initialize when the window loads (fallback)
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        initializeMiningCalculator();
+    }, 500);
+});
+
 // Function to initialize the mining calculator
 function initializeMiningCalculator() {
     console.log('Attempting to initialize mining calculator...');
-    
+    console.log('Current URL:', window.location.href);
+    console.log('Document ready state:', document.readyState);
+
     // Cache DOM elements
-    cacheElements();
-    
+    const foundElements = cacheElements();
+
     // Check if we're on the mining calculator page by looking for key elements
     // Use multiple potential selectors for more robust detection
     const calculatorSelectors = [
-        '#gpuSetupContainer', 
+        '#gpuSetupContainer',
         '#networkDifficulty',
         '.mining-calculator-container',
         '.calculator-form',
         '#calculateButton'
     ];
-    
-    const isCalculatorPage = calculatorSelectors.some(selector => 
+
+    // Debug: Check each selector
+    calculatorSelectors.forEach(selector => {
+        const element = document.querySelector(selector);
+        console.log(`Selector ${selector}:`, element ? 'FOUND' : 'NOT FOUND');
+    });
+
+    const isCalculatorPage = calculatorSelectors.some(selector =>
         document.querySelector(selector) !== null
     );
-    
+
     // Only proceed with initialization if we're on the calculator page
     if (isCalculatorPage) {
         console.log('Mining calculator page detected, initializing calculator');
-        
+
         // Ensure all necessary elements are cached
-        if (Object.keys(elements).length === 0) {
-            console.log('Re-caching elements...');
+        if (foundElements === 0) {
+            console.log('No elements found, re-caching...');
             cacheElements();
         }
-        
+
         // Fetch network data
         fetchNetworkData();
-        
+
         // Add event listeners
         addEventListeners();
-        
+
         // Populate GPU comparison table
         populateGPUTable();
-        
+
         // Trigger initial calculation
         setTimeout(() => {
             calculateProfits();
         }, 1000);
-        
+
         // Set up auto-refresh
         setInterval(fetchNetworkData, 300000); // Refresh every 5 minutes
     } else {
         console.log('Not on mining calculator page, skipping initialization');
-        
+        console.log('Available elements on page:', document.querySelectorAll('*[id]').length);
+
         // If we're not on the calculator page but the URL contains mining-calculator,
         // it's possible the elements haven't loaded yet, so retry after a delay
         if (window.location.href.includes('mining-calculator')) {
             console.log('URL suggests mining calculator page, will retry initialization in 1 second');
-            setTimeout(initializeMiningCalculator, 1000);
+
+            // Limit retries to prevent infinite loop
+            if (!window.miningCalculatorRetries) {
+                window.miningCalculatorRetries = 0;
+            }
+
+            if (window.miningCalculatorRetries < 10) {
+                window.miningCalculatorRetries++;
+                setTimeout(initializeMiningCalculator, 1000);
+            } else {
+                console.error('Maximum retries reached, giving up on mining calculator initialization');
+            }
         }
     }
 }
@@ -134,7 +161,7 @@ function cacheElements() {
             // GPU table
             'gpuTableBody'
         ];
-        
+
         // Cache each element, tracking how many were found
         let foundCount = 0;
         elementIds.forEach(id => {
@@ -142,21 +169,24 @@ function cacheElements() {
             if (element) {
                 elements[id] = element;
                 foundCount++;
+                console.log(`✓ Found element: ${id}`);
+            } else {
+                console.log(`✗ Missing element: ${id}`);
             }
         });
-        
+
         console.log(`Successfully cached ${foundCount}/${elementIds.length} DOM elements`);
-        
+
         // If we found at least some elements but not all, that's probably okay
         // We may be on a page that only has some of the calculator functionality
         if (foundCount > 0 && foundCount < elementIds.length / 2) {
             console.warn('Some mining calculator elements were not found, but will continue with partial functionality');
         }
-        
-        return foundCount > 0; // Return true if we found at least one element
+
+        return foundCount; // Return the count of found elements
     } catch (error) {
         console.error('Error caching DOM elements:', error);
-        return false;
+        return 0;
     }
 }
 

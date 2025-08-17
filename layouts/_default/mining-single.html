@@ -28,8 +28,6 @@
 {{ end }}
 
 {{ define "scripts" }}
-<!-- Include mining calculator script only on mining calculator pages -->
-{{ if or (eq .Page.File.Path "ecosystem/mining/mining-calculator.md") (eq .Page.File.Path "ecosystem/mining/mining-calculator/_index.md") }}
+<!-- Include mining calculator script for mining-single layout -->
 <script defer src="{{ "js/mining-calculator.js" | relURL }}"></script>
-{{ end }}
 {{ end }}
