@@ -745,15 +745,33 @@
             renderer.render(scene, camera);
         }
 
+        // BitcoinZ halving configuration - every 840,000 blocks (~4 years)
+        const halvingConfig = {
+            halvingInterval: 840000, // blocks between halvings
+            blockTimeInSeconds: 2.5 * 60, // 2.5 minutes in seconds
+            initialReward: 12500, // initial block reward in BTCZ
+            halvingHistory: [
+                { block: 0, reward: 12500 }, // Genesis
+                { block: 840000, reward: 6250 }, // 1st halving (Oct 2021)
+                { block: 1680000, reward: 3125 }, // 2nd halving (Dec 2025)
+                { block: 2520000, reward: 1562.5 }, // 3rd halving (Dec 2029)
+                { block: 3360000, reward: 781.25 }, // 4th halving (Dec 2033)
+                { block: 4200000, reward: 390.625 }, // 5th halving (Dec 2037)
+            ]
+        };
+
         // Store global state for the countdown
         const halvingState = {
-            halvingBlock: 1680000,
-            blockTimeInSeconds: 2.5 * 60, // 2.5 minutes in seconds
+            halvingBlock: 1680000, // will be updated automatically
+            currentReward: 6250, // will be updated automatically
+            futureReward: 3125, // will be updated automatically
+            blockTimeInSeconds: halvingConfig.blockTimeInSeconds,
             currentBlock: 0,
             remainingBlocks: 0,
             lastFetchTime: 0,
             timeRemainingSeconds: 0,
-            countdownStartTime: 0
+            countdownStartTime: 0,
+            halvingNumber: 2 // current halving (2nd halving)
         };
 
         // Dynamic timer for countdown (will be calculated from real block data)
@@ -763,6 +781,78 @@
             minutes: 0,
             seconds: 0
         };
+
+        // Function to determine current halving based on block height
+        function getCurrentHalvingInfo(currentBlock) {
+            // Find the current halving period
+            let currentHalving = null;
+            let nextHalving = null;
+
+            for (let i = 0; i < halvingConfig.halvingHistory.length; i++) {
+                const halving = halvingConfig.halvingHistory[i];
+                if (currentBlock >= halving.block) {
+                    currentHalving = halving;
+                    nextHalving = halvingConfig.halvingHistory[i + 1];
+                } else {
+                    break;
+                }
+            }
+
+            // If we don't have a next halving defined, calculate it
+            if (!nextHalving && currentHalving) {
+                const nextBlock = currentHalving.block + halvingConfig.halvingInterval;
+                const nextReward = currentHalving.reward / 2;
+                nextHalving = { block: nextBlock, reward: nextReward };
+            }
+
+            return {
+                current: currentHalving,
+                next: nextHalving,
+                halvingNumber: halvingConfig.halvingHistory.indexOf(currentHalving) + 1
+            };
+        }
+
+        // Function to update halving state based on current block
+        function updateHalvingState(currentBlock) {
+            const halvingInfo = getCurrentHalvingInfo(currentBlock);
+
+            if (halvingInfo.next) {
+                halvingState.halvingBlock = halvingInfo.next.block;
+                halvingState.currentReward = halvingInfo.current.reward;
+                halvingState.futureReward = halvingInfo.next.reward;
+                halvingState.halvingNumber = halvingInfo.halvingNumber;
+
+                console.log('Updated halving state:', {
+                    currentHalving: halvingInfo.current,
+                    nextHalving: halvingInfo.next,
+                    halvingNumber: halvingInfo.halvingNumber
+                });
+
+                // Update UI elements with new reward values
+                updateRewardLabels();
+            }
+        }
+
+        // Function to update reward labels in the UI
+        function updateRewardLabels() {
+            // Update current reward label
+            const currentRewardLabel = document.querySelector('.current-reward');
+            if (currentRewardLabel) {
+                currentRewardLabel.textContent = `Current Reward: ${halvingState.currentReward.toLocaleString()} BTCZ`;
+            }
+
+            // Update future reward label
+            const futureRewardLabel = document.querySelector('.future-reward');
+            if (futureRewardLabel) {
+                futureRewardLabel.textContent = `Future Reward: ${halvingState.futureReward.toLocaleString()} BTCZ`;
+            }
+
+            // Update halving block display
+            const halvingBlockElement = document.querySelector('.info-item:nth-child(1) p');
+            if (halvingBlockElement) {
+                halvingBlockElement.textContent = halvingState.halvingBlock.toLocaleString();
+            }
+        }
 
         // Update countdown timer based on real-time block data from API
         function updateCountdown() {
@@ -780,6 +870,9 @@
                     // Get the current block height from the API response
                     halvingState.currentBlock = data.height;
 
+                    // Update halving state based on current block (auto-detect next halving)
+                    updateHalvingState(halvingState.currentBlock);
+
                     // Calculate remaining blocks to halving
                     halvingState.remainingBlocks = halvingState.halvingBlock - halvingState.currentBlock;
 
@@ -787,6 +880,9 @@
                         halvingBlock: halvingState.halvingBlock,
                         currentBlock: halvingState.currentBlock,
                         remainingBlocks: halvingState.remainingBlocks,
+                        currentReward: halvingState.currentReward,
+                        futureReward: halvingState.futureReward,
+                        halvingNumber: halvingState.halvingNumber,
                         blockTimeSeconds: halvingState.blockTimeInSeconds
                     });
 
@@ -825,6 +921,10 @@
 
             // Calculate current block and remaining blocks
             halvingState.currentBlock = knownBlock + estimatedBlocksMined;
+
+            // Update halving state based on estimated current block
+            updateHalvingState(halvingState.currentBlock);
+
             halvingState.remainingBlocks = halvingState.halvingBlock - halvingState.currentBlock;
 
             // Calculate time remaining based on blocks
@@ -1044,7 +1144,7 @@
 
         const currentCoinText = document.createElement('p');
         currentCoinText.style.marginTop = '10px';
-        currentCoinText.innerHTML = 'Current Reward:<br>6,250 BTCZ';
+        currentCoinText.innerHTML = `Current Reward:<br>${halvingState.currentReward.toLocaleString()} BTCZ`;
 
         currentCoin.appendChild(currentCoinCircle);
         currentCoin.appendChild(currentCoinText);
@@ -1062,7 +1162,7 @@
 
         const futureCoinText = document.createElement('p');
         futureCoinText.style.marginTop = '10px';
-        futureCoinText.innerHTML = 'Future Reward:<br>3,125 BTCZ';
+        futureCoinText.innerHTML = `Future Reward:<br>${halvingState.futureReward.toLocaleString()} BTCZ`;
 
         futureCoin.appendChild(futureCoinCircle);
         futureCoin.appendChild(futureCoinText);
