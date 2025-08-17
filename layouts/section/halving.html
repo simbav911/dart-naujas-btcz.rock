@@ -751,14 +751,16 @@
             blockTimeInSeconds: 2.5 * 60, // 2.5 minutes in seconds
             currentBlock: 0,
             remainingBlocks: 0,
-            lastFetchTime: 0
+            lastFetchTime: 0,
+            timeRemainingSeconds: 0,
+            countdownStartTime: 0
         };
-        
-        // Simple timer for countdown
+
+        // Dynamic timer for countdown (will be calculated from real block data)
         let countdownTimer = {
-            days: 197,
-            hours: 3,
-            minutes: 50,
+            days: 0,
+            hours: 0,
+            minutes: 0,
             seconds: 0
         };
 
@@ -773,22 +775,35 @@
                     return response.json();
                 })
                 .then(data => {
+                    console.log('API Response:', data);
+
                     // Get the current block height from the API response
                     halvingState.currentBlock = data.height;
-                    
+
                     // Calculate remaining blocks to halving
                     halvingState.remainingBlocks = halvingState.halvingBlock - halvingState.currentBlock;
-                    
+
+                    console.log('Halving calculation:', {
+                        halvingBlock: halvingState.halvingBlock,
+                        currentBlock: halvingState.currentBlock,
+                        remainingBlocks: halvingState.remainingBlocks,
+                        blockTimeSeconds: halvingState.blockTimeInSeconds
+                    });
+
+                    // Calculate time remaining based on blocks
+                    calculateTimeFromBlocks();
+
                     // Update last fetch time
                     halvingState.lastFetchTime = Date.now();
-                    
+
                     // Update UI with real block data
                     updateUI();
-                    
-                    console.log('Updated with real block data:', halvingState.currentBlock);
+
+                    console.log('Updated with real block data:', halvingState.currentBlock, 'Remaining blocks:', halvingState.remainingBlocks);
                 })
                 .catch(error => {
                     console.error('Error fetching block data:', error);
+                    console.log('Falling back to estimation...');
                     // Fallback to estimation if API fails
                     fallbackEstimation();
                 });
@@ -811,23 +826,45 @@
             // Calculate current block and remaining blocks
             halvingState.currentBlock = knownBlock + estimatedBlocksMined;
             halvingState.remainingBlocks = halvingState.halvingBlock - halvingState.currentBlock;
-            
+
+            // Calculate time remaining based on blocks
+            calculateTimeFromBlocks();
+
             // Update last fetch time
             halvingState.lastFetchTime = Date.now();
-            
+
             // Update UI with estimated data
             updateUI();
-            
-            console.log('Updated with estimated block data:', halvingState.currentBlock);
+
+            console.log('Updated with estimated block data:', halvingState.currentBlock, 'Remaining blocks:', halvingState.remainingBlocks);
         }
 
         // Calculate and update time based on block data
-        function calculateTime() {
+        function calculateTimeFromBlocks() {
             // Calculate time remaining in seconds
             halvingState.timeRemainingSeconds = halvingState.remainingBlocks * halvingState.blockTimeInSeconds;
-            
+
             // Store the start time for the countdown
             halvingState.countdownStartTime = Date.now();
+
+            // Convert seconds to days, hours, minutes, seconds
+            updateCountdownFromSeconds(halvingState.timeRemainingSeconds);
+
+            console.log('Calculated time remaining:', halvingState.timeRemainingSeconds, 'seconds');
+        }
+
+        // Convert seconds to countdown timer format
+        function updateCountdownFromSeconds(totalSeconds) {
+            countdownTimer.days = Math.floor(totalSeconds / (24 * 60 * 60));
+            const remainingAfterDays = totalSeconds % (24 * 60 * 60);
+
+            countdownTimer.hours = Math.floor(remainingAfterDays / (60 * 60));
+            const remainingAfterHours = remainingAfterDays % (60 * 60);
+
+            countdownTimer.minutes = Math.floor(remainingAfterHours / 60);
+            countdownTimer.seconds = Math.floor(remainingAfterHours % 60);
+
+            console.log('Updated countdown timer from', totalSeconds, 'seconds:', countdownTimer);
         }
         
         // Update UI elements with block data
@@ -896,56 +933,61 @@
         
         // Function to decrement the countdown timer
         function decrementTimer() {
-            // Decrement seconds
-            countdownTimer.seconds--;
-            
-            // Handle minute rollover
-            if (countdownTimer.seconds < 0) {
-                countdownTimer.seconds = 59;
-                countdownTimer.minutes--;
-                
-                // Handle hour rollover
-                if (countdownTimer.minutes < 0) {
-                    countdownTimer.minutes = 59;
-                    countdownTimer.hours--;
-                    
-                    // Handle day rollover
-                    if (countdownTimer.hours < 0) {
-                        countdownTimer.hours = 23;
-                        countdownTimer.days--;
-                        
-                        // Stop at zero
-                        if (countdownTimer.days < 0) {
-                            countdownTimer.days = 0;
-                            countdownTimer.hours = 0;
-                            countdownTimer.minutes = 0;
-                            countdownTimer.seconds = 0;
+            // Calculate elapsed time since countdown started
+            if (halvingState.countdownStartTime > 0) {
+                const now = Date.now();
+                const elapsedSeconds = Math.floor((now - halvingState.countdownStartTime) / 1000);
+                const remainingSeconds = Math.max(0, halvingState.timeRemainingSeconds - elapsedSeconds);
+
+                // Update countdown from remaining seconds
+                updateCountdownFromSeconds(remainingSeconds);
+            } else {
+                // Fallback: simple decrement if no start time set
+                countdownTimer.seconds--;
+
+                // Handle minute rollover
+                if (countdownTimer.seconds < 0) {
+                    countdownTimer.seconds = 59;
+                    countdownTimer.minutes--;
+
+                    // Handle hour rollover
+                    if (countdownTimer.minutes < 0) {
+                        countdownTimer.minutes = 59;
+                        countdownTimer.hours--;
+
+                        // Handle day rollover
+                        if (countdownTimer.hours < 0) {
+                            countdownTimer.hours = 23;
+                            countdownTimer.days--;
+
+                            // Stop at zero
+                            if (countdownTimer.days < 0) {
+                                countdownTimer.days = 0;
+                                countdownTimer.hours = 0;
+                                countdownTimer.minutes = 0;
+                                countdownTimer.seconds = 0;
+                            }
                         }
                     }
                 }
             }
-            
+
             // Update the display
             updateCountdownDisplay();
         }
 
-        // Initialize the countdown
+        // Initialize the countdown immediately
+        console.log('Initializing halving countdown at', new Date().toISOString());
         updateCountdown();
-        
+
         // Update the real block data from API every minute
         setInterval(updateCountdown, 60000);
-        
+
         // Decrement the countdown timer every second
         setInterval(function() {
             // Decrement the timer
             decrementTimer();
         }, 1000);
-        
-        // Update block data every minute
-        setInterval(function() {
-            // Fetch new block data
-            updateCountdown();
-        }, 60000);
         
         // Start the animation loop
         animate();
