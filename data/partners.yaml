@@ -1,9 +1,9 @@
-- name: "Freedom Voice X (Twitter)"
-  icon: "images/partners/x.png"
+- name: "Coinomi Wallet"
+  icon: "images/partners/coinomi.png"
   rating: 5
-  description: "X, formerly known as Twitter, is a pioneering social media platform renowned for its commitment to open dialogue and the free exchange of ideas. In the spirit of BitcoinZ, X promotes unrestricted communication, privacy, and a vibrant, community-driven environment. Together, we champion a digital space where voices are heard, innovation thrives, and fundamental freedoms remain protected."
-  tags: ["Free Speech", "Privacy", "Decentralization", "Digital Rights", "Community"]
-  website: "https://x.com/BTCZOfficial"
+  description: "Coinomi is the officially recommended wallet of the BitcoinZ Community and a long-standing supporter of our project. Launched in 2014 and never hacked, Coinomi offers proven reliability and top-tier security. As a non-custodial wallet with a strict no-KYC policy, it ensures you always have complete control and privacy over your assets."
+  tags: ["Official Wallet", "Security", "Privacy", "Non-Custodial", "Multi-Currency"]
+  website: "https://www.coinomi.com/"
   order: 1
 
 - name: "SafeTrade"
