@@ -1575,77 +1575,75 @@ body {
                 <thead>
                     <tr>
                         <th class="text-left">Feature</th>
-                        <th>Vortex</th>
-                        <th>WhatsApp</th>
-                        <th>Signal</th>
-                        <th>Telegram</th>
-                        <th>Jami</th>
+                        <th>Vortex (Sovereign Protocol)</th>
+                        <th>WhatsApp / Telegram (Centralized)</th>
+                        <th>Signal (Privacy-Focused)</th>
+                        <th>Jami (Peer-to-Peer DHT)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="font-bold">True Ownership</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-yellow-400">Partial</td>
+                        <td class="font-bold">Core Architecture</td>
+                        <td class="text-green-400">BitcoinZ Blockchain</td>
+                        <td class="text-red-400">Centralized Servers</td>
+                        <td class="text-red-400">Centralized Servers</td>
+                        <td class="text-yellow-400">Peer-to-Peer DHT</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">No Central Server</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-green-400">✓</td>
+                        <td class="font-bold">Identity Foundation</td>
+                        <td class="text-green-400">Cryptographic Key (Anonymous)</td>
+                        <td class="text-red-400">Phone Number (Not Anonymous)</td>
+                        <td class="text-red-400">Phone Number (Not Anonymous)</td>
+                        <td class="text-green-400">Cryptographic Key (Anonymous)</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">Permanent Messages</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
+                        <td class="font-bold">Data Sovereignty</td>
+                        <td class="text-green-400">Permanent & Portable (Seed Phrase)</td>
+                        <td class="text-red-400">Fragile (Server/Cloud Backup)</td>
+                        <td class="text-red-400">Fragile (Local/Cloud Backup)</td>
+                        <td class="text-yellow-400">Device-Bound (Export Keys Required)</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">Censorship Resistant</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-green-400">✓</td>
+                        <td class="font-bold">Metadata Privacy</td>
+                        <td class="text-green-400">Zero Metadata (via zk-SNARKs)</td>
+                        <td class="text-red-400">Massive Metadata Collection</td>
+                        <td class="text-yellow-400">Minimal Metadata Collection</td>
+                        <td class="text-yellow-400">Partial (No central server, but IPs & timing exposed)</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">Reliable Offline Messaging</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
+                        <td class="font-bold">Censorship Resistance</td>
+                        <td class="text-green-400">Extremely High (Unstoppable)</td>
+                        <td class="text-red-400">None (Can be blocked/banned)</td>
+                        <td class="text-red-400">Low (Servers can be blocked)</td>
+                        <td class="text-green-400">High (Hard to block, but IP traffic visible)</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">No Phone Number Required</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-yellow-400">Optional</td>
-                        <td class="text-green-400">✓</td>
+                        <td class="font-bold">Offline Messaging</td>
+                        <td class="text-green-400">100% Reliable (via Blockchain)</td>
+                        <td class="text-green-400">Reliable (Server stores messages)</td>
+                        <td class="text-green-400">Reliable (Server stores messages)</td>
+                        <td class="text-red-400">Limited (Both peers must be online or short relay)</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">Open Source</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-yellow-400">Client Only</td>
-                        <td class="text-green-400">✓</td>
+                        <td class="font-bold">Multi-Device Sync</td>
+                        <td class="text-green-400">Perfect (via Blockchain)</td>
+                        <td class="text-green-400">Seamless (Server-based)</td>
+                        <td class="text-green-400">Good (Server-based)</td>
+                        <td class="text-red-400">Manual & Clunky (Export/import keys)</td>
                     </tr>
                     <tr>
-                        <td class="font-bold">Blockchain Secured</td>
-                        <td class="text-green-400">✓</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
-                        <td class="text-red-400">✗</td>
+                        <td class="font-bold">Native Payments</td>
+                        <td class="text-green-400">Core Function (BTCZ)</td>
+                        <td class="text-yellow-400">Third-Party (Slow, regional)</td>
+                        <td class="text-yellow-400">Third-Party (Limited)</td>
+                        <td class="text-red-400">None</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Cost to Use</td>
+                        <td class="text-green-400">Predictable Micro-fees ($0.0001)</td>
+                        <td class="text-yellow-400">Free* (You are the product)</td>
+                        <td class="text-yellow-400">Free* (Donation supported)</td>
+                        <td class="text-green-400">Free</td>
                     </tr>
                 </tbody>
             </table>
@@ -1655,6 +1653,270 @@ body {
             <h3 class="text-2xl font-bold text-yellow-400 mb-6 text-center">The Unbeatable Combination</h3>
             <p class="text-lg text-gray-300 text-center">
                 Vortex is the only platform that combines the reliability of centralized systems with the freedom of decentralized architecture, secured by the immutability of blockchain technology.
+            </p>
+        </div>
+
+        <!-- Narrative Breakdown Section -->
+        <div class="mt-16">
+            <h2 class="heading-lg gradient-text text-center mb-6">Narrative Breakdown: Why The Differences Matter</h2>
+            <p class="text-xl text-gray-400 text-center mb-12">The table shows the "what." This section explains the "so what."</p>
+            
+            <div class="space-y-12">
+                <!-- vs Centralized Giants -->
+                <div class="glass">
+                    <h3 class="text-2xl font-bold text-red-400 mb-4">1. vs. The Centralized Giants (WhatsApp, Signal, Telegram)</h3>
+                    <h4 class="text-xl font-semibold text-yellow-400 mb-6">This is a battle of Sovereignty vs. Trust.</h4>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>The centralized messengers, despite their differences, share a unifying weakness: they require you to trust a central entity.</p>
+                        
+                        <p><span class="text-blue-400 font-bold">Signal & WhatsApp</span> offer excellent end-to-end encryption by default, but still require you to trust their servers, their policies, and their corporate structure. Your identity is tied to a phone number, and they can be legally compelled to provide metadata or be blocked by governments.</p>
+                        
+                        <p><span class="text-purple-400 font-bold">Telegram</span> makes a different trade-off. It offers seamless cloud-based multi-device sync, but it achieves this by not using end-to-end encryption by default. Your cloud messages can be accessed by the company. You trade true privacy for convenience.</p>
+                        
+                        <p><span class="text-green-400 font-bold">Vortex removes the need for trust entirely.</span> It operates on a model of mathematical verification. Your identity is a sovereign key you own. Your privacy is protected by zero-knowledge cryptography that hides your metadata. Your right to communicate is not a privilege granted by a company; it is an immutable fact recorded on a global ledger that cannot be shut down.</p>
+                    </div>
+                </div>
+
+                <!-- vs P2P Pioneers -->
+                <div class="glass">
+                    <h3 class="text-2xl font-bold text-orange-400 mb-4">2. vs. The Peer-to-Peer Pioneers (Jami)</h3>
+                    <h4 class="text-xl font-semibold text-yellow-400 mb-6">This is a battle of Permanence vs. Ephemerality.</h4>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p><span class="text-orange-400 font-bold">Jami</span> and other DHT-based messengers are pioneers that proved serverless communication is possible. However, they are architected for real-time, synchronous connections, like a telephone call. This creates inherent weaknesses for the way we communicate today.</p>
+                        
+                        <p><span class="text-green-400 font-bold">Vortex is architected for permanent, asynchronous communication.</span> The blockchain acts as a 100% reliable "post office box," solving Jami's offline messaging problem. Its "Sovereign Recovery" feature solves Jami's fragile identity problem, making your entire social graph permanent and portable. The blockchain as a single source of truth solves Jami's multi-device sync problem. Vortex takes the P2P vision and makes it robust, permanent, and reliable for the modern world.</p>
+                    </div>
+                </div>
+
+                <!-- Conclusion: The Synthesis -->
+                <div class="glass">
+                    <h3 class="text-2xl font-bold gradient-text mb-6 text-center">Conclusion: The Synthesis</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p class="text-lg text-center">Vortex is not just another option; it is a synthesis. It combines:</p>
+                        
+                        <ul class="space-y-3 text-lg max-w-4xl mx-auto">
+                            <li class="flex items-start">
+                                <span class="text-green-400 mr-3">•</span>
+                                <span><span class="text-green-400 font-bold">The reliability and seamless user experience</span> of a centralized application.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-3">•</span>
+                                <span><span class="text-blue-400 font-bold">The serverless freedom and privacy</span> of a P2P application.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-400 mr-3">•</span>
+                                <span><span class="text-yellow-400 font-bold">The permanence, sovereign recovery, and native economic power</span> that only a purpose-built blockchain protocol can provide.</span>
+                            </li>
+                        </ul>
+                        
+                        <p class="text-xl text-center mt-8 font-semibold">This unique combination positions Vortex in a category of its own, offering a <span class="gradient-text">no-compromise solution for sovereign communication</span>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-separator"></div>
+
+<!-- The Current Reality Section -->
+<section class="section section-dark fade-in">
+    <div class="container">
+        <h2 class="heading-lg gradient-text text-center mb-6">The Current Reality: A Compendium of Digital Failures</h2>
+        <p class="text-xl text-gray-400 text-center mb-12">The theoretical benefits of a sovereign protocol are clear, but its true value is understood when contrasted with the documented failures of existing systems. The following are real-world examples of how centralized and trusted platforms have failed their users through leaks, surveillance, and censorship.</p>
+        
+        <div class="mb-8 p-6 bg-red-500/10 rounded-xl border border-red-500/20 text-center">
+            <p class="text-lg text-red-300 font-bold">These are not isolated incidents; they are the predictable outcomes of flawed architectures.</p>
+        </div>
+
+        <div class="space-y-16">
+            <!-- Category 1: Leaks & Hacks -->
+            <div>
+                <h3 class="text-3xl font-bold text-red-400 text-center mb-6">Category 1: Leaks & Hacks - The Myth of Secure Walls</h3>
+                <p class="text-xl text-gray-400 text-center mb-12">Even the most well-intentioned platforms are centralized targets, and their complex software creates inevitable vulnerabilities.</p>
+                
+                <div class="space-y-8">
+                    <!-- Pegasus WhatsApp Hack -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: The Pegasus Hack via WhatsApp (2019)</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>NSO Group's Pegasus spyware, one of the most powerful surveillance tools ever created, was deployed against journalists, activists, and government officials. The primary infection vector was a "zero-click" vulnerability in WhatsApp. An attacker could simply call a target's phone, and the spyware would be installed, even if the user never answered the call. This gave the attacker complete control over the device, including the ability to read all encrypted messages.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>A single, undiscovered vulnerability in a massive, centralized application became a single point of failure for the security of millions. Users had to trust that the company's code was perfect. It wasn't.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>While no software is bug-free, a decentralized, open-source protocol allows for more community auditing. More importantly, by separating the core protocol from the user interface, we reduce the attack surface and create a more resilient system.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Signal/Twilio Hack -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: The Signal/Twilio Verification Hack (2022)</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>Signal, widely regarded as the gold standard for private messaging, was indirectly impacted when their verification service provider, Twilio, was hacked. Attackers gained access to Twilio's systems and were able to re-register the phone numbers of 1,900 Signal users, potentially allowing them to impersonate those users.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>The system's security was dependent on a trusted third party. The entire identity system was anchored to a legacy phone number, which is a centralized and insecure point of failure.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>Vortex removes this dependency entirely. Your identity is a cryptographic key you generate yourself. There are no phone numbers. There is no third-party verification service to hack. Your identity is truly self-sovereign.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Telegram Non-Secret Chats -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: Telegram's "Non-Secret" Chats</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>Unlike Signal or WhatsApp, Telegram's default cloud chats are not end-to-end encrypted. They are stored on Telegram's servers, accessible to the company. Over the years, this has led to numerous cases where opposition activists, particularly in countries like Iran and Russia, have had their accounts compromised or their data accessed by state actors who targeted Telegram's infrastructure or the users' access to it.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>A trade-off of convenience (cloud sync) for security. The data is centrally stored in a way that is accessible to the platform, creating a massive target.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>All communication on Vortex is end-to-end encrypted by default, always. Data is not stored on a central server; it is recorded on a decentralized, public ledger in an encrypted, unreadable format.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 2: Spying & Surveillance -->
+            <div>
+                <h3 class="text-3xl font-bold text-purple-400 text-center mb-6">Category 2: Spying & Surveillance - The Value of Your Shadow</h3>
+                <p class="text-xl text-gray-400 text-center mb-12">The most profitable product of "free" services is the data about your life—your metadata.</p>
+                
+                <div class="space-y-8">
+                    <!-- FBI WhatsApp Metadata -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: The FBI and WhatsApp Metadata (2021)</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>A publicly available FBI training document revealed exactly what data law enforcement can obtain from various messaging apps with a warrant. For WhatsApp, even with encrypted messages, they could obtain a near real-time log of a user's metadata. This includes who they messaged, when, and their entire contact list.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>Metadata is a centralized treasure trove. Knowing who you talk to and when can be just as revealing as what you say. Encrypting the content is only half the battle.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>Vortex is architected to destroy the metadata trail. By using the zero-knowledge privacy (zk-SNARKs) of the BitcoinZ network, it is designed to obscure the sender and receiver of transactions. This is true digital invisibility.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Broker Ecosystem -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: The Data Broker Ecosystem</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>This is an ongoing reality. Investigations by outlets like The Wall Street Journal have revealed a multi-billion dollar industry where data brokers purchase location data, contact information, and other personal details harvested from thousands of mobile apps. This data is then resold to corporations, marketers, and even government agencies without a warrant.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>The business model of "free" tech is surveillance. Your data is the currency.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>The economic model of Vortex is honest and transparent. The network is sustained by tiny, predictable transaction fees (fractions of a cent) paid by users for the utility of the network. The incentive is to provide a secure service, not to sell user data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 3: Banning & Censorship -->
+            <div>
+                <h3 class="text-3xl font-bold text-blue-400 text-center mb-6">Category 3: Banning & Censorship - The Loss of Your Voice</h3>
+                <p class="text-xl text-gray-400 text-center mb-12">Centralized platforms are, by their nature, instruments of control.</p>
+                
+                <div class="space-y-8">
+                    <!-- Nationwide Messenger Blocks -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: Nationwide Messenger Blocks (Ongoing)</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>This is a standard tactic for authoritarian regimes. In recent years, countries including Iran, Russia, Cuba, China, and Uganda have temporarily or permanently blocked access to Telegram and WhatsApp during protests, elections, or periods of civil unrest to control the flow of information and disrupt organization.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>Centralized servers are a "choke point." A government can simply order internet service providers to block all traffic going to and from a specific set of IP addresses, instantly disabling the service for an entire country.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>Vortex has no central servers. It is a peer-to-peer network where users connect directly to the BitcoinZ blockchain, which is run by thousands of nodes worldwide. There is no central choke point to block, making it dramatically more resilient to state-level censorship.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corporate De-platforming -->
+                    <div class="glass">
+                        <h4 class="text-2xl font-bold text-orange-400 mb-4">The Story: Corporate De-platforming (Ongoing)</h4>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-bold text-red-400 mb-2">The Event:</p>
+                                <p>Platforms like Discord, YouTube, and Patreon regularly ban users and entire communities for violating their ever-changing Terms of Service. The WallStreetBets Discord server was famously (though temporarily) banned during the GameStop saga. Countless creators and communities have had their digital homes and income streams destroyed overnight with no recourse.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-bold text-yellow-400 mb-2">The Core Problem:</p>
+                                <p>When you build your community on a centralized platform, you are building on rented land. Your identity, your group, and your right to speak are subject to the arbitrary rules of a corporation.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800/50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-bold text-green-400 mb-2">The Vortex Solution:</p>
+                                <p>Your identity in Vortex is a key you own. Your groups are sovereign entities on the blockchain, defined by their Transaction ID. They cannot be deleted or taken away by any third party. You are not a user on a platform; you are the platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="mt-16 p-8 bg-gradient-to-br from-red-500/10 via-yellow-500/10 to-green-500/10 rounded-xl border border-yellow-500/20">
+            <h3 class="text-2xl font-bold gradient-text text-center mb-4">Conclusion</h3>
+            <p class="text-lg text-gray-300 text-center">
+                These stories are not edge cases; they are the inevitable result of the centralized and trust-based systems we use every day. They prove that a new architecture is not just a novelty, but a <span class="text-green-400 font-bold">necessity</span>. Vortex is designed from the ground up to be the solution to these systemic failures.
             </p>
         </div>
     </div>
