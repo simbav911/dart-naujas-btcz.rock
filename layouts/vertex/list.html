@@ -4,6 +4,14 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Enhanced spacing variables */
+:root {
+    --section-spacing: 5rem;
+    --section-spacing-md: 8rem;
+    --content-spacing: 3rem;
+    --card-spacing: 2rem;
+}
+
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -15,16 +23,55 @@ html {
     transform: translateY(0);
 }
 
+/* Enhanced section card styling */
 .section-card {
     background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
     border: 1px solid rgba(255, 215, 0, 0.2);
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 3rem !important;
+}
+
+@media (min-width: 768px) {
+    .section-card {
+        padding: 4rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section-card {
+        padding: 5rem !important;
+    }
 }
 
 .section-card:hover {
     border-color: rgba(255, 215, 0, 0.4);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+}
+
+/* Professional section separator */
+.section-separator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.3) 50%, transparent 100%);
+    margin: 6rem 0;
+}
+
+@media (min-width: 768px) {
+    .section-separator {
+        margin: 8rem 0;
+    }
+}
+
+.section-separator::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: #FFD700;
+    margin: -1px auto 0;
+    border-radius: 1px;
 }
 
 .hero-gradient {
@@ -38,9 +85,11 @@ html {
     50% { background-position: 100% 50%; }
 }
 
+/* Enhanced roadmap styling */
 .roadmap-item {
     position: relative;
     padding-left: 2rem;
+    margin-bottom: 2rem;
 }
 
 .roadmap-item::before {
@@ -63,6 +112,48 @@ html {
     width: 2px;
     height: calc(100% - 1rem);
     background: linear-gradient(to bottom, #FFD700, rgba(255, 215, 0, 0.3));
+}
+
+/* Enhanced typography spacing */
+.enhanced-spacing h2 {
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+.enhanced-spacing h3 {
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.enhanced-spacing p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* Professional content blocks */
+.content-block {
+    margin-bottom: 2rem;
+}
+
+.content-block:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile-specific spacing adjustments */
+@media (max-width: 768px) {
+    :root {
+        --section-spacing: 3rem;
+        --content-spacing: 2rem;
+        --card-spacing: 1.5rem;
+    }
+    
+    .section-separator {
+        margin: 2.5rem 0;
+    }
+    
+    .section-card {
+        padding: 1.5rem !important;
+    }
 }
 </style>
 
@@ -96,15 +187,15 @@ html {
 </section>
 
 <!-- Abstract Section -->
-<section id="abstract" class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section id="abstract" class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 Abstract
             </h2>
         </div>
         
-        <div class="section-card rounded-2xl p-8 md:p-12">
+        <div class="section-card rounded-2xl p-24 md:p-32 lg:p-40">
             <div class="prose prose-invert prose-lg max-w-none">
                 <p class="text-btcz-gray-200 leading-relaxed text-lg mb-6">
                     The modern digital communication landscape is defined by a flawed dichotomy. Centralized platforms like WhatsApp and Telegram offer reliability at the cost of user sovereignty, harvesting metadata and controlling user identity. Existing decentralized P2P messengers like Jami offer freedom from servers but suffer from architectural trade-offs, resulting in unreliable offline messaging, fragile identities tied to physical devices, and a lack of data permanence.
@@ -120,18 +211,20 @@ html {
     </div>
 </section>
 
+<div class="section-separator"></div>
+
 <!-- The Problem Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 The Problem: The Illusion of Choice
             </h2>
         </div>
         
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
             <!-- Centralized -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <div class="text-center mb-6">
                     <div class="w-16 h-16 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-building text-2xl text-red-400"></i>
@@ -148,7 +241,7 @@ html {
             </div>
             
             <!-- P2P -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <div class="text-center mb-6">
                     <div class="w-16 h-16 mx-auto mb-4 bg-orange-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-network-wired text-2xl text-orange-400"></i>
@@ -168,15 +261,15 @@ html {
 </section>
 
 <!-- The Solution Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 The Solution: The Sovereign Protocol
             </h2>
         </div>
         
-        <div class="section-card rounded-2xl p-8 md:p-12 mb-12">
+        <div class="section-card rounded-2xl p-20 md:p-24 mb-12">
             <div class="text-center mb-8">
                 <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                     <i class="fas fa-crown text-3xl text-btcz-gold"></i>
@@ -187,7 +280,7 @@ html {
                 Vortex is the synthesis of these two models, eliminating their core weaknesses. It uses the BitcoinZ blockchain not as a database, but as the single source of truth for identity, social connections, and communication.
             </p>
             
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                 <div class="bg-btcz-gray-800/50 rounded-xl p-6">
                     <h4 class="text-xl font-bold text-btcz-gold mb-3">Permanence & Reliability</h4>
                     <p class="text-btcz-gray-200">Your data is immutably recorded on a global, decentralized ledger. It can never be lost or censored.</p>
@@ -201,19 +294,21 @@ html {
     </div>
 </section>
 
+<div class="section-separator"></div>
+
 <!-- Blueprint Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 The Definitive Blueprint
             </h2>
             <p class="text-xl text-btcz-gray-300">How Vortex Works</p>
         </div>
         
-        <div class="space-y-12">
+        <div class="space-y-16 md:space-y-20">
             <!-- Identity Generation -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <h3 class="text-2xl font-bold text-btcz-gold mb-6">A. Cryptographic Identity Generation</h3>
                 <p class="text-btcz-gray-200 mb-6 italic">The process begins and ends on the user's device, handled by the Rust Core Engine.</p>
                 <div class="space-y-6">
@@ -237,7 +332,7 @@ html {
             </div>
             
             <!-- Social Layer -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <h3 class="text-2xl font-bold text-btcz-gold mb-6">B. The Secure Social Layer</h3>
                 <div class="space-y-6">
                     <div class="bg-btcz-gray-800/50 rounded-lg p-6">
@@ -252,7 +347,7 @@ html {
             </div>
             
             <!-- Message Lifecycle -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <h3 class="text-2xl font-bold text-btcz-gold mb-6">C. The Lifecycle of a Message</h3>
                 <div class="space-y-4">
                     <div class="flex items-start space-x-4">
@@ -296,10 +391,12 @@ html {
     </div>
 </section>
 
+<div class="section-separator"></div>
+
 <!-- Current Reality Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
                 The Current Reality: A Compendium of Digital Failures
             </h2>
@@ -313,9 +410,9 @@ html {
             </div>
         </div>
 
-        <div class="space-y-16">
+        <div class="space-y-28 md:space-y-32">
             <!-- Category 1: Leaks & Hacks -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <div class="text-center mb-8">
                     <div class="w-16 h-16 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-shield-slash text-2xl text-red-400"></i>
@@ -324,7 +421,7 @@ html {
                     <p class="text-btcz-gray-300">Even the most well-intentioned platforms are centralized targets, and their complex software creates inevitable vulnerabilities.</p>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <!-- Pegasus Story -->
                     <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                         <h4 class="text-xl font-bold text-red-400 mb-4">🔴 The Story: The Pegasus Hack via WhatsApp (2019)</h4>
@@ -385,7 +482,7 @@ html {
             </div>
 
             <!-- Category 2: Spying & Surveillance -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <div class="text-center mb-8">
                     <div class="w-16 h-16 mx-auto mb-4 bg-orange-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-eye text-2xl text-orange-400"></i>
@@ -394,7 +491,7 @@ html {
                     <p class="text-btcz-gray-300">The most profitable product of "free" services is the data about your life—your metadata.</p>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <!-- FBI Metadata Story -->
                     <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                         <h4 class="text-xl font-bold text-orange-400 mb-4">🟠 The Story: The FBI and WhatsApp Metadata (2021)</h4>
@@ -436,7 +533,7 @@ html {
             </div>
 
             <!-- Category 3: Banning & Censorship -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <div class="text-center mb-8">
                     <div class="w-16 h-16 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-ban text-2xl text-red-400"></i>
@@ -445,7 +542,7 @@ html {
                     <p class="text-btcz-gray-300">Centralized platforms are, by their nature, instruments of control.</p>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <!-- Nationwide Blocks Story -->
                     <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                         <h4 class="text-xl font-bold text-red-400 mb-4">🔴 The Story: Nationwide Messenger Blocks (Ongoing)</h4>
@@ -488,7 +585,7 @@ html {
 
             <!-- Conclusion -->
             <div class="text-center">
-                <div class="section-card rounded-2xl p-8 max-w-4xl mx-auto">
+                <div class="section-card rounded-2xl p-20 md:p-24 max-w-4xl mx-auto">
                     <h3 class="text-2xl font-bold text-btcz-gold mb-6">Conclusion</h3>
                     <p class="text-xl text-btcz-gray-200 leading-relaxed mb-6">
                         These stories are not edge cases; they are the inevitable result of the centralized and trust-based systems we use every day. They prove that a new architecture is not just a novelty, but a necessity.
@@ -505,9 +602,9 @@ html {
 </section>
 
 <!-- Surveillance Capitalism Engine Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
                 The Surveillance Capitalism Engine
             </h2>
@@ -517,9 +614,9 @@ html {
         </div>
 
         <!-- Part 1: Data Collection Engine -->
-        <div class="space-y-16">
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+        <div class="space-y-28 md:space-y-32">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-orange-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-search text-3xl text-orange-400"></i>
                     </div>
@@ -532,7 +629,7 @@ html {
                     </div>
                 </div>
 
-                <div class="space-y-12">
+                <div class="space-y-16 md:space-y-20">
                     <!-- Layer 1: The Application -->
                     <div class="bg-btcz-gray-800/50 rounded-xl p-8">
                         <div class="flex items-center mb-6">
@@ -546,7 +643,7 @@ html {
                         </div>
                         <p class="text-btcz-gray-300 mb-6">This is the data you willingly provide.</p>
                         
-                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                             <div class="bg-btcz-gray-700/50 rounded-lg p-4">
                                 <div class="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center mb-3">
                                     <i class="fas fa-user text-blue-400"></i>
@@ -595,7 +692,7 @@ html {
                             </p>
                         </div>
                         
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid md:grid-cols-2 gap-10 md:gap-12">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <div class="flex items-center mb-4">
                                     <i class="fas fa-project-diagram text-orange-400 text-xl mr-3"></i>
@@ -640,7 +737,7 @@ html {
                         </div>
                         <p class="text-btcz-gray-300 mb-6">Most apps don't operate in a vacuum.</p>
                         
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid md:grid-cols-2 gap-10 md:gap-12">
                             <div class="bg-btcz-gray-700/50 rounded-lg p-6">
                                 <div class="flex items-center mb-4">
                                     <i class="fas fa-code text-red-400 text-xl mr-3"></i>
@@ -661,8 +758,8 @@ html {
             </div>
 
             <!-- Part 2: Monetization Engine -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-green-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-dollar-sign text-3xl text-green-400"></i>
                     </div>
@@ -675,13 +772,13 @@ html {
                     </div>
                 </div>
 
-                <div class="space-y-12">
+                <div class="space-y-16 md:space-y-20">
                     <!-- Hyper-Targeted Advertising -->
                     <div class="bg-gradient-to-br from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-xl p-8">
                         <h4 class="text-2xl font-bold text-green-400 mb-6">1. Hyper-Targeted Advertising (The Primary Model)</h4>
                         <p class="text-green-300 font-semibold mb-6">This is the main engine of Surveillance Capitalism.</p>
                         
-                        <div class="grid md:grid-cols-2 gap-8">
+                        <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <h5 class="font-semibold text-red-400 mb-4">❌ The Old Way</h5>
                                 <p class="text-btcz-gray-200">A car company buys a TV ad and hopes car buyers are watching.</p>
@@ -721,7 +818,7 @@ html {
                         <h4 class="text-2xl font-bold text-purple-400 mb-6">3. Behavioral Analysis & Market Research</h4>
                         <p class="text-btcz-gray-300 mb-6">The aggregated, anonymized data is incredibly valuable.</p>
                         
-                        <div class="grid md:grid-cols-3 gap-6">
+                        <div class="grid md:grid-cols-3 gap-10 md:gap-12 md:gap-10">
                             <div class="bg-btcz-gray-700/50 rounded-lg p-6 text-center">
                                 <i class="fas fa-chart-bar text-purple-400 text-2xl mb-4"></i>
                                 <h5 class="font-semibold text-purple-400 mb-3">Trend Analysis</h5>
@@ -747,8 +844,8 @@ html {
             </div>
 
             <!-- How Vortex Breaks This System -->
-            <div class="section-card rounded-2xl p-8 bg-gradient-to-br from-btcz-gold/5 to-btcz-gold/10 border border-btcz-gold/20">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-20 md:p-24 bg-gradient-to-br from-btcz-gold/5 to-btcz-gold/10 border border-btcz-gold/20">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-shield-alt text-3xl text-btcz-gold"></i>
                     </div>
@@ -756,7 +853,7 @@ html {
                     <p class="text-xl text-btcz-gray-300">Vortex is architected from the ground up to be incompatible with the Surveillance Capitalism model.</p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12">
+                <div class="grid md:grid-cols-2 gap-16 md:gap-20">
                     <!-- It Blinds the Where -->
                     <div class="space-y-6">
                         <h4 class="text-2xl font-bold text-btcz-gold mb-6">🔒 It Blinds the "Where"</h4>
@@ -812,9 +909,9 @@ html {
 </section>
 
 <!-- New Paradigm Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-green-400">
                 A New Paradigm of Network Strength
             </h2>
@@ -824,13 +921,13 @@ html {
         </div>
 
         <!-- Philosophy Contrast -->
-        <div class="space-y-16">
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+        <div class="space-y-28 md:space-y-32">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <h3 class="text-3xl font-bold text-btcz-gold mb-8">Quality Over Quantity: A Fundamental Shift</h3>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-12">
+                <div class="grid lg:grid-cols-2 gap-16 md:gap-20">
                     <!-- Old Paradigm -->
                     <div class="bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-xl p-8">
                         <div class="text-center mb-6">
@@ -882,8 +979,8 @@ html {
             </div>
 
             <!-- Network Power & Technical Capabilities -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-blue-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-network-wired text-3xl text-blue-400"></i>
                     </div>
@@ -891,12 +988,12 @@ html {
                     <p class="text-xl text-btcz-gray-300">With this new definition of strength, the BitcoinZ network delivers extraordinary capabilities.</p>
                 </div>
 
-                <div class="space-y-12">
+                <div class="space-y-16 md:space-y-20">
                     <!-- Protocol Engineering -->
                     <div class="bg-blue-500/10 rounded-xl p-8 border border-blue-500/20">
                         <h4 class="text-2xl font-bold text-blue-400 mb-6 text-center">Profound Engineering Efficiency</h4>
                         
-                        <div class="grid md:grid-cols-2 gap-8">
+                        <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <div class="flex items-center mb-4">
                                     <i class="fas fa-compress text-blue-400 text-xl mr-3"></i>
@@ -923,7 +1020,7 @@ html {
                     <div class="bg-green-500/10 rounded-xl p-8 border border-green-500/20">
                         <h4 class="text-2xl font-bold text-green-400 mb-8 text-center">Exponential Scaling Capacity</h4>
                         
-                        <div class="grid md:grid-cols-3 gap-8">
+                        <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                             <div class="text-center">
                                 <div class="w-16 h-16 mx-auto mb-4 bg-green-500/20 rounded-full flex items-center justify-center">
                                     <i class="fas fa-cube text-2xl text-green-400"></i>
@@ -960,8 +1057,8 @@ html {
             </div>
 
             <!-- The Honest Economy -->
-            <div class="section-card rounded-2xl p-8 bg-gradient-to-br from-btcz-gold/5 to-green-500/5 border border-btcz-gold/20">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-20 md:p-24 bg-gradient-to-br from-btcz-gold/5 to-green-500/5 border border-btcz-gold/20">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-handshake text-3xl text-btcz-gold"></i>
                     </div>
@@ -969,7 +1066,7 @@ html {
                     <p class="text-xl text-btcz-gray-300">All of this power comes with an honest, transparent, and sustainable economic model that is superior to every "free" app.</p>
                 </div>
 
-                <div class="space-y-12">
+                <div class="space-y-16 md:space-y-20">
                     <!-- No Surveillance Economy -->
                     <div class="bg-btcz-gray-800/50 rounded-xl p-8">
                         <div class="text-center mb-8">
@@ -989,7 +1086,7 @@ html {
                     </div>
 
                     <!-- Three Elegant Features -->
-                    <div class="grid md:grid-cols-3 gap-8">
+                    <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                         <div class="bg-gradient-to-b from-green-500/10 to-green-500/5 border border-green-500/20 rounded-xl p-8 text-center">
                             <div class="w-16 h-16 mx-auto mb-4 bg-green-500/20 rounded-full flex items-center justify-center">
                                 <i class="fas fa-feather text-2xl text-green-400"></i>
@@ -1028,14 +1125,14 @@ html {
 
             <!-- Endurance & Vision -->
             <div class="text-center">
-                <div class="section-card rounded-2xl p-8 max-w-4xl mx-auto">
+                <div class="section-card rounded-2xl p-20 md:p-24 max-w-4xl mx-auto">
                     <h3 class="text-2xl font-bold text-btcz-gold mb-6">Built to Endure, Engineered for Everyone</h3>
                     <div class="space-y-6">
                         <p class="text-xl text-btcz-gray-200 leading-relaxed">
                             Vortex is not just built to be used; it is engineered to endure. It has the capacity for a global community and a fair, sustainable economic model that respects its users from day one.
                         </p>
                         
-                        <div class="grid md:grid-cols-2 gap-8">
+                        <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <div class="flex items-center mb-3">
                                     <i class="fas fa-globe text-btcz-gold mr-3"></i>
@@ -1064,10 +1161,12 @@ html {
     </div>
 </section>
 
+<div class="section-separator"></div>
+
 <!-- Vision for Year One Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-green-400 to-btcz-gold">
                 The Vision for Year One: From Launch to Phenomenon
             </h2>
@@ -1077,11 +1176,11 @@ html {
         </div>
 
         <!-- Strategic Foundation -->
-        <div class="space-y-16">
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+        <div class="space-y-28 md:space-y-32">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <h3 class="text-3xl font-bold text-btcz-gold mb-8">Exponential Growth by Design</h3>
-                    <div class="grid md:grid-cols-2 gap-8">
+                    <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                         <div class="bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-xl p-6">
                             <h4 class="text-xl font-bold text-red-400 mb-4">❌ Not Incremental Growth</h4>
                             <p class="text-btcz-gray-200">We are not aiming for slow, linear adoption like traditional apps.</p>
@@ -1101,8 +1200,8 @@ html {
             </div>
 
             <!-- Three Pillars of Adoption -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <h3 class="text-3xl font-bold text-btcz-gold mb-4">Why Vortex Will Get So Popular</h3>
                     <p class="text-xl text-btcz-gray-300">The Three Pillars of Adoption</p>
                     <div class="mt-6 p-4 bg-btcz-gold/10 rounded-lg border border-btcz-gold/20 max-w-3xl mx-auto">
@@ -1112,7 +1211,7 @@ html {
                     </div>
                 </div>
 
-                <div class="space-y-16">
+                <div class="space-y-28 md:space-y-32">
                     <!-- Pillar 1: Sovereign Creator Economy -->
                     <div class="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl p-8">
                         <div class="flex items-center mb-8">
@@ -1125,7 +1224,7 @@ html {
                             </div>
                         </div>
                         
-                        <div class="space-y-8">
+                        <div class="space-y-16 md:space-y-20">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <h5 class="font-semibold text-green-400 mb-3">🎯 The Catalyst</h5>
                                 <p class="text-btcz-gray-200 mb-4">
@@ -1138,7 +1237,7 @@ html {
                                 </div>
                             </div>
                             
-                            <div class="grid md:grid-cols-3 gap-6">
+                            <div class="grid md:grid-cols-3 gap-10 md:gap-12 md:gap-10">
                                 <div class="bg-btcz-gray-800/50 rounded-lg p-6 text-center">
                                     <i class="fas fa-users text-green-400 text-2xl mb-4"></i>
                                     <h6 class="font-semibold text-green-400 mb-2">Sovereign Groups</h6>
@@ -1177,7 +1276,7 @@ html {
                             </div>
                         </div>
                         
-                        <div class="space-y-8">
+                        <div class="space-y-16 md:space-y-20">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <h5 class="font-semibold text-blue-400 mb-3">🎯 The Catalyst</h5>
                                 <p class="text-btcz-gray-200 mb-4">
@@ -1190,7 +1289,7 @@ html {
                                 </div>
                             </div>
                             
-                            <div class="grid md:grid-cols-3 gap-6">
+                            <div class="grid md:grid-cols-3 gap-10 md:gap-12 md:gap-10">
                                 <div class="bg-btcz-gray-800/50 rounded-lg p-6 text-center">
                                     <i class="fas fa-newspaper text-blue-400 text-2xl mb-4"></i>
                                     <h6 class="font-semibold text-blue-400 mb-2">Journalist Protection</h6>
@@ -1229,7 +1328,7 @@ html {
                             </div>
                         </div>
                         
-                        <div class="space-y-8">
+                        <div class="space-y-16 md:space-y-20">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <h5 class="font-semibold text-btcz-gold mb-3">🎯 The Catalyst</h5>
                                 <p class="text-btcz-gray-200 mb-4">
@@ -1242,7 +1341,7 @@ html {
                                 </div>
                             </div>
                             
-                            <div class="grid md:grid-cols-3 gap-6">
+                            <div class="grid md:grid-cols-3 gap-10 md:gap-12 md:gap-10">
                                 <div class="bg-btcz-gray-800/50 rounded-lg p-6 text-center">
                                     <i class="fas fa-smile text-btcz-gold text-2xl mb-4"></i>
                                     <h6 class="font-semibold text-btcz-gold mb-2">Easy as Emoji</h6>
@@ -1272,22 +1371,22 @@ html {
             </div>
 
             <!-- The Goal is Clear -->
-            <div class="section-card rounded-2xl p-8 bg-gradient-to-br from-btcz-gold/5 to-blue-500/5 border border-btcz-gold/20">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-20 md:p-24 bg-gradient-to-br from-btcz-gold/5 to-blue-500/5 border border-btcz-gold/20">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-rocket text-3xl text-btcz-gold"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-btcz-gold mb-4">The Goal is Clear</h3>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <div class="bg-btcz-gray-800/50 rounded-xl p-8 text-center">
                         <h4 class="text-2xl font-bold text-btcz-gold mb-6">Essential Tool for the 21st Century</h4>
                         <p class="text-xl text-btcz-gray-200 leading-relaxed mb-6">
                             By building the definitive platform for sovereign creators, privacy advocates, and peer-to-peer finance, we are not just building a messenger. We are building an essential tool for the 21st century.
                         </p>
                         
-                        <div class="grid md:grid-cols-3 gap-8">
+                        <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                             <div class="bg-green-500/10 rounded-lg p-6 border border-green-500/20">
                                 <i class="fas fa-paint-brush text-green-400 text-2xl mb-4"></i>
                                 <h5 class="font-semibold text-green-400 mb-2">Sovereign Creators</h5>
@@ -1306,7 +1405,7 @@ html {
                         </div>
                     </div>
                     
-                    <div class="grid md:grid-cols-2 gap-8">
+                    <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                         <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                             <h5 class="font-semibold text-btcz-gold mb-3">🔥 Year One Focus</h5>
                             <p class="text-btcz-gray-200">The first year is about lighting the fire of mass adoption. From there, the potential is limitless.</p>
@@ -1329,9 +1428,9 @@ html {
 </section>
 
 <!-- Advantages Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-7xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 The Vortex Advantage: A Comparative Analysis
             </h2>
@@ -1341,7 +1440,7 @@ html {
         </div>
         
         <!-- Comparison Matrix -->
-        <div class="section-card rounded-2xl p-4 md:p-8 mb-12 overflow-x-auto">
+        <div class="section-card rounded-2xl p-8 md:p-12 mb-12 overflow-x-auto">
             <h3 class="text-2xl font-bold text-btcz-gold mb-8 text-center">Comparative Matrix</h3>
             <div class="min-w-full overflow-x-auto">
                 <table class="w-full text-sm">
@@ -1431,14 +1530,14 @@ html {
         </div>
 
         <!-- Narrative Breakdown -->
-        <div class="space-y-12">
+        <div class="space-y-16 md:space-y-20">
             <div class="text-center mb-12">
                 <h3 class="text-3xl font-bold text-btcz-gold mb-4">Narrative Breakdown: Why The Differences Matter</h3>
                 <p class="text-lg text-btcz-gray-300">The table shows the "what." This section explains the "so what."</p>
             </div>
 
             <!-- vs Centralized -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <h4 class="text-2xl font-bold text-btcz-gold mb-6">1. vs. The Centralized Giants (WhatsApp, Signal, Telegram)</h4>
                 <div class="bg-btcz-gray-800/50 rounded-lg p-6 mb-6">
                     <p class="text-xl text-btcz-gold font-semibold text-center mb-4">This is a battle of Sovereignty vs. Trust.</p>
@@ -1462,7 +1561,7 @@ html {
             </div>
 
             <!-- vs P2P -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <h4 class="text-2xl font-bold text-btcz-gold mb-6">2. vs. The Peer-to-Peer Pioneers (Jami)</h4>
                 <div class="bg-btcz-gray-800/50 rounded-lg p-6 mb-6">
                     <p class="text-xl text-btcz-gold font-semibold text-center mb-4">This is a battle of Permanence vs. Ephemerality.</p>
@@ -1480,13 +1579,13 @@ html {
             </div>
 
             <!-- Synthesis -->
-            <div class="section-card rounded-2xl p-8">
+            <div class="section-card rounded-2xl p-24 md:p-32">
                 <h4 class="text-2xl font-bold text-btcz-gold mb-6 text-center">Conclusion: The Synthesis</h4>
                 <div class="space-y-6">
                     <p class="text-xl text-btcz-gray-200 leading-relaxed text-center">
                         Vortex is not just another option; it is a synthesis. It combines:
                     </p>
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid md:grid-cols-3 gap-10 md:gap-12 md:gap-10">
                         <div class="bg-btcz-gray-800/50 rounded-lg p-6 text-center">
                             <div class="w-12 h-12 mx-auto mb-4 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                                 <i class="fas fa-rocket text-btcz-gold"></i>
@@ -1518,20 +1617,20 @@ html {
 </section>
 
 <!-- Game Changer Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 Why Vortex is a Paradigm Shift
             </h2>
         </div>
         
-        <div class="section-card rounded-2xl p-8 md:p-12">
+        <div class="section-card rounded-2xl p-20 md:p-24">
             <p class="text-xl text-btcz-gray-200 leading-relaxed mb-8 text-center">
                 Vortex is not just an improvement; it is an innovation that changes the fundamental nature of our relationship with our digital lives.
             </p>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                 <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-history text-2xl text-btcz-gold"></i>
@@ -1567,15 +1666,15 @@ html {
 </section>
 
 <!-- Roadmap Section -->
-<section id="roadmap" class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section id="roadmap" class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 Development Roadmap
             </h2>
         </div>
         
-        <div class="section-card rounded-2xl p-8 md:p-12">
+        <div class="section-card rounded-2xl p-20 md:p-24">
             <div class="space-y-8">
                 <div class="roadmap-item">
                     <h3 class="text-xl font-bold text-btcz-gold mb-3">Phase 1: Core Protocol & CLI Client</h3>
@@ -1601,10 +1700,12 @@ html {
     </div>
 </section>
 
+<div class="section-separator"></div>
+
 <!-- Ecosystem Fund Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">
                 The Vortex Ecosystem Fund: A Sustainable Model for a Sovereign Future
             </h2>
@@ -1613,12 +1714,12 @@ html {
             </p>
         </div>
 
-        <div class="space-y-16">
+        <div class="space-y-28 md:space-y-32">
             <!-- Core Philosophy -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <h3 class="text-3xl font-bold text-purple-400 mb-8">A Sustainable Future Without Compromise</h3>
-                    <div class="grid md:grid-cols-2 gap-8">
+                    <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                         <div class="bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-xl p-6">
                             <h4 class="text-xl font-bold text-red-400 mb-4">❌ The "Free App" Lie</h4>
                             <p class="text-btcz-gray-200">Built on surveillance and selling user data. Your privacy is the product.</p>
@@ -1641,8 +1742,8 @@ html {
             </div>
 
             <!-- Vortex Premium -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-blue-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-crown text-3xl text-blue-400"></i>
                     </div>
@@ -1657,7 +1758,7 @@ html {
                         <p class="text-lg text-green-300 font-semibold">The fundamental, sovereign features of Vortex will always be free for everyone. This is non-negotiable.</p>
                     </div>
                     
-                    <div class="grid md:grid-cols-2 gap-6">
+                    <div class="grid md:grid-cols-2 gap-10 md:gap-12">
                         <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                             <h5 class="font-semibold text-green-400 mb-4 flex items-center">
                                 <i class="fas fa-check-circle mr-3"></i>
@@ -1692,8 +1793,8 @@ html {
             </div>
 
             <!-- The Power of the Fund -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-purple-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-rocket text-3xl text-purple-400"></i>
                     </div>
@@ -1706,7 +1807,7 @@ html {
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12">
+                <div class="grid md:grid-cols-2 gap-16 md:gap-20">
                     <!-- Mission 1: Development -->
                     <div class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-xl p-8">
                         <div class="text-center mb-8">
@@ -1724,7 +1825,7 @@ html {
                                 </p>
                             </div>
                             
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-6 md:gap-8">
                                 <div class="bg-btcz-gray-800/50 rounded-lg p-4 text-center">
                                     <i class="fas fa-code text-cyan-400 text-xl mb-3"></i>
                                     <h6 class="font-semibold text-cyan-400 mb-1">Top Developers</h6>
@@ -1762,7 +1863,7 @@ html {
                                 </div>
                             </div>
                             
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-6 md:gap-8">
                                 <div class="bg-btcz-gray-800/50 rounded-lg p-4 text-center">
                                     <i class="fas fa-chart-line text-btcz-gold text-xl mb-3"></i>
                                     <h6 class="font-semibold text-btcz-gold mb-1">Market Access</h6>
@@ -1780,22 +1881,22 @@ html {
             </div>
 
             <!-- Community Value Proposition -->
-            <div class="section-card rounded-2xl p-8 bg-gradient-to-br from-purple-500/5 to-blue-500/5 border border-purple-500/20">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-20 md:p-24 bg-gradient-to-br from-purple-500/5 to-blue-500/5 border border-purple-500/20">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-purple-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-users text-3xl text-purple-400"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-purple-400 mb-4">Built For Us, By Us</h3>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <div class="bg-btcz-gray-800/50 rounded-xl p-8 text-center">
                         <h4 class="text-2xl font-bold text-purple-400 mb-6">A Tool We Build Together</h4>
                         <p class="text-xl text-btcz-gray-200 leading-relaxed mb-6">
                             Vortex Premium is not a product we are selling to you; it is a tool we are building for us. It is the system that ensures our project remains independent, innovative, and powerful for years to come, with all the value flowing back to the community that builds it.
                         </p>
                         
-                        <div class="grid md:grid-cols-3 gap-8">
+                        <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                             <div class="bg-purple-500/10 rounded-lg p-6 border border-purple-500/20">
                                 <i class="fas fa-eye text-purple-400 text-2xl mb-4"></i>
                                 <h5 class="font-semibold text-purple-400 mb-2">Transparent</h5>
@@ -1829,9 +1930,9 @@ html {
 </section>
 
 <!-- Vortex Strategy Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400">
                 The Vortex Strategy: A Three-Phase Plan to Ignite the Value of BitcoinZ
             </h2>
@@ -1840,10 +1941,10 @@ html {
             </p>
         </div>
 
-        <div class="space-y-16">
+        <div class="space-y-28 md:space-y-32">
             <!-- Phase 1: Build the Value Engine -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-green-500/20 rounded-full flex items-center justify-center">
                         <span class="text-green-400 font-bold text-3xl">1</span>
                     </div>
@@ -1851,8 +1952,8 @@ html {
                     <p class="text-xl text-green-300">(The Current Stage)</p>
                 </div>
 
-                <div class="space-y-8">
-                    <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-16 md:space-y-20">
+                    <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                         <div class="bg-red-500/10 rounded-xl p-6 border border-red-500/20">
                             <h4 class="text-xl font-bold text-red-400 mb-4">❌ The Problem</h4>
                             <p class="text-btcz-gray-200">Currently, the primary utility of BTCZ is speculation and holding. To command a higher price, it needs a powerful, undeniable, and daily use case.</p>
@@ -1885,8 +1986,8 @@ html {
             </div>
 
             <!-- Phase 2: Ignite the Utility Flywheel -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-blue-500/20 rounded-full flex items-center justify-center">
                         <span class="text-blue-400 font-bold text-3xl">2</span>
                     </div>
@@ -1899,12 +2000,12 @@ html {
                     </div>
                 </div>
 
-                <div class="space-y-12">
+                <div class="space-y-16 md:space-y-20">
                     <!-- Create Buying Pressure -->
                     <div class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-xl p-8">
                         <h4 class="text-2xl font-bold text-cyan-400 mb-8 text-center">1. Create Powerful, Sustained Buying Pressure (Demand ↑)</h4>
                         
-                        <div class="grid md:grid-cols-3 gap-8">
+                        <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <div class="flex items-center mb-4">
                                     <i class="fas fa-user-plus text-cyan-400 text-xl mr-3"></i>
@@ -1933,7 +2034,7 @@ html {
                     <div class="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-xl p-8">
                         <h4 class="text-2xl font-bold text-orange-400 mb-8 text-center">2. Drastically Reduce Selling Pressure (Supply ↓)</h4>
                         
-                        <div class="grid md:grid-cols-2 gap-8">
+                        <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <div class="flex items-center mb-4">
                                     <i class="fas fa-grip-horizontal text-orange-400 text-xl mr-3"></i>
@@ -1968,8 +2069,8 @@ html {
             </div>
 
             <!-- Phase 3: Expand and Capture the Market -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-purple-500/20 rounded-full flex items-center justify-center">
                         <span class="text-purple-400 font-bold text-3xl">3</span>
                     </div>
@@ -1982,8 +2083,8 @@ html {
                     </div>
                 </div>
 
-                <div class="space-y-8">
-                    <div class="grid md:grid-cols-3 gap-8">
+                <div class="space-y-16 md:space-y-20">
+                    <div class="grid md:grid-cols-3 gap-10 md:gap-12">
                         <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-6">
                             <div class="text-center mb-6">
                                 <div class="w-16 h-16 mx-auto mb-4 bg-purple-500/20 rounded-full flex items-center justify-center">
@@ -2055,7 +2156,7 @@ html {
             </div>
 
             <!-- Strategy Summary -->
-            <div class="section-card rounded-2xl p-8 bg-gradient-to-br from-green-500/5 via-blue-500/5 to-purple-500/5 border border-btcz-gold/20">
+            <div class="section-card rounded-2xl p-20 md:p-24 bg-gradient-to-br from-green-500/5 via-blue-500/5 to-purple-500/5 border border-btcz-gold/20">
                 <div class="text-center mb-8">
                     <h3 class="text-3xl font-bold text-btcz-gold mb-4">Clear, Actionable, Cause-and-Effect</h3>
                     <p class="text-xl text-btcz-gray-200 leading-relaxed">
@@ -2074,9 +2175,9 @@ html {
 </section>
 
 <!-- Core Team Oversight Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-btcz-gold to-yellow-400">
                 A Commitment to Excellence: Oversight by the Core BitcoinZ Team
             </h2>
@@ -2085,10 +2186,10 @@ html {
             </p>
         </div>
 
-        <div class="space-y-12">
+        <div class="space-y-16 md:space-y-20">
             <!-- Main Oversight Card -->
-            <div class="section-card rounded-2xl p-8 md:p-12">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-20 md:p-24">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-shield-alt text-3xl text-btcz-gold"></i>
                     </div>
@@ -2105,7 +2206,7 @@ html {
                 <div class="mb-12">
                     <h3 class="text-2xl font-bold text-orange-400 mb-8 text-center">What this oversight means for the project:</h3>
                     
-                    <div class="space-y-8">
+                    <div class="space-y-16 md:space-y-20">
                         <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                             <h4 class="text-xl font-bold text-blue-400 mb-4 flex items-center">
                                 <i class="fas fa-brain mr-3"></i>Expert Guidance
@@ -2149,9 +2250,9 @@ html {
 </section>
 
 <!-- Community Call to Action Section -->
-<section class="section bg-btcz-gray-950 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-950 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-btcz-gold to-red-400">
                 Project Vortex: A Community Call to Forge Our Future
             </h2>
@@ -2160,23 +2261,23 @@ html {
             </p>
         </div>
 
-        <div class="space-y-16">
+        <div class="space-y-28 md:space-y-32">
             <!-- What We're Really Building -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-shield-alt text-3xl text-btcz-gold"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-btcz-gold mb-8">This is Not a Simple "Memo Messenger"</h3>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <div class="bg-btcz-gold/10 rounded-xl p-8 border border-btcz-gold/20">
                         <p class="text-xl text-btcz-gold font-semibold mb-6 text-center">
                             Vortex is not a simple "memo messenger." Anyone can send a message in a memo.
                         </p>
                         
-                        <div class="grid md:grid-cols-2 gap-8">
+                        <div class="grid md:grid-cols-2 gap-16 md:gap-20 md:gap-16">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-6">
                                 <h4 class="text-lg font-bold text-orange-400 mb-4">🔒 The Analogy</h4>
                                 <p class="text-btcz-gray-200 mb-4">
@@ -2221,8 +2322,8 @@ html {
             </div>
 
             <!-- The Mission: Phased Funding -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-orange-500/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-rocket text-3xl text-orange-400"></i>
                     </div>
@@ -2230,7 +2331,7 @@ html {
                     <p class="text-xl text-orange-300">Transparent, phased funding strategy</p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12">
+                <div class="grid md:grid-cols-2 gap-16 md:gap-20">
                     <!-- Phase 1: Immediate Goal -->
                     <div class="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl p-8">
                         <div class="text-center mb-8">
@@ -2288,8 +2389,8 @@ html {
             </div>
 
             <!-- Timeline & Strategy -->
-            <div class="section-card rounded-2xl p-8">
-                <div class="grid md:grid-cols-2 gap-12">
+            <div class="section-card rounded-2xl p-24 md:p-32">
+                <div class="grid md:grid-cols-2 gap-16 md:gap-20">
                     <!-- Timeline -->
                     <div class="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl p-8">
                         <div class="text-center mb-8">
@@ -2346,8 +2447,8 @@ html {
             </div>
 
             <!-- How to Contribute -->
-            <div class="section-card rounded-2xl p-8 bg-gradient-to-br from-btcz-gold/5 to-orange-500/5 border border-btcz-gold/20">
-                <div class="text-center mb-12">
+            <div class="section-card rounded-2xl p-20 md:p-24 bg-gradient-to-br from-btcz-gold/5 to-orange-500/5 border border-btcz-gold/20">
+                <div class="text-center mb-16">
                     <div class="w-20 h-20 mx-auto mb-6 bg-btcz-gold/20 rounded-full flex items-center justify-center">
                         <i class="fas fa-hand-holding-heart text-3xl text-btcz-gold"></i>
                     </div>
@@ -2355,7 +2456,7 @@ html {
                     <p class="text-xl text-btcz-gray-200">Every contribution, big or small, moves us closer to our goal.</p>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-16 md:space-y-20">
                     <div class="bg-btcz-gray-800/50 rounded-xl p-8">
                         <h4 class="text-2xl font-bold text-orange-400 mb-6 text-center">Official Contribution Address</h4>
                         
@@ -2387,7 +2488,7 @@ html {
                             This is our one chance to collectively fund the creation of the application that will define the future of our ecosystem.
                         </p>
                         
-                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="grid md:grid-cols-3 gap-10 md:gap-12 md:gap-10 mb-8">
                             <div class="bg-btcz-gray-800/50 rounded-lg p-4">
                                 <i class="fas fa-comments text-btcz-gold text-xl mb-3"></i>
                                 <h5 class="font-semibold text-btcz-gold mb-2">The conversation is over</h5>
@@ -2415,15 +2516,15 @@ html {
 </section>
 
 <!-- Conclusion Section -->
-<section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
+<section class="section bg-btcz-gray-900 py-20 md:py-32 fade-in">
     <div class="container mx-auto px-4 max-w-6xl">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
                 Conclusion
             </h2>
         </div>
         
-        <div class="section-card rounded-2xl p-8 md:p-12 text-center">
+        <div class="section-card rounded-2xl p-20 md:p-24 text-center">
             <p class="text-xl text-btcz-gray-200 leading-relaxed mb-8">
                 Project Vortex is an ambitious but achievable step towards a truly decentralized web. It is a practical, powerful demonstration of what is possible when a community leverages a secure and efficient blockchain to solve real-world problems.
             </p>
