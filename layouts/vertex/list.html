@@ -233,9 +233,56 @@ body {
     box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
 }
 
+.btn-hero {
+    background: linear-gradient(135deg, var(--v-gold) 0%, var(--v-gold-dark) 100%);
+    color: var(--v-dark);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+    min-width: 140px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, #FFE55C 0%, var(--v-gold) 100%);
+}
+
+/* Responsive adjustments for hero buttons */
+@media (max-width: 640px) {
+    .btn-hero {
+        padding: 0.75rem 1.5rem;
+        min-width: 120px;
+        font-size: 0.9rem;
+    }
+    
+    .heading-xl {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+    }
+    
+    .heading-lg {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-hero {
+        padding: 0.6rem 1.2rem;
+        min-width: 100px;
+        font-size: 0.85rem;
+    }
+    
+    .heading-xl {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+}
+
 /* Section Styles */
 .section {
-    padding: 5rem 0;
+    padding: 3rem 0;
     position: relative;
 }
 
@@ -896,29 +943,37 @@ body {
     </div>
     
     <div class="container relative z-10 text-center">
-        <h1 class="heading-xl gradient-text-animated mb-4">VORTEX</h1>
-        <p class="text-xl text-gray-400 tracking-[0.5em] uppercase mb-8">Project</p>
+        <div class="mb-8">
+            <h1 class="heading-xl gradient-text-animated mb-2">VORTEX</h1>
+            <p class="text-lg text-gray-400 tracking-[0.3em] uppercase mb-6">Project</p>
+        </div>
         
-        <h2 class="heading-lg text-white mb-6">
+        <h2 class="heading-lg text-white mb-6 max-w-4xl mx-auto">
             The Future of <span class="gradient-text">Sovereign Communication</span>
         </h2>
         
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
             A revolutionary messaging protocol built on BitcoinZ blockchain. 
             Permanent, private, and truly decentralized.
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <a href="#abstract" class="btn btn-primary">
-                Explore Vortex
+        <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto mb-12">
+            <a href="#abstract" class="btn btn-hero">
+                Overview
             </a>
-            <a href="#roadmap" class="btn btn-secondary">
-                View Roadmap
+            <a href="#blueprint" class="btn btn-hero">
+                How It Works
+            </a>
+            <a href="#roadmap" class="btn btn-hero">
+                Roadmap
+            </a>
+            <a href="#funding" class="btn btn-hero">
+                Fund Launch
             </a>
         </div>
         
         <!-- Quick Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-8">
             <div class="glass text-center">
                 <div class="text-3xl font-bold gradient-text mb-2">100%</div>
                 <div class="text-sm text-gray-400">Decentralized</div>
@@ -938,18 +993,12 @@ body {
         </div>
     </div>
     
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-    </div>
 </section>
 
 <!-- ABSTRACT SECTION -->
 <section id="abstract" class="section section-dark fade-in">
     <div class="container">
-        <h2 class="heading-lg gradient-text text-center mb-12">Abstract</h2>
+        <h2 class="heading-lg gradient-text text-center mb-8">Abstract</h2>
         
         <div class="glass max-w-4xl mx-auto">
             <p class="text-gray-300 text-lg leading-relaxed mb-6">
@@ -973,10 +1022,10 @@ body {
 <div class="section-separator"></div>
 
 <!-- THE PROBLEM SECTION -->
-<section class="section section-gray fade-in">
+<section id="problem" class="section section-gray fade-in">
     <div class="container">
-        <h2 class="heading-lg gradient-text text-center mb-6">The Problem: The Illusion of Choice</h2>
-        <p class="text-xl text-gray-400 text-center mb-12">Users currently face a choice between two imperfect models:</p>
+        <h2 class="heading-lg gradient-text text-center mb-4">The Problem: The Illusion of Choice</h2>
+        <p class="text-xl text-gray-400 text-center mb-8">Users currently face a choice between two imperfect models:</p>
         
         <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <!-- Centralized -->
@@ -1021,35 +1070,30 @@ body {
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<div class="section-separator"></div>
-
-
-<!-- THE SOLUTION SECTION -->
-<section class="section section-dark fade-in">
-    <div class="container">
-        <h2 class="heading-lg gradient-text text-center mb-12">The Solution: The Sovereign Protocol</h2>
         
-        <div class="glass max-w-4xl mx-auto">
-            <p class="text-gray-300 text-lg leading-relaxed mb-8">
-                Vortex is the synthesis of these two models, eliminating their core weaknesses. It uses the BitcoinZ blockchain not as a database, but as the single source of truth for identity, social connections, and communication.
-            </p>
+        <!-- The Solution -->
+        <div class="mt-16">
+            <h2 class="heading-lg gradient-text text-center mb-8">The Solution: The Sovereign Protocol</h2>
             
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="feature-card">
-                    <h3 class="text-xl font-bold text-green-400 mb-3">Permanence & Reliability</h3>
-                    <p class="text-gray-400">
-                        Your data is immutably recorded on a global, decentralized ledger. It can never be lost or censored.
-                    </p>
-                </div>
+            <div class="glass max-w-4xl mx-auto">
+                <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                    Vortex is the synthesis of these two models, eliminating their core weaknesses. It uses the BitcoinZ blockchain not as a database, but as the single source of truth for identity, social connections, and communication.
+                </p>
                 
-                <div class="feature-card">
-                    <h3 class="text-xl font-bold text-blue-400 mb-3">Portability & Sovereignty</h3>
-                    <p class="text-gray-400">
-                        Your identity is tied to a cryptographic key you own, not to a server or a device. You can perfectly restore your entire digital life on any device, at any time.
-                    </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="feature-card">
+                        <h3 class="text-xl font-bold text-green-400 mb-3">Permanence & Reliability</h3>
+                        <p class="text-gray-400">
+                            Your data is immutably recorded on a global, decentralized ledger. It can never be lost or censored.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="text-xl font-bold text-blue-400 mb-3">Portability & Sovereignty</h3>
+                        <p class="text-gray-400">
+                            Your identity is tied to a cryptographic key you own, not to a server or a device. You can perfectly restore your entire digital life on any device, at any time.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1059,7 +1103,7 @@ body {
 <div class="section-separator"></div>
 
 <!-- Blueprint Section -->
-<section class="section section-dark fade-in">
+<section id="blueprint" class="section section-dark fade-in">
     <div class="container">
         <h2 class="heading-lg gradient-text text-center mb-12">The Definitive Blueprint</h2>
         <p class="text-xl text-gray-400 text-center mb-12">How Vortex Works: The end-to-end operational flow</p>
@@ -1867,23 +1911,34 @@ body {
     </div>
 </section>
 
-<div class="section-separator"></div>
-
-<!-- The Current Reality Section -->
-<section class="section section-dark fade-in">
-    <div class="container">
-        <h2 class="heading-lg gradient-text text-center mb-6">The Current Reality: A Compendium of Digital Failures</h2>
-        <p class="text-xl text-gray-400 text-center mb-12">The theoretical benefits of a sovereign protocol are clear, but its true value is understood when contrasted with the documented failures of existing systems. The following are real-world examples of how centralized and trusted platforms have failed their users through leaks, surveillance, and censorship.</p>
-        
-        <div class="mb-8 p-6 bg-red-500/10 rounded-xl border border-red-500/20 text-center">
-            <p class="text-lg text-red-300 font-bold">These are not isolated incidents; they are the predictable outcomes of flawed architectures.</p>
+<!-- Current Reality Summary -->
+<div class="mt-12 max-w-4xl mx-auto">
+    <h3 class="text-2xl font-bold gradient-text text-center mb-6">Why We Need Vortex: Real-World Failures</h3>
+    <div class="glass">
+        <p class="text-gray-300 mb-4">
+            Centralized platforms consistently fail users through security breaches, surveillance, and censorship:
+        </p>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+            <div class="p-3 bg-red-500/10 rounded-lg border border-red-500/20">
+                <p class="font-bold text-red-400 mb-1">Security Breaches</p>
+                <p class="text-gray-400">Pegasus spyware, Signal hack attempts, centralized vulnerabilities</p>
+            </div>
+            <div class="p-3 bg-orange-500/10 rounded-lg border border-orange-500/20">
+                <p class="font-bold text-orange-400 mb-1">Surveillance</p>
+                <p class="text-gray-400">Metadata collection, government cooperation, privacy violations</p>
+            </div>
+            <div class="p-3 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+                <p class="font-bold text-yellow-400 mb-1">Censorship</p>
+                <p class="text-gray-400">Account bans, platform deactivation, content control</p>
+            </div>
         </div>
+        <p class="text-center text-green-400 font-semibold mt-4">
+            Vortex's blockchain-based approach eliminates these single points of failure.
+        </p>
+    </div>
+</div>
 
-        <div class="space-y-16">
-            <!-- Category 1: Leaks & Hacks -->
-            <div>
-                <h3 class="text-3xl font-bold text-red-400 text-center mb-6">Category 1: Leaks & Hacks - The Myth of Secure Walls</h3>
-                <p class="text-xl text-gray-400 text-center mb-12">Even the most well-intentioned platforms are centralized targets, and their complex software creates inevitable vulnerabilities.</p>
+<div class="section-separator"></div>
                 
                 <div class="space-y-8">
                     <!-- Pegasus WhatsApp Hack -->
@@ -2614,7 +2669,7 @@ body {
 <div class="section-separator"></div>
 
 <!-- Roadmap Section -->
-<section class="section section-gradient fade-in">
+<section id="roadmap" class="section section-gradient fade-in">
     <div class="container">
         <h2 class="heading-lg gradient-text text-center mb-6">Development Roadmap</h2>
         <p class="text-xl text-gray-300 text-center mb-4">Four phases to complete sovereignty</p>
@@ -2777,7 +2832,7 @@ body {
 <div class="section-separator"></div>
 
 <!-- Community Call to Forge Our Future Section -->
-<section class="section section-dark fade-in">
+<section id="funding" class="section section-dark fade-in">
     <div class="container">
         <h2 class="heading-lg gradient-text text-center mb-6">Project Vortex: A Community Call to Forge Our Future</h2>
         <p class="text-xl text-gray-400 text-center mb-12">Community,</p>
