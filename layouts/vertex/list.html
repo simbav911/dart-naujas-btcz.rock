@@ -116,11 +116,10 @@
 }
 
 /* ============================================
-   BASE ELEMENTS 
+   BASE ELEMENTS
    ============================================ */
-* {
-    margin: 0;
-    padding: 0;
+/* Only apply resets to main content, not header */
+main * {
     box-sizing: border-box;
 }
 
@@ -128,11 +127,19 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
+/* Only apply to main content area, not affecting header */
+main {
     background: var(--v-dark);
     color: var(--v-gray-300);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     line-height: 1.6;
+}
+
+/* Ensure mobile menu button is properly hidden on desktop */
+@media (min-width: 768px) {
+    header .md\:hidden {
+        display: none !important;
+    }
 }
 
 /* Gradient Text Styles */
@@ -924,8 +931,8 @@ body {
     line-height: 1.4;
 }
 
-/* Container */
-.container {
+/* Container - only for vertex content */
+main .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
