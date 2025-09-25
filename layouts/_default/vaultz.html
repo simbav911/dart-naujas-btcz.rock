@@ -1,0 +1,408 @@
+{{ define "main" }}
+<div class="min-h-screen vaultz-hero-background">
+    <!-- Advanced Animated Background Layers -->
+    <div class="vaultz-bg-layer-1"></div>
+    <div class="vaultz-bg-layer-2"></div>
+    <div class="vaultz-bg-layer-3"></div>
+    <div class="vaultz-treasury-network"></div>
+
+    <!-- Hero Section -->
+    <div class="relative z-10 pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero Content -->
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                    <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                        VaultZ
+                    </span>
+                    <span class="block text-4xl md:text-5xl font-semibold mt-2" style="background: linear-gradient(45deg, #FFD700, #FFA500, #FFED4E, #FFD700); background-size: 400% 400%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: golden-gradient 15s ease-in-out infinite;">
+                        Community Fund
+                    </span>
+                </h1>
+
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                    Democratically governed funding system that allocates
+                    <span class="text-blue-400 font-semibold">5% of all block rewards</span>
+                    to sustain and expand the BitcoinZ ecosystem through community-driven initiatives.
+                </p>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+                    <div class="glass-card p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-400 mb-2">5%</div>
+                        <div class="text-gray-400 text-sm">Block Rewards Allocated</div>
+                    </div>
+                    <div class="glass-card p-6 text-center">
+                        <div class="text-3xl font-bold text-green-400 mb-2">96%</div>
+                        <div class="text-gray-400 text-sm">Community Approval</div>
+                    </div>
+                    <div class="glass-card p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">100%</div>
+                        <div class="text-gray-400 text-sm">Transparent</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToBalance()" class="btn-primary bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                        View Live Balance
+                    </button>
+                    <button onclick="scrollToProposal()" class="btn-secondary border-2 border-blue-500/50 text-blue-300 px-8 py-4 rounded-xl font-semibold hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Submit Proposal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            {{ .Content }}
+        </div>
+    </div>
+</div>
+
+<style>
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Enhanced Glass Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Balance Display */
+.balance-display {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Professional Button Styles */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-secondary {
+    position: relative;
+    background: rgba(59, 130, 246, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Smooth Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Content Cards */
+.content-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Step Cards */
+.step-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Burning Effect for Balance Numbers */
+.burning-text {
+    position: relative;
+    background: linear-gradient(45deg, #ff6b35, #f7931e, #ffdd00, #ff6b35);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: flame-gradient 15s ease-in-out infinite, flame-flicker 4s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.5), 0 0 40px rgba(247, 147, 30, 0.3), 0 0 60px rgba(255, 221, 0, 0.2);
+    filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.8));
+}
+
+.burning-text::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), rgba(247, 147, 30, 0.4), rgba(255, 221, 0, 0.3), transparent);
+    filter: blur(8px);
+    animation: flame-dance 12s ease-in-out infinite;
+    z-index: -1;
+}
+
+.burning-text::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 10%;
+    right: 10%;
+    height: 10px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), rgba(247, 147, 30, 0.3), transparent);
+    filter: blur(6px);
+    animation: flame-base 8s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes flame-gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes flame-flicker {
+    0% {
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.5), 0 0 40px rgba(247, 147, 30, 0.3), 0 0 60px rgba(255, 221, 0, 0.2);
+        filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.8));
+    }
+    100% {
+        text-shadow: 0 0 25px rgba(255, 107, 53, 0.7), 0 0 50px rgba(247, 147, 30, 0.5), 0 0 75px rgba(255, 221, 0, 0.3);
+        filter: drop-shadow(0 0 15px rgba(255, 107, 53, 1));
+    }
+}
+
+@keyframes flame-dance {
+    0%, 100% {
+        transform: translateY(0) scaleY(1);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-3px) scaleY(1.1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-1px) scaleY(0.9);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-4px) scaleY(1.2);
+        opacity: 0.6;
+    }
+}
+
+@keyframes flame-base {
+    0%, 100% {
+        transform: scaleX(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: scaleX(1.1);
+        opacity: 0.3;
+    }
+}
+
+/* Golden Gradient Animation for Community Fund */
+@keyframes golden-gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* VaultZ Advanced Hero Background System */
+.vaultz-hero-background {
+    background: radial-gradient(ellipse at center, #1a1a0a 0%, #0f0f05 70%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.vaultz-bg-layer-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse 85% 55% at 25% 35%, rgba(255, 215, 0, 0.12) 0%, transparent 55%),
+                radial-gradient(ellipse 65% 45% at 75% 65%, rgba(255, 193, 7, 0.08) 0%, transparent 55%);
+    animation: vaultzLayer1 28s ease-in-out infinite;
+    z-index: 1;
+}
+
+.vaultz-bg-layer-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse 75% 65% at 65% 25%, rgba(255, 215, 0, 0.06) 0%, transparent 65%),
+                radial-gradient(ellipse 55% 85% at 35% 75%, rgba(255, 152, 0, 0.04) 0%, transparent 65%);
+    animation: vaultzLayer2 33s ease-in-out infinite reverse;
+    z-index: 2;
+}
+
+.vaultz-bg-layer-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.02) 0%, transparent 35%, transparent 65%, rgba(255, 193, 7, 0.02) 100%);
+    animation: vaultzLayer3 40s linear infinite;
+    z-index: 3;
+}
+
+.vaultz-treasury-network {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='treasury-grid' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 80 0 L 0 0 0 80' fill='none' stroke='%23FFD700' stroke-width='0.3' opacity='0.3'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='80' height='80' fill='url(%23treasury-grid)'/%3E%3C/svg%3E");
+    animation: treasuryFloat 25s ease-in-out infinite;
+}
+
+@keyframes vaultzLayer1 {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(1.08) rotate(0.8deg);
+        opacity: 0.85;
+    }
+    60% {
+        transform: scale(1.03) rotate(-0.4deg);
+        opacity: 1;
+    }
+    85% {
+        transform: scale(1.06) rotate(0.6deg);
+        opacity: 0.9;
+    }
+}
+
+@keyframes vaultzLayer2 {
+    0%, 100% {
+        transform: scale(1) translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.04) translate(-1.5%, 0.8%) rotate(-0.2deg);
+    }
+    50% {
+        transform: scale(1.02) translate(0.8%, -0.6%) rotate(0.15deg);
+    }
+    75% {
+        transform: scale(1.06) translate(-0.5%, 1.2%) rotate(-0.1deg);
+    }
+}
+
+@keyframes vaultzLayer3 {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.01);
+        opacity: 0.25;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 0.4;
+    }
+}
+
+@keyframes treasuryFloat {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-8px) scale(1.01);
+        opacity: 0.2;
+    }
+}
+</style>
+
+<script>
+function scrollToBalance() {
+    document.getElementById('balance-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function scrollToProposal() {
+    document.getElementById('proposal-section').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+<script src="/js/vaultz-balance.js"></script>
+{{ end }}
