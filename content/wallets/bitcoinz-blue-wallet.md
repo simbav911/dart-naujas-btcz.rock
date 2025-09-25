@@ -1,7 +1,7 @@
 ---
 title: "BitcoinZ Blue - Official Light Wallet"
 description: "The official light wallet for BitcoinZ with instant sync, privacy features, and cross-platform support"
-date: 2025-08-02T10:00:00Z
+date: 2025-09-25T10:00:00Z
 type: "wallet"
 image: "images/wallets/btcz-blue.webp"
 icon: "images/wallets/icon_blue.png"
@@ -18,36 +18,39 @@ features:
   - "Multi-Currency Display"
   - "Contact Management"
   - "Open Source"
+  - "Large Amount Support (>21M BTCZ)"
+  - "HD Address Discovery"
+  - "Enhanced Key Import/Export"
 platforms:
   - name: "Windows"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v1.2.6/BitcoinZ-Blue-Windows-Installer.zip"
-    portable_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v1.2.6/BitcoinZ-Blue-Windows-Portable.zip"
-    version: "1.2.6"
-    sha256_installer: "cb3a8ba5427e7aaaa51a6bcaa2299d16b9a0118807997dd223eaaf36fe544016"
-    sha256_portable: "b727313c11208921a39537cf4bf2c3febdd8b9c3ef09bf6480461dbb974027b5"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Windows-Installer.zip"
+    portable_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Windows-Portable.zip"
+    version: "2.0.0"
+    sha256_installer: "TBD"
+    sha256_portable: "TBD"
   - name: "macOS (Apple Silicon)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v1.2.6/BitcoinZ-Blue-macOS-AppleSilicon.zip"
-    version: "1.2.6"
-    sha256: "0e2a87f4b5b202fc968dd9daa482383419d09c629079a7ecfd9496c21a46fbe7"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-macOS-AppleSilicon.zip"
+    version: "2.0.0"
+    sha256: "TBD"
   - name: "macOS (Intel)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v1.2.6/BitcoinZ-Blue-macOS-Intel.zip"
-    version: "1.2.6"
-    sha256: "bf0d1d0e07252d9fa52ab5939e3557d57b9234e1fa68889c2454f1d81670c22b"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-macOS-Intel.zip"
+    version: "2.0.0"
+    sha256: "TBD"
   - name: "Linux (AppImage)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v1.2.6/BitcoinZ-Blue-Linux-AppImage.zip"
-    version: "1.2.6"
-    sha256: "5133f815d3bd15c3aac4b6c61dfeecbe3ac7bf4fba822c0af23b0f13d7e898af"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Linux-AppImage.zip"
+    version: "2.0.0"
+    sha256: "TBD"
   - name: "Linux (DEB)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v1.2.6/BitcoinZ-Blue-Linux-DEB.zip"
-    version: "1.2.6"
-    sha256: "eeedc465873cab2dc8267df4da361ac07cde97f0898d68ef7f2c7c20b3d8a8b3"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Linux-DEB.zip"
+    version: "2.0.0"
+    sha256: "TBD"
 requirements:
   - "4GB RAM (8GB recommended)"
   - "500MB free disk space"
   - "Internet connection"
   - "Windows 10/11, macOS 10.15+, or Ubuntu 20.04+"
 source_code: "https://github.com/z-bitcoinz/BitcoinZ_Blue"
-releases_page: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/tag/v1.2.6"
+releases_page: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/tag/v2.0.0"
 draft: false
 ---
 
@@ -75,6 +78,10 @@ BitcoinZ Blue is the official light wallet for BitcoinZ, developed and supported
 - **Multi-Currency Display**: View your balance in multiple fiat currencies
 - **Contact Management**: Save and backup your frequently used addresses
 - **Enterprise-Grade Encryption**: PIN protection and bulletproof encryption for your private keys
+- **Large Amount Support**: Handle amounts up to 21 billion BTCZ with precision mathematics
+- **HD Address Discovery**: Complete wallet recovery with automatic address discovery
+- **Enhanced Key Import/Export**: Support for multiple key formats with improved user interface
+- **Protocol Compatibility**: BitcoinZ-specific protocol implementation for optimal performance
 
 ### Technical Specifications
 
@@ -120,6 +127,41 @@ BitcoinZ Blue implements bulletproof security technology that ensures your priva
 - **Backup Security**: Encrypted seed phrase backups ensure recovery while maintaining security
 
 **Your funds are 100% safe with bulletproof technology - private keys never leave your device.**
+
+## Version History
+
+### v2.0.0 (September 25, 2025) - Protocol & Reliability Update
+
+**Major Release Highlights:**
+- **Protocol Upgrade**: Migrated to BitcoinZ-specific forks of librustzcash and orchard to support >21M BTCZ supply
+- **Enhanced Recovery**: HD address discovery on restore for complete account recovery
+- **Improved Key Management**: Redesigned export modal with enhanced copy/download functionality
+- **Large Amount Support**: Proper handling of amounts up to 21 billion BTCZ with precision math
+- **Windows Reliability**: Fixed transaction errors and improved balance persistence
+
+**Key Features Added:**
+- Import transparent private keys (WIF format)
+- BitcoinZ-specific HRP support for key import
+- Enhanced export modal with Copy All and Download options
+- PIN/lock state persistence across app restarts
+- Improved balance change detection and conversion accuracy
+
+**Bug Fixes:**
+- Fixed zatoshis→BTCZ conversion in balance detection
+- Resolved EUR→BTCZ rounding issues preventing validation errors
+- Fixed Windows "Missing inputs" transaction errors
+- Improved balance persistence after app restart
+- Enhanced loading and recovery flow
+
+### v1.2.6 (August 2, 2025) - Initial Release
+
+**First Official Release:**
+- Complete light wallet implementation with instant sync
+- Shielded transaction support (z-addresses)
+- Cross-platform support (Windows, macOS, Linux)
+- Non-custodial architecture with local key management
+- PIN protection and enterprise-grade encryption
+- Multi-currency display and contact management
 
 ## Terms and Conditions
 
