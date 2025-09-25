@@ -1,0 +1,541 @@
+<!doctype html><html lang=en class=scroll-smooth><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>VaultZ Community Fund | BitcoinZ - Community-Driven Cryptocurrency</title><style>:root{--btcz-gold:#FFD700;--btcz-black:#000000;--btcz-white:#FFFFFF}*,::after,::before{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:open sans,ui-sans-serif,system-ui;color:var(--btcz-white);background-color:var(--btcz-black)}[x-cloak]{display:none!important}font-size: 0.8rem; margin-top: 10px; text-decoration: underline; opacity: 0.8; transition: opacity 0.3s;}.ad-sidebar .transparency-link:hover{opacity:1}@media(max-width:1400px){.ad-sidebar{display:none}}.show-ads-btn{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:gold;color:#000;padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-weight:700;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:all .3s;z-index:100}.show-ads-btn:hover{background:#fff;transform:translateX(-50%)scale(1.05)}</style><script defer src=https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js></script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><meta name=description content="Monitor the BitcoinZ community vault balances in real-time. VaultZ is our democratized donation mechanism that allocates 5% of block rewards to sustain the BitcoinZ ecosystem through development, marketing, and community initiatives."><meta name=keywords content="BitcoinZ cryptocurrency decentralization privacy blockchain"><meta name=author content="BitcoinZ Community"><meta property="og:title" content="VaultZ Community Fund | BitcoinZ - Community-Driven Cryptocurrency"><meta property="og:description" content="Monitor the BitcoinZ community vault balances in real-time. VaultZ is our democratized donation mechanism that allocates 5% of block rewards to sustain the BitcoinZ ecosystem through development, marketing, and community initiatives."><meta property="og:type" content="website"><meta property="og:url" content="https://getbtcz.com/vaultz/"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="VaultZ Community Fund | BitcoinZ - Community-Driven Cryptocurrency"><meta name=twitter:description content="Monitor the BitcoinZ community vault balances in real-time. VaultZ is our democratized donation mechanism that allocates 5% of block rewards to sustain the BitcoinZ ecosystem through development, marketing, and community initiatives."><link rel=icon type=image/png href=/favicon.png><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel=stylesheet media=print onload='this.media="all"'><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/mobile-menu.css><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"BitcoinZ","description":"A decentralized, community-driven cryptocurrency focused on privacy and security","url":"https:\/\/getbtcz.com\/vaultz\/","logo":"https:\/\/getbtcz.com\//images/bitcoinz-logo.svg","foundingDate":"2017","founders":[{"@type":"Person","name":"Community Contributors"}],"sameAs":["https:\/\/twitter.com\/bitcoinz_team","https:\/\/t.me\/bitcoinzcommunity","https:\/\/discord.gg\/bitcoinz","https:\/\/github.com\/simbav911\/dart-naujas-btcz.rock"]}</script></head><body class="min-h-screen flex flex-col"><header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-50 w-full glass-effect border-b border-btcz-gray-800/50"><div class="container mx-auto px-1 md:px-2"><nav class="flex items-center justify-between py-0.5 min-h-[2rem]"><div class="flex items-center space-x-2 md:space-x-4 pl-1 md:pl-0"><a href=/ class="flex items-center group transition-transform duration-300 hover:scale-105 flex-shrink-0"><div class="logo-container group-hover:opacity-90 transition-opacity duration-300"><img src=/images/btcz-logo.png alt="BitcoinZ Logo" class="h-6 md:h-7 xl:h-8 w-auto"></div><div class="animated-logo ml-1 md:ml-2 lg:ml-3 xl:ml-4"><span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300" style=animation-delay:0s>B</span>
+<span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.1s>i</span>
+<span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.2s>t</span>
+<span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.3s>c</span>
+<span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.4s>o</span>
+<span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.5s>i</span>
+<span class="animated-letter font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg text-white group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.6s>n</span>
+<span class="animated-letter special-z font-heading font-bold text-sm md:text-base lg:text-base xl:text-lg group-hover:text-btcz-gold transition-colors duration-300 tracking-wide" style=animation-delay:.7s>Z</span></div></a><div class="price-ticker bg-btcz-gray-800/50 backdrop-blur-sm rounded-lg px-1.5 py-0.5 border border-btcz-gold/20 shadow-lg md:hidden" style="transform:scale(.8);transform-origin:right center;margin-right:2cm"><div class="flex items-center space-x-1"><span class="text-btcz-gold font-medium text-xs" id=btcz-price-mobile>$0.00000000</span>
+<span class=text-xs id=btcz-change-mobile-24h>0.00%</span>
+<span class="text-gray-400 text-xs">24H</span></div><div class="flex flex-col text-xs border-t border-btcz-gray-700/30 pt-0.5"><div class="flex items-center justify-between"><span class="text-gray-400 text-xs">Current:</span>
+<span class="text-btcz-gold text-xs font-medium" id=btcz-current-supply-mobile>0</span></div><div class="flex items-center justify-between"><span class="text-gray-400 text-xs">Max:</span>
+<span class="text-btcz-gold text-xs font-medium" id=btcz-max-supply-mobile>0</span></div></div></div></div><div class="hidden md:flex items-center space-x-2 lg:space-x-6 xl:space-x-8 2xl:space-x-10"><a href=/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Home
+</a><a href=/why-bitcoinz/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Why BTCZ
+</a><a href=/ecosystem/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Eco
+</a><a href=/wallets/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Wallets
+</a><a href=/buy/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Buy
+</a><a href=/learn/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Learn
+</a><a href=/news/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">News
+</a><a href=/roadmap/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Map
+</a><a href=/halving/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Halving
+</a><a href=/vaultz/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">VaultZ
+</a><a href=/vertex/ class="nav-link text-white hover:text-btcz-gold transition-colors duration-200">Vertex</a></div><div class="hidden md:flex items-center space-x-1 lg:space-x-3 xl:space-x-4"><div x-data="{ bridgeMenuOpen: false }" class="relative mr-2"><button @click="bridgeMenuOpen = !bridgeMenuOpen" class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200">
+<svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0-4-4m4 4-4 4m0 6H4m0 0 4 4m-4-4 4-4"/></svg>
+<span class="ml-1 text-white">Bridge</span><svg class="w-4 h-4" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-cloak x-show=bridgeMenuOpen @click.away="bridgeMenuOpen = false" class="absolute right-0 mt-2 py-3 w-72 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 z-50"><div class="px-4 pb-2 mb-2 border-b border-btcz-gray-700/50"><h4 class="text-btcz-gold font-medium text-base mb-1">BitcoinZ Bridge</h4><p class="text-xs text-gray-400">Convert between native BTCZ and BSC tokens</p></div><a href=https://bridge.getbtcz.com/ target=_blank class="flex items-center px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0-4-4m4 4-4 4m0 6H4m0 0 4 4m-4-4 4-4"/></svg>
+<span>Bridge Portal</span>
+</a><a href=/ecosystem/connect-z/ class="flex items-center px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z"/></svg>
+<span>What is Connect-Z?</span></a><div class="mt-2 pt-2 px-4 border-t border-btcz-gray-700/50"><p class="text-xs text-gray-400 mb-1">BSC Contract Address:</p><div class="flex items-center bg-btcz-gray-800/50 rounded p-2"><code class="text-xs text-btcz-gold truncate flex-1">0xcBBB3e5099F769F6d4E2b8b92DC0e268f7E099D8</code>
+<button onclick='navigator.clipboard.writeText("0xcBBB3e5099F769F6d4E2b8b92DC0e268f7E099D8"),this.innerHTML="Copied!",setTimeout(()=>this.innerHTML="Copy",2e3)' class="ml-2 text-xs bg-btcz-gray-700 hover:bg-btcz-gold hover:text-black px-2 py-1 rounded transition-colors duration-200">
+Copy</button></div></div></div></div><div x-data="{ explorerMenuOpen: false }" class="relative mr-2"><button @click="explorerMenuOpen = !explorerMenuOpen" class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200">
+<svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7A2 2 0 005 5v11m0 5 4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"/></svg>
+<span class="ml-1 text-white">Explorer</span><svg class="w-4 h-4" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-cloak x-show=explorerMenuOpen @click.away="explorerMenuOpen = false" class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 z-50"><a href=https://explorer.getbtcz.com/ target=_blank class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200">New Explorer
+</a><a href=https://explorer.btcz.rocks/ target=_blank class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200">Old Explorer</a></div></div><div x-data="{ langMenuOpen: false }" class=relative><button @click="langMenuOpen = !langMenuOpen" class="flex items-center space-x-2 text-white hover:text-btcz-gold transition-colors duration-200">
+<svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 9h16.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 15h16.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3a22 22 0 000 18"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c1.657 2.333 2.5 5.167 2.5 8.5s-.843 6.167-2.5 8.5"/></svg>
+<span class="ml-2 text-white">Language</span><svg class="w-4 h-4" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-cloak x-show=langMenuOpen @click.away="langMenuOpen = false" class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 z-50" style="max-height:500px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#FFD700 rgba(0,0,0,.3)"><style>.lang-button{display:flex!important;align-items:center!important;padding:.75rem 1rem!important;width:100%!important;justify-content:flex-start!important;transition:all .2s ease-in-out}.lang-button:hover{background-color:rgba(31,41,55,.8)}.lang-button .fi{flex-shrink:0;width:1.5rem;height:1rem;display:inline-flex;justify-content:center;align-items:center}.lang-button span:last-child{margin-left:.75rem;flex:1}div[x-show=langMenuOpen]::-webkit-scrollbar{width:6px}div[x-show=langMenuOpen]::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:3px}div[x-show=langMenuOpen]::-webkit-scrollbar-thumb{background:gold;border-radius:3px}div[x-show=langMenuOpen]::-webkit-scrollbar-thumb:hover{background:#ffd900d1}</style><button onclick='const desktopLoading=document.querySelector(".translate-loading");desktopLoading&&desktopLoading.remove(),localStorage.setItem("selectedLang","en"),window.location.reload()' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 w-full text-left transition-colors duration-200">
+<span class="fi fi-us"></span>
+<span class=ml-3>English</span>
+</button>
+<button onclick='translatePage("es")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es"></span>
+<span class=ml-3>Español</span>
+</button>
+<button onclick='translatePage("fr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-fr"></span>
+<span class=ml-3>Français</span>
+</button>
+<button onclick='translatePage("de")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-de"></span>
+<span class=ml-3>Deutsch</span>
+</button>
+<button onclick='translatePage("zh-CN")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-cn"></span>
+<span class=ml-3>中文 (简体)</span>
+</button>
+<button onclick='translatePage("ja")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-jp"></span>
+<span class=ml-3>日本語</span>
+</button>
+<button onclick='translatePage("ko")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-kr"></span>
+<span class=ml-3>한국어</span>
+</button>
+<button onclick='translatePage("ru")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ru"></span>
+<span class=ml-3>Русский</span>
+</button>
+<button onclick='translatePage("tr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-tr"></span>
+<span class=ml-3>Türkçe</span>
+</button>
+<button onclick='translatePage("fi")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-fi"></span>
+<span class=ml-3>Suomi</span>
+</button>
+<button onclick='translatePage("pt")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-pt"></span>
+<span class=ml-3>Português</span>
+</button>
+<button onclick='translatePage("ar")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-sa"></span>
+<span class=ml-3>العربية</span>
+</button>
+<button onclick='translatePage("id")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-id"></span>
+<span class=ml-3>Bahasa Indonesia</span>
+</button>
+<button onclick='translatePage("vi")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-vn"></span>
+<span class=ml-3>Tiếng Việt</span>
+</button>
+<button onclick='translatePage("he")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-il"></span>
+<span class=ml-3>עברית</span>
+</button>
+<button onclick='translatePage("th")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-th"></span>
+<span class=ml-3>ไทย</span>
+</button>
+<button onclick='translatePage("ms")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-my"></span>
+<span class=ml-3>Bahasa Melayu</span>
+</button>
+<button onclick='translatePage("uk")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ua"></span>
+<span class=ml-3>Українська</span>
+</button>
+<button onclick='translatePage("hu")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-hu"></span>
+<span class=ml-3>Magyar</span>
+</button>
+<button onclick='translatePage("el")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-gr"></span>
+<span class=ml-3>Ελληνικά</span>
+</button>
+<button onclick='translatePage("cs")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-cz"></span>
+<span class=ml-3>Čeština</span>
+</button>
+<button onclick='translatePage("ro")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ro"></span>
+<span class=ml-3>Română</span>
+</button>
+<button onclick='translatePage("sk")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-sk"></span>
+<span class=ml-3>Slovenčina</span>
+</button>
+<button onclick='translatePage("hr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-hr"></span>
+<span class=ml-3>Hrvatski</span>
+</button>
+<button onclick='translatePage("bg")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-bg"></span>
+<span class=ml-3>Български</span>
+</button>
+<button onclick='translatePage("lt")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-lt"></span>
+<span class=ml-3>Lietuvių</span>
+</button>
+<button onclick='translatePage("sl")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-si"></span>
+<span class=ml-3>Slovenščina</span>
+</button>
+<button onclick='translatePage("et")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ee"></span>
+<span class=ml-3>Eesti</span>
+</button>
+<button onclick='translatePage("lv")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-lv"></span>
+<span class=ml-3>Latviešu</span>
+</button>
+<button onclick='translatePage("sr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-rs"></span>
+<span class=ml-3>Српски</span>
+</button>
+<button onclick='translatePage("ca")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es-ct"></span>
+<span class=ml-3>Català</span>
+</button>
+<button onclick='translatePage("fil")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ph"></span>
+<span class=ml-3>Filipino</span>
+</button>
+<button onclick='translatePage("is")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-is"></span>
+<span class=ml-3>Íslenska</span>
+</button>
+<button onclick='translatePage("af")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-za"></span>
+<span class=ml-3>Afrikaans</span>
+</button>
+<button onclick='translatePage("sw")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-tz"></span>
+<span class=ml-3>Kiswahili</span>
+</button>
+<button onclick='translatePage("eu")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es-pv"></span>
+<span class=ml-3>Euskara</span>
+</button>
+<button onclick='translatePage("gl")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-es-ga"></span>
+<span class=ml-3>Galego</span>
+</button>
+<button onclick='translatePage("sq")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-al"></span>
+<span class=ml-3>Shqip</span>
+</button>
+<button onclick='translatePage("hy")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-am"></span>
+<span class=ml-3>Հայերեն</span>
+</button>
+<button onclick='translatePage("ka")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-ge"></span>
+<span class=ml-3>ქართული</span>
+</button>
+<button onclick='translatePage("ml")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>മലയാളം</span>
+</button>
+<button onclick='translatePage("ta")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>தமிழ்</span>
+</button>
+<button onclick='translatePage("te")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>తెలుగు</span>
+</button>
+<button onclick='translatePage("kn")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>ಕನ್ನಡ</span>
+</button>
+<button onclick='translatePage("mr")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>मराठी</span>
+</button>
+<button onclick='translatePage("gu")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>ગુજરાતી</span>
+</button>
+<button onclick='translatePage("pa")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-in"></span>
+<span class=ml-3>ਪੰਜਾਬੀ</span>
+</button>
+<button onclick='translatePage("bn")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-bd"></span>
+<span class=ml-3>বাংলা</span>
+</button>
+<button onclick='translatePage("ne")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-np"></span>
+<span class=ml-3>नेपाली</span>
+</button>
+<button onclick='translatePage("si")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-lk"></span>
+<span class=ml-3>සිංහල</span>
+</button>
+<button onclick='translatePage("km")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-kh"></span>
+<span class=ml-3>ខ្មែរ</span>
+</button>
+<button onclick='translatePage("lo")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-la"></span>
+<span class=ml-3>ລາວ</span>
+</button>
+<button onclick='translatePage("my")' class="lang-button px-4 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800 w-full text-left">
+<span class="fi fi-mm"></span>
+<span class=ml-3>မြန်မာ</span></button></div><div class="price-ticker-container fixed hidden md:flex flex-col rounded-lg px-2 py-1 glass-effect shadow-lg z-5 border border-btcz-gray-700" style="top:5rem;right:2cm;min-width:200px;transform:scale(.8);transform-origin:top right"><div class="flex items-center justify-between"><span class="text-sm font-bold text-btcz-gold" id=btcz-price>$0.00000000</span><div class="flex items-center text-xs"><span class=text-gray-400>24H</span>
+<span id=change-24h class=ml-1>0.00%</span>
+<span class="text-gray-400 ml-1">7d</span>
+<span id=change-7d class=ml-1>0.00%</span>
+<span class="text-gray-400 ml-1">30d</span>
+<span id=change-30d class=ml-1>0.00%</span></div></div><div class="flex flex-col text-xs border-t border-btcz-gray-700/30 pt-0.5"><div class="flex items-center justify-between text-xs"><span class=text-gray-400>Current:</span>
+<span class="text-btcz-gold font-medium" id=btcz-current-supply>0</span></div><div class="flex items-center justify-between text-xs"><span class=text-gray-400>Max:</span>
+<span class="text-btcz-gold font-medium text-right" id=btcz-max-supply>0</span></div></div></div></div></div><div class="flex items-center space-x-4 md:hidden"><button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden flex items-center p-2 rounded-lg hover:bg-btcz-gray-800/50 transition-all duration-200" :aria-expanded=mobileMenuOpen aria-label="Toggle mobile menu"><svg class="w-6 h-6 text-white transform transition-transform duration-200" :class="{ 'rotate-90': mobileMenuOpen }" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button></div><div x-show=mobileMenuOpen x-transition:enter="transition-opacity ease-out duration-200" x-transition:enter-start=opacity-0 x-transition:enter-end=opacity-100 x-transition:leave="transition-opacity ease-in duration-200" x-transition:leave-start=opacity-100 x-transition:leave-end=opacity-0 x-cloak class="fixed inset-0 bg-black/80 backdrop-blur-sm md:hidden z-40"><div x-show=mobileMenuOpen x-bind:class="{ 'slide-in': mobileMenuOpen }" @click.away="mobileMenuOpen = false" class="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden z-50 bg-black/90 backdrop-blur-md border-l border-white/5 shadow-2xl transform" style="background:linear-gradient(to bottom right,rgba(0,0,0,.95),rgba(0,0,0,.9))"><nav class="h-full w-full overflow-y-auto flex flex-col"><div class="flex justify-end items-center p-6 border-b border-white/10"><button @click="mobileMenuOpen = false" class="p-2 text-white/80 hover:text-btcz-gold transition-all duration-200 hover:rotate-90 transform"><svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18 18 6M6 6l12 12"/></svg></button></div><div class=p-6><a href=/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Home
+</a><a href=/why-bitcoinz/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Why BTCZ
+</a><a href=/ecosystem/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Eco
+</a><a href=/wallets/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Wallets
+</a><a href=/buy/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Buy
+</a><a href=/learn/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Learn
+</a><a href=/news/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">News
+</a><a href=/roadmap/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Map
+</a><a href=/halving/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Halving
+</a><a href=/vaultz/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">VaultZ
+</a><a href=/vertex/ class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">Vertex</a><div class="mt-6 pt-6 border-t border-white/10" x-data="{ explorerMenuOpen: false }"><button @click="explorerMenuOpen = !explorerMenuOpen" class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-colors duration-200 py-2">
+<span class=text-lg>Explorer</span><svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': explorerMenuOpen }" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-show=explorerMenuOpen x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="mt-2 rounded-lg bg-btcz-gray-900/60 overflow-hidden"><div class=py-2><a href=https://explorer.getbtcz.com/ target=_blank class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded"><span class=ml-3>New Explorer</span>
+</a><a href=https://explorer.btcz.rocks/ target=_blank class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded"><span class=ml-3>Old Explorer</span></a></div></div></div><div class="mt-6 pt-6 border-t border-white/10" x-data="{ bridgeMenuOpen: false }"><button @click="bridgeMenuOpen = !bridgeMenuOpen" class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-colors duration-200 py-2"><div class="flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0-4-4m4 4-4 4m0 6H4m0 0 4 4m-4-4 4-4"/></svg>
+<span class=text-lg>Bridge</span></div><svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': bridgeMenuOpen }" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-show=bridgeMenuOpen x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="mt-2 space-y-2 px-1"><div class="px-3 pb-2 mb-2 border-b border-white/10"><p class="text-xs text-gray-400">Convert between native BTCZ and BSC tokens</p></div><a href=https://bridge.getbtcz.com/ target=_blank class="flex items-center py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0-4-4m4 4-4 4m0 6H4m0 0 4 4m-4-4 4-4"/></svg>
+<span>Bridge Portal</span>
+</a><a href=/ecosystem/connect-z/ class="flex items-center py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z"/></svg>
+<span>What is Connect-Z?</span></a><div class="mt-2 pt-2 px-3 border-t border-white/10"><p class="text-xs text-gray-400 mb-1">BSC Contract Address:</p><div class="flex items-center bg-btcz-gray-800/50 rounded p-2"><code class="text-xs text-btcz-gold truncate flex-1">0xcBBB3e5099F769F6d4E2b8b92DC0e268f7E099D8</code>
+<button onclick='navigator.clipboard.writeText("0xcBBB3e5099F769F6d4E2b8b92DC0e268f7E099D8"),this.innerHTML="Copied!",setTimeout(()=>this.innerHTML="Copy",2e3)' class="ml-2 text-xs bg-btcz-gray-700 hover:bg-btcz-gold hover:text-black px-2 py-1 rounded transition-colors duration-200">
+Copy</button></div></div></div></div><div class="mt-6 pt-6 border-t border-white/10" x-data="{ langMenuOpen: false }"><button @click="langMenuOpen = !langMenuOpen" class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-colors duration-200 py-2">
+<span class=text-lg>Select Language</span><svg class="w-5 h-5 transform transition-transform duration-200" :class="{'rotate-180': langMenuOpen}" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div x-show=langMenuOpen x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="mobile-lang-menu mt-2 bg-black/95 backdrop-blur-md rounded-lg border border-btcz-gray-700/50" style=max-height:60vh;overflow-y:auto><style>.mobile-lang-menu{scrollbar-width:thin;scrollbar-color:#FFD700 rgba(0,0,0,.3)}.mobile-lang-menu::-webkit-scrollbar{width:4px}.mobile-lang-menu::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:2px}.mobile-lang-menu::-webkit-scrollbar-thumb{background:gold;border-radius:2px}.mobile-lang-menu::-webkit-scrollbar-thumb:hover{background:#ffd900d1}</style><div class=py-2><button onclick='const mobileLoading=document.querySelector(".translate-loading");mobileLoading&&mobileLoading.remove(),localStorage.setItem("selectedLang","en"),window.location.reload()' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-us"></span>
+<span class=ml-3>English</span>
+</button>
+<button onclick='translatePage("es")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es"></span>
+<span class=ml-3>Español</span>
+</button>
+<button onclick='translatePage("fr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-fr"></span>
+<span class=ml-3>Français</span>
+</button>
+<button onclick='translatePage("de")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-de"></span>
+<span class=ml-3>Deutsch</span>
+</button>
+<button onclick='translatePage("zh-CN")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-cn"></span>
+<span class=ml-3>中文 (简体)</span>
+</button>
+<button onclick='translatePage("ja")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-jp"></span>
+<span class=ml-3>日本語</span>
+</button>
+<button onclick='translatePage("ko")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-kr"></span>
+<span class=ml-3>한국어</span>
+</button>
+<button onclick='translatePage("ru")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ru"></span>
+<span class=ml-3>Русский</span>
+</button>
+<button onclick='translatePage("tr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-tr"></span>
+<span class=ml-3>Türkçe</span>
+</button>
+<button onclick='translatePage("fi")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-fi"></span>
+<span class=ml-3>Suomi</span>
+</button>
+<button onclick='translatePage("pt")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-pt"></span>
+<span class=ml-3>Português</span>
+</button>
+<button onclick='translatePage("ar")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-sa"></span>
+<span class=ml-3>العربية</span>
+</button>
+<button onclick='translatePage("id")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-id"></span>
+<span class=ml-3>Bahasa Indonesia</span>
+</button>
+<button onclick='translatePage("vi")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-vn"></span>
+<span class=ml-3>Tiếng Việt</span>
+</button>
+<button onclick='translatePage("he")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-il"></span>
+<span class=ml-3>עברית</span>
+</button>
+<button onclick='translatePage("th")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-th"></span>
+<span class=ml-3>ไทย</span>
+</button>
+<button onclick='translatePage("ms")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-my"></span>
+<span class=ml-3>Bahasa Melayu</span>
+</button>
+<button onclick='translatePage("uk")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ua"></span>
+<span class=ml-3>Українська</span>
+</button>
+<button onclick='translatePage("hu")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-hu"></span>
+<span class=ml-3>Magyar</span>
+</button>
+<button onclick='translatePage("el")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-gr"></span>
+<span class=ml-3>Ελληνικά</span>
+</button>
+<button onclick='translatePage("cs")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-cz"></span>
+<span class=ml-3>Čeština</span>
+</button>
+<button onclick='translatePage("ro")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ro"></span>
+<span class=ml-3>Română</span>
+</button>
+<button onclick='translatePage("sk")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-sk"></span>
+<span class=ml-3>Slovenčina</span>
+</button>
+<button onclick='translatePage("hr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-hr"></span>
+<span class=ml-3>Hrvatski</span>
+</button>
+<button onclick='translatePage("bg")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-bg"></span>
+<span class=ml-3>Български</span>
+</button>
+<button onclick='translatePage("lt")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-lt"></span>
+<span class=ml-3>Lietuvių</span>
+</button>
+<button onclick='translatePage("sl")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-si"></span>
+<span class=ml-3>Slovenščina</span>
+</button>
+<button onclick='translatePage("et")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ee"></span>
+<span class=ml-3>Eesti</span>
+</button>
+<button onclick='translatePage("lv")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-lv"></span>
+<span class=ml-3>Latviešu</span>
+</button>
+<button onclick='translatePage("sr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-rs"></span>
+<span class=ml-3>Српски</span>
+</button>
+<button onclick='translatePage("ca")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es-ct"></span>
+<span class=ml-3>Català</span>
+</button>
+<button onclick='translatePage("fil")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ph"></span>
+<span class=ml-3>Filipino</span>
+</button>
+<button onclick='translatePage("is")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-is"></span>
+<span class=ml-3>Íslenska</span>
+</button>
+<button onclick='translatePage("af")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-za"></span>
+<span class=ml-3>Afrikaans</span>
+</button>
+<button onclick='translatePage("sw")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-tz"></span>
+<span class=ml-3>Kiswahili</span>
+</button>
+<button onclick='translatePage("eu")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es-pv"></span>
+<span class=ml-3>Euskara</span>
+</button>
+<button onclick='translatePage("gl")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-es-ga"></span>
+<span class=ml-3>Galego</span>
+</button>
+<button onclick='translatePage("sq")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-al"></span>
+<span class=ml-3>Shqip</span>
+</button>
+<button onclick='translatePage("hy")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-am"></span>
+<span class=ml-3>Հայերեն</span>
+</button>
+<button onclick='translatePage("ka")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-ge"></span>
+<span class=ml-3>ქართული</span>
+</button>
+<button onclick='translatePage("ml")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>മലയാളം</span>
+</button>
+<button onclick='translatePage("ta")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>தமிழ்</span>
+</button>
+<button onclick='translatePage("te")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>తెలుగు</span>
+</button>
+<button onclick='translatePage("kn")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>ಕನ್ನಡ</span>
+</button>
+<button onclick='translatePage("mr")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>मराठी</span>
+</button>
+<button onclick='translatePage("gu")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>ગુજરાતી</span>
+</button>
+<button onclick='translatePage("pa")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-in"></span>
+<span class=ml-3>ਪੰਜਾਬੀ</span>
+</button>
+<button onclick='translatePage("bn")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-bd"></span>
+<span class=ml-3>বাংলা</span>
+</button>
+<button onclick='translatePage("ne")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-np"></span>
+<span class=ml-3>नेपाली</span>
+</button>
+<button onclick='translatePage("si")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-lk"></span>
+<span class=ml-3>සිංහල</span>
+</button>
+<button onclick='translatePage("km")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-kh"></span>
+<span class=ml-3>ខ្មែរ</span>
+</button>
+<button onclick='translatePage("lo")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-la"></span>
+<span class=ml-3>ລາວ</span>
+</button>
+<button onclick='translatePage("my")' class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
+<span class="fi fi-mm"></span>
+<span class=ml-3>မြန်မာ</span></button></div></div></div></div></nav></div></div></nav></div></header><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#000000"><script src=/js/supply-info.js></script><meta name=apple-mobile-web-app-status-bar-style content="black"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.1.0/css/flag-icons.min.css><link rel=stylesheet href=/css/logo-animation.css><link rel=stylesheet href=/css/animations.css><link rel=stylesheet href=/css/main.min.236da825de1ce3553e57e6f140e89045e233fa2742f0961d41228715953e1866.css integrity="sha256-I22oJd4c41U+V+bxQOiQReIz+idC8JYdQSKHFZU+GGY="><script src=/js/price-ticker.js></script><script src=/js/scroll-handler.js></script><script src=/js/main.js defer></script><script>function translatePage(e){const t=document.createElement("div");t.className="translate-loading",t.textContent="Translating...",document.body.appendChild(t);const i=document.querySelectorAll('[class*="text-transparent"], [class*="bg-clip-text"]'),s=new Map;i.forEach(e=>{s.set(e,e.textContent)});async function o(t){try{if(!t.trim())return"";const n=await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${e}&dt=t&q=${encodeURIComponent(t)}`);if(!n.ok)throw new Error("Translation request failed");const s=await n.json();return s[0][0][0]}catch(e){throw console.error("Translation error:",e),e}}async function a(e){if(e.tagName==="SCRIPT"||e.tagName==="STYLE")return;if(e.classList&&e.classList.contains("notranslate"))return;if(e.matches('[class*="text-transparent"], [class*="bg-clip-text"]')){try{const t=await o(e.textContent.trim());t&&(e.textContent=t)}catch(e){console.error("Error translating special element:",e)}return}const s=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,{acceptNode:function(e){const t=e.parentElement;if(!t)return NodeFilter.FILTER_REJECT;let n=t;for(;n;){if(n.classList&&n.classList.contains("notranslate"))return NodeFilter.FILTER_REJECT;n=n.parentElement}return t.tagName!=="SCRIPT"&&t.tagName!=="STYLE"&&t.tagName!=="NOSCRIPT"&&!t.classList?.contains("notranslate")&&e.textContent.trim()!==""?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),t=[];let n;for(;n=s.nextNode();)t.push(n);await Promise.all(t.map(async e=>{const t=e.textContent.trim();if(t)try{const n=await o(t);n&&(e.textContent=n)}catch(e){console.error("Error translating text node:",e)}}));const i=["placeholder","title","alt"],a=e.querySelectorAll("[placeholder], [title], [alt]");await Promise.all([...a].map(async e=>{if(e.classList&&e.classList.contains("notranslate"))return;for(const t of i)if(e.hasAttribute(t)){const n=e.getAttribute(t);try{const s=await o(n);s&&e.setAttribute(t,s)}catch(e){console.error(`Error translating ${t} attribute:`,e)}}}))}const n=document.createElement("style");n.textContent=".notranslate { display: none !important; }",document.head.appendChild(n),a(document.body).then(()=>{localStorage.setItem("selectedLang",e),t.remove(),n.remove();const s=document.querySelectorAll('a[href*="translate.google.com/translate_error"]');s.forEach(e=>e.remove())}).catch(e=>{console.error("Translation failed:",e),showErrorToast("Translation failed. Please try again."),i.forEach(e=>{s.has(e)&&(e.textContent=s.get(e))}),n.remove(),t.remove()})}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=localStorage.getItem("selectedLang");e&&e!=="en"&&translatePage(e)})</script></div></header><main class=flex-grow role=main><div class="min-h-screen vaultz-hero-background"><div class=vaultz-bg-layer-1></div><div class=vaultz-bg-layer-2></div><div class=vaultz-bg-layer-3></div><div class=vaultz-treasury-network></div><div class="relative z-10 pt-20 pb-16"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-16"><h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"><span class="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">VaultZ
+</span><span class="block text-4xl md:text-5xl font-semibold mt-2" style="background:linear-gradient(45deg,#FFD700,#FFA500,#FFED4E,#FFD700);background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:golden-gradient 15s ease-in-out infinite">Community Fund</span></h1><p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">Democratically governed funding system that allocates
+<span class="text-blue-400 font-semibold">5% of all block rewards</span>
+to sustain and expand the BitcoinZ ecosystem through community-driven initiatives.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10"><div class="glass-card p-6 text-center"><div class="text-3xl font-bold text-blue-400 mb-2">5%</div><div class="text-gray-400 text-sm">Block Rewards Allocated</div></div><div class="glass-card p-6 text-center"><div class="text-3xl font-bold text-green-400 mb-2">96%</div><div class="text-gray-400 text-sm">Community Approval</div></div><div class="glass-card p-6 text-center"><div class="text-3xl font-bold text-purple-400 mb-2">100%</div><div class="text-gray-400 text-sm">Transparent</div></div></div><div class="flex flex-col sm:flex-row gap-4 justify-center"><button onclick=scrollToBalance() class="btn-primary bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1">
+<svg class="w-5 h-5 mr-2" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8-8 8-4-4-6 6"/></svg>
+View Live Balance
+</button>
+<button onclick=scrollToProposal() class="btn-secondary border-2 border-blue-500/50 text-blue-300 px-8 py-4 rounded-xl font-semibold hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300">
+<svg class="w-5 h-5 mr-2" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+Submit Proposal</button></div></div></div></div><div class="relative z-10"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20"><div class=mb-16><div class="content-card p-8 max-w-5xl mx-auto"><div class="flex items-center mb-6"><div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-4"><svg class="w-6 h-6 text-white" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657.0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11.0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11.0-2.08-.402-2.599-1"/></svg></div><h2 class="text-2xl font-bold text-white">What is VaultZ?</h2></div><p class="text-gray-300 leading-relaxed mb-6">VaultZ is BitcoinZ's democratized funding mechanism that automatically allocates
+<span class="text-blue-400 font-semibold">5% of all block rewards</span> to community funds.
+This transparent system, approved by <span class="text-green-400 font-semibold">96% of the community</span>,
+ensures sustainable growth and development of the BitcoinZ ecosystem.</p><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="flex items-start space-x-3"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div><div><h4 class="text-white font-medium">Automatic Collection</h4><p class="text-gray-400 text-sm">5% of every block reward automatically allocated</p></div></div><div class="flex items-start space-x-3"><div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div><div><h4 class="text-white font-medium">Community Governed</h4><p class="text-gray-400 text-sm">All decisions made by community consensus</p></div></div><div class="flex items-start space-x-3"><div class="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div><div><h4 class="text-white font-medium">Complete Transparency</h4><p class="text-gray-400 text-sm">Every transaction publicly visible on blockchain</p></div></div><div class="flex items-start space-x-3"><div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div><div><h4 class="text-white font-medium">Decentralized Control</h4><p class="text-gray-400 text-sm">No central authority manages the funds</p></div></div></div></div></div><div class=mb-16 id=balance-section><div class="text-center mb-8"><h2 class="text-3xl font-bold text-white mb-4">Live Fund Balance</h2><p class="text-gray-400 max-w-2xl mx-auto">Real-time monitoring of VaultZ community funds across all addresses.
+Data is updated automatically from the BitcoinZ blockchain.</p></div><div class="balance-display glass-effect p-8 rounded-2xl"><div id=vaultz-loading class="text-center py-12"><div class="inline-flex items-center justify-center w-16 h-16 mb-4"><div class="animate-spin rounded-full h-12 w-12" style="border:2px solid rgba(255,215,0,.2);border-top:2px solid gold"></div></div><h3 class="text-xl font-semibold mb-2" style=color:gold>Loading Balance</h3><p class=text-gray-400>Fetching data from blockchain...</p></div><div id=vaultz-error class="hidden text-center py-12"><div class="inline-flex items-center justify-center w-16 h-16 bg-red-500/10 rounded-full mb-4"><svg class="w-8 h-8 text-red-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54.0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732.0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg></div><h3 class="text-xl font-semibold text-red-400 mb-2">Connection Error</h3><p class="text-gray-400 mb-6">Unable to fetch balance data. Please try again.</p><button onclick=window.vaultzBalance.refreshBalance() class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/25">
+Retry Connection</button></div><div id=vaultz-content class=hidden><div class="text-center mb-8"><div class="inline-flex items-baseline justify-center gap-4 mb-4"><span id=total-balance class="golden-balance text-5xl md:text-7xl font-bold font-mono tracking-tight" role=status aria-live=polite>0</span>
+<span class="text-2xl md:text-3xl font-semibold" style=color:#facc15>BTCZ</span></div><p class="text-gray-400 text-lg">Total Community Fund Balance</p></div><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"><div class="glass-card p-6 text-center transition-all duration-300" style="border:1px solid rgba(255,215,0,.2)"><div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3" style=background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,165,0,.2))><svg class="w-6 h-6" style="color:gold" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7A2 2 0 005 5v16m14 0h2m-2 0h-4m-5 0H3m2 0h2M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><div id=address-count class="text-2xl font-bold mb-1" style=color:gold>0</div><div class="text-gray-400 text-sm">Active Addresses</div></div><div class="glass-card p-6 text-center transition-all duration-300" style="border:1px solid rgba(255,215,0,.2)"><div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3" style=background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,165,0,.2))><svg class="w-6 h-6" style="color:gold" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3A9 9 0 113 12a9 9 0 0118 0z"/></svg></div><div id=last-updated class="text-2xl font-bold mb-1" style=color:gold>Never</div><div class="text-gray-400 text-sm">Last Updated</div></div><div class="glass-card p-6 text-center transition-all duration-300" style="border:1px solid rgba(255,215,0,.2)"><div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3" style=background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,165,0,.2))><svg class="w-6 h-6" style="color:gold" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8-8 8-4-4-6 6"/></svg></div><div class="text-2xl font-bold mb-1" style=color:gold>Live</div><div class="text-gray-400 text-sm">Real-time Data</div></div></div><div class="flex flex-col sm:flex-row gap-4 mb-8"><button id=refresh-balance class="flex-1 px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300" style=background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;border:none>
+<svg class="w-5 h-5" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001.0 004.582 9m0 0H9m11 11v-5h-.581m0 0A8.003 8.003.0 014.062 13m15.357 2H15"/></svg>
+Refresh Balance
+</button>
+<button id=toggle-addresses class="flex-1 px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300" style="border:2px solid gold;color:gold;background:0 0">
+<svg class="w-5 h-5" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+View All Addresses</button></div><div id=address-list class=hidden><div class="glass-card p-6"><div class="flex items-center justify-between mb-6"><h4 class="text-xl font-semibold text-white flex items-center gap-3"><div class="w-8 h-8 bg-blue-500/10 text-blue-400 rounded-lg flex items-center justify-center"><svg class="w-4 h-4" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5A2 2 0 003 7v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>VaultZ Addresses</h4><span class="text-gray-400 text-sm"><span id=addresses-count>0</span> total addresses</span></div><div id=addresses-container class=space-y-3></div></div></div></div></div></div><div id=proposal-section class=mb-16><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get VaultZ Funding</h2><p class="text-xl text-gray-300 max-w-3xl mx-auto">Have an innovative idea that benefits the BitcoinZ ecosystem?
+Submit your proposal and get funded by the community.</p></div><div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"><div class="content-card p-8"><div class="flex items-center mb-6"><div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-4"><svg class="w-6 h-6 text-white" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><h3 class="text-2xl font-bold text-white">How to Apply</h3></div><div class=space-y-6><div class="step-card p-6 flex items-start"><div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">1</div><div><h4 class="font-semibold text-white mb-2 text-lg">Join the Community</h4><p class=text-gray-400>Connect via Discord or Forum to discuss your idea with the community</p></div></div><div class="step-card p-6 flex items-start"><div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">2</div><div><h4 class="font-semibold text-white mb-2 text-lg">Draft Your Proposal</h4><p class=text-gray-400>Detail your project scope, timeline, budget, and expected outcomes</p></div></div><div class="step-card p-6 flex items-start"><div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">3</div><div><h4 class="font-semibold text-white mb-2 text-lg">Community Review</h4><p class=text-gray-400>Open discussion period for feedback and refinements</p></div></div><div class="step-card p-6 flex items-start"><div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">4</div><div><h4 class="font-semibold text-white mb-2 text-lg">Community Decision</h4><p class=text-gray-400>Community sentiment guides funding decisions within BitcoinZ principles</p></div></div><div class="step-card p-6 flex items-start"><div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-green-500/25">5</div><div><h4 class="font-semibold text-white mb-2 text-lg">Receive Funding</h4><p class=text-gray-400>Approved proposals receive VaultZ funding to execute the project</p></div></div></div></div><div class="content-card p-8"><div class="flex items-center mb-6"><div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center mr-4"><svg class="w-6 h-6 text-white" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657.0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11.0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11.0-2.08-.402-2.599-1"/></svg></div><h3 class="text-2xl font-bold text-white">What Gets Funded</h3></div><div class=space-y-4><div class="flex items-center p-4 rounded-lg bg-blue-500/5 border border-blue-500/20"><div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mr-4"><svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4 4 4-4 4M6 16l-4-4 4-4"/></svg></div><div><h4 class="font-semibold text-white">Development</h4><p class="text-gray-400 text-sm">Core improvements, new features, developer tools</p></div></div><div class="flex items-center p-4 rounded-lg bg-green-500/5 border border-green-500/20"><div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center mr-4"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76.0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001.0 017 6h1.832c4.1.0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988.0 01-1.564-.317z"/></svg></div><div><h4 class="font-semibold text-white">Marketing</h4><p class="text-gray-400 text-sm">Promotion campaigns, content creation, outreach</p></div></div><div class="flex items-center p-4 rounded-lg bg-purple-500/5 border border-purple-500/20"><div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mr-4"><svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002.0 019.288.0M15 7A3 3 0 119 7a3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><div><h4 class="font-semibold text-white">Community</h4><p class="text-gray-400 text-sm">Events, rewards, educational content, community building</p></div></div><div class="flex items-center p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/20"><div class="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center mr-4"><svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782.0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div><div><h4 class="font-semibold text-white">Innovation</h4><p class="text-gray-400 text-sm">Research, experiments, new initiatives, infrastructure</p></div></div></div></div></div><div class=text-center><div class="glass-effect p-8 rounded-2xl max-w-2xl mx-auto"><h3 class="text-2xl font-bold text-white mb-4">Ready to Submit Your Proposal?</h3><p class="text-gray-300 mb-6">Join our community and start the conversation about your innovative idea.</p><div class="flex flex-col sm:flex-row gap-4 justify-center"><a href=https://discord.gg/bitcoinz target=_blank class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 inline-flex items-center justify-center gap-3"><svg class="w-5 h-5" fill="currentcolor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791.0 00-4.885-1.515.074.074.0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27.0 00-5.487.0 12.64 12.64.0 00-.617-1.25.077.077.0 00-.079-.037A19.736 19.736.0 003.677 4.37a.07.07.0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082.0 00.031.057 19.9 19.9.0 005.993 3.03.078.078.0 00.084-.028 14.09 14.09.0 001.226-1.994.076.076.0 00-.041-.106 13.107 13.107.0 01-1.872-.892.077.077.0 01-.008-.128 10.2 10.2.0 00.372-.292.074.074.0 01.077-.01c3.928 1.793 8.18 1.793 12.062.0a.074.074.0 01.078.01c.12.098.246.198.373.292a.077.077.0 01-.006.127 12.299 12.299.0 01-1.873.892.077.077.0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076.0 00.084.028 19.839 19.839.0 006.002-3.03.077.077.0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061.0 00-.031-.03zM8.02 15.33c-1.183.0-2.157-1.085-2.157-2.419.0-1.333.956-2.419 2.157-2.419 1.21.0 2.176 1.096 2.157 2.42.0 1.333-.956 2.418-2.157 2.418zm7.975.0c-1.183.0-2.157-1.085-2.157-2.419.0-1.333.955-2.419 2.157-2.419 1.21.0 2.176 1.096 2.157 2.42.0 1.333-.946 2.418-2.157 2.418z"/></svg>
+Join Discord
+</a><a href=https://t.me/bitcoinzcommunity target=_blank class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105 inline-flex items-center justify-center gap-3"><svg class="w-5 h-5" fill="currentcolor" viewBox="0 0 24 24"><path d="M11.944.0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056.0zm4.962 7.224c.1-.002.321.023.465.14a.506.506.0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+Join Telegram</a></div></div></div></div><div class=mb-16><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-white mb-4">VaultZ Evolution</h2><p class="text-xl text-gray-300 max-w-3xl mx-auto">A timeline of community-driven milestones that shaped VaultZ into the
+transparent and democratic funding system it is today.</p></div><div class="content-card p-8"><div class=relative><div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500"></div><div class=space-y-8><div class="flex items-start"><div class="relative z-10 w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><span class="text-white font-bold text-sm">2018</span></div><div class=pt-3><h4 class="text-xl font-bold text-white mb-2">Birth of VaultZ</h4><p class="text-gray-300 leading-relaxed">Community proposal approved with <span class="text-blue-400 font-semibold">96% support</span>,
+establishing the foundation for democratized funding and launching the revolution
+against centralized financial control.</p></div></div><div class="flex items-start"><div class="relative z-10 w-16 h-16 bg-gradient-to-r from-purple-500 to-green-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><span class="text-white font-bold text-sm">2019</span></div><div class=pt-3><h4 class="text-xl font-bold text-white mb-2">Foundation of Freedom</h4><p class="text-gray-300 leading-relaxed">VaultZ implementation completed and first community funds collected,
+securing true independence from centralized systems and establishing
+transparent blockchain-based governance.</p></div></div><div class="flex items-start"><div class="relative z-10 w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><span class="text-white font-bold text-sm">2021</span></div><div class=pt-3><h4 class="text-xl font-bold text-white mb-2">Unity & Strength</h4><p class="text-gray-300 leading-relaxed">VaultZ Era 2 approved with <span class="text-green-400 font-semibold">100% positive votes</span>,
+proving unbreakable community resolve and commitment to decentralized governance principles.</p></div></div><div class="flex items-start"><div class="relative z-10 w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><span class="text-white font-bold text-sm">2022</span></div><div class=pt-3><h4 class="text-xl font-bold text-white mb-2">Global Expansion</h4><p class="text-gray-300 leading-relaxed">Army-Z 2.0 marketing initiative funded and launched, spreading the freedom message
+globally and awakening minds worldwide to the possibilities of true decentralization.</p></div></div><div class="flex items-start"><div class="relative z-10 w-16 h-16 bg-gradient-to-r from-purple-500 to-green-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0"><span class="text-white font-bold text-sm">2025</span></div><div class=pt-3><h4 class="text-xl font-bold text-white mb-2">Continued Innovation</h4><p class="text-gray-300 leading-relaxed">Ongoing community initiatives and technological advancement, with VaultZ continuing
+to fund projects that strengthen the ecosystem and promote digital sovereignty.</p></div></div></div></div><div class="mt-8 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20"><p class="text-gray-300 text-center italic">Each milestone represents the community's growing commitment to digital sovereignty
+and the unstoppable march toward true financial freedom. VaultZ empowers every voice
+in the global movement for decentralization.</p></div></div></div><div class=mb-16><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Community Governance</h2><p class="text-xl text-gray-300 max-w-3xl mx-auto">All VaultZ fund usage is guided by community sentiment within BitcoinZ principles.
+Every decision is transparent, democratic, and aligned with our core values.</p></div><div class="content-card p-8 mb-8"><div class="flex items-center mb-8"><div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-4"><svg class="w-6 h-6 text-white" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2A9 9 0 113 12a9 9 0 0118 0z"/></svg></div><h3 class="text-2xl font-bold text-white">Governance Process</h3></div><div class="grid grid-cols-1 md:grid-cols-5 gap-8 max-w-7xl mx-auto"><div class="governance-step text-center p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105" style="background:rgba(255,215,0,5%);border:1px solid rgba(255,215,0,.2);animation-delay:.2s"><div class="w-24 h-24 rounded-2xl flex items-center justify-center font-bold mx-auto mb-6 text-3xl" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;box-shadow:0 10px 30px rgba(255,215,0,.5),0 0 0 3px rgba(255,215,0,.3)">1</div><h4 class="font-bold text-xl mb-4" style=color:gold>Proposal</h4><p class="text-gray-300 text-base leading-relaxed">Community members submit detailed funding proposals with clear objectives and budgets</p></div><div class="governance-step text-center p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105" style="background:rgba(255,215,0,5%);border:1px solid rgba(255,215,0,.2);animation-delay:.4s"><div class="w-24 h-24 rounded-2xl flex items-center justify-center font-bold mx-auto mb-6 text-3xl" style="background:linear-gradient(135deg,#FFD700,#FF8F00);color:#000;box-shadow:0 10px 30px rgba(255,215,0,.5),0 0 0 3px rgba(255,215,0,.3)">2</div><h4 class="font-bold text-xl mb-4" style=color:gold>Discussion</h4><p class="text-gray-300 text-base leading-relaxed">Community discussion and feedback on Telegram and Discord channels</p></div><div class="governance-step text-center p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105" style="background:rgba(255,215,0,5%);border:1px solid rgba(255,215,0,.2);animation-delay:.6s"><div class="w-24 h-24 rounded-2xl flex items-center justify-center font-bold mx-auto mb-6 text-3xl" style="background:linear-gradient(135deg,#FFC107,#FF9800);color:#000;box-shadow:0 10px 30px rgba(255,193,7,.5),0 0 0 3px rgba(255,193,7,.3)">3</div><h4 class="font-bold text-xl mb-4" style=color:gold>Review</h4><p class="text-gray-300 text-base leading-relaxed">Community sentiment analysis and alignment with BitcoinZ principles</p></div><div class="governance-step text-center p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105" style="background:rgba(255,215,0,5%);border:1px solid rgba(255,215,0,.2);animation-delay:.8s"><div class="w-24 h-24 rounded-2xl flex items-center justify-center font-bold mx-auto mb-6 text-3xl" style="background:linear-gradient(135deg,#FFB300,#FF8F00);color:#000;box-shadow:0 10px 30px rgba(255,179,0,.5),0 0 0 3px rgba(255,179,0,.3)">4</div><h4 class="font-bold text-xl mb-4" style=color:gold>Decision</h4><p class="text-gray-300 text-base leading-relaxed">Community-guided funding decisions based on consensus and merit</p></div><div class="governance-step text-center p-6 rounded-xl transition-all duration-300 hover:transform hover:scale-105" style="background:rgba(255,215,0,5%);border:1px solid rgba(255,215,0,.2);animation-delay:1s"><div class="w-24 h-24 rounded-2xl flex items-center justify-center font-bold mx-auto mb-6 text-3xl" style="background:linear-gradient(135deg,#FFA000,#FF6F00);color:#000;box-shadow:0 10px 30px rgba(255,160,0,.5),0 0 0 3px rgba(255,160,0,.3)">5</div><h4 class="font-bold text-xl mb-4" style=color:gold>Execution</h4><p class="text-gray-300 text-base leading-relaxed">Transparent funding distribution with public tracking and accountability</p></div></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div class="content-card p-6"><div class="flex items-center mb-4"><div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3"><svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7A4 4 0 008 7v4h8z"/></svg></div><h4 class="text-lg font-semibold text-white">Core Principles</h4></div><ul class="space-y-2 text-gray-300"><li class="flex items-start"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Respect BitcoinZ white paper principles</span></li><li class="flex items-start"><div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Maintain decentralized governance</span></li><li class="flex items-start"><div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Ensure complete transparency</span></li><li class="flex items-start"><div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Benefit the entire ecosystem</span></li></ul></div><div class="content-card p-6"><div class="flex items-center mb-4"><div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center mr-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentcolor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2A9 9 0 113 12a9 9 0 0118 0z"/></svg></div><h4 class="text-lg font-semibold text-white">Decision Criteria</h4></div><ul class="space-y-2 text-gray-300"><li class="flex items-start"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Community support and engagement</span></li><li class="flex items-start"><div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Technical feasibility and merit</span></li><li class="flex items-start"><div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Ecosystem impact and value</span></li><li class="flex items-start"><div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div><span>Alignment with project goals</span></li></ul></div></div><div class="text-center mt-12"><div class="glass-effect p-8 rounded-2xl max-w-4xl mx-auto"><h3 class="text-2xl font-bold text-white mb-4">True Decentralization in Action</h3><p class="text-gray-300 leading-relaxed">The VaultZ system exemplifies BitcoinZ's commitment to true decentralization and community governance.
+Every decision is made by the community, for the community, ensuring that our ecosystem remains
+truly democratic and aligned with our foundational principles of freedom and transparency.</p></div></div></div><style>.golden-balance{background:linear-gradient(45deg,#FFD700,#FFA500,#FFED4E,#FFD700)!important;background-size:400% 400%!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important;animation:golden-gradient 8s ease-in-out infinite!important;text-shadow:0 0 20px rgba(255,215,0,.5),0 0 40px rgba(255,165,0,.3),0 0 60px rgba(255,237,78,.2)!important;filter:drop-shadow(0 0 10px rgba(255,215,0,.8))!important}@keyframes golden-gradient{0%,100%{background-position:0}50%{background-position:100%}}#total-balance.golden-balance{background:linear-gradient(45deg,#FFD700,#FFA500,#FFED4E,#FFD700)!important;background-size:400% 400%!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;animation:golden-gradient 8s ease-in-out infinite!important}.governance-step{opacity:0;transform:translateY(30px);animation:governanceStepIn .8s ease-out forwards}@keyframes governanceStepIn{0%{opacity:0;transform:translateY(30px)scale(.95)}100%{opacity:1;transform:translateY(0)scale(1)}}.governance-step:hover{transform:translateY(-5px)scale(1.02)!important;box-shadow:0 15px 40px rgba(255,215,0,.2)!important}</style></div></div></div><style>.glass-card{background:rgba(255,255,255,5%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.3);transition:all .3s cubic-bezier(.4,0,.2,1)}.glass-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4);border-color:rgba(59,130,246,.3)}.glass-effect{background:rgba(255,255,255,8%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.4);transition:all .3s cubic-bezier(.4,0,.2,1)}.glass-effect:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(59,130,246,.2)}.balance-display{background:linear-gradient(135deg,rgba(59,130,246,.1) 0%,rgba(147,51,234,.1) 100%);border:1px solid rgba(59,130,246,.2)}.btn-primary{position:relative;overflow:hidden;transform:translateZ(0)}.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}.btn-primary:hover::before{left:100%}.btn-secondary{position:relative;background:rgba(59,130,246,5%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.float-animation{animation:float 6s ease-in-out infinite}.content-card{background:rgba(255,255,255,6%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:16px;transition:all .3s ease}.content-card:hover{background:rgba(255,255,255,8%);border-color:rgba(59,130,246,.3);transform:translateY(-2px)}.step-card{background:rgba(255,255,255,4%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,8%);border-radius:12px;transition:all .3s ease}.step-card:hover{background:rgba(255,255,255,6%);border-color:rgba(59,130,246,.2)}.burning-text{position:relative;background:linear-gradient(45deg,#ff6b35,#f7931e,#ffdd00,#ff6b35);background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:flame-gradient 15s ease-in-out infinite,flame-flicker 4s ease-in-out infinite alternate;text-shadow:0 0 20px rgba(255,107,53,.5),0 0 40px rgba(247,147,30,.3),0 0 60px rgba(255,221,0,.2);filter:drop-shadow(0 0 10px rgba(255,107,53,.8))}.burning-text::before{content:'';position:absolute;top:-10px;left:0;right:0;height:20px;background:linear-gradient(90deg,transparent,rgba(255,107,53,.3),rgba(247,147,30,.4),rgba(255,221,0,.3),transparent);filter:blur(8px);animation:flame-dance 12s ease-in-out infinite;z-index:-1}.burning-text::after{content:'';position:absolute;bottom:-5px;left:10%;right:10%;height:10px;background:linear-gradient(90deg,transparent,rgba(255,107,53,.2),rgba(247,147,30,.3),transparent);filter:blur(6px);animation:flame-base 8s ease-in-out infinite;z-index:-1}@keyframes flame-gradient{0%,100%{background-position:0}50%{background-position:100%}}@keyframes flame-flicker{0%{text-shadow:0 0 20px rgba(255,107,53,.5),0 0 40px rgba(247,147,30,.3),0 0 60px rgba(255,221,0,.2);filter:drop-shadow(0 0 10px rgba(255,107,53,.8))}100%{text-shadow:0 0 25px rgba(255,107,53,.7),0 0 50px rgba(247,147,30,.5),0 0 75px rgba(255,221,0,.3);filter:drop-shadow(0 0 15px #ff6b35)}}@keyframes flame-dance{0%,100%{transform:translateY(0)scaleY(1);opacity:.3}25%{transform:translateY(-3px)scaleY(1.1);opacity:.5}50%{transform:translateY(-1px)scaleY(.9);opacity:.4}75%{transform:translateY(-4px)scaleY(1.2);opacity:.6}}@keyframes flame-base{0%,100%{transform:scaleX(1);opacity:.2}50%{transform:scaleX(1.1);opacity:.3}}@keyframes golden-gradient{0%,100%{background-position:0}50%{background-position:100%}}.vaultz-hero-background{background:radial-gradient(ellipse at center,#1a1a0a 0%,#0f0f05 70%,#000000 100%);position:relative;overflow:hidden}.vaultz-bg-layer-1{position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 85% 55% at 25% 35%,rgba(255,215,0,.12) 0%,transparent 55%),radial-gradient(ellipse 65% 45% at 75% 65%,rgba(255,193,7,8%) 0%,transparent 55%);animation:vaultzLayer1 28s ease-in-out infinite;z-index:1}.vaultz-bg-layer-2{position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 75% 65% at 65% 25%,rgba(255,215,0,6%) 0%,transparent 65%),radial-gradient(ellipse 55% 85% at 35% 75%,rgba(255,152,0,4%) 0%,transparent 65%);animation:vaultzLayer2 33s ease-in-out infinite reverse;z-index:2}.vaultz-bg-layer-3{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(255,215,0,2%) 0%,transparent 35%,transparent 65%,rgba(255,193,7,2%) 100%);animation:vaultzLayer3 40s linear infinite;z-index:3}.vaultz-treasury-network{position:absolute;top:0;left:0;right:0;bottom:0;z-index:4;pointer-events:none;background:url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='treasury-grid' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 80 0 L 0 0 0 80' fill='none' stroke='%23FFD700' stroke-width='0.3' opacity='0.3'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='80' height='80' fill='url(%23treasury-grid)'/%3E%3C/svg%3E");animation:treasuryFloat 25s ease-in-out infinite}@keyframes vaultzLayer1{0%,100%{transform:scale(1)rotate(0);opacity:1}30%{transform:scale(1.08)rotate(.8deg);opacity:.85}60%{transform:scale(1.03)rotate(-.4deg);opacity:1}85%{transform:scale(1.06)rotate(.6deg);opacity:.9}}@keyframes vaultzLayer2{0%,100%{transform:scale(1)translate(0,0)rotate(0)}25%{transform:scale(1.04)translate(-1.5%,.8%)rotate(-.2deg)}50%{transform:scale(1.02)translate(.8%,-.6%)rotate(.15deg)}75%{transform:scale(1.06)translate(-.5%,1.2%)rotate(-.1deg)}}@keyframes vaultzLayer3{0%{transform:rotate(0)scale(1);opacity:.4}50%{transform:rotate(180deg)scale(1.01);opacity:.25}100%{transform:rotate(360deg)scale(1);opacity:.4}}@keyframes treasuryFloat{0%,100%{transform:translateY(0)scale(1);opacity:.3}50%{transform:translateY(-8px)scale(1.01);opacity:.2}}</style><script>function scrollToBalance(){document.getElementById("balance-section").scrollIntoView({behavior:"smooth"})}function scrollToProposal(){document.getElementById("proposal-section").scrollIntoView({behavior:"smooth"})}</script><script src=/js/vaultz-balance.js></script></main><footer class="bg-btcz-black border-t border-btcz-gray-800 py-12"><div class="container mx-auto px-4"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"><div class=space-y-4><div class="flex items-center space-x-2"><div class="logo-container group-hover:opacity-90 transition-opacity duration-300"><img src=/images/btcz-logo.png alt="BitcoinZ Logo" class="h-12 w-auto"></div><span class="font-heading font-bold text-xl text-btcz-gold">BitcoinZ</span></div><p class=text-btcz-gray-400>A community-driven cryptocurrency focused on decentralization, privacy, and accessibility for everyone.</p></div><div><h4 class="font-heading font-bold text-lg mb-4 text-btcz-gold">Quick Links</h4><ul class=space-y-2><li><a href=/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Home</a></li><li><a href=/why-bitcoinz/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Why BTCZ</a></li><li><a href=/ecosystem/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Eco</a></li><li><a href=/wallets/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Wallets</a></li><li><a href=/buy/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Buy</a></li><li><a href=/learn/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Learn</a></li><li><a href=/news/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">News</a></li><li><a href=/roadmap/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Map</a></li><li><a href=/halving/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Halving</a></li><li><a href=/vaultz/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">VaultZ</a></li><li><a href=/vertex/ class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Vertex</a></li></ul></div><div class=lg:col-span-2><h4 class="font-heading font-bold text-lg mb-4 text-btcz-gold">Community</h4><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"><a href=https://discord.gg/K59mxyf target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-discord text-xl text-btcz-gold"></i>
+<span>Discord</span>
+</a><a href=https://t.me/bitcoinzcommunity target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-telegram text-xl text-btcz-gold"></i>
+<span>Telegram</span>
+</a><a href=https://twitter.com/BTCZOfficial target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-twitter text-xl text-btcz-gold"></i>
+<span>Twitter</span>
+</a><a href=https://github.com/btcz/bitcoinz target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-github text-xl text-btcz-gold"></i>
+<span>GitHub</span>
+</a><a href=https://www.reddit.com/r/BTCZCommunity/ target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-reddit text-xl text-btcz-gold"></i>
+<span>Reddit</span>
+</a><a href=https://www.instagram.com/bitcoinzofficial/ target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-instagram text-xl text-btcz-gold"></i>
+<span>Instagram</span>
+</a><a href=https://www.youtube.com/channel/UC2MBhoVK45Eqp2cMb2bFuUA target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-youtube text-xl text-btcz-gold"></i>
+<span>YouTube</span>
+</a><a href="https://www.tiktok.com/@bitcoinz_community?lang=en" target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-tiktok text-xl text-btcz-gold"></i>
+<span>TikTok</span>
+</a><a href=https://www.pinterest.co.uk/bitcoinzcommunity/bitcoinz-community/ target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-brands fa-pinterest text-xl text-btcz-gold"></i>
+<span>Pinterest</span>
+</a><a href="https://bitcointalk.org/index.php?topic=3086664.0" target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-solid fa-b text-xl text-btcz-gold"></i>
+<span>BitcoinTalk</span>
+</a><a href=https://www.floyx.com/profile/bitcoinz/posts target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-solid fa-hashtag text-xl text-btcz-gold"></i>
+<span>Floyx</span>
+</a><a href=https://www.radioking.com/radio/bitcoinz-radio target=_blank rel="noopener noreferrer" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-all duration-200 flex items-center space-x-2 group"><i class="fa-solid fa-radio text-xl text-btcz-gold"></i>
+<span>Radio</span></a></div></div></div><div class="mt-12 pt-8 border-t border-btcz-gray-800"><div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"><div class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">&copy; 2025 BitcoinZ. All Rights Reserved.</div><div class="flex space-x-6"><a href=/privacy-policy class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">Privacy Policy</a></div></div></div></div></footer><script defer src=/js/main.js></script><script defer src=/js/price-ticker.js></script><script defer src=/js/scroll-handler.js></script></body></html>
