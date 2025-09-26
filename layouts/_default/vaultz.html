@@ -27,7 +27,7 @@
                 </p>
 
                 <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+                <div class="header-stats grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
                     <div class="glass-card p-6 text-center">
                         <div class="text-3xl font-bold text-blue-400 mb-2">5%</div>
                         <div class="text-gray-400 text-sm">Block Rewards Allocated</div>
@@ -71,7 +71,7 @@
 
 <style>
 /* Glass Card Effect */
-.glass-card {
+.vaultz-hero-background .glass-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -88,7 +88,7 @@
 }
 
 /* Enhanced Glass Effect */
-.glass-effect {
+.vaultz-hero-background .glass-effect {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
@@ -104,11 +104,12 @@
     border-color: rgba(59, 130, 246, 0.2);
 }
 
-/* Balance Display */
-.balance-display {
+/* Balance Display Styling */
+.balance-display.glass-effect {
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
     border: 1px solid rgba(59, 130, 246, 0.2);
 }
+
 
 /* Professional Button Styles */
 .btn-primary {
@@ -150,7 +151,7 @@
 }
 
 /* Content Cards */
-.content-card {
+.vaultz-hero-background .content-card {
     background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -166,7 +167,7 @@
 }
 
 /* Step Cards */
-.step-card {
+.vaultz-hero-background .step-card {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -391,6 +392,19 @@
         transform: translateY(-8px) scale(1.01);
         opacity: 0.2;
     }
+}
+
+/* FINAL OVERRIDE - FORCE SHARP CORNERS (Header only) */
+header.glass-effect,
+header .price-ticker-container,
+header .price-ticker {
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 </style>
 
