@@ -70,7 +70,7 @@ layout: vaultz
         </p>
     </div>
 
-    <div class="balance-display glass-effect p-8 rounded-2xl">
+    <div class="balance-display glass-effect p-8">
         <!-- Loading State -->
         <div id="vaultz-loading" class="text-center py-12">
             <div class="inline-flex items-center justify-center w-16 h-16 mb-4">
@@ -110,7 +110,7 @@ layout: vaultz
                 <div class="glass-card p-6 text-center transition-all duration-300" style="border: 1px solid rgba(255, 215, 0, 0.2);">
                     <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));">
                         <svg class="w-6 h-6" style="color: #FFD700;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h2M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                     </div>
                     <div id="address-count" class="text-2xl font-bold mb-1" style="color: #FFD700;">0</div>
@@ -183,8 +183,8 @@ layout: vaultz
     <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get VaultZ Funding</h2>
         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            Have an innovative idea that benefits the BitcoinZ ecosystem?
-            Submit your proposal and get funded by the community.
+            Apply for a community grant to build apps, tools, content, or growth initiatives for BitcoinZ.
+            Simple 5-step process, milestone-based payouts, open to individuals and teams.
         </p>
     </div>
 
@@ -202,7 +202,7 @@ layout: vaultz
 
             <div class="space-y-6">
                 <div class="step-card p-6 flex items-start">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">1</div>
+                    <div class="apply-step-badge mr-8 flex-shrink-0">1</div>
                     <div>
                         <h4 class="font-semibold text-white mb-2 text-lg">Join the Community</h4>
                         <p class="text-gray-400">Connect via Discord or Forum to discuss your idea with the community</p>
@@ -210,7 +210,7 @@ layout: vaultz
                 </div>
 
                 <div class="step-card p-6 flex items-start">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">2</div>
+                    <div class="apply-step-badge mr-8 flex-shrink-0">2</div>
                     <div>
                         <h4 class="font-semibold text-white mb-2 text-lg">Draft Your Proposal</h4>
                         <p class="text-gray-400">Detail your project scope, timeline, budget, and expected outcomes</p>
@@ -218,7 +218,7 @@ layout: vaultz
                 </div>
 
                 <div class="step-card p-6 flex items-start">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">3</div>
+                    <div class="apply-step-badge mr-8 flex-shrink-0">3</div>
                     <div>
                         <h4 class="font-semibold text-white mb-2 text-lg">Community Review</h4>
                         <p class="text-gray-400">Open discussion period for feedback and refinements</p>
@@ -226,7 +226,7 @@ layout: vaultz
                 </div>
 
                 <div class="step-card p-6 flex items-start">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-blue-500/25">4</div>
+                    <div class="apply-step-badge mr-8 flex-shrink-0">4</div>
                     <div>
                         <h4 class="font-semibold text-white mb-2 text-lg">Community Decision</h4>
                         <p class="text-gray-400">Community sentiment guides funding decisions within BitcoinZ principles</p>
@@ -234,7 +234,7 @@ layout: vaultz
                 </div>
 
                 <div class="step-card p-6 flex items-start">
-                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl shadow-lg shadow-green-500/25">5</div>
+                    <div class="apply-step-badge mr-8 flex-shrink-0">5</div>
                     <div>
                         <h4 class="font-semibold text-white mb-2 text-lg">Receive Funding</h4>
                         <p class="text-gray-400">Approved proposals receive VaultZ funding to execute the project</p>
@@ -314,13 +314,13 @@ layout: vaultz
                 Join our community and start the conversation about your innovative idea.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://discord.gg/bitcoinz" target="_blank" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 inline-flex items-center justify-center gap-3">
+                <a href="https://discord.gg/bitcoinz" target="_blank" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 inline-flex items-center justify-center gap-4">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                     </svg>
                     Join Discord
                 </a>
-                <a href="https://t.me/bitcoinzcommunity" target="_blank" class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105 inline-flex items-center justify-center gap-3">
+                <a href="https://t.me/bitcoinzcommunity" target="_blank" class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105 inline-flex items-center justify-center gap-4">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                     </svg>
@@ -430,11 +430,18 @@ layout: vaultz
 <!-- Governance Section -->
 <div class="mb-16">
     <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Community Governance</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How Funding Decisions Are Made</h2>
         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            All VaultZ fund usage is guided by community sentiment within BitcoinZ principles.
-            Every decision is transparent, democratic, and aligned with our core values.
+            Proposals are discussed in public, voted on by the community, and paid out in milestones from a public multisig.
+            Every vote, decision, and transaction is transparent and auditable.
         </p>
+        <div class="text-gray-300 max-w-3xl mx-auto mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-left">
+            <div class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 rounded-full bg-yellow-400 flex-shrink-0"></span><span>Public discussion in Discord and the Forum</span></div>
+            <div class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 rounded-full bg-yellow-400 flex-shrink-0"></span><span>Community voting on proposals</span></div>
+            <div class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 rounded-full bg-yellow-400 flex-shrink-0"></span><span>Milestone reviews before each payout</span></div>
+            <div class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 rounded-full bg-yellow-400 flex-shrink-0"></span><span>Transparent payouts from a public multisig</span></div>
+        </div>
+
     </div>
 
     <div class="content-card p-8 mb-8">
@@ -609,6 +616,42 @@ layout: vaultz
 .governance-step:hover {
     transform: translateY(-5px) scale(1.02) !important;
     box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2) !important;
+}
+
+/* How-to-Apply number badge — high-contrast, professional look */
+.apply-step-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.3px;
+    color: #000;
+    background: linear-gradient(135deg, #FFD700, #FF9F0A);
+    border: 2px solid rgba(255, 215, 0, 0.7);
+    margin-right: 2.5rem;
+    box-shadow:
+        0 6px 14px rgba(255, 193, 7, 0.22),
+        0 0 0 2px rgba(255, 215, 0, 0.12),
+        inset 0 2px 5px rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+}
+
+.apply-step-badge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 55%);
+    pointer-events: none;
+}
+
+@media (max-width: 640px) {
+    .apply-step-badge { width: 56px; height: 56px; font-size: 18px; margin-right: 1.25rem; }
 }
 </style>
 {{< /rawhtml >}}
