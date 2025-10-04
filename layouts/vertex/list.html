@@ -3632,6 +3632,57 @@ main .container {
                             </div>
                         </div>
                     </div>
+
+                    <!-- ZEC Contribution -->
+                    <div class="p-4 md:p-6 bg-gray-900/30 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <!-- QR Code Section (Left on desktop, top on mobile) -->
+                            <div class="flex-shrink-0 mx-auto md:mx-0">
+                                <div class="p-3 bg-white rounded-lg">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=zcash:t1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz" alt="ZEC QR Code" class="w-32 h-32 md:w-36 md:h-36" />
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2 text-center">Scan to send ZEC</p>
+                            </div>
+
+                            <!-- Information Section (Right on desktop, bottom on mobile) -->
+                            <div class="flex-1 space-y-3 md:space-y-4">
+                                <!-- Header -->
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="text-xl font-semibold text-white">Zcash</h4>
+                                        <span class="px-2 py-0.5 bg-purple-500/20 rounded text-xs font-medium text-purple-400">ZEC</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Privacy-focused cryptocurrency</p>
+                                </div>
+
+                                <!-- Balance -->
+                                <div class="p-3 bg-gray-800/50 rounded-lg">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs text-gray-500 uppercase tracking-wider">Balance</span>
+                                        <button onclick="refreshZECBalance()" class="text-xs text-gray-400 hover:text-purple-400 transition-colors">
+                                            <span class="inline-block hover:rotate-180 transition-transform duration-500">🔄</span>
+                                        </button>
+                                    </div>
+                                    <div class="text-lg font-semibold text-purple-300" id="zec-balance">0.00000000 ZEC</div>
+                                    <div class="text-xs text-gray-500" id="zec-balance-usd">≈ $0.00 USD</div>
+                                </div>
+
+                                <!-- Address -->
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+                                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                                        <div id="zec-address" class="font-mono text-xs text-gray-300 bg-gray-800/50 rounded-lg px-3 py-2 flex-1 break-all">t1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz</div>
+                                        <button onclick="copyZECAddress()" class="px-3 py-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs text-purple-400 transition-all whitespace-nowrap">
+                                            📋 Copy
+                                        </button>
+                                    </div>
+                                    <div id="zec-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
+                                        ✅ Address copied to clipboard
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3958,7 +4009,7 @@ function copyLTCAddress() {
     const address = 'ltc1qcrpx7nnqkrw0wm9hu85tq5n256d2z6mja75n7u';
     const copyButton = event.target;
     const successMessage = document.getElementById('ltc-copy-success');
-    
+
     // Try to copy to clipboard
     if (navigator.clipboard && window.isSecureContext) {
         // Use modern clipboard API
@@ -3970,6 +4021,26 @@ function copyLTCAddress() {
     } else {
         // Fallback for older browsers or non-HTTPS
         fallbackCopyTextToClipboard(address, copyButton, successMessage, 'gray');
+    }
+}
+
+// Copy ZEC Address functionality
+function copyZECAddress() {
+    const address = 't1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz';
+    const copyButton = event.target;
+    const successMessage = document.getElementById('zec-copy-success');
+
+    // Try to copy to clipboard
+    if (navigator.clipboard && window.isSecureContext) {
+        // Use modern clipboard API
+        navigator.clipboard.writeText(address).then(() => {
+            showCopySuccess(copyButton, successMessage, 'purple');
+        }).catch(err => {
+            fallbackCopyTextToClipboard(address, copyButton, successMessage, 'purple');
+        });
+    } else {
+        // Fallback for older browsers or non-HTTPS
+        fallbackCopyTextToClipboard(address, copyButton, successMessage, 'purple');
     }
 }
 
@@ -4042,6 +4113,7 @@ function showCopySuccess(button, successMessage, colorTheme = 'orange') {
 // Global variables for total progress tracking
 let totalBTC_USD = 0;
 let totalLTC_USD = 0;
+let totalZEC_USD = 0;
 const FUNDING_TARGET = 6000; // $6,000 USD target
 
 // Balance fetching functions
@@ -4087,22 +4159,22 @@ async function fetchLTCBalance() {
     const address = 'ltc1qcrpx7nnqkrw0wm9hu85tq5n256d2z6mja75n7u';
     const balanceElement = document.getElementById('ltc-balance');
     const balanceUsdElement = document.getElementById('ltc-balance-usd');
-    
+
     try {
         // Using BlockCypher API for LTC balance
         const response = await fetch(`https://api.blockcypher.com/v1/ltc/main/addrs/${address}/balance`);
         const data = await response.json();
-        
+
         if (data.balance !== undefined) {
             const balanceLTC = (data.balance / 100000000).toFixed(8); // Convert litoshis to LTC
             balanceElement.textContent = `${balanceLTC} LTC`;
-            
+
             // Get LTC price for USD conversion
             const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd');
             const priceData = await priceResponse.json();
             const usdValue = (parseFloat(balanceLTC) * priceData.litecoin.usd).toFixed(2);
             balanceUsdElement.textContent = `≈ $${usdValue} USD`;
-            
+
             // Update global total
             totalLTC_USD = parseFloat(usdValue);
             updateTotalProgress();
@@ -4121,6 +4193,44 @@ async function fetchLTCBalance() {
     }
 }
 
+async function fetchZECBalance() {
+    const address = 't1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz';
+    const balanceElement = document.getElementById('zec-balance');
+    const balanceUsdElement = document.getElementById('zec-balance-usd');
+
+    try {
+        // Using Zcha.in API for ZEC balance
+        const response = await fetch(`https://api.zcha.in/v2/mainnet/accounts/${address}`);
+        const data = await response.json();
+
+        if (data.balance !== undefined) {
+            const balanceZEC = parseFloat(data.balance).toFixed(8);
+            balanceElement.textContent = `${balanceZEC} ZEC`;
+
+            // Get ZEC price for USD conversion
+            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=zcash&vs_currencies=usd');
+            const priceData = await priceResponse.json();
+            const usdValue = (parseFloat(balanceZEC) * priceData.zcash.usd).toFixed(2);
+            balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+
+            // Update global total
+            totalZEC_USD = parseFloat(usdValue);
+            updateTotalProgress();
+        } else {
+            balanceElement.textContent = '0.00000000 ZEC';
+            balanceUsdElement.textContent = '≈ $0.00 USD';
+            totalZEC_USD = 0;
+            updateTotalProgress();
+        }
+    } catch (error) {
+        console.error('Error fetching ZEC balance:', error);
+        balanceElement.textContent = '0.00000000 ZEC';
+        balanceUsdElement.textContent = '≈ $0.00 USD';
+        totalZEC_USD = 0;
+        updateTotalProgress();
+    }
+}
+
 
 // Refresh functions for manual updates
 function refreshBTCBalance() {
@@ -4135,10 +4245,16 @@ function refreshLTCBalance() {
     fetchLTCBalance();
 }
 
+function refreshZECBalance() {
+    document.getElementById('zec-balance').textContent = 'Loading...';
+    document.getElementById('zec-balance-usd').textContent = 'Checking balance...';
+    fetchZECBalance();
+}
+
 
 // Update total progress function
 function updateTotalProgress() {
-    const totalUSD = totalBTC_USD + totalLTC_USD;
+    const totalUSD = totalBTC_USD + totalLTC_USD + totalZEC_USD;
     const percentage = Math.min((totalUSD / FUNDING_TARGET) * 100, 100);
     const remaining = Math.max(FUNDING_TARGET - totalUSD, 0);
     
@@ -4194,17 +4310,19 @@ function refreshTotalProgress() {
     // Reset all totals and refresh all balances
     totalBTC_USD = 0;
     totalLTC_USD = 0;
-    
+    totalZEC_USD = 0;
+
     // Show loading state
     const currentTotalElement = document.getElementById('current-total');
     const progressPercentageElement = document.getElementById('progress-percentage');
-    
+
     if (currentTotalElement) currentTotalElement.textContent = 'Loading...';
     if (progressPercentageElement) progressPercentageElement.textContent = '...';
-    
+
     // Refresh all balances (they will call updateTotalProgress when complete)
     fetchBTCBalance();
     fetchLTCBalance();
+    fetchZECBalance();
 }
 
 // Initialize balance fetching when page loads
@@ -4213,12 +4331,14 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         fetchBTCBalance();
         fetchLTCBalance();
+        fetchZECBalance();
     }, 1000); // Small delay to let page fully load
-    
+
     // Auto-refresh balances every 5 minutes
     setInterval(() => {
         fetchBTCBalance();
         fetchLTCBalance();
+        fetchZECBalance();
     }, 300000); // 300000ms = 5 minutes
 });
 </script>
