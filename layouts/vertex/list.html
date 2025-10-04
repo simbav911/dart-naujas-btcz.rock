@@ -4199,12 +4199,17 @@ async function fetchZECBalance() {
     const balanceUsdElement = document.getElementById('zec-balance-usd');
 
     try {
-        // Using Zcha.in API for ZEC balance
-        const response = await fetch(`https://api.zcha.in/v2/mainnet/accounts/${address}`);
-        const data = await response.json();
+        // Use CORS proxy to fetch HTML from Zcash Explorer
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const targetUrl = encodeURIComponent(`https://mainnet.zcashexplorer.app/address/${address}`);
+        const response = await fetch(proxyUrl + targetUrl);
+        const html = await response.text();
 
-        if (data.balance !== undefined) {
-            const balanceZEC = parseFloat(data.balance).toFixed(8);
+        // Extract balance from HTML using regex
+        const balanceMatch = html.match(/(\d+\.\d+)\s*ZEC/);
+
+        if (balanceMatch && balanceMatch[1]) {
+            const balanceZEC = parseFloat(balanceMatch[1]).toFixed(8);
             balanceElement.textContent = `${balanceZEC} ZEC`;
 
             // Get ZEC price for USD conversion
