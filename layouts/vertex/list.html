@@ -4124,7 +4124,8 @@ let cachedZECPrice = 0;
 // Fetch all cryptocurrency prices in one API call
 async function fetchCryptoPrices() {
     try {
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        // Try corsproxy.io instead of allorigins
+        const proxyUrl = 'https://corsproxy.io/?';
         const priceUrl = encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,litecoin,zcash&vs_currencies=usd');
         const response = await fetch(proxyUrl + priceUrl);
         const data = await response.json();
@@ -4230,7 +4231,7 @@ async function fetchZECBalance() {
 
     try {
         // Use CORS proxy to fetch HTML from Zcash Explorer
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const proxyUrl = 'https://corsproxy.io/?';
         const targetUrl = encodeURIComponent(`https://mainnet.zcashexplorer.app/address/${address}`);
         const response = await fetch(proxyUrl + targetUrl);
         const html = await response.text();
