@@ -4116,29 +4116,58 @@ let totalLTC_USD = 0;
 let totalZEC_USD = 0;
 const FUNDING_TARGET = 6000; // $6,000 USD target
 
+// Global price cache
+let cachedBTCPrice = 0;
+let cachedLTCPrice = 0;
+let cachedZECPrice = 0;
+
+// Fetch all cryptocurrency prices in one API call
+async function fetchCryptoPrices() {
+    try {
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const priceUrl = encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,litecoin,zcash&vs_currencies=usd');
+        const response = await fetch(proxyUrl + priceUrl);
+        const data = await response.json();
+        console.log('Combined price data:', data);
+
+        // Store prices in cache
+        cachedBTCPrice = data?.bitcoin?.usd || 0;
+        cachedLTCPrice = data?.litecoin?.usd || 0;
+        cachedZECPrice = data?.zcash?.usd || 0;
+
+        console.log(`Prices cached - BTC: $${cachedBTCPrice}, LTC: $${cachedLTCPrice}, ZEC: $${cachedZECPrice}`);
+    } catch (error) {
+        console.error('Error fetching crypto prices:', error);
+        cachedBTCPrice = 0;
+        cachedLTCPrice = 0;
+        cachedZECPrice = 0;
+    }
+}
+
 // Balance fetching functions
 async function fetchBTCBalance() {
     const address = 'bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx';
     const balanceElement = document.getElementById('btc-balance');
     const balanceUsdElement = document.getElementById('btc-balance-usd');
-    
+
     try {
         // Using BlockCypher API for BTC balance (free tier)
         const response = await fetch(`https://api.blockcypher.com/v1/btc/main/addrs/${address}/balance`);
         const data = await response.json();
-        
+
         if (data.balance !== undefined) {
             const balanceBTC = (data.balance / 100000000).toFixed(8); // Convert satoshis to BTC
             balanceElement.textContent = `${balanceBTC} BTC`;
-            
-            // Get BTC price for USD conversion
-            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-            const priceData = await priceResponse.json();
-            const usdValue = (parseFloat(balanceBTC) * priceData.bitcoin.usd).toFixed(2);
-            balanceUsdElement.textContent = `≈ $${usdValue} USD`;
-            
-            // Update global total
-            totalBTC_USD = parseFloat(usdValue);
+
+            // Use cached price
+            if (cachedBTCPrice > 0) {
+                const usdValue = (parseFloat(balanceBTC) * cachedBTCPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalBTC_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalBTC_USD = 0;
+            }
             updateTotalProgress();
         } else {
             balanceElement.textContent = '0.00000000 BTC';
@@ -4169,14 +4198,15 @@ async function fetchLTCBalance() {
             const balanceLTC = (data.balance / 100000000).toFixed(8); // Convert litoshis to LTC
             balanceElement.textContent = `${balanceLTC} LTC`;
 
-            // Get LTC price for USD conversion
-            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd');
-            const priceData = await priceResponse.json();
-            const usdValue = (parseFloat(balanceLTC) * priceData.litecoin.usd).toFixed(2);
-            balanceUsdElement.textContent = `≈ $${usdValue} USD`;
-
-            // Update global total
-            totalLTC_USD = parseFloat(usdValue);
+            // Use cached price
+            if (cachedLTCPrice > 0) {
+                const usdValue = (parseFloat(balanceLTC) * cachedLTCPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalLTC_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalLTC_USD = 0;
+            }
             updateTotalProgress();
         } else {
             balanceElement.textContent = '0.00000000 LTC';
@@ -4212,14 +4242,15 @@ async function fetchZECBalance() {
             const balanceZEC = parseFloat(balanceMatch[1]).toFixed(8);
             balanceElement.textContent = `${balanceZEC} ZEC`;
 
-            // Get ZEC price for USD conversion
-            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=zcash&vs_currencies=usd');
-            const priceData = await priceResponse.json();
-            const usdValue = (parseFloat(balanceZEC) * priceData.zcash.usd).toFixed(2);
-            balanceUsdElement.textContent = `≈ $${usdValue} USD`;
-
-            // Update global total
-            totalZEC_USD = parseFloat(usdValue);
+            // Use cached price
+            if (cachedZECPrice > 0) {
+                const usdValue = (parseFloat(balanceZEC) * cachedZECPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalZEC_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalZEC_USD = 0;
+            }
             updateTotalProgress();
         } else {
             balanceElement.textContent = '0.00000000 ZEC';
@@ -4238,21 +4269,24 @@ async function fetchZECBalance() {
 
 
 // Refresh functions for manual updates
-function refreshBTCBalance() {
+async function refreshBTCBalance() {
     document.getElementById('btc-balance').textContent = 'Loading...';
     document.getElementById('btc-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
     fetchBTCBalance();
 }
 
-function refreshLTCBalance() {
+async function refreshLTCBalance() {
     document.getElementById('ltc-balance').textContent = 'Loading...';
     document.getElementById('ltc-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
     fetchLTCBalance();
 }
 
-function refreshZECBalance() {
+async function refreshZECBalance() {
     document.getElementById('zec-balance').textContent = 'Loading...';
     document.getElementById('zec-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
     fetchZECBalance();
 }
 
@@ -4311,7 +4345,7 @@ function updateTotalProgress() {
 }
 
 // Manual refresh function for total progress
-function refreshTotalProgress() {
+async function refreshTotalProgress() {
     // Reset all totals and refresh all balances
     totalBTC_USD = 0;
     totalLTC_USD = 0;
@@ -4324,7 +4358,8 @@ function refreshTotalProgress() {
     if (currentTotalElement) currentTotalElement.textContent = 'Loading...';
     if (progressPercentageElement) progressPercentageElement.textContent = '...';
 
-    // Refresh all balances (they will call updateTotalProgress when complete)
+    // Fetch prices first, then refresh all balances
+    await fetchCryptoPrices();
     fetchBTCBalance();
     fetchLTCBalance();
     fetchZECBalance();
@@ -4332,15 +4367,17 @@ function refreshTotalProgress() {
 
 // Initialize balance fetching when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Fetch balances on page load
-    setTimeout(() => {
+    // Fetch prices first, then balances
+    setTimeout(async () => {
+        await fetchCryptoPrices(); // Fetch all prices in one call
         fetchBTCBalance();
         fetchLTCBalance();
         fetchZECBalance();
     }, 1000); // Small delay to let page fully load
 
-    // Auto-refresh balances every 5 minutes
-    setInterval(() => {
+    // Auto-refresh prices and balances every 5 minutes
+    setInterval(async () => {
+        await fetchCryptoPrices(); // Refresh prices first
         fetchBTCBalance();
         fetchLTCBalance();
         fetchZECBalance();
