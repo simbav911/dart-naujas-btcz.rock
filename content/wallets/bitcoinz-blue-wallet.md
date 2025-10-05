@@ -23,26 +23,26 @@ features:
   - "Enhanced Key Import/Export"
 platforms:
   - name: "Windows"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Windows-Installer.zip"
-    portable_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Windows-Portable.zip"
-    version: "2.0.0"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Windows-Installer.zip"
+    portable_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Windows-Portable.zip"
+    version: "2.0.2"
     sha256_installer: "TBD"
     sha256_portable: "TBD"
   - name: "macOS (Apple Silicon)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-macOS-AppleSilicon.zip"
-    version: "2.0.0"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-macOS-AppleSilicon.zip"
+    version: "2.0.2"
     sha256: "TBD"
   - name: "macOS (Intel)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-macOS-Intel.zip"
-    version: "2.0.0"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-macOS-Intel.zip"
+    version: "2.0.2"
     sha256: "TBD"
   - name: "Linux (AppImage)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Linux-AppImage.zip"
-    version: "2.0.0"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Linux-AppImage.zip"
+    version: "2.0.2"
     sha256: "TBD"
   - name: "Linux (DEB)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.0/BitcoinZ-Blue-Linux-DEB.zip"
-    version: "2.0.0"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Linux-DEB.zip"
+    version: "2.0.2"
     sha256: "TBD"
 requirements:
   - "4GB RAM (8GB recommended)"
@@ -50,7 +50,7 @@ requirements:
   - "Internet connection"
   - "Windows 10/11, macOS 10.15+, or Ubuntu 20.04+"
 source_code: "https://github.com/z-bitcoinz/BitcoinZ_Blue"
-releases_page: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/tag/v2.0.0"
+releases_page: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/tag/v2.0.2"
 draft: false
 ---
 
@@ -130,7 +130,7 @@ BitcoinZ Blue implements bulletproof security technology that ensures your priva
 
 ## Version History
 
-### v2.0.0 (September 25, 2025) - Protocol & Reliability Update
+### v2.0.2 (October 5, 2025) - Latest Release
 
 **Major Release Highlights:**
 - **Protocol Upgrade**: Migrated to BitcoinZ-specific forks of librustzcash and orchard to support >21M BTCZ supply
