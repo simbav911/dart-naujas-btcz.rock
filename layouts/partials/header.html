@@ -476,22 +476,26 @@
                 <div x-show="mobileMenuOpen"
                      x-bind:class="{ 'slide-in': mobileMenuOpen }"
                      @click.away="mobileMenuOpen = false"
-                     class="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden z-50 bg-black/90 backdrop-blur-md border-l border-white/5 shadow-2xl transform"
+                     class="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden z-50 bg-black/90 backdrop-blur-md border-l border-white/5 shadow-2xl transform flex flex-col"
                      style="background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.9));">
-                    
-                    <nav class="h-full w-full overflow-y-auto flex flex-col">
-                        <!-- Menu Header with Close Button -->
-                        <div class="flex justify-end items-center p-6 border-b border-white/10">
-                            <button @click="mobileMenuOpen = false" 
-                                    class="p-2 text-white/80 hover:text-btcz-gold transition-all duration-200 hover:rotate-90 transform">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        
-                        <!-- Menu Content -->
-                        <div class="p-6">
+
+                    <!-- Menu Header with Close Button -->
+                    <div class="flex-shrink-0 flex justify-end items-center p-6 border-b border-white/10">
+                        <button @click="mobileMenuOpen = false"
+                                class="p-2 text-white/80 hover:text-btcz-gold transition-all duration-200 hover:rotate-90 transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Scrollable Menu Content -->
+                    <nav class="flex-1 overflow-y-auto overscroll-contain" style="
+                        -webkit-overflow-scrolling: touch;
+                        scrollbar-width: thin;
+                        scrollbar-color: #FFD700 rgba(0,0,0,0.3);
+                    ">
+                        <div class="p-6 pb-12">
                             <!-- Navigation Links -->
                             {{ range .Site.Menus.main }}
                                 <a href="{{ .URL | relLangURL }}" 
@@ -852,6 +856,24 @@
                     </nav>
                 </div>
             </div>
+
+            <style>
+                /* Mobile menu scrollbar styling */
+                nav.overflow-y-auto::-webkit-scrollbar {
+                    width: 6px;
+                }
+                nav.overflow-y-auto::-webkit-scrollbar-track {
+                    background: rgba(0,0,0,0.3);
+                    border-radius: 3px;
+                }
+                nav.overflow-y-auto::-webkit-scrollbar-thumb {
+                    background: #FFD700;
+                    border-radius: 3px;
+                }
+                nav.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+                    background: #ffd900d1;
+                }
+            </style>
         </nav>
     </div>
 </header>
