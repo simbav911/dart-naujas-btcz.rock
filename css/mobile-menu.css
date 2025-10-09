@@ -162,3 +162,64 @@
 .arrow-icon.open {
     transform: rotate(180deg);
 }
+
+/* Mobile Menu Scrolling Fix */
+@media (max-width: 768px) {
+    /* Ensure mobile menu container uses flexbox properly */
+    .mobile-menu-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Make scrollable content area work properly */
+    .mobile-menu-scrollable {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        position: relative;
+    }
+
+    /* Ensure content has bottom padding for accessibility */
+    .mobile-menu-content {
+        padding-bottom: 4rem;
+        min-height: min-content;
+    }
+
+    /* Prevent body scroll when mobile menu is open */
+    body.mobile-menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Custom scrollbar for mobile menu */
+    .mobile-menu-scrollable::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .mobile-menu-scrollable::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+    }
+
+    .mobile-menu-scrollable::-webkit-scrollbar-thumb {
+        background: #FFD700;
+        border-radius: 3px;
+    }
+
+    .mobile-menu-scrollable::-webkit-scrollbar-thumb:hover {
+        background: #ffd900d1;
+    }
+
+    /* Firefox scrollbar */
+    .mobile-menu-scrollable {
+        scrollbar-width: thin;
+        scrollbar-color: #FFD700 rgba(0, 0, 0, 0.3);
+    }
+}
