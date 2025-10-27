@@ -3531,6 +3531,61 @@ main .container {
                 
                 <!-- Crypto Contribution Options -->
                 <div class="space-y-8 mb-12">
+                    <!-- BTCZ Contribution -->
+                    <div class="p-4 md:p-6 bg-yellow-900/20 rounded-xl border border-yellow-500/50 backdrop-blur-sm">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <!-- QR Code Section (Left on desktop, top on mobile) -->
+                            <div class="flex-shrink-0 mx-auto md:mx-0">
+                                <div class="p-3 bg-white rounded-lg">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoinz:t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP" alt="BTCZ QR Code" class="w-32 h-32 md:w-36 md:h-36" />
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2 text-center">Scan to send BTCZ</p>
+                            </div>
+
+                            <!-- Information Section (Right on desktop, bottom on mobile) -->
+                            <div class="flex-1 space-y-3 md:space-y-4">
+                                <!-- Header -->
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="text-xl font-semibold text-white">BitcoinZ</h4>
+                                        <span class="px-2 py-0.5 bg-yellow-500/20 rounded text-xs font-medium text-yellow-400">BTCZ</span>
+                                        <span class="px-2 py-0.5 bg-blue-500/20 rounded text-xs font-medium text-blue-400">⭐ Native</span>
+                                    </div>
+                                    <p class="text-sm text-yellow-300">Primary funding method - Native BitcoinZ blockchain</p>
+                                </div>
+
+                                <!-- Balance -->
+                                <div class="p-3 bg-gray-800/50 rounded-lg">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs text-gray-500 uppercase tracking-wider">Balance</span>
+                                        <button onclick="refreshBTCZBalance()" class="text-xs text-gray-400 hover:text-yellow-400 transition-colors">
+                                            <span class="inline-block hover:rotate-180 transition-transform duration-500">🔄</span>
+                                        </button>
+                                    </div>
+                                    <div class="text-lg font-semibold text-yellow-400" id="btcz-balance">0.00000000 BTCZ</div>
+                                    <div class="text-xs text-gray-500" id="btcz-balance-usd">≈ $0.00 USD</div>
+                                </div>
+
+                                <!-- Address -->
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+                                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                                        <div id="btcz-address" class="font-mono text-xs text-gray-300 bg-gray-800/50 rounded-lg px-3 py-2 flex-1 break-all">t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP</div>
+                                        <button onclick="copyBTCZAddress()" class="px-3 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-xs text-yellow-400 transition-all whitespace-nowrap">
+                                            📋 Copy
+                                        </button>
+                                    </div>
+                                    <div id="btcz-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
+                                        ✅ Address copied to clipboard
+                                    </div>
+                                    <a href="https://explorer.btcz.rocks/address/t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP" target="_blank" class="text-xs text-yellow-500/70 hover:text-yellow-400 mt-2 inline-flex items-center gap-1 transition-colors">
+                                        🔗 View on BitcoinZ Explorer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- BTC Contribution -->
                     <div class="p-4 md:p-6 bg-gray-900/30 rounded-xl border border-gray-700/50 backdrop-blur-sm">
                         <div class="flex flex-col md:flex-row gap-6">
@@ -3550,7 +3605,7 @@ main .container {
                                         <h4 class="text-xl font-semibold text-white">Bitcoin</h4>
                                         <span class="px-2 py-0.5 bg-orange-500/20 rounded text-xs font-medium text-orange-400">BTC</span>
                                     </div>
-                                    <p class="text-sm text-gray-400">Primary funding method</p>
+                                    <p class="text-sm text-gray-400">Alternative funding method</p>
                                 </div>
                                 
                                 <!-- Balance -->
@@ -3984,6 +4039,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Copy BTCZ Address functionality
+function copyBTCZAddress() {
+    const address = 't1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP';
+    const copyButton = event.target;
+    const successMessage = document.getElementById('btcz-copy-success');
+
+    // Try to copy to clipboard
+    if (navigator.clipboard && window.isSecureContext) {
+        // Use modern clipboard API
+        navigator.clipboard.writeText(address).then(() => {
+            showCopySuccess(copyButton, successMessage, 'yellow');
+        }).catch(err => {
+            fallbackCopyTextToClipboard(address, copyButton, successMessage, 'yellow');
+        });
+    } else {
+        // Fallback for older browsers or non-HTTPS
+        fallbackCopyTextToClipboard(address, copyButton, successMessage, 'yellow');
+    }
+}
+
 // Copy BTC Address functionality
 function copyBTCAddress() {
     const address = 'bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx';
@@ -4111,12 +4186,14 @@ function showCopySuccess(button, successMessage, colorTheme = 'orange') {
 }
 
 // Global variables for total progress tracking
+let totalBTCZ_USD = 0;
 let totalBTC_USD = 0;
 let totalLTC_USD = 0;
 let totalZEC_USD = 0;
 const FUNDING_TARGET = 6000; // $6,000 USD target
 
 // Global price cache
+let cachedBTCZPrice = 0;
 let cachedBTCPrice = 0;
 let cachedLTCPrice = 0;
 let cachedZECPrice = 0;
@@ -4126,19 +4203,21 @@ async function fetchCryptoPrices() {
     try {
         // Try corsproxy.io instead of allorigins
         const proxyUrl = 'https://corsproxy.io/?';
-        const priceUrl = encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,litecoin,zcash&vs_currencies=usd');
+        const priceUrl = encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=bitcoinz,bitcoin,litecoin,zcash&vs_currencies=usd');
         const response = await fetch(proxyUrl + priceUrl);
         const data = await response.json();
         console.log('Combined price data:', data);
 
         // Store prices in cache
+        cachedBTCZPrice = data?.bitcoinz?.usd || 0;
         cachedBTCPrice = data?.bitcoin?.usd || 0;
         cachedLTCPrice = data?.litecoin?.usd || 0;
         cachedZECPrice = data?.zcash?.usd || 0;
 
-        console.log(`Prices cached - BTC: $${cachedBTCPrice}, LTC: $${cachedLTCPrice}, ZEC: $${cachedZECPrice}`);
+        console.log(`Prices cached - BTCZ: $${cachedBTCZPrice}, BTC: $${cachedBTCPrice}, LTC: $${cachedLTCPrice}, ZEC: $${cachedZECPrice}`);
     } catch (error) {
         console.error('Error fetching crypto prices:', error);
+        cachedBTCZPrice = 0;
         cachedBTCPrice = 0;
         cachedLTCPrice = 0;
         cachedZECPrice = 0;
@@ -4146,6 +4225,47 @@ async function fetchCryptoPrices() {
 }
 
 // Balance fetching functions
+async function fetchBTCZBalance() {
+    const address = 't1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP';
+    const balanceElement = document.getElementById('btcz-balance');
+    const balanceUsdElement = document.getElementById('btcz-balance-usd');
+
+    try {
+        // Use CORS proxy to fetch from BitcoinZ Explorer
+        const proxyUrl = 'https://corsproxy.io/?';
+        const targetUrl = encodeURIComponent(`https://explorer.btcz.rocks/api/addr/${address}/balance`);
+        const response = await fetch(proxyUrl + targetUrl);
+        const balanceSatoshis = await response.text();
+
+        if (balanceSatoshis) {
+            const balanceBTCZ = (parseFloat(balanceSatoshis) / 100000000).toFixed(8); // Convert satoshis to BTCZ
+            balanceElement.textContent = `${balanceBTCZ} BTCZ`;
+
+            // Use cached price
+            if (cachedBTCZPrice > 0) {
+                const usdValue = (parseFloat(balanceBTCZ) * cachedBTCZPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalBTCZ_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalBTCZ_USD = 0;
+            }
+            updateTotalProgress();
+        } else {
+            balanceElement.textContent = '0.00000000 BTCZ';
+            balanceUsdElement.textContent = '≈ $0.00 USD';
+            totalBTCZ_USD = 0;
+            updateTotalProgress();
+        }
+    } catch (error) {
+        console.error('Error fetching BTCZ balance:', error);
+        balanceElement.textContent = '0.00000000 BTCZ';
+        balanceUsdElement.textContent = '≈ $0.00 USD';
+        totalBTCZ_USD = 0;
+        updateTotalProgress();
+    }
+}
+
 async function fetchBTCBalance() {
     const address = 'bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx';
     const balanceElement = document.getElementById('btc-balance');
@@ -4270,6 +4390,13 @@ async function fetchZECBalance() {
 
 
 // Refresh functions for manual updates
+async function refreshBTCZBalance() {
+    document.getElementById('btcz-balance').textContent = 'Loading...';
+    document.getElementById('btcz-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
+    fetchBTCZBalance();
+}
+
 async function refreshBTCBalance() {
     document.getElementById('btc-balance').textContent = 'Loading...';
     document.getElementById('btc-balance-usd').textContent = 'Checking balance...';
@@ -4294,7 +4421,7 @@ async function refreshZECBalance() {
 
 // Update total progress function
 function updateTotalProgress() {
-    const totalUSD = totalBTC_USD + totalLTC_USD + totalZEC_USD;
+    const totalUSD = totalBTCZ_USD + totalBTC_USD + totalLTC_USD + totalZEC_USD;
     const percentage = Math.min((totalUSD / FUNDING_TARGET) * 100, 100);
     const remaining = Math.max(FUNDING_TARGET - totalUSD, 0);
     
@@ -4348,6 +4475,7 @@ function updateTotalProgress() {
 // Manual refresh function for total progress
 async function refreshTotalProgress() {
     // Reset all totals and refresh all balances
+    totalBTCZ_USD = 0;
     totalBTC_USD = 0;
     totalLTC_USD = 0;
     totalZEC_USD = 0;
@@ -4361,6 +4489,7 @@ async function refreshTotalProgress() {
 
     // Fetch prices first, then refresh all balances
     await fetchCryptoPrices();
+    fetchBTCZBalance();
     fetchBTCBalance();
     fetchLTCBalance();
     fetchZECBalance();
@@ -4371,6 +4500,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch prices first, then balances
     setTimeout(async () => {
         await fetchCryptoPrices(); // Fetch all prices in one call
+        fetchBTCZBalance();
         fetchBTCBalance();
         fetchLTCBalance();
         fetchZECBalance();
@@ -4379,6 +4509,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-refresh prices and balances every 5 minutes
     setInterval(async () => {
         await fetchCryptoPrices(); // Refresh prices first
+        fetchBTCZBalance();
         fetchBTCBalance();
         fetchLTCBalance();
         fetchZECBalance();
