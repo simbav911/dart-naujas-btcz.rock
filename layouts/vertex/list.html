@@ -492,6 +492,60 @@ main {
     box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
 }
 
+/* Donation FAB Button */
+.fab-donate {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 5px 20px rgba(16, 185, 129, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.fab-donate.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.fab-donate:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6);
+}
+
+.fab-donate svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .fab-donate {
+        bottom: 5.5rem;
+        right: 1rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+    }
+
+    .fab {
+        bottom: 1.5rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+}
+
 /* Network Background */
 .network-bg {
     position: absolute;
@@ -1512,7 +1566,7 @@ main .container {
             <a href="#roadmap" class="btn btn-hero">
                 Roadmap
             </a>
-            <a href="#funding" class="btn btn-hero">
+            <a href="/vertex/donate/" class="btn btn-hero">
                 Fund Launch
             </a>
         </div>
@@ -3506,20 +3560,21 @@ main .container {
                     </div>
                     
                     <!-- Progress Bar -->
-                    <div class="relative w-full max-w-2xl mx-auto mb-4">
-                        <div class="w-full bg-gray-800/50 rounded-full h-6 border border-gray-600/50 overflow-hidden">
-                            <div id="progress-fill" class="h-full bg-gradient-to-r from-green-500 to-emerald-400 rounded-full transition-all duration-1000 ease-out shadow-lg shadow-green-500/30 relative overflow-hidden" style="width: 0%">
+                    <div class="w-full max-w-2xl mx-auto mb-6">
+                        <!-- Progress bar container -->
+                        <div class="relative w-full rounded-full h-8 overflow-hidden shadow-lg mb-2" style="background: linear-gradient(to bottom, #1f2937, #111827); border: 2px solid #374151;">
+                            <div id="progress-fill" class="h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%); box-shadow: 0 0 30px rgba(16, 185, 129, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.4);">
                                 <!-- Animated shine effect -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
                             </div>
                         </div>
-                        <!-- Milestone markers -->
-                        <div class="absolute inset-0 flex justify-between items-center px-1">
-                            <div class="text-xs text-gray-400">$0</div>
-                            <div class="text-xs text-gray-400">25%</div>
-                            <div class="text-xs text-gray-400">50%</div>
-                            <div class="text-xs text-gray-400">75%</div>
-                            <div class="text-xs text-gray-400">$6K</div>
+                        <!-- Milestone markers below the bar -->
+                        <div class="flex justify-between items-center px-1">
+                            <div class="text-xs font-medium text-gray-400">$0</div>
+                            <div class="text-xs font-medium text-gray-400">25%</div>
+                            <div class="text-xs font-medium text-gray-400">50%</div>
+                            <div class="text-xs font-medium text-gray-400">75%</div>
+                            <div class="text-xs font-medium text-gray-400">$6K</div>
                         </div>
                     </div>
                     
@@ -3986,6 +4041,14 @@ main .container {
     </div>
 </section>
 
+<!-- Donation FAB Button -->
+<a href="/vertex/donate/" class="fab-donate" id="donateBtn">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span>Donate to Project</span>
+</a>
+
 <!-- FAB Button -->
 <div class="fab" id="scrollTop">
     <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -4000,13 +4063,16 @@ window.addEventListener('scroll', () => {
     const total = document.documentElement.scrollHeight - window.innerHeight;
     const progress = (scrolled / total) * 100;
     document.getElementById('progressBar').style.width = progress + '%';
-    
-    // Show/hide FAB
+
+    // Show/hide FAB buttons
     const fab = document.getElementById('scrollTop');
+    const donateBtn = document.getElementById('donateBtn');
     if (scrolled > 500) {
         fab.classList.add('visible');
+        donateBtn.classList.add('visible');
     } else {
         fab.classList.remove('visible');
+        donateBtn.classList.remove('visible');
     }
 });
 

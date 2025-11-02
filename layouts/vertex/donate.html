@@ -1,0 +1,875 @@
+{{ define "main" }}
+<style>
+/* ============================================
+   VERTEX DONATION PAGE STYLES
+   ============================================ */
+
+.donate-page-content {
+    /* Color Palette as CSS variables scoped to this page */
+    --v-gold: #FFD700;
+    --v-gold-dark: #FFA500;
+    --v-green: #10B981;
+    --v-orange: #FB923C;
+    --v-gray-900: #111827;
+    --v-gray-800: #1F2937;
+    --v-gray-700: #374151;
+    --v-gray-600: #4B5563;
+    --v-gray-500: #6B7280;
+    --v-gray-400: #9CA3AF;
+    --v-gray-300: #D1D5DB;
+    --v-dark: #0A0A0A;
+
+    background: var(--v-dark);
+    color: var(--v-gray-300);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.donate-page-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.donate-page-content .gradient-text {
+    background: linear-gradient(135deg, var(--v-gold) 0%, var(--v-gold-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.donate-page-content .glass {
+    background: rgba(31, 41, 55, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+/* Scroll to top button - keep global since it's fixed position */
+.donate-page .fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.donate-page .fab.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.donate-page .fab:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Back to Vertex button */
+.donate-page-content .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 0.5rem;
+    color: var(--v-gold);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.donate-page-content .back-button:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--v-gold);
+    transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+    .donate-page-content {
+        padding: 1rem 0;
+    }
+
+    .donate-page-content .container {
+        padding: 0 1rem;
+    }
+}
+</style>
+
+<main class="donate-page donate-page-content">
+    <div class="container">
+        <!-- Back to Vertex Button -->
+        <a href="/vertex/" class="back-button">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Back to Vertex Overview
+        </a>
+
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4">Support Vertex Development</h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                Every contribution brings us closer to launching the world's first truly sovereign messaging platform built on the BitcoinZ blockchain.
+            </p>
+        </div>
+
+        <!-- Mission Statement -->
+        <div class="glass mb-12">
+            <h2 class="text-2xl font-bold text-yellow-400 mb-6 text-center">Project Vertex: A Community Call to Forge Our Future</h2>
+
+            <div class="space-y-6 text-gray-300">
+                <p class="text-lg">Before we ask for your support, we need to be absolutely clear about what we are building together. This is the key to understanding why this moment is so important for the future of our entire ecosystem.</p>
+
+                <div class="p-6 bg-red-500/10 rounded-lg border border-red-500/20">
+                    <p class="text-xl font-bold text-red-400 mb-4 text-center">Vertex is not a simple "memo messenger." Anyone can send a message in a memo.</p>
+                </div>
+
+                <div class="p-6 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                    <p class="text-lg mb-4">Think of a shielded transaction as a <span class="font-bold text-blue-400">microscopic, cryptographic armored car</span>. A simple messenger just puts a postcard in the vault.</p>
+
+                    <p class="text-lg"><span class="font-bold text-green-400">Vertex builds an entire, sophisticated security and logistics protocol around that armored car.</span> We are engineering the system that enables Sovereign Recovery, where your seed phrase can find every piece of cargo you've ever sent. We are building the on-chain rules for Sovereign Groups, where only a cryptographically signed key can open the door. We are leveraging the zero-knowledge route of that armored car to make you truly invisible.</p>
+                </div>
+
+                <div class="p-6 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-500/20 text-center">
+                    <p class="text-xl font-bold text-yellow-400 mb-2">This is not a simple app. This is a next-generation protocol with a world-class design.</p>
+                    <p class="text-gray-300">Building this protocol—this high-tech 'logistics system'—requires more than just an idea. It requires the dedicated time of expert engineers to build the Rust engine, design the cryptographic security, and polish the user experience.</p>
+                </div>
+
+                <p class="text-lg font-bold text-center">This is what you are making possible today. The planning is over. The blueprints are complete. Now, we must fund the builders.</p>
+            </div>
+        </div>
+
+        <!-- Funding Goals -->
+        <div class="glass mb-12">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-6 text-center">The Mission: A Phased Approach to a World-Class Product</h3>
+            <p class="text-lg text-gray-300 mb-8 text-center">We are launching a community initiative with a transparent, phased funding strategy.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Immediate Goal -->
+                <div class="p-6 bg-orange-500/10 rounded-lg border border-orange-500/20">
+                    <h4 class="text-xl font-bold text-orange-400 mb-4">Immediate Goal (The Ignition)</h4>
+                    <div class="text-3xl font-bold text-green-400 mb-4">$6,000 USD</div>
+                    <p class="text-gray-300 mb-4">This is our <span class="font-bold">Phase 1 Seed Fund</span>. This is the critical capital to hire a core developer and begin work on the Core Rust Engine immediately.</p>
+                    <div class="p-3 bg-green-500/10 rounded border border-green-500/20">
+                        <p class="text-green-400 font-bold">Reaching this goal is the green light.</p>
+                        <p class="text-gray-300 text-sm mt-1">It means development on the cryptographic heart of Vertex starts without delay.</p>
+                    </div>
+                </div>
+
+                <!-- Full Target -->
+                <div class="p-6 bg-green-500/10 rounded-lg border border-green-500/20">
+                    <h4 class="text-xl font-bold text-green-400 mb-4">Full Target (The Beta Launch)</h4>
+                    <div class="text-3xl font-bold text-blue-400 mb-4">$15,000 - $20,000 USD</div>
+                    <p class="text-gray-300 mb-4">This is our <span class="font-bold">Phase 2 Development Fund</span>. Reaching this target fully funds our "Lean & Mean" budget.</p>
+                    <div class="p-3 bg-blue-500/10 rounded border border-blue-500/20">
+                        <p class="text-blue-400 font-bold">Complete Package:</p>
+                        <ul class="text-gray-300 text-sm mt-2 space-y-1">
+                            <li>• Build the Rust core</li>
+                            <li>• Hire dedicated Flutter developer</li>
+                            <li>• Engage professional UI/UX designer</li>
+                            <li>• Blueprint → Beautiful, functional Beta</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funding Progress Section -->
+        <div class="p-8 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/30 text-center shadow-lg shadow-green-500/10 mb-12">
+            <h3 class="text-3xl font-bold text-green-400 mb-2">Development Funding Progress</h3>
+            <p class="text-gray-300 mb-6 text-sm">Target: $6,000 USD for Vertex Development</p>
+
+            <!-- Progress Statistics -->
+            <div class="mb-6">
+                <div class="flex items-center justify-center gap-4 mb-3">
+                    <span class="text-4xl font-bold text-green-400" id="current-total">$0</span>
+                    <span class="text-gray-400">/</span>
+                    <span class="text-2xl font-semibold text-gray-300">$6,000</span>
+                    <span class="px-3 py-1 bg-green-500/20 rounded-full text-sm font-medium text-green-300" id="progress-percentage">0%</span>
+                </div>
+                <p class="text-sm text-gray-400">
+                    <span id="remaining-amount">$6,000</span> remaining to reach our goal
+                </p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full max-w-2xl mx-auto mb-6">
+                <!-- Progress bar container -->
+                <div class="relative w-full rounded-full h-8 overflow-hidden shadow-lg mb-2" style="background: linear-gradient(to bottom, #1f2937, #111827); border: 2px solid #374151;">
+                    <div id="progress-fill" class="h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%); box-shadow: 0 0 30px rgba(16, 185, 129, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.4);">
+                        <!-- Animated shine effect -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
+                    </div>
+                </div>
+                <!-- Milestone markers below the bar -->
+                <div class="flex justify-between items-center px-1">
+                    <div class="text-xs font-medium text-gray-400">$0</div>
+                    <div class="text-xs font-medium text-gray-400">25%</div>
+                    <div class="text-xs font-medium text-gray-400">50%</div>
+                    <div class="text-xs font-medium text-gray-400">75%</div>
+                    <div class="text-xs font-medium text-gray-400">$6K</div>
+                </div>
+            </div>
+
+            <!-- Refresh Button -->
+            <button onclick="refreshTotalProgress()" class="px-6 py-3 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-lg text-sm text-green-400 transition-all hover:scale-105">
+                🔄 Refresh Progress
+            </button>
+        </div>
+
+        <!-- Donation Addresses -->
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-3xl font-bold text-center gradient-text mb-8">How to Contribute</h3>
+            <p class="text-lg text-gray-300 text-center mb-12">Every contribution, big or small, moves us closer to our goal. Choose your preferred cryptocurrency below.</p>
+
+            <div class="space-y-8">
+                <!-- BTCZ Contribution -->
+                <div class="p-4 md:p-6 bg-yellow-900/20 rounded-xl border border-yellow-500/50 backdrop-blur-sm">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- QR Code Section -->
+                        <div class="flex-shrink-0 mx-auto md:mx-0">
+                            <div class="p-3 bg-white rounded-lg">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoinz:t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP" alt="BTCZ QR Code" class="w-32 h-32 md:w-36 md:h-36" />
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 text-center">Scan to send BTCZ</p>
+                        </div>
+
+                        <!-- Information Section -->
+                        <div class="flex-1 space-y-3 md:space-y-4">
+                            <!-- Header -->
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h4 class="text-xl font-semibold text-white">BitcoinZ</h4>
+                                    <span class="px-2 py-0.5 bg-yellow-500/20 rounded text-xs font-medium text-yellow-400">BTCZ</span>
+                                    <span class="px-2 py-0.5 bg-blue-500/20 rounded text-xs font-medium text-blue-400">⭐ Native</span>
+                                </div>
+                                <p class="text-sm text-yellow-300">Primary funding method - Native BitcoinZ blockchain</p>
+                            </div>
+
+                            <!-- Balance -->
+                            <div class="p-3 bg-gray-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 uppercase tracking-wider">Balance</span>
+                                    <button onclick="refreshBTCZBalance()" class="text-xs text-gray-400 hover:text-yellow-400 transition-colors">
+                                        <span class="inline-block hover:rotate-180 transition-transform duration-500">🔄</span>
+                                    </button>
+                                </div>
+                                <div class="text-lg font-semibold text-yellow-400" id="btcz-balance">0.00000000 BTCZ</div>
+                                <div class="text-xs text-gray-500" id="btcz-balance-usd">≈ $0.00 USD</div>
+                            </div>
+
+                            <!-- Address -->
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                                    <div id="btcz-address" class="font-mono text-xs text-gray-300 bg-gray-800/50 rounded-lg px-3 py-2 flex-1 break-all">t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP</div>
+                                    <button onclick="copyBTCZAddress()" class="px-3 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-xs text-yellow-400 transition-all whitespace-nowrap">
+                                        📋 Copy
+                                    </button>
+                                </div>
+                                <div id="btcz-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
+                                    ✅ Address copied to clipboard
+                                </div>
+                                <a href="https://explorer.btcz.rocks/address/t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP" target="_blank" class="text-xs text-yellow-500/70 hover:text-yellow-400 mt-2 inline-flex items-center gap-1 transition-colors">
+                                    🔗 View on BitcoinZ Explorer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BTC Contribution -->
+                <div class="p-4 md:p-6 bg-gray-900/30 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- QR Code Section -->
+                        <div class="flex-shrink-0 mx-auto md:mx-0">
+                            <div class="p-3 bg-white rounded-lg">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx" alt="BTC QR Code" class="w-32 h-32 md:w-36 md:h-36" />
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 text-center">Scan to send BTC</p>
+                        </div>
+
+                        <!-- Information Section -->
+                        <div class="flex-1 space-y-3 md:space-y-4">
+                            <!-- Header -->
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h4 class="text-xl font-semibold text-white">Bitcoin</h4>
+                                    <span class="px-2 py-0.5 bg-orange-500/20 rounded text-xs font-medium text-orange-400">BTC</span>
+                                </div>
+                                <p class="text-sm text-gray-400">Alternative funding method</p>
+                            </div>
+
+                            <!-- Balance -->
+                            <div class="p-3 bg-gray-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 uppercase tracking-wider">Balance</span>
+                                    <button onclick="refreshBTCBalance()" class="text-xs text-gray-400 hover:text-orange-400 transition-colors">
+                                        <span class="inline-block hover:rotate-180 transition-transform duration-500">🔄</span>
+                                    </button>
+                                </div>
+                                <div class="text-lg font-semibold text-orange-400" id="btc-balance">0.00000000 BTC</div>
+                                <div class="text-xs text-gray-500" id="btc-balance-usd">≈ $0.00 USD</div>
+                            </div>
+
+                            <!-- Address -->
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                                    <div id="btc-address" class="font-mono text-xs text-gray-300 bg-gray-800/50 rounded-lg px-3 py-2 flex-1 break-all">bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx</div>
+                                    <button onclick="copyBTCAddress()" class="px-3 py-2 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 rounded-lg text-xs text-orange-400 transition-all whitespace-nowrap">
+                                        📋 Copy
+                                    </button>
+                                </div>
+                                <div id="btc-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
+                                    ✅ Address copied to clipboard
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LTC Contribution -->
+                <div class="p-4 md:p-6 bg-gray-900/30 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- QR Code Section -->
+                        <div class="flex-shrink-0 mx-auto md:mx-0">
+                            <div class="p-3 bg-white rounded-lg">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=litecoin:ltc1qcrpx7nnqkrw0wm9hu85tq5n256d2z6mja75n7u" alt="LTC QR Code" class="w-32 h-32 md:w-36 md:h-36" />
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 text-center">Scan to send LTC</p>
+                        </div>
+
+                        <!-- Information Section -->
+                        <div class="flex-1 space-y-3 md:space-y-4">
+                            <!-- Header -->
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h4 class="text-xl font-semibold text-white">Litecoin</h4>
+                                    <span class="px-2 py-0.5 bg-gray-500/20 rounded text-xs font-medium text-gray-400">LTC</span>
+                                </div>
+                                <p class="text-sm text-gray-400">Fast & low-fee transactions</p>
+                            </div>
+
+                            <!-- Balance -->
+                            <div class="p-3 bg-gray-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 uppercase tracking-wider">Balance</span>
+                                    <button onclick="refreshLTCBalance()" class="text-xs text-gray-400 hover:text-gray-300 transition-colors">
+                                        <span class="inline-block hover:rotate-180 transition-transform duration-500">🔄</span>
+                                    </button>
+                                </div>
+                                <div class="text-lg font-semibold text-gray-300" id="ltc-balance">0.00000000 LTC</div>
+                                <div class="text-xs text-gray-500" id="ltc-balance-usd">≈ $0.00 USD</div>
+                            </div>
+
+                            <!-- Address -->
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                                    <div id="ltc-address" class="font-mono text-xs text-gray-300 bg-gray-800/50 rounded-lg px-3 py-2 flex-1 break-all">ltc1qcrpx7nnqkrw0wm9hu85tq5n256d2z6mja75n7u</div>
+                                    <button onclick="copyLTCAddress()" class="px-3 py-2 bg-gray-500/10 hover:bg-gray-500/20 border border-gray-500/30 rounded-lg text-xs text-gray-400 transition-all whitespace-nowrap">
+                                        📋 Copy
+                                    </button>
+                                </div>
+                                <div id="ltc-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
+                                    ✅ Address copied to clipboard
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ZEC Contribution -->
+                <div class="p-4 md:p-6 bg-gray-900/30 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- QR Code Section -->
+                        <div class="flex-shrink-0 mx-auto md:mx-0">
+                            <div class="p-3 bg-white rounded-lg">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=zcash:t1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz" alt="ZEC QR Code" class="w-32 h-32 md:w-36 md:h-36" />
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 text-center">Scan to send ZEC</p>
+                        </div>
+
+                        <!-- Information Section -->
+                        <div class="flex-1 space-y-3 md:space-y-4">
+                            <!-- Header -->
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h4 class="text-xl font-semibold text-white">Zcash</h4>
+                                    <span class="px-2 py-0.5 bg-purple-500/20 rounded text-xs font-medium text-purple-400">ZEC</span>
+                                </div>
+                                <p class="text-sm text-gray-400">Privacy-focused cryptocurrency</p>
+                            </div>
+
+                            <!-- Balance -->
+                            <div class="p-3 bg-gray-800/50 rounded-lg">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 uppercase tracking-wider">Balance</span>
+                                    <button onclick="refreshZECBalance()" class="text-xs text-gray-400 hover:text-purple-400 transition-colors">
+                                        <span class="inline-block hover:rotate-180 transition-transform duration-500">🔄</span>
+                                    </button>
+                                </div>
+                                <div class="text-lg font-semibold text-purple-300" id="zec-balance">0.00000000 ZEC</div>
+                                <div class="text-xs text-gray-500" id="zec-balance-usd">≈ $0.00 USD</div>
+                            </div>
+
+                            <!-- Address -->
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                                    <div id="zec-address" class="font-mono text-xs text-gray-300 bg-gray-800/50 rounded-lg px-3 py-2 flex-1 break-all">t1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz</div>
+                                    <button onclick="copyZECAddress()" class="px-3 py-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs text-purple-400 transition-all whitespace-nowrap">
+                                        📋 Copy
+                                    </button>
+                                </div>
+                                <div id="zec-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
+                                    ✅ Address copied to clipboard
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thank You Message -->
+        <div class="glass text-center mt-12">
+            <h3 class="text-2xl font-bold gradient-text mb-4">Thank You for Your Support!</h3>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                Every contribution, no matter the size, helps us move closer to building a truly sovereign, censorship-resistant communication platform. Together, we're forging the future of decentralized messaging.
+            </p>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <div class="fab" id="scrollTop">
+        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </div>
+</main>
+
+<script>
+// Scroll to top functionality
+const scrollTopBtn = document.getElementById('scrollTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        scrollTopBtn.classList.add('visible');
+    } else {
+        scrollTopBtn.classList.remove('visible');
+    }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Copy BTCZ Address functionality
+function copyBTCZAddress() {
+    const address = 't1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP';
+    const copyButton = event.target;
+    const successMessage = document.getElementById('btcz-copy-success');
+    copyToClipboard(address, copyButton, successMessage, 'yellow');
+}
+
+// Copy BTC Address functionality
+function copyBTCAddress() {
+    const address = 'bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx';
+    const copyButton = event.target;
+    const successMessage = document.getElementById('btc-copy-success');
+    copyToClipboard(address, copyButton, successMessage, 'orange');
+}
+
+// Copy LTC Address functionality
+function copyLTCAddress() {
+    const address = 'ltc1qcrpx7nnqkrw0wm9hu85tq5n256d2z6mja75n7u';
+    const copyButton = event.target;
+    const successMessage = document.getElementById('ltc-copy-success');
+    copyToClipboard(address, copyButton, successMessage, 'gray');
+}
+
+// Copy ZEC Address functionality
+function copyZECAddress() {
+    const address = 't1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz';
+    const copyButton = event.target;
+    const successMessage = document.getElementById('zec-copy-success');
+    copyToClipboard(address, copyButton, successMessage, 'purple');
+}
+
+// Generic copy to clipboard function
+function copyToClipboard(text, button, successMessage, colorTheme) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showCopySuccess(button, successMessage, colorTheme);
+        }).catch(err => {
+            fallbackCopyTextToClipboard(text, button, successMessage, colorTheme);
+        });
+    } else {
+        fallbackCopyTextToClipboard(text, button, successMessage, colorTheme);
+    }
+}
+
+function fallbackCopyTextToClipboard(text, button, successMessage, colorTheme) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        document.execCommand('copy');
+        showCopySuccess(button, successMessage, colorTheme);
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+        button.textContent = '❌ Failed';
+        setTimeout(() => {
+            button.innerHTML = '📋 Copy';
+        }, 2000);
+    }
+
+    document.body.removeChild(textArea);
+}
+
+function showCopySuccess(button, successMessage, colorTheme = 'orange') {
+    const themes = {
+        orange: { success: { bg: 'rgba(34, 197, 94, 0.2)', border: 'rgba(34, 197, 94, 0.5)', color: '#22c55e' }, default: { bg: 'rgba(249, 115, 22, 0.2)', border: 'rgba(249, 115, 22, 0.5)', color: '#fb923c' } },
+        gray: { success: { bg: 'rgba(34, 197, 94, 0.2)', border: 'rgba(34, 197, 94, 0.5)', color: '#22c55e' }, default: { bg: 'rgba(107, 114, 128, 0.2)', border: 'rgba(107, 114, 128, 0.5)', color: '#d1d5db' } },
+        purple: { success: { bg: 'rgba(34, 197, 94, 0.2)', border: 'rgba(34, 197, 94, 0.5)', color: '#22c55e' }, default: { bg: 'rgba(147, 51, 234, 0.2)', border: 'rgba(147, 51, 234, 0.5)', color: '#c4b5fd' } },
+        yellow: { success: { bg: 'rgba(34, 197, 94, 0.2)', border: 'rgba(34, 197, 94, 0.5)', color: '#22c55e' }, default: { bg: 'rgba(234, 179, 8, 0.2)', border: 'rgba(234, 179, 8, 0.5)', color: '#facc15' } }
+    };
+
+    const theme = themes[colorTheme] || themes.orange;
+
+    successMessage.style.opacity = '1';
+    button.innerHTML = '✅ Copied!';
+    button.style.background = theme.success.bg;
+    button.style.borderColor = theme.success.border;
+    button.style.color = theme.success.color;
+
+    setTimeout(() => {
+        successMessage.style.opacity = '0';
+        button.innerHTML = '📋 Copy';
+        button.style.background = theme.default.bg;
+        button.style.borderColor = theme.default.border;
+        button.style.color = theme.default.color;
+    }, 3000);
+}
+
+// Global variables for total progress tracking
+let totalBTCZ_USD = 0;
+let totalBTC_USD = 0;
+let totalLTC_USD = 0;
+let totalZEC_USD = 0;
+const FUNDING_TARGET = 6000; // $6,000 USD target
+
+// Global price cache
+let cachedBTCZPrice = 0;
+let cachedBTCPrice = 0;
+let cachedLTCPrice = 0;
+let cachedZECPrice = 0;
+
+// Fetch all cryptocurrency prices in one API call
+async function fetchCryptoPrices() {
+    try {
+        const proxyUrl = 'https://corsproxy.io/?';
+        const priceUrl = encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=bitcoinz,bitcoin,litecoin,zcash&vs_currencies=usd');
+        const response = await fetch(proxyUrl + priceUrl);
+        const data = await response.json();
+
+        cachedBTCZPrice = data?.bitcoinz?.usd || 0;
+        cachedBTCPrice = data?.bitcoin?.usd || 0;
+        cachedLTCPrice = data?.litecoin?.usd || 0;
+        cachedZECPrice = data?.zcash?.usd || 0;
+
+        console.log(`Prices cached - BTCZ: $${cachedBTCZPrice}, BTC: $${cachedBTCPrice}, LTC: $${cachedLTCPrice}, ZEC: $${cachedZECPrice}`);
+    } catch (error) {
+        console.error('Error fetching crypto prices:', error);
+        cachedBTCZPrice = 0;
+        cachedBTCPrice = 0;
+        cachedLTCPrice = 0;
+        cachedZECPrice = 0;
+    }
+}
+
+// Balance fetching functions
+async function fetchBTCZBalance() {
+    const address = 't1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP';
+    const balanceElement = document.getElementById('btcz-balance');
+    const balanceUsdElement = document.getElementById('btcz-balance-usd');
+
+    try {
+        const proxyUrl = 'https://corsproxy.io/?';
+        const targetUrl = encodeURIComponent(`https://explorer.btcz.rocks/api/addr/${address}/balance`);
+        const response = await fetch(proxyUrl + targetUrl);
+        const balanceSatoshis = await response.text();
+
+        if (balanceSatoshis) {
+            const balanceBTCZ = (parseFloat(balanceSatoshis) / 100000000).toFixed(8);
+            balanceElement.textContent = `${balanceBTCZ} BTCZ`;
+
+            if (cachedBTCZPrice > 0) {
+                const usdValue = (parseFloat(balanceBTCZ) * cachedBTCZPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalBTCZ_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalBTCZ_USD = 0;
+            }
+            updateTotalProgress();
+        } else {
+            balanceElement.textContent = '0.00000000 BTCZ';
+            balanceUsdElement.textContent = '≈ $0.00 USD';
+            totalBTCZ_USD = 0;
+            updateTotalProgress();
+        }
+    } catch (error) {
+        console.error('Error fetching BTCZ balance:', error);
+        balanceElement.textContent = '0.00000000 BTCZ';
+        balanceUsdElement.textContent = '≈ $0.00 USD';
+        totalBTCZ_USD = 0;
+        updateTotalProgress();
+    }
+}
+
+async function fetchBTCBalance() {
+    const address = 'bc1q9m2ny7l0na2y7w69hslv6xckrdyq4t4yxldypx';
+    const balanceElement = document.getElementById('btc-balance');
+    const balanceUsdElement = document.getElementById('btc-balance-usd');
+
+    try {
+        const response = await fetch(`https://api.blockcypher.com/v1/btc/main/addrs/${address}/balance`);
+        const data = await response.json();
+
+        if (data.balance !== undefined) {
+            const balanceBTC = (data.balance / 100000000).toFixed(8);
+            balanceElement.textContent = `${balanceBTC} BTC`;
+
+            if (cachedBTCPrice > 0) {
+                const usdValue = (parseFloat(balanceBTC) * cachedBTCPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalBTC_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalBTC_USD = 0;
+            }
+            updateTotalProgress();
+        } else {
+            balanceElement.textContent = '0.00000000 BTC';
+            balanceUsdElement.textContent = '≈ $0.00 USD';
+            totalBTC_USD = 0;
+            updateTotalProgress();
+        }
+    } catch (error) {
+        console.error('Error fetching BTC balance:', error);
+        balanceElement.textContent = '0.00000000 BTC';
+        balanceUsdElement.textContent = '≈ $0.00 USD';
+        totalBTC_USD = 0;
+        updateTotalProgress();
+    }
+}
+
+async function fetchLTCBalance() {
+    const address = 'ltc1qcrpx7nnqkrw0wm9hu85tq5n256d2z6mja75n7u';
+    const balanceElement = document.getElementById('ltc-balance');
+    const balanceUsdElement = document.getElementById('ltc-balance-usd');
+
+    try {
+        const response = await fetch(`https://api.blockcypher.com/v1/ltc/main/addrs/${address}/balance`);
+        const data = await response.json();
+
+        if (data.balance !== undefined) {
+            const balanceLTC = (data.balance / 100000000).toFixed(8);
+            balanceElement.textContent = `${balanceLTC} LTC`;
+
+            if (cachedLTCPrice > 0) {
+                const usdValue = (parseFloat(balanceLTC) * cachedLTCPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalLTC_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalLTC_USD = 0;
+            }
+            updateTotalProgress();
+        } else {
+            balanceElement.textContent = '0.00000000 LTC';
+            balanceUsdElement.textContent = '≈ $0.00 USD';
+            totalLTC_USD = 0;
+            updateTotalProgress();
+        }
+    } catch (error) {
+        console.error('Error fetching LTC balance:', error);
+        balanceElement.textContent = '0.00000000 LTC';
+        balanceUsdElement.textContent = '≈ $0.00 USD';
+        totalLTC_USD = 0;
+        updateTotalProgress();
+    }
+}
+
+async function fetchZECBalance() {
+    const address = 't1MDK7dLqxXAfvKrCdb4teWzyFcocqfa1Vz';
+    const balanceElement = document.getElementById('zec-balance');
+    const balanceUsdElement = document.getElementById('zec-balance-usd');
+
+    try {
+        const proxyUrl = 'https://corsproxy.io/?';
+        const targetUrl = encodeURIComponent(`https://mainnet.zcashexplorer.app/address/${address}`);
+        const response = await fetch(proxyUrl + targetUrl);
+        const html = await response.text();
+
+        const balanceMatch = html.match(/(\d+\.\d+)\s*ZEC/);
+
+        if (balanceMatch && balanceMatch[1]) {
+            const balanceZEC = parseFloat(balanceMatch[1]).toFixed(8);
+            balanceElement.textContent = `${balanceZEC} ZEC`;
+
+            if (cachedZECPrice > 0) {
+                const usdValue = (parseFloat(balanceZEC) * cachedZECPrice).toFixed(2);
+                balanceUsdElement.textContent = `≈ $${usdValue} USD`;
+                totalZEC_USD = parseFloat(usdValue);
+            } else {
+                balanceUsdElement.textContent = '≈ $0.00 USD (Price unavailable)';
+                totalZEC_USD = 0;
+            }
+            updateTotalProgress();
+        } else {
+            balanceElement.textContent = '0.00000000 ZEC';
+            balanceUsdElement.textContent = '≈ $0.00 USD';
+            totalZEC_USD = 0;
+            updateTotalProgress();
+        }
+    } catch (error) {
+        console.error('Error fetching ZEC balance:', error);
+        balanceElement.textContent = '0.00000000 ZEC';
+        balanceUsdElement.textContent = '≈ $0.00 USD';
+        totalZEC_USD = 0;
+        updateTotalProgress();
+    }
+}
+
+// Refresh functions for manual updates
+async function refreshBTCZBalance() {
+    document.getElementById('btcz-balance').textContent = 'Loading...';
+    document.getElementById('btcz-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
+    fetchBTCZBalance();
+}
+
+async function refreshBTCBalance() {
+    document.getElementById('btc-balance').textContent = 'Loading...';
+    document.getElementById('btc-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
+    fetchBTCBalance();
+}
+
+async function refreshLTCBalance() {
+    document.getElementById('ltc-balance').textContent = 'Loading...';
+    document.getElementById('ltc-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
+    fetchLTCBalance();
+}
+
+async function refreshZECBalance() {
+    document.getElementById('zec-balance').textContent = 'Loading...';
+    document.getElementById('zec-balance-usd').textContent = 'Checking balance...';
+    await fetchCryptoPrices();
+    fetchZECBalance();
+}
+
+// Update total progress function
+function updateTotalProgress() {
+    const totalUSD = totalBTCZ_USD + totalBTC_USD + totalLTC_USD + totalZEC_USD;
+    const percentage = Math.min((totalUSD / FUNDING_TARGET) * 100, 100);
+    const remaining = Math.max(FUNDING_TARGET - totalUSD, 0);
+
+    const currentTotalElement = document.getElementById('current-total');
+    const progressPercentageElement = document.getElementById('progress-percentage');
+    const remainingAmountElement = document.getElementById('remaining-amount');
+    const progressFillElement = document.getElementById('progress-fill');
+
+    if (currentTotalElement) {
+        currentTotalElement.textContent = `$${totalUSD.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    }
+
+    if (progressPercentageElement) {
+        progressPercentageElement.textContent = `${percentage.toFixed(1)}%`;
+    }
+
+    if (remainingAmountElement) {
+        remainingAmountElement.textContent = `$${remaining.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    }
+
+    if (progressFillElement) {
+        progressFillElement.style.width = `${percentage}%`;
+
+        if (percentage >= 100) {
+            remainingAmountElement.textContent = 'Goal Reached! 🎉';
+        }
+    }
+
+    console.log(`Total Progress: $${totalUSD} / $${FUNDING_TARGET} (${percentage.toFixed(1)}%)`);
+}
+
+// Manual refresh function for total progress
+async function refreshTotalProgress() {
+    totalBTCZ_USD = 0;
+    totalBTC_USD = 0;
+    totalLTC_USD = 0;
+    totalZEC_USD = 0;
+
+    const currentTotalElement = document.getElementById('current-total');
+    const progressPercentageElement = document.getElementById('progress-percentage');
+
+    if (currentTotalElement) currentTotalElement.textContent = 'Loading...';
+    if (progressPercentageElement) progressPercentageElement.textContent = '...';
+
+    await fetchCryptoPrices();
+    fetchBTCZBalance();
+    fetchBTCBalance();
+    fetchLTCBalance();
+    fetchZECBalance();
+}
+
+// Initialize balance fetching when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(async () => {
+        await fetchCryptoPrices();
+        fetchBTCZBalance();
+        fetchBTCBalance();
+        fetchLTCBalance();
+        fetchZECBalance();
+    }, 1000);
+
+    // Auto-refresh prices and balances every 5 minutes
+    setInterval(async () => {
+        await fetchCryptoPrices();
+        fetchBTCZBalance();
+        fetchBTCBalance();
+        fetchLTCBalance();
+        fetchZECBalance();
+    }, 300000); // 300000ms = 5 minutes
+});
+</script>
+
+{{ end }}
