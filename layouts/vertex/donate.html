@@ -743,9 +743,14 @@ async function fetchWithRetry(url, retries = 3, timeout = 10000) {
 // Fetch all cryptocurrency prices in one API call
 async function fetchCryptoPrices() {
     try {
-        const proxyUrl = 'https://corsproxy.io/?';
-        const priceUrl = encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=bitcoinz,bitcoin,litecoin,zcash&vs_currencies=usd');
-        const response = await fetch(proxyUrl + priceUrl);
+        // Direct API call - each user makes their own request
+        const priceUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoinz,bitcoin,litecoin,zcash&vs_currencies=usd';
+        const response = await fetch(priceUrl);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
 
         cachedBTCZPrice = data?.bitcoinz?.usd || 0;
@@ -756,10 +761,13 @@ async function fetchCryptoPrices() {
         console.log(`Prices cached - BTCZ: $${cachedBTCZPrice}, BTC: $${cachedBTCPrice}, LTC: $${cachedLTCPrice}, ZEC: $${cachedZECPrice}`);
     } catch (error) {
         console.error('Error fetching crypto prices:', error);
-        cachedBTCZPrice = 0;
-        cachedBTCPrice = 0;
-        cachedLTCPrice = 0;
-        cachedZECPrice = 0;
+        // Keep previous cached values if fetch fails
+        if (cachedBTCZPrice === 0) {
+            cachedBTCZPrice = 0.00001; // Fallback default
+            cachedBTCPrice = 50000;
+            cachedLTCPrice = 100;
+            cachedZECPrice = 50;
+        }
     }
 }
 
@@ -770,9 +778,14 @@ async function fetchBTCZBalance() {
     const balanceUsdElement = document.getElementById('btcz-balance-usd');
 
     try {
-        const proxyUrl = 'https://corsproxy.io/?';
-        const targetUrl = encodeURIComponent(`https://explorer.btcz.rocks/api/addr/${address}/balance`);
-        const response = await fetchWithRetry(proxyUrl + targetUrl);
+        // Direct API call to BTCZ explorer
+        const apiUrl = `https://explorer.btcz.rocks/api/addr/${address}/balance`;
+        const response = await fetchWithRetry(apiUrl);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const balanceSatoshis = await response.text();
 
         if (balanceSatoshis) {
@@ -809,8 +822,15 @@ async function fetchBTCBalance() {
     const balanceUsdElement = document.getElementById('btc-balance-usd');
 
     try {
-        const response = await fetchWithRetry(`https://api.blockcypher.com/v1/btc/main/addrs/${address}/balance`);
-        const data = await response.json();
+        // Use blockchain.info API which supports CORS
+        const response = await fetchWithRetry(`https://blockchain.info/q/addressbalance/${address}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const balanceSatoshis = await response.text();
+        const data = { balance: parseInt(balanceSatoshis) };
 
         if (data.balance !== undefined) {
             const balanceBTC = (data.balance / 100000000).toFixed(8);
@@ -846,8 +866,16 @@ async function fetchLTCBalance() {
     const balanceUsdElement = document.getElementById('ltc-balance-usd');
 
     try {
-        const response = await fetchWithRetry(`https://api.blockcypher.com/v1/ltc/main/addrs/${address}/balance`);
-        const data = await response.json();
+        // Use chain.so API which supports CORS
+        const response = await fetchWithRetry(`https://chain.so/api/v2/get_address_balance/LTC/${address}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        const balanceLTC = parseFloat(result.data.confirmed_balance || 0);
+        const data = { balance: Math.round(balanceLTC * 100000000) };
 
         if (data.balance !== undefined) {
             const balanceLTC = (data.balance / 100000000).toFixed(8);
