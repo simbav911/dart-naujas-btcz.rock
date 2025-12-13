@@ -1,8 +1,8 @@
 <header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-50 w-full glass-effect border-b border-btcz-gray-800/50">
-    <div class="container mx-auto px-1 md:px-2">
-        <nav class="flex items-center justify-between py-0.5 min-h-[2rem]">
+    <div class="w-full px-4 md:px-5 lg:px-6">
+        <nav class="flex items-center justify-between py-2 min-h-[3rem]">
             <!-- Logo and Mobile Price -->
-            <div class="flex items-center space-x-2 md:space-x-4 pl-1 md:pl-0">
+            <div class="flex items-center space-x-2 md:space-x-4 pl-0 mr-12 md:mr-20 lg:mr-24">
                 <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center group transition-transform duration-300 hover:scale-105 flex-shrink-0">
                     <div class="logo-container logo-with-hat group-hover:opacity-90 transition-opacity duration-300">
                         <img src="{{ "images/btcz-logo.png" | relURL }}" alt="BitcoinZ Logo" class="h-6 md:h-7 xl:h-8 w-auto">
@@ -43,12 +43,12 @@
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-2 lg:space-x-6 xl:space-x-8 2xl:space-x-10">
+            <div class="hidden md:flex items-center space-x-3 lg:space-x-5 xl:space-x-6 2xl:space-x-8">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
                     {{ if .HasChildren }}
                         <div class="relative group">
-                            <button class="nav-link text-white hover:text-btcz-gold transition-colors duration-200 flex items-center">
+                            <button class="nav-link text-xs lg:text-sm text-white hover:text-btcz-gold transition-colors duration-200 flex items-center">
                                 {{ .Name }}
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -66,7 +66,7 @@
                         </div>
                     {{ else }}
                         <a href="{{ .URL | relLangURL }}" 
-                           class="nav-link text-white hover:text-btcz-gold transition-colors duration-200 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
+                           class="nav-link text-xs lg:text-sm text-white hover:text-btcz-gold transition-colors duration-200 {{ if $currentPage.IsMenuCurrent "main" . }}text-btcz-gold{{ end }}"
                         >
                             {{ .Name }}
                         </a>
