@@ -12,28 +12,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {{ range (where .Site.RegularPages "Type" "exchange").ByDate.Reverse }}
             <article class="group">
-                <a href="{{ if eq .Title "Zer0trace" }}#{{ else }}{{ .Params.website }}{{ end }}" target="{{ if eq .Title "Zer0trace" }}_self{{ else }}_blank{{ end }}" rel="noopener noreferrer" class="block h-full {{ if eq .Title "Zer0trace" }}pointer-events-none{{ end }}">
+                <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="block h-full">
                     <div class="relative h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
-                        <!-- Maintenance Overlay for Zer0trace -->
-                        {{ if eq .Title "Zer0trace" }}
-                        <div class="absolute inset-0 bg-black/85 z-50 rounded-2xl flex items-center justify-center">
-                            <div class="text-center px-6 w-full max-w-md">
-                                <div class="relative px-10 py-10 rounded-2xl" style="background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fbbf24 100%); box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2), 0 0 60px rgba(251, 146, 60, 1), 0 0 100px rgba(251, 146, 60, 0.6), 0 10px 40px rgba(0, 0, 0, 0.5); border: 5px solid rgba(255, 255, 255, 0.3);">
-                                    <!-- Tool Icon -->
-                                    <div class="mb-4">
-                                        <svg class="w-12 h-12 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                    </div>
-                                    <!-- Text -->
-                                    <div class="text-white font-black text-2xl uppercase tracking-wider mb-2" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.3);">Under Maintenance</div>
-                                    <div class="h-1 w-20 mx-auto bg-white/40 rounded-full mb-3"></div>
-                                    <div class="text-white font-bold text-lg" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">Back Soon</div>
-                                </div>
-                            </div>
-                        </div>
-                        {{ end }}
 
                         <!-- Exchange Logo/Image -->
                         <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
@@ -48,14 +28,6 @@
                             <div class="absolute bottom-0 left-0 right-0 z-10">
                                 <div class="w-full px-2 py-1 bg-red-600" style="box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;">
                                     <span class="text-white font-bold text-xs text-center block uppercase">NOT RECOMMENDED</span>
-                                </div>
-                            </div>
-                            {{ end }}
-                            
-                            {{ if eq .Title "Zer0trace" }}
-                            <div class="absolute bottom-0 left-0 right-0 z-10">
-                                <div class="w-full px-2 py-1 bg-blue-500" style="box-shadow: 0 0 5px #0088ff, 0 0 10px #0088ff;">
-                                    <span class="text-white font-bold text-xs text-center block">RECOMMENDED | SUPER FAST</span>
                                 </div>
                             </div>
                             {{ end }}
