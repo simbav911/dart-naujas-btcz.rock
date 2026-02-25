@@ -113,29 +113,13 @@
                     </div>
                 </div>
                 
-                <!-- Explorer Dropdown -->
-                <div x-data="{ explorerMenuOpen: false }" class="relative mr-2">
-                    <button @click="explorerMenuOpen = !explorerMenuOpen" class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"></path>
-                        </svg>
-                        <span class="ml-1 text-white">Explorer</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div x-cloak
-                         x-show="explorerMenuOpen"
-                         @click.away="explorerMenuOpen = false"
-                         class="absolute right-0 mt-2 py-2 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl border border-btcz-gray-700/50 z-50">
-                        <a href="https://explorer.getbtcz.com/" target="_blank" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200">
-                            New Explorer
-                        </a>
-                        <a href="https://explorer.btcz.rocks/" target="_blank" class="block px-4 py-2 text-sm text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200">
-                            Old Explorer
-                        </a>
-                    </div>
-                </div>
+                <!-- Explorer Link -->
+                <a href="https://explorer.btcz.rocks/" target="_blank" class="flex items-center space-x-1 text-white hover:text-btcz-gold transition-colors duration-200 mr-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"></path>
+                    </svg>
+                    <span class="ml-1">Explorer</span>
+                </a>
                 
                 <!-- Language Selector -->
                 <div x-data="{ langMenuOpen: false }" class="relative">
@@ -504,34 +488,12 @@
                             {{ end }}
                             
                             <!-- Language Selector for Mobile -->
-                            <!-- Explorer Links (Mobile) -->
-                            <div class="mt-6 pt-6 border-t border-white/10" x-data="{ explorerMenuOpen: false }">
-                                <button @click="explorerMenuOpen = !explorerMenuOpen" 
-                                    class="w-full flex items-center justify-between text-white hover:text-btcz-gold transition-colors duration-200 py-2">
-                                    <span class="text-lg">Explorer</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-200" 
-                                         :class="{ 'rotate-180': explorerMenuOpen }"
-                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div x-show="explorerMenuOpen" 
-                                     x-transition:enter="transition ease-out duration-200"
-                                     x-transition:enter-start="opacity-0 transform -translate-y-2"
-                                     x-transition:enter-end="opacity-100 transform translate-y-0"
-                                     x-transition:leave="transition ease-in duration-150"
-                                     x-transition:leave-start="opacity-100 transform translate-y-0"
-                                     x-transition:leave-end="opacity-0 transform -translate-y-2"
-                                     class="mt-2 rounded-lg bg-btcz-gray-900/60 overflow-hidden">
-                                    <div class="py-2">
-                                        <a href="https://explorer.getbtcz.com/" target="_blank" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
-                                            <span class="ml-3">New Explorer</span>
-                                        </a>
-                                        <a href="https://explorer.btcz.rocks/" target="_blank" class="w-full flex items-center text-left py-2 px-3 text-white hover:text-btcz-gold hover:bg-btcz-gray-800/90 transition-colors duration-200 rounded">
-                                            <span class="ml-3">Old Explorer</span>
-                                        </a>
-                                    </div>
-                                </div>
+                            <!-- Explorer Link (Mobile) -->
+                            <div class="mt-6 pt-6 border-t border-white/10">
+                                <a href="https://explorer.btcz.rocks/" target="_blank"
+                                    class="block py-2 text-lg text-white hover:text-btcz-gold transition-colors duration-200">
+                                    Explorer
+                                </a>
                             </div>
                             
                             <!-- Bridge Menu Mobile -->
