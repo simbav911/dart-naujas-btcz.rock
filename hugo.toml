@@ -77,6 +77,11 @@ ignoreLogs = ['warning-goldmark-raw-html']
     name = "Vertex"
     url = "/vertex/"
     weight = 11
+  [[menu.main]]
+    identifier = "earn"
+    name = "Earn"
+    url = "/earn/"
+    weight = 12
 
 [outputs]
   home = ["HTML"]
