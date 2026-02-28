@@ -1,7 +1,7 @@
 ---
 title: "BTCZ Awareness App Is Live on iOS – Play, Learn & Earn Real BTCZ!"
 date: 2026-02-28T12:00:00+01:00
-description: "The official BTCZ Awareness App is now available on iOS. Play quizzes, complete tasks, challenge friends in PVP games, and earn real BTCZ rewards directly to your wallet."
+description: "The official BTCZ Awareness App is now available on iOS and macOS (Apple Silicon). Play quizzes, complete tasks, challenge friends in PVP games, and earn real BTCZ rewards directly to your wallet."
 image: "/images/news/btcz-awareness-app/btcz-awareness-app-hero.jpeg"
 draft: false
 author: "BitcoinZ Community"
@@ -10,7 +10,7 @@ tags: ["app", "ios", "play-to-earn", "rewards", "community", "awareness"]
 type: "news"
 ---
 
-The BitcoinZ community is thrilled to announce the launch of **BTCZ Awareness** — a brand-new play-to-earn iOS app that makes learning about BitcoinZ fun, rewarding, and social. Whether you're a long-time BTCZ supporter or discovering the project for the first time, BTCZ Awareness gives you a way to engage with the ecosystem and **earn real BTCZ rewards** directly to your wallet.
+The BitcoinZ community is thrilled to announce the launch of **BTCZ Awareness** — a brand-new play-to-earn app for **iOS and macOS (Apple Silicon)** that makes learning about BitcoinZ fun, rewarding, and social. Whether you're a long-time BTCZ supporter or discovering the project for the first time, BTCZ Awareness gives you a way to engage with the ecosystem and **earn real BTCZ rewards** directly to your wallet.
 
 <!--more-->
 
@@ -36,7 +36,7 @@ The BitcoinZ community is thrilled to announce the launch of **BTCZ Awareness** 
 
 ## Get Started Now
 
-BTCZ Awareness is available for download on the Apple App Store. Get the app, start playing, and begin earning real BTCZ today.
+BTCZ Awareness is available for download on the Apple App Store for **iPhone, iPad, and Mac with Apple Silicon**. Get the app, start playing, and begin earning real BTCZ today.
 
 **[Download BTCZ Awareness on the App Store](https://apps.apple.com/si/app/btczawareness/id6755697719)**
 
@@ -48,4 +48,4 @@ Download the app, spread the word, and start earning. The BitcoinZ community is 
 
 ---
 
-*BTCZ Awareness is developed by the BitcoinZ community and is available on iOS.*
+*BTCZ Awareness is developed by the BitcoinZ community and is available on iOS and macOS (Apple Silicon).*
