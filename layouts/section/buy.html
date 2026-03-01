@@ -19,7 +19,7 @@
                         <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8">
                             <div class="absolute top-4 left-4">
                                 <span class="inline-block px-3 py-1 bg-btcz-gray-800/80 text-btcz-gold text-sm font-medium rounded-full">
-                                    {{ if .Params.is_centralized }}Centralized{{ else }}Decentralized{{ end }}
+                                    {{ if .Params.is_app }}App{{ else if .Params.is_centralized }}Centralized{{ else }}Decentralized{{ end }}
                                 </span>
                             </div>
                             
@@ -41,6 +41,14 @@
                             {{ end }}
                             
                             {{ if eq .Title "SafeTrade" }}
+                            <div class="absolute bottom-0 left-0 right-0 z-10">
+                                <div class="w-full px-2 py-1 bg-green-500" style="box-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00;">
+                                    <span class="text-white font-bold text-xs text-center block">RECOMMENDED</span>
+                                </div>
+                            </div>
+                            {{ end }}
+
+                            {{ if eq .Title "BTCZ Awareness" }}
                             <div class="absolute bottom-0 left-0 right-0 z-10">
                                 <div class="w-full px-2 py-1 bg-green-500" style="box-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00;">
                                     <span class="text-white font-bold text-xs text-center block">RECOMMENDED</span>
@@ -104,7 +112,7 @@
                                     {{ if .Params.kyc_required }}KYC Required{{ else }}No KYC Required{{ end }}
                                 </span>
                                 <span class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
-                                    Visit Exchange
+                                    {{ if .Params.is_app }}Download App{{ else }}Visit Exchange{{ end }}
                                     <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
