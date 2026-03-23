@@ -30,7 +30,7 @@ class VaultZBalance {
         ];
 
         this.explorerAPIs = [
-            'https://explorer.btcz.rocks/api',
+            'https://explorer.getbtcz.com/api',
             'https://btczexplorer.blockhub.info/api'
         ];
 
@@ -480,7 +480,7 @@ class VaultZBalance {
                 white-space: nowrap;
             `;
             explorerBtn.innerHTML = '<span style="font-size: 14px;">🔗</span> Explorer';
-            explorerBtn.href = `https://explorer.btcz.rocks/address/${address}`;
+            explorerBtn.href = `https://explorer.getbtcz.com/address/${address}`;
             explorerBtn.target = '_blank';
 
             explorerBtn.onmouseover = () => {

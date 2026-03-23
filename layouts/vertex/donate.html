@@ -356,7 +356,7 @@
                                 <div id="btcz-copy-success" class="text-xs text-green-400 mt-2 opacity-0 transition-opacity">
                                     ✅ Address copied to clipboard
                                 </div>
-                                <a href="https://explorer.btcz.rocks/address/t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP" target="_blank" class="text-xs text-yellow-500/70 hover:text-yellow-400 mt-2 inline-flex items-center gap-1 transition-colors">
+                                <a href="https://explorer.getbtcz.com/address/t1V2p6pCak1ATqetJnbxtNksYWGA8CA6aoP" target="_blank" class="text-xs text-yellow-500/70 hover:text-yellow-400 mt-2 inline-flex items-center gap-1 transition-colors">
                                     🔗 View on BitcoinZ Explorer
                                 </a>
                             </div>
@@ -736,7 +736,7 @@ async function fetchBTCZBalance() {
 
     try {
         // Direct API call to BTCZ explorer
-        const apiUrl = `https://explorer.btcz.rocks/api/addr/${address}/balance`;
+        const apiUrl = `https://explorer.getbtcz.com/api/addr/${address}/balance`;
         const response = await fetchWithRetry(apiUrl);
 
         if (!response.ok) {

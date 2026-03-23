@@ -1,7 +1,7 @@
 ---
 title: "BitcoinZ Blue - Official Light Wallet"
 description: "The official light wallet for BitcoinZ with instant sync, privacy features, and cross-platform support"
-date: 2025-09-25T10:00:00Z
+date: 2026-03-19T10:00:00Z
 type: "wallet"
 image: "images/wallets/btcz-blue.webp"
 icon: "images/wallets/icon_blue.png"
@@ -23,26 +23,26 @@ features:
   - "Enhanced Key Import/Export"
 platforms:
   - name: "Windows"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Windows-Installer.zip"
-    portable_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Windows-Portable.zip"
-    version: "2.0.2"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.2.0/BitcoinZ-Blue-Windows-Installer.zip"
+    portable_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.2.0/BitcoinZ-Blue-Windows-Portable.zip"
+    version: "2.2.0"
     sha256_installer: "TBD"
     sha256_portable: "TBD"
   - name: "macOS (Apple Silicon)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-macOS-AppleSilicon.zip"
-    version: "2.0.2"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.2.0/BitcoinZ-Blue-macOS-AppleSilicon.zip"
+    version: "2.2.0"
     sha256: "TBD"
   - name: "macOS (Intel)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-macOS-Intel.zip"
-    version: "2.0.2"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.2.0/BitcoinZ-Blue-macOS-Intel.zip"
+    version: "2.2.0"
     sha256: "TBD"
   - name: "Linux (AppImage)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Linux-AppImage.zip"
-    version: "2.0.2"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.2.0/BitcoinZ-Blue-Linux-AppImage.zip"
+    version: "2.2.0"
     sha256: "TBD"
   - name: "Linux (DEB)"
-    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.0.2/BitcoinZ-Blue-Linux-DEB.zip"
-    version: "2.0.2"
+    download_url: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/download/v2.2.0/BitcoinZ-Blue-Linux-DEB.zip"
+    version: "2.2.0"
     sha256: "TBD"
 requirements:
   - "4GB RAM (8GB recommended)"
@@ -50,7 +50,7 @@ requirements:
   - "Internet connection"
   - "Windows 10/11, macOS 10.15+, or Ubuntu 20.04+"
 source_code: "https://github.com/z-bitcoinz/BitcoinZ_Blue"
-releases_page: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/tag/v2.0.2"
+releases_page: "https://github.com/z-bitcoinz/BitcoinZ_Blue/releases/tag/v2.2.0"
 draft: false
 ---
 
@@ -130,7 +130,20 @@ BitcoinZ Blue implements bulletproof security technology that ensures your priva
 
 ## Version History
 
-### v2.0.2 (October 5, 2025) - Latest Release
+### v2.2.0 (March 19, 2026) - Latest Release
+
+**Canopy Network Upgrade Support:**
+- Canopy activation at block 1,735,000 (mainnet) and 840,000 (testnet)
+- Added checkpoint at block 1,730,000 with sapling tree from lightwalletd
+- Wallet is now fully compatible with the Canopy consensus upgrade
+
+**Server Migration:**
+- Improved reliability and connection speed
+
+**Upgrade Notes:**
+All users should update before block 1,735,000 to ensure continued wallet functionality after the Canopy activation.
+
+### v2.0.2 (October 5, 2025)
 
 **Major Release Highlights:**
 - **Protocol Upgrade**: Migrated to BitcoinZ-specific forks of librustzcash and orchard to support >21M BTCZ supply
