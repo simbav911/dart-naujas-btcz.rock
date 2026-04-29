@@ -17,7 +17,7 @@
             <!-- Quick Links -->
             <div>
                 <h4 class="font-heading font-bold text-lg mb-4 text-btcz-gold">{{ i18n "quickLinks" | default "Quick Links" }}</h4>
-                <ul class="space-y-2">
+                <ul class="grid grid-cols-2 gap-x-4 gap-y-2">
                     {{ range .Site.Menus.main }}
                     <li>
                         <a href="{{ .URL | relLangURL }}" class="text-btcz-gray-400 hover:text-btcz-gray-200 transition-colors duration-200">

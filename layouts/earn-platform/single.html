@@ -1,0 +1,339 @@
+{{ define "main" }}
+{{ $accent := default "#FFD700" .Params.accent_color }}
+<div class="min-h-screen earn-bg">
+    <div class="earn-bg-layer-1"></div>
+    <div class="earn-bg-layer-2"></div>
+    <div class="earn-bg-layer-3"></div>
+
+    <!-- Back link -->
+    <div class="relative z-10 pt-12 pb-2">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="/earn/" class="earn-back-link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Back to Earn
+            </a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative z-10 pt-6 pb-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="single-hero" style="--accent: {{ $accent }};">
+                <div class="single-hero-text">
+                    <div class="single-hero-eyebrow">{{ with .Params.category }}{{ . | upper }}{{ end }} · EARN BTCZ</div>
+                    <h1 class="single-hero-title">{{ .Title }}</h1>
+                    <p class="single-hero-desc">{{ .Description }}</p>
+                    {{ with .Params.badges }}
+                    <div class="earn-badge-row">
+                        {{ range . }}<span class="earn-badge">{{ . }}</span>{{ end }}
+                    </div>
+                    {{ end }}
+                    <div class="single-hero-actions">
+                        <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-btn earn-btn-primary">
+                            <span class="earn-btn-shimmer"></span>
+                            <span class="earn-btn-content">
+                                {{ .Params.cta_label }}
+                                {{ if .Params.cta_external }}
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                {{ else }}
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                {{ end }}
+                            </span>
+                        </a>
+                        <a href="#details" class="earn-text-link">How it works ↓</a>
+                    </div>
+                </div>
+                {{ with .Params.hero_image }}
+                <div class="single-hero-art">
+                    <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <!-- BODY -->
+    <section id="details" class="relative z-10 pb-20">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="single-body">
+                {{ .Content }}
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOSING CTA -->
+    <section class="relative z-10 pb-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="earn-final-cta">
+                <div class="earn-final-cta-glow"></div>
+                <div class="earn-final-cta-eyebrow">READY?</div>
+                <h3 class="earn-final-cta-title">Stack BTCZ with <span style="color: #FFD700;">{{ .Title }}</span></h3>
+                <p class="earn-final-cta-sub">{{ .Description }}</p>
+                <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-btn earn-btn-primary">
+                    <span class="earn-btn-shimmer"></span>
+                    <span class="earn-btn-content">
+                        {{ .Params.cta_label }}
+                        {{ if .Params.cta_external }}
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        {{ else }}
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        {{ end }}
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+/* ========== Background (shared with hub) ========== */
+.earn-bg {
+    background: radial-gradient(ellipse at center top, #1a1a0a 0%, #0a0a04 50%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+}
+.earn-bg-layer-1, .earn-bg-layer-2, .earn-bg-layer-3 {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.earn-bg-layer-1 {
+    background:
+        radial-gradient(ellipse 70% 50% at 18% 22%, rgba(255, 215, 0, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 82% 70%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+    animation: earnLayer1 32s ease-in-out infinite;
+    z-index: 1;
+}
+.earn-bg-layer-2 {
+    background:
+        radial-gradient(ellipse 55% 45% at 70% 18%, rgba(14, 165, 233, 0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 28% 82%, rgba(168, 85, 247, 0.04) 0%, transparent 65%);
+    animation: earnLayer2 38s ease-in-out infinite reverse;
+    z-index: 2;
+}
+.earn-bg-layer-3 {
+    background:
+        repeating-linear-gradient(45deg, transparent 0, transparent 80px, rgba(255, 215, 0, 0.012) 80px, rgba(255, 215, 0, 0.012) 81px);
+    animation: earnLayer3 60s linear infinite;
+    z-index: 3;
+}
+@keyframes earnLayer1 {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.08) rotate(0.5deg); opacity: 0.85; }
+}
+@keyframes earnLayer2 {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.05) translate(-1%, 0.6%); }
+}
+@keyframes earnLayer3 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(80px, 80px); }
+}
+
+/* ========== Back link ========== */
+.earn-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    color: #CBD5E1;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.2s;
+}
+.earn-back-link:hover {
+    color: #FFD700;
+    border-color: rgba(255, 215, 0, 0.35);
+    background: rgba(255, 215, 0, 0.05);
+    transform: translateX(-2px);
+}
+
+/* ========== Hero ========== */
+.single-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+@media (min-width: 1024px) {
+    .single-hero { grid-template-columns: 1.05fr 1fr; gap: 3.5rem; }
+}
+.single-hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255, 215, 0, 0.06);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 999px;
+}
+.single-hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    background: linear-gradient(120deg, #ffffff 0%, #FACC15 60%, #FFD700 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.single-hero-desc {
+    color: #CBD5E1;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
+    max-width: 540px;
+}
+.single-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+.single-hero-art {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #0a0a04;
+    border: 1px solid rgba(255, 215, 0, 0.18);
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 50px var(--accent, rgba(255, 215, 0, 0.15));
+    aspect-ratio: 16 / 10;
+}
+.single-hero-art img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ========== Body content ========== */
+.single-body { color: #E5E7EB; font-size: 1.025rem; line-height: 1.7; }
+.single-body h2 {
+    color: #ffffff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.01em;
+    border-left: 4px solid #FFD700;
+    padding-left: 1rem;
+    line-height: 1.2;
+}
+.single-body h3 {
+    color: #FFD700;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 1.75rem 0 0.6rem;
+    letter-spacing: 0.01em;
+}
+.single-body p { margin: 0 0 1rem; }
+.single-body strong { color: #ffffff; font-weight: 700; }
+.single-body a { color: #FBBF24; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(251, 191, 36, 0.4); transition: all 0.2s; }
+.single-body a:hover { color: #ffffff; text-decoration-color: #ffffff; }
+.single-body ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 1.25rem;
+}
+.single-body ul li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.65rem;
+}
+.single-body ul li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.6em;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #F59E0B);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+/* ========== Buttons + badges (shared) ========== */
+.earn-btn {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    padding: 0.95rem 1.75rem;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    isolation: isolate;
+}
+.earn-btn-content { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.55rem; }
+.earn-btn-primary {
+    background: linear-gradient(135deg, #FFD700 0%, #F59E0B 100%);
+    color: #1a1a0a;
+    box-shadow: 0 10px 28px rgba(255, 215, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+.earn-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 42px rgba(255, 215, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+.earn-btn-shimmer {
+    position: absolute;
+    top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-20deg);
+    z-index: 1;
+    transition: left 0.7s ease;
+}
+.earn-btn-primary:hover .earn-btn-shimmer { left: 140%; }
+.earn-text-link { color: #FBBF24; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+.earn-text-link:hover { color: #ffffff; }
+.earn-badge-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+.earn-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: #CBD5E1;
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+/* ========== Final CTA ========== */
+.earn-final-cta {
+    position: relative;
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(0, 0, 0, 0) 100%), rgba(20, 18, 8, 0.5);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 215, 0, 0.18);
+    border-radius: 28px;
+    overflow: hidden;
+}
+.earn-final-cta-glow {
+    position: absolute;
+    top: -50%; left: 50%;
+    width: 80%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.12) 0%, transparent 60%);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+}
+.earn-final-cta > * { position: relative; z-index: 1; }
+.earn-final-cta-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; font-weight: 700; color: #FFD700; margin-bottom: 0.75rem; }
+.earn-final-cta-title { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: #ffffff; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+.earn-final-cta-sub { color: #CBD5E1; margin: 0 0 1.5rem; font-size: 1rem; }
+
+/* Header sharp corners */
+header.glass-effect,
+header .price-ticker-container,
+header .price-ticker { border-radius: 0 !important; }
+</style>
+{{ end }}

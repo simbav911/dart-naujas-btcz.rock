@@ -1,280 +1,712 @@
 {{ define "main" }}
-<div class="min-h-screen earn-hero-background">
-    <!-- Animated Background Layers -->
+{{ $platforms := (where .Pages "Type" "earn-platform").ByWeight }}
+{{ $spotlight := where $platforms "Params.spotlight" true }}
+{{ $rails := slice
+    (dict "key" "play"    "title" "Play to Earn"    "subtitle" "Skill-based games. Win matches, win BTCZ."     "color" "#0EA5E9")
+    (dict "key" "learn"   "title" "Learn to Earn"   "subtitle" "Quizzes, fun facts, videos — knowledge pays."  "color" "#F59E0B")
+    (dict "key" "compete" "title" "Compete to Earn" "subtitle" "PvP duels and community events with prizes."   "color" "#EF4444")
+}}
+{{ $primaryAwareness := index (where $platforms ".File.BaseFileName" "btcz-awareness") 0 }}
+{{ $primaryPlay := index (where $platforms ".File.BaseFileName" "playbtcz") 0 }}
+<div class="min-h-screen earn-bg">
     <div class="earn-bg-layer-1"></div>
     <div class="earn-bg-layer-2"></div>
     <div class="earn-bg-layer-3"></div>
 
-    <!-- Hero Section -->
-    <div class="relative z-10 pt-20 pb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-                    <span style="background: linear-gradient(to right, #FACC15, #F59E0B, #FACC15); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-                        Earn BTCZ
-                    </span>
-                </h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-4">
-                    Play quizzes, complete daily tasks, challenge friends, and earn real
-                    <span class="font-semibold" style="color: #FFD700;">BitcoinZ</span> rewards
-                    with the <span class="text-amber-400 font-semibold">BTCZ Awareness</span> app.
-                </p>
-                <p class="text-gray-400 max-w-2xl mx-auto mb-10">
-                    Available on iOS and macOS (Apple Silicon). Learn about crypto while you earn.
-                </p>
+    <!-- ========== HERO ========== -->
+    <section class="relative z-10 pt-24 pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="earn-eyebrow">PLAY · LEARN · WIN · STACK</div>
+            <h1 class="earn-h1">
+                <span class="earn-h1-shine">Earn BTCZ</span>
+            </h1>
+            <p class="earn-subhead">
+                Pick your way and stack real <span class="earn-orange">BitcoinZ</span>. Play modern checkers, run quizzes, win at poker, compete in trivia.
+                <span class="earn-emphasis">Free.</span> Skill-based. <span class="earn-emphasis">No KYC.</span>
+            </p>
 
-                <!-- CTA Button -->
-                <a href="https://apps.apple.com/si/app/btczawareness/id6755697719" target="_blank" rel="noopener noreferrer"
-                   class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-3">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                    </svg>
-                    Download on the App Store
+            <!-- Stat strip -->
+            <div class="earn-stat-strip" role="group" aria-label="Earn highlights">
+                <div class="earn-stat">
+                    <div class="earn-stat-value">{{ len $platforms }}</div>
+                    <div class="earn-stat-label">platforms</div>
+                </div>
+                <div class="earn-stat-divider"></div>
+                <div class="earn-stat">
+                    <div class="earn-stat-value">12+</div>
+                    <div class="earn-stat-label">ways to earn</div>
+                </div>
+                <div class="earn-stat-divider"></div>
+                <div class="earn-stat">
+                    <div class="earn-stat-value">0</div>
+                    <div class="earn-stat-label">KYC required</div>
+                </div>
+                <div class="earn-stat-divider"></div>
+                <div class="earn-stat">
+                    <div class="earn-stat-value">100%</div>
+                    <div class="earn-stat-label">on-chain rewards</div>
+                </div>
+            </div>
+
+            <!-- Primary CTAs -->
+            <div class="earn-hero-cta-row">
+                {{ with $primaryPlay }}
+                <a href="{{ .Params.cta_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-primary">
+                    <span class="earn-btn-shimmer"></span>
+                    <span class="earn-btn-content">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Play PlayBTCZ
+                    </span>
+                </a>
+                {{ end }}
+                {{ with $primaryAwareness }}
+                <a href="{{ .Params.cta_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-secondary">
+                    <span class="earn-btn-content">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Get BTCZ Awareness
+                    </span>
+                </a>
+                {{ end }}
+            </div>
+            <a href="#all-platforms" class="earn-hero-scroll">Browse all platforms ↓</a>
+        </div>
+    </section>
+
+    <!-- ========== SPOTLIGHT ========== -->
+    {{ if gt (len $spotlight) 0 }}
+    <section class="relative z-10 pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="earn-section-head">
+                <div class="earn-section-eyebrow">FEATURED</div>
+                <h2 class="earn-h2">The flagships</h2>
+                <p class="earn-section-sub">The two biggest ways to stack BTCZ right now.</p>
+            </div>
+
+            <div class="earn-spotlight-grid">
+                {{ range $spotlight }}
+                {{ $accent := default "#FFD700" .Params.accent_color }}
+                <article class="earn-spotlight" style="--accent: {{ $accent }};">
+                    <div class="earn-spotlight-media">
+                        {{ with .Params.thumbnail }}
+                        <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+                        {{ end }}
+                        <div class="earn-spotlight-overlay"></div>
+                        <div class="earn-spotlight-tag">{{ .Params.category | upper }}</div>
+                        <div class="earn-spotlight-name">{{ .Title }}</div>
+                    </div>
+                    <div class="earn-spotlight-body">
+                        <p class="earn-spotlight-desc">{{ .Description }}</p>
+                        {{ with .Params.badges }}
+                        <div class="earn-badge-row">
+                            {{ range . }}<span class="earn-badge">{{ . }}</span>{{ end }}
+                        </div>
+                        {{ end }}
+                        <div class="earn-spotlight-actions">
+                            <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-btn earn-btn-primary earn-btn-compact">
+                                <span class="earn-btn-shimmer"></span>
+                                <span class="earn-btn-content">
+                                    {{ .Params.cta_label }}
+                                    {{ if .Params.cta_external }}
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    {{ else }}
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                    {{ end }}
+                                </span>
+                            </a>
+                            <a href="{{ .RelPermalink }}" class="earn-text-link">How it works →</a>
+                        </div>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- ========== RAILS ========== -->
+    <section id="all-platforms" class="relative z-10 pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="earn-section-head">
+                <div class="earn-section-eyebrow">ALL PLATFORMS</div>
+                <h2 class="earn-h2">Pick your lane</h2>
+                <p class="earn-section-sub">Earn methods grouped by what you actually like doing.</p>
+            </div>
+
+            {{ range $rails }}
+            {{ $items := where $platforms "Params.category" .key }}
+            {{ if gt (len $items) 0 }}
+            <div class="earn-rail">
+                <div class="earn-rail-header">
+                    <span class="earn-rail-dot" style="--rail-color: {{ .color }};"></span>
+                    <h3 class="earn-rail-title">{{ .title }}</h3>
+                    <span class="earn-rail-subtitle">{{ .subtitle }}</span>
+                </div>
+                <div class="earn-rail-grid">
+                    {{ range $items }}
+                    {{ $accent := default "#FFD700" .Params.accent_color }}
+                    <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-tile" style="--accent: {{ $accent }};">
+                        <div class="earn-tile-media">
+                            {{ with .Params.thumbnail }}
+                            <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+                            {{ end }}
+                            <div class="earn-tile-media-fade"></div>
+                            {{ with .Params.reward_type }}<span class="earn-reward-chip">{{ . }}</span>{{ end }}
+                        </div>
+                        <div class="earn-tile-body">
+                            <h4 class="earn-tile-title">{{ .Title }}</h4>
+                            <p class="earn-tile-desc">{{ .Description }}</p>
+                            {{ with .Params.badges }}
+                            <div class="earn-badge-row">
+                                {{ range . }}<span class="earn-badge">{{ . }}</span>{{ end }}
+                            </div>
+                            {{ end }}
+                            <div class="earn-tile-cta">
+                                <span>{{ .Params.cta_label }}</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <!-- "Engage" callout — small inline card instead of an empty rail -->
+            <div class="earn-engage-callout">
+                <div class="earn-engage-icon" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+                <div class="earn-engage-text">
+                    <h4>Plus daily engagement rewards</h4>
+                    <p>Daily logins, social tasks, and referrals are bundled inside the BTCZ Awareness app. Open it to start a streak.</p>
+                </div>
+                <a href="/earn/btcz-awareness/#engage" class="earn-text-link">Open in Awareness →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CLOSING CTA ========== -->
+    <section class="relative z-10 pb-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="earn-final-cta">
+                <div class="earn-final-cta-glow"></div>
+                <div class="earn-final-cta-eyebrow">BUILDING SOMETHING?</div>
+                <h3 class="earn-final-cta-title">Got an earn dapp idea for BTCZ?</h3>
+                <p class="earn-final-cta-sub">Game, quiz, faucet, wild experiment — the community wants to ship it. Drop us a line.</p>
+                <a href="https://discord.gg/u3dkbFyKAT" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-primary">
+                    <span class="earn-btn-shimmer"></span>
+                    <span class="earn-btn-content">
+                        Tell us on Discord
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </span>
                 </a>
             </div>
         </div>
-    </div>
-
-    <!-- App Screenshot Section -->
-    <div class="relative z-10 pb-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center">
-                <div class="earn-screenshot-wrapper">
-                    <img src="/images/news/btcz-awareness-app/btcz-awareness-app-hero.jpeg"
-                         alt="BTCZ Awareness App"
-                         class="rounded-2xl shadow-2xl max-w-full h-auto"
-                         style="max-height: 520px; border: 2px solid rgba(255, 215, 0, 0.25);"
-                         loading="lazy">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features Grid -->
-    <div class="relative z-10 pb-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How You Earn</h2>
-                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                    Multiple ways to stack BTCZ every day, just by using the app.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                <!-- Quiz -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.2));">
-                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Quiz</h3>
-                    <p class="text-gray-400 text-sm">Test your crypto knowledge and earn BTCZ for correct answers.</p>
-                </div>
-
-                <!-- Daily Login -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(16,185,129,0.2));">
-                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Daily Login</h3>
-                    <p class="text-gray-400 text-sm">Log in every day and collect your daily BTCZ bonus.</p>
-                </div>
-
-                <!-- Social Tasks -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(139,92,246,0.2));">
-                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Social Tasks</h3>
-                    <p class="text-gray-400 text-sm">Follow, share, and engage with the community for rewards.</p>
-                </div>
-
-                <!-- Fun Facts -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.2));">
-                        <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Fun Facts</h3>
-                    <p class="text-gray-400 text-sm">Discover interesting crypto facts and get rewarded for learning.</p>
-                </div>
-
-                <!-- Rewarded Videos -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(244,63,94,0.2));">
-                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Rewarded Videos</h3>
-                    <p class="text-gray-400 text-sm">Watch short videos and earn BTCZ for your time.</p>
-                </div>
-
-                <!-- PVP Games -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(6,182,212,0.2));">
-                        <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">PVP Games</h3>
-                    <p class="text-gray-400 text-sm">Challenge friends in player-vs-player trivia for BTCZ prizes.</p>
-                </div>
-
-                <!-- Referrals -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(219,39,119,0.2));">
-                        <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Referrals</h3>
-                    <p class="text-gray-400 text-sm">Invite friends and earn bonus BTCZ when they join.</p>
-                </div>
-
-                <!-- Claim Rewards -->
-                <div class="earn-feature-card">
-                    <div class="earn-feature-icon" style="background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,165,0,0.2));">
-                        <svg class="w-6 h-6" style="color: #FFD700;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-white font-semibold text-lg mb-2">Claim Rewards</h3>
-                    <p class="text-gray-400 text-sm">Withdraw your earned BTCZ directly to your wallet.</p>
-                </div>
-            </div>
-
-            <!-- Bottom CTA -->
-            <div class="text-center">
-                <div class="earn-glass-effect p-8 rounded-2xl max-w-2xl mx-auto">
-                    <h3 class="text-2xl font-bold text-white mb-4">Start Earning BTCZ Today</h3>
-                    <p class="text-gray-300 mb-6">
-                        Download the BTCZ Awareness app and start stacking real BitcoinZ rewards. Available on
-                        <span class="text-amber-400 font-semibold">iPhone, iPad,</span> and
-                        <span class="text-amber-400 font-semibold">Mac (Apple Silicon)</span>.
-                    </p>
-                    <a href="https://apps.apple.com/si/app/btczawareness/id6755697719" target="_blank" rel="noopener noreferrer"
-                       class="btn-primary bg-btcz-gold text-btcz-gray-900 hover:bg-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-3">
-                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                        </svg>
-                        Download on the App Store
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 </div>
 
 <style>
-/* Earn Page Hero Background */
-.earn-hero-background {
-    background: radial-gradient(ellipse at center, #1a1a0a 0%, #0f0f05 70%, #000000 100%);
+/* ========== Background ========== */
+.earn-bg {
+    background: radial-gradient(ellipse at center top, #1a1a0a 0%, #0a0a04 50%, #000000 100%);
     position: relative;
     overflow: hidden;
 }
-
+.earn-bg-layer-1, .earn-bg-layer-2, .earn-bg-layer-3 {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
 .earn-bg-layer-1 {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse 85% 55% at 25% 35%, rgba(255, 215, 0, 0.10) 0%, transparent 55%),
-                radial-gradient(ellipse 65% 45% at 75% 65%, rgba(255, 193, 7, 0.06) 0%, transparent 55%);
-    animation: earnLayer1 28s ease-in-out infinite;
+    background:
+        radial-gradient(ellipse 70% 50% at 18% 22%, rgba(255, 215, 0, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 82% 70%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+    animation: earnLayer1 32s ease-in-out infinite;
     z-index: 1;
 }
-
 .earn-bg-layer-2 {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse 75% 65% at 65% 25%, rgba(255, 215, 0, 0.05) 0%, transparent 65%),
-                radial-gradient(ellipse 55% 85% at 35% 75%, rgba(255, 152, 0, 0.03) 0%, transparent 65%);
-    animation: earnLayer2 33s ease-in-out infinite reverse;
+    background:
+        radial-gradient(ellipse 55% 45% at 70% 18%, rgba(14, 165, 233, 0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 28% 82%, rgba(168, 85, 247, 0.04) 0%, transparent 65%);
+    animation: earnLayer2 38s ease-in-out infinite reverse;
     z-index: 2;
 }
-
 .earn-bg-layer-3 {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.02) 0%, transparent 35%, transparent 65%, rgba(255, 193, 7, 0.02) 100%);
-    animation: earnLayer3 40s linear infinite;
+    background:
+        repeating-linear-gradient(45deg, transparent 0, transparent 80px, rgba(255, 215, 0, 0.012) 80px, rgba(255, 215, 0, 0.012) 81px);
+    animation: earnLayer3 60s linear infinite;
     z-index: 3;
 }
-
 @keyframes earnLayer1 {
     0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    30% { transform: scale(1.08) rotate(0.8deg); opacity: 0.85; }
-    60% { transform: scale(1.03) rotate(-0.4deg); opacity: 1; }
-    85% { transform: scale(1.06) rotate(0.6deg); opacity: 0.9; }
+    50% { transform: scale(1.08) rotate(0.5deg); opacity: 0.85; }
 }
-
 @keyframes earnLayer2 {
     0%, 100% { transform: scale(1) translate(0, 0); }
-    25% { transform: scale(1.04) translate(-1.5%, 0.8%); }
-    50% { transform: scale(1.02) translate(0.8%, -0.6%); }
-    75% { transform: scale(1.06) translate(-0.5%, 1.2%); }
+    50% { transform: scale(1.05) translate(-1%, 0.6%); }
 }
-
 @keyframes earnLayer3 {
-    0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
-    50% { transform: rotate(180deg) scale(1.01); opacity: 0.25; }
-    100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(80px, 80px); }
 }
 
-/* Screenshot Wrapper */
-.earn-screenshot-wrapper {
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(255, 215, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5);
+/* ========== Typography ========== */
+.earn-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 1.25rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 999px;
+    background: rgba(255, 215, 0, 0.05);
+}
+.earn-h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+}
+.earn-h1-shine {
+    background: linear-gradient(120deg, #FACC15 0%, #FBBF24 25%, #FFFFFF 50%, #FBBF24 75%, #FACC15 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: earnShine 8s linear infinite;
+}
+@keyframes earnShine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+.earn-subhead {
+    font-size: 1.15rem;
+    color: #CBD5E1;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+}
+.earn-orange { color: #FFD700; font-weight: 600; }
+.earn-emphasis { color: #FBBF24; font-weight: 700; }
+
+@media (min-width: 768px) {
+    .earn-subhead { font-size: 1.25rem; }
 }
 
-/* Feature Cards */
-.earn-feature-card {
-    background: rgba(255, 255, 255, 0.05);
+.earn-h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+.earn-section-head { text-align: center; margin-bottom: 3rem; }
+.earn-section-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 0.75rem;
+}
+.earn-section-sub { color: #94A3B8; font-size: 1rem; margin: 0; }
+
+/* ========== Stat Strip ========== */
+.earn-stat-strip {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 1.75rem;
+    padding: 1rem 2rem;
+    background: rgba(20, 18, 8, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1.5rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 999px;
+    margin-bottom: 2.25rem;
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.45),
+        0 0 24px rgba(255, 215, 0, 0.06),
+        inset 0 1px 0 rgba(255, 215, 0, 0.08);
+}
+.earn-stat { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; }
+.earn-stat-value {
+    font-weight: 800;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: #FFD700;
+    text-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+}
+.earn-stat-label { color: #E2E8F0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+.earn-stat-divider { width: 1px; background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.45), transparent); }
+
+@media (max-width: 720px) {
+    .earn-stat-strip {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem 1.5rem;
+        padding: 1.25rem 1.5rem;
+        border-radius: 24px;
+    }
+    .earn-stat-divider { display: none; }
+    .earn-stat-value { font-size: 1.4rem; }
 }
 
-.earn-feature-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 215, 0, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.08);
+/* ========== Hero CTAs ========== */
+.earn-hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.earn-hero-scroll {
+    display: inline-block;
+    color: #94A3B8;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    transition: color 0.2s;
+}
+.earn-hero-scroll:hover { color: #FFD700; }
+
+/* ========== Buttons ========== */
+.earn-btn {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    padding: 0.95rem 1.75rem;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    isolation: isolate;
+}
+.earn-btn-content { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.55rem; }
+.earn-btn-compact { padding: 0.7rem 1.25rem; font-size: 0.9rem; border-radius: 12px; }
+
+.earn-btn-primary {
+    background: linear-gradient(135deg, #FFD700 0%, #F59E0B 100%);
+    color: #1a1a0a;
+    box-shadow: 0 10px 28px rgba(255, 215, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+.earn-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 42px rgba(255, 215, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+.earn-btn-shimmer {
+    position: absolute;
+    top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-20deg);
+    z-index: 1;
+    transition: left 0.7s ease;
+}
+.earn-btn-primary:hover .earn-btn-shimmer { left: 140%; }
+
+.earn-btn-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+.earn-btn-secondary:hover {
+    background: rgba(255, 215, 0, 0.12);
+    border-color: rgba(255, 215, 0, 0.7);
+    transform: translateY(-2px);
 }
 
-.earn-feature-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+.earn-text-link {
+    color: #FBBF24;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.earn-text-link:hover { color: #ffffff; }
+
+/* ========== Spotlight ========== */
+.earn-spotlight-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+}
+@media (min-width: 1024px) {
+    .earn-spotlight-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+
+.earn-spotlight {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 215, 0, 0.18);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.earn-spotlight:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.55),
+        0 0 40px var(--accent, rgba(255, 215, 0, 0.18));
+}
+.earn-spotlight-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 8;
+    overflow: hidden;
+    background: #0a0a04;
+}
+.earn-spotlight-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.earn-spotlight:hover .earn-spotlight-media img { transform: scale(1.04); }
+.earn-spotlight-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10, 6, 0, 0.05) 0%, rgba(10, 6, 0, 0.55) 60%, rgba(10, 6, 0, 0.92) 100%);
+}
+.earn-spotlight-tag {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--accent, #FFD700);
+    color: #0a0a04;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+.earn-spotlight-name {
+    position: absolute;
+    left: 1.5rem; right: 1.5rem; bottom: 1.25rem;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+}
+.earn-spotlight-body { padding: 1.5rem 1.75rem 1.75rem; }
+.earn-spotlight-desc {
+    color: #CBD5E1;
+    line-height: 1.55;
+    margin: 0 0 1rem;
+    font-size: 1rem;
+}
+.earn-spotlight-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1rem;
 }
 
-/* Glass Effect for CTA */
-.earn-glass-effect {
-    background: rgba(255, 255, 255, 0.06);
+/* ========== Rails ========== */
+.earn-rail { margin-bottom: 3rem; }
+.earn-rail-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.earn-rail-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--rail-color);
+    box-shadow: 0 0 18px var(--rail-color), 0 0 6px var(--rail-color);
+    flex-shrink: 0;
+}
+.earn-rail-title { font-size: 1.5rem; font-weight: 800; color: #ffffff; margin: 0; letter-spacing: -0.01em; }
+.earn-rail-subtitle { color: #94A3B8; font-size: 0.95rem; }
+
+.earn-rail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+@media (min-width: 640px) { .earn-rail-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .earn-rail-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ========== Tile ========== */
+.earn-tile {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(30, 25, 12, 0.6) 0%, rgba(15, 12, 6, 0.7) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s, border-color 0.3s;
+    text-decoration: none;
+    color: inherit;
+}
+.earn-tile:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent, rgba(255, 215, 0, 0.35));
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.5),
+        0 0 25px var(--accent, rgba(255, 215, 0, 0.18));
+}
+.earn-tile-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0a0a04;
+}
+.earn-tile-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.earn-tile:hover .earn-tile-media img { transform: scale(1.06); }
+.earn-tile-media-fade {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(15, 12, 6, 0.9) 100%);
+    pointer-events: none;
+}
+.earn-reward-chip {
+    position: absolute;
+    top: 0.75rem; right: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 999px;
+    color: #FFD700;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    z-index: 2;
+}
+.earn-tile-body {
+    padding: 1.25rem 1.4rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.earn-tile-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.01em;
+}
+.earn-tile-desc {
+    color: #94A3B8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 0.85rem;
+    flex-grow: 1;
+}
+.earn-tile-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-top: auto;
+    transition: gap 0.2s ease;
+}
+.earn-tile:hover .earn-tile-cta { gap: 0.7rem; }
+
+/* ========== Badges ========== */
+.earn-badge-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.85rem; }
+.earn-badge {
+    display: inline-block;
+    padding: 0.22rem 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: #CBD5E1;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* ========== Engage callout ========== */
+.earn-engage-callout {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.25rem;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.06) 0%, rgba(168, 85, 247, 0.02) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 18px;
+    flex-wrap: wrap;
+}
+.earn-engage-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(139, 92, 246, 0.1));
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    color: #C4B5FD;
+    display: flex; align-items: center; justify-content: center;
+}
+.earn-engage-text { flex: 1; min-width: 240px; }
+.earn-engage-text h4 { color: #ffffff; font-weight: 700; font-size: 1.1rem; margin: 0 0 0.25rem; }
+.earn-engage-text p { color: #94A3B8; font-size: 0.92rem; margin: 0; line-height: 1.5; }
+
+/* ========== Final CTA ========== */
+.earn-final-cta {
+    position: relative;
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(0, 0, 0, 0) 100%), rgba(20, 18, 8, 0.5);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 215, 0, 0.15);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.18);
+    border-radius: 28px;
+    overflow: hidden;
 }
+.earn-final-cta-glow {
+    position: absolute;
+    top: -50%; left: 50%;
+    width: 80%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.12) 0%, transparent 60%);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+}
+.earn-final-cta > * { position: relative; z-index: 1; }
+.earn-final-cta-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 0.75rem;
+}
+.earn-final-cta-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.01em;
+}
+.earn-final-cta-sub { color: #CBD5E1; margin: 0 0 1.5rem; font-size: 1rem; }
 
-/* Header sharp corners override */
+/* ========== Header sharp corner override ========== */
 header.glass-effect,
 header .price-ticker-container,
-header .price-ticker {
-    border-radius: 0 !important;
-}
+header .price-ticker { border-radius: 0 !important; }
 </style>
 {{ end }}

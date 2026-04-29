@@ -1,6 +1,6 @@
 ---
 title: "Earn BTCZ"
-description: "Earn real BTCZ rewards by playing quizzes, completing tasks, and challenging friends with the BTCZ Awareness app on iOS and macOS."
+description: "Stack real BitcoinZ — play checkers on PlayBTCZ, run quizzes in BTCZ Awareness, win at Poker, compete in Trivia Night, and more. Free, skill-based, no KYC."
 draft: false
 layout: "earn"
 ---
