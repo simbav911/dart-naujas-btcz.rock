@@ -1,0 +1,143 @@
+{{ define "main" }}
+<div class="bg-btcz-gray-950 min-h-screen">
+    <div class="relative py-12 sm:py-16 lg:py-20">
+        <div class="mx-auto max-w-[1080px] px-4 sm:px-6 lg:px-8">
+
+            <!-- Back Button -->
+            <a href="{{ .Params.backURL | default .Site.Home.RelPermalink }}" class="back-button inline-flex items-center px-6 py-3 mb-8 glass-effect rounded-full text-btcz-gold hover:text-yellow-300 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                {{ .Params.backLabel | default "Back to Home" }}
+            </a>
+
+            <!-- Verdict Hero -->
+            <div class="audit-hero glass-effect rounded-3xl">
+                <div class="audit-shield" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <p class="audit-eyebrow">{{ with .Params.eyebrow }}{{ . }}{{ else }}Independent Code Review &middot; Supply Integrity{{ end }}</p>
+                <h1 class="audit-title">{{ .Params.verdict | default .Title }}</h1>
+                <p class="audit-sub">{{ .Description }}</p>
+                <div class="audit-meta">
+                    <span class="audit-chip">Reviewed {{ .Params.auditDate | default (.Date.Format "January 2006") }}</span>
+                    {{ with .Params.commit }}<span class="audit-chip">Full node @ <code>{{ . }}</code></span>{{ end }}
+                    {{ with .Params.scope }}<span class="audit-chip">{{ . }}</span>{{ end }}
+                </div>
+            </div>
+
+            <!-- Report Body -->
+            <div class="glass-effect rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 mt-8">
+                <div class="prose prose-invert prose-lg max-w-none audit-prose">
+                    {{ .Content }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+.glass-effect {
+    background: rgba(13, 17, 23, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.text-btcz-gold { color: #FFD700; }
+.hover\:text-yellow-300:hover { color: #FCD34D; }
+
+/* Back button glow (matches site convention) */
+.back-button { position: relative; transition: all 0.3s ease; }
+.back-button:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+.back-button:hover:before { opacity: 1; }
+.back-button:before {
+    content: ''; position: absolute; inset: -2px; border-radius: 9999px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    opacity: 0; z-index: -1; transition: opacity 0.3s ease; filter: blur(8px);
+}
+
+/* Verdict hero */
+.audit-hero {
+    text-align: center;
+    padding: 3rem 1.5rem 2.5rem;
+    border-top: 3px solid #FFD700;
+}
+.audit-shield {
+    width: 72px; height: 72px; margin: 0 auto 1.25rem;
+    color: #FFD700;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 9999px;
+    background: radial-gradient(circle at center, rgba(255,215,0,0.16), rgba(255,215,0,0.02) 70%);
+}
+.audit-shield svg { width: 40px; height: 40px; }
+.audit-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.18em;
+    font-size: 0.78rem; font-weight: 600; color: #9CA3AF; margin-bottom: 0.75rem;
+}
+.audit-title {
+    color: #ffffff; font-weight: 700; line-height: 1.2;
+    font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 760px; margin: 0 auto 1rem;
+}
+.audit-sub { color: #C7CDD6; max-width: 680px; margin: 0 auto 1.75rem; font-size: 1.05rem; }
+.audit-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+.audit-chip {
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #FFE680; border-radius: 9999px;
+    padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 500;
+}
+.audit-chip code { color: #FFE680; font-size: 0.82rem; }
+
+/* Report prose */
+.audit-prose h2 {
+    color: #FFD700; font-size: 1.7rem; font-weight: 700;
+    margin-top: 2.5rem; margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.audit-prose h3 { color: #FFE680; font-size: 1.2rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 0.5rem; }
+.audit-prose p, .audit-prose li { color: #D7DBE2; }
+.audit-prose strong { color: #FFFFFF; }
+.audit-prose a { color: #FFD700; text-decoration: underline; }
+.audit-prose ul { list-style: none; padding-left: 0; }
+.audit-prose ul li { display: flex; align-items: start; margin-top: 0.6rem; }
+.audit-prose ul li:before { content: "\2713"; color: #4ADE80; font-weight: 700; margin-right: 0.6rem; flex-shrink: 0; }
+.audit-prose ol { color: #D7DBE2; padding-left: 1.25rem; }
+.audit-prose ol li { margin-top: 0.5rem; }
+.audit-prose hr { border-color: rgba(255,255,255,0.08); margin: 2.5rem 0; }
+.audit-prose blockquote {
+    border-left: 3px solid #FFD700; background: rgba(255,215,0,0.05);
+    padding: 0.75rem 1.25rem; border-radius: 0 0.5rem 0.5rem 0; color: #E5E7EB; font-style: normal;
+}
+.audit-prose code { color: #FFE680; background: rgba(255,255,255,0.06); padding: 0.1rem 0.4rem; border-radius: 0.3rem; }
+
+/* Summary table */
+.audit-prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.97rem; }
+.audit-prose thead th {
+    background: rgba(255, 215, 0, 0.1); color: #FFD700; text-align: left;
+    padding: 0.75rem 1rem; border-bottom: 2px solid rgba(255,215,0,0.35); font-weight: 600;
+}
+.audit-prose tbody td { padding: 0.7rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); color: #D7DBE2; vertical-align: top; }
+.audit-prose tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+/* Fenced code blocks (technical report) */
+.audit-prose pre {
+    background: #0b0f14; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0.6rem; padding: 1rem 1.1rem; overflow-x: auto; margin: 1.25rem 0;
+}
+.audit-prose pre code { background: none; color: #C7CDD6; padding: 0; font-size: 0.88rem; line-height: 1.6; }
+
+/* Call-to-action button (e.g. "Read the full technical report") */
+.audit-cta { margin: 1.75rem 0 0.5rem; }
+.audit-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #1a1a1a !important; font-weight: 700; text-decoration: none !important;
+    padding: 0.8rem 1.6rem; border-radius: 9999px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.audit-btn:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(255,215,0,0.45); }
+</style>
+{{ end }}
