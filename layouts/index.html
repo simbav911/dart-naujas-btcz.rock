@@ -568,16 +568,36 @@ window.BREVO_CONFIG = {
 <!-- Rendered explicitly so the widget cannot load before the site key is known -->
 <script>
 window.turnstileWidgetId = null;
+// Set when the challenge itself cannot run - blocked by an extension, offline,
+// or an unsupported browser. Without this the widget fails silently and the
+// visitor only ever sees "Verification failed", which a reload cannot fix.
+window.turnstileBroken = false;
 window.onTurnstileLoad = function () {
     if (!window.BREVO_CONFIG || !window.turnstile) {
+        window.turnstileBroken = true;
         return;
     }
     window.turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
         sitekey: window.BREVO_CONFIG.turnstileSiteKey,
         appearance: 'interaction-only',
-        theme: 'dark'
+        theme: 'dark',
+        'error-callback': function () {
+            window.turnstileBroken = true;
+        },
+        'timeout-callback': function () {
+            window.turnstileBroken = true;
+        },
+        'unsupported-callback': function () {
+            window.turnstileBroken = true;
+        }
     });
 };
+// The script itself may never arrive; nothing above would run in that case.
+window.addEventListener('load', function () {
+    if (!window.turnstile) {
+        window.turnstileBroken = true;
+    }
+});
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit" async defer></script>
 <!-- Finally load our application code -->
@@ -658,6 +678,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 let turnstileToken = '';
                 if (window.turnstile && window.turnstileWidgetId !== null) {
                     turnstileToken = window.turnstile.getResponse(window.turnstileWidgetId) || '';
+                }
+
+                if (!turnstileToken) {
+                    if (window.turnstileBroken || !window.turnstile) {
+                        throw new Error(
+                            'The human check could not load. It is often blocked by ad or privacy ' +
+                            'blockers - allow challenges.cloudflare.com and reload, or write to ' +
+                            'us instead.'
+                        );
+                    }
+                    // Nothing is wrong: the visitor simply has not ticked the box
+                    // yet. Sending this would come back 403 and read as a failure,
+                    // so point at the widget instead of hitting the Worker.
+                    const widget = document.getElementById('turnstile-widget');
+                    if (widget) {
+                        widget.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                    }
+                    throw new Error('Please tick "Verify you are human" above, then subscribe.');
                 }
 
                 const response = await fetch(config.endpoint, {
