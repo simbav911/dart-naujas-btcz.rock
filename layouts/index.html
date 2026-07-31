@@ -547,8 +547,22 @@ html {
     </div>
 </section>
 
-<!-- Load configuration first -->
-<script src="/js/brevo-config.js"></script>
+<!--
+  Config is inlined rather than loaded from /js/brevo-config.js. That file was
+  served with a 31-day cache, so after a deploy browsers kept the old copy and
+  the form broke against the new markup. Inlined, the config can never be
+  staler than the page it belongs to. Both values are public by design - the
+  Brevo key lives on the Worker, not here.
+-->
+<script>
+window.BREVO_CONFIG = {
+    // Same origin in production; local Hugo dev talks to the deployed Worker
+    endpoint: window.location.hostname === 'localhost'
+        ? 'https://getbtcz.com/api/subscribe'
+        : '/api/subscribe',
+    turnstileSiteKey: '0x4AAAAAAEC25RiLWxCWN-Ht'
+};
+</script>
 <!-- Then load dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <!-- Rendered explicitly so the widget cannot load before the site key is known -->
@@ -569,7 +583,7 @@ window.onTurnstileLoad = function () {
 <!-- Finally load our application code -->
 <script>
 if (typeof window.BREVO_CONFIG === 'undefined') {
-    console.error('Newsletter config failed to load from /js/brevo-config.js');
+    console.error('Newsletter config is missing from the page.');
 }
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
