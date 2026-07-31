@@ -850,10 +850,12 @@
         {{ $css := resources.Get "css/main.css" }}
         {{ $style := $css | css.Sass | resources.Minify | resources.Fingerprint }}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
-        <script src="{{ "js/price-ticker.js" | relURL }}"></script>
-        <script src="{{ "js/scroll-handler.js" | relURL }}"></script>
-        <script src="{{ "js/main.js" | relURL }}" defer></script>
-        
+        {{/* price-ticker.js, scroll-handler.js and main.js are loaded once at
+             the end of baseof.html. Loading them here as well ran every one of
+             them twice, and price-ticker.js declares CACHE_KEY at top level, so
+             the second copy died with "Identifier 'CACHE_KEY' has already been
+             declared" on every page. */}}
+
         <script>
         function translatePage(lang) {
             const loading = document.createElement('div');
