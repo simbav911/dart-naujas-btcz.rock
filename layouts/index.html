@@ -15,6 +15,18 @@ html {
     transform: translateY(0);
 }
 
+/* Honeypot: off-screen rather than display:none, which bots skip */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .subscription-message {
     position: absolute;
     top: 0;
@@ -309,7 +321,7 @@ html {
             <p class="text-lg text-btcz-gray-300 mb-8">
                 Subscribe to our newsletter for the latest news and updates
             </p>
-            <div class="max-w-md mx-auto">
+            <div class="max-w-md mx-auto relative">
                 <form id="sib-form" data-type="subscription" class="space-y-4">
                     <div class="relative">
                         <input class="w-full px-6 py-4 rounded-lg bg-btcz-gray-800 border border-btcz-gray-700 text-white placeholder-btcz-gray-400 focus:outline-none focus:ring-2 focus:ring-btcz-gold focus:border-transparent transition-all"
@@ -319,8 +331,19 @@ html {
                                autocomplete="off"
                                placeholder="Enter your email"
                                required>
-                        
+
                     </div>
+                    <!-- Anti-bot honeypot: invisible to people, bots fill it in -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="company-website">Leave this field empty</label>
+                        <input type="text"
+                               id="company-website"
+                               name="company-website"
+                               tabindex="-1"
+                               autocomplete="off">
+                    </div>
+                    <!-- Cloudflare Turnstile: stays invisible unless a visitor looks suspicious -->
+                    <div id="turnstile-widget" class="flex justify-center"></div>
                     <button class="w-full px-6 py-4 bg-gradient-to-r from-btcz-gold to-yellow-400 text-btcz-gray-900 font-semibold rounded-lg hover:from-yellow-400 hover:to-btcz-gold transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-btcz-gold focus:ring-offset-2 focus:ring-offset-btcz-gray-950"
                             type="submit">
                         Subscribe Now
@@ -528,13 +551,26 @@ html {
 <script src="/js/brevo-config.js"></script>
 <!-- Then load dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<!-- Rendered explicitly so the widget cannot load before the site key is known -->
+<script>
+window.turnstileWidgetId = null;
+window.onTurnstileLoad = function () {
+    if (!window.BREVO_CONFIG || !window.turnstile) {
+        return;
+    }
+    window.turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
+        sitekey: window.BREVO_CONFIG.turnstileSiteKey,
+        appearance: 'interaction-only',
+        theme: 'dark'
+    });
+};
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit" async defer></script>
 <!-- Finally load our application code -->
 <script>
-// Verify Brevo config is loaded
-console.log('Initial Brevo config check:', {
-    configExists: typeof window.BREVO_CONFIG !== 'undefined',
-    configPath: '/js/brevo-config.js'
-});
+if (typeof window.BREVO_CONFIG === 'undefined') {
+    console.error('Newsletter config failed to load from /js/brevo-config.js');
+}
 document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -554,100 +590,117 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle form submission
     const form = document.getElementById('sib-form');
+
+    function showSubscriptionMessage(text, isError) {
+        const existing = document.querySelector('.subscription-message');
+        if (existing) {
+            existing.remove();
+        }
+
+        const message = document.createElement('div');
+        message.className = 'subscription-message';
+
+        const content = document.createElement('div');
+        content.className = 'message-content';
+
+        const paragraph = document.createElement('p');
+        if (isError) {
+            paragraph.className = 'text-red-500';
+        }
+        paragraph.textContent = text;
+
+        const closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.textContent = isError ? 'Close' : 'OK';
+        closeButton.addEventListener('click', () => message.remove());
+
+        content.appendChild(paragraph);
+        content.appendChild(closeButton);
+        message.appendChild(content);
+        form.parentElement.appendChild(message);
+    }
+
+    // The honeypot and the elapsed time are sent to the Worker, which makes the
+    // real decision - checks that only ran here could simply be skipped.
+    const honeypot = document.getElementById('company-website');
+    const formReadyAt = Date.now();
+
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const email = document.getElementById('EMAIL').value;
             const button = form.querySelector('button');
             const originalButtonText = button.textContent;
-            
+
             button.disabled = true;
             button.textContent = 'Subscribing...';
             try {
-                if (!window.BREVO_CONFIG) {
-                    throw new Error('Brevo configuration is not loaded');
-                }
-                
-                console.log('Brevo config loaded:', {
-                    apiKeyPresent: !!window.BREVO_CONFIG.apiKey,
-                    listIdPresent: !!window.BREVO_CONFIG.listId,
-                    apiUrl: window.BREVO_CONFIG.apiUrl
-                });
-                
-                if (!window.BREVO_CONFIG.apiKey) {
-                    throw new Error('Brevo API key is missing');
-                }
-                if (!window.BREVO_CONFIG.listId) {
-                    throw new Error('Brevo list ID is missing');
+                const config = window.BREVO_CONFIG;
+                if (!config || !config.endpoint) {
+                    throw new Error('The newsletter is temporarily unavailable. Please try again later.');
                 }
 
-                const response = await fetch(`${window.BREVO_CONFIG.apiUrl}/contacts`, {
+                let turnstileToken = '';
+                if (window.turnstile && window.turnstileWidgetId !== null) {
+                    turnstileToken = window.turnstile.getResponse(window.turnstileWidgetId) || '';
+                }
+
+                const response = await fetch(config.endpoint, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'api-key': window.BREVO_CONFIG.apiKey
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [parseInt(window.BREVO_CONFIG.listId)],
-                        attributes: {
-                            WEBSITE: window.location.hostname
-                        }
+                        companyWebsite: honeypot ? honeypot.value : '',
+                        elapsed: Date.now() - formReadyAt,
+                        turnstileToken: turnstileToken
                     })
                 });
 
-                let responseData;
+                let responseData = {};
                 try {
                     responseData = await response.json();
-                } catch (e) {
-                    console.error('Failed to parse response:', e);
-                    throw new Error(`Failed to parse response: ${response.status} ${response.statusText}`);
+                } catch (err) {
+                    responseData = {};
                 }
 
-                if (!response.ok) {
-                    console.error('Brevo API Error:', responseData);
-                    throw new Error(responseData.message || `Subscription failed: ${response.status} ${response.statusText}`);
+                if (!response.ok || !responseData.ok) {
+                    // A used or expired token cannot be replayed - get a fresh one
+                    if (window.turnstile && window.turnstileWidgetId !== null) {
+                        window.turnstile.reset(window.turnstileWidgetId);
+                    }
+                    throw new Error(responseData.error || 'Subscription failed. Please try again later.');
                 }
 
-                console.log('Brevo API Success:', responseData);
-                
-                if (responseData.error) {
-                    throw new Error(responseData.error);
-                }
+                showSubscriptionMessage(
+                    responseData.alreadySubscribed
+                        ? 'You are already subscribed. Thank you!'
+                        : 'Thank you for subscribing!'
+                );
 
-                // Create and show message
-                const message = document.createElement('div');
-                message.className = 'subscription-message';
-                message.innerHTML = `
-                    <div class="message-content">
-                        <p>Thank you for subscribing!</p>
-                        <button onclick="this.parentElement.parentElement.remove()">OK</button>
-                    </div>
-                `;
-                form.parentElement.appendChild(message);
-                
                 // Trigger confetti
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-                
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                }
+
+                if (window.turnstile && window.turnstileWidgetId !== null) {
+                    window.turnstile.reset(window.turnstileWidgetId);
+                }
+
                 form.reset();
             } catch (error) {
                 console.error('Subscription error:', error);
-                const errorMessage = error.message || 'Subscription failed. Please try again later.';
-                const message = document.createElement('div');
-                message.className = 'subscription-message';
-                message.innerHTML = `
-                    <div class="message-content">
-                        <p class="text-red-500">${errorMessage}</p>
-                        <button onclick="this.parentElement.parentElement.remove()">Close</button>
-                    </div>
-                `;
-                form.parentElement.appendChild(message);
+                showSubscriptionMessage(
+                    error.message || 'Subscription failed. Please try again later.',
+                    true
+                );
             } finally {
                 button.disabled = false;
                 button.textContent = originalButtonText;

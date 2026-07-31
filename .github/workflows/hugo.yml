@@ -35,17 +35,21 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: Generate Brevo Config
-        env:
-          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+      # The Brevo API key is no longer part of this build. It lives as a
+      # Cloudflare secret on the getbtcz-subscribe Worker, which the form posts
+      # to, so it never reaches a visitor's browser. This step only guards
+      # against a key being reintroduced into the published site by accident.
+      # Brevo keys look like <64 hex>-<16 alnum>, optionally with an "xkeysib-"
+      # prefix. Matching the body rather than the prefix catches both forms -
+      # the key that used to be published here had no prefix at all.
+      - name: Ensure no API key is published
         run: |
-          mkdir -p static/js
-          if [ ! -z "$BREVO_API_KEY" ] && [ ! -z "$BREVO_LIST_ID" ]; then
-            node scripts/generate-brevo-config.js
-          else
-            echo "window.BREVO_CONFIG = { disabled: true };" > static/js/brevo-config.js
+          if grep -rlE "[a-f0-9]{64}-[A-Za-z0-9]{16}" \
+               static/ layouts/ content/ data/ assets/ 2>/dev/null; then
+            echo "::error::A Brevo API key is present in files that get published. Aborting."
+            exit 1
           fi
+          echo "No API key found in publishable files."
 
       - name: List Project Structure
         run: |
