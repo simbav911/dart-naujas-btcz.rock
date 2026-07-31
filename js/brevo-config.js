@@ -1,5 +1,12 @@
+// Newsletter form configuration.
+//
+// There is deliberately no API key here. The form posts to a Cloudflare Worker
+// (worker/subscribe.js) which holds the Brevo key as a Cloudflare secret, so it
+// is never served to visitors. Both values below are public by design.
 window.BREVO_CONFIG = {
-  "listId": "3",
-  "apiUrl": "https://api.brevo.com/v3",
-  "apiKey": "c8a42a70c6c1eaf7d4ed98e1f77c8d55c29c4ca09a3a7909a34365675a4c2ed5-Rhva2S36Hsc27C9d"
+  // Same origin in production; local Hugo dev talks to the deployed Worker
+  endpoint: window.location.hostname === 'localhost'
+    ? 'https://getbtcz.com/api/subscribe'
+    : '/api/subscribe',
+  turnstileSiteKey: '0x4AAAAAAEC25RiLWxCWN-Ht'
 };
