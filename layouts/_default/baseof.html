@@ -84,6 +84,13 @@
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    {{ if .IsHome }}
+    <!-- Z-TEXT's own brand faces, loaded only where the hero tile uses them.
+         Space Grotesk gives the tile headline a real 700 instead of a weight
+         the browser has to fake; JetBrains Mono gives the release ticker
+         tabular figures that do not shift as the seconds tick. -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    {{ end }}
     
     <!-- Styles -->
     <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">

@@ -187,19 +187,55 @@ html {
                     </div>
                 </div>
             </div>
-            <div class="hidden lg:block transform hover:scale-105 transition-transform duration-500">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-btcz-gray-800 hover:border-btcz-gold transition-colors duration-300">
-                    <div class="relative pb-[56.25%] h-0">
-                        <iframe 
-                            src="https://www.youtube-nocookie.com/embed/ILOzg-9X7Jc?autoplay=0&rel=0&modestbranding=1" 
-                            title="BitcoinZ Introduction Video"
-                            class="absolute top-0 left-0 w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen
-                            loading="lazy">
-                        </iframe>
+            <div class="hero-side">
+                <!-- Z-TEXT call to action, sits above the intro video -->
+                <a href="https://z-text.com/" target="_blank" rel="noopener noreferrer" class="zt-card">
+                    <span class="zt-spot" aria-hidden="true"></span>
+                    <img src="{{ "images/z-text/ztext-bird.png" | relURL }}" alt="" class="zt-watermark" width="240" height="154" aria-hidden="true">
+
+                    <span class="zt-head">
+                        <img src="{{ "images/z-text/ztext-bird.png" | relURL }}" alt="" class="zt-bird" width="240" height="154" loading="eager">
+                        <span class="zt-word">Z&#8202;-&#8202;TEXT</span>
+                        <span class="zt-tag">Shielded on BitcoinZ</span>
+                    </span>
+
+                    <span class="zt-title">Speak freely,<br>forever.</span>
+
+                    <span class="zt-claims">
+                        <span>No phone number</span><span class="zt-dot"></span><span>No email</span><span class="zt-dot"></span><span>No server</span>
+                    </span>
+
+                    <span class="zt-rule"></span>
+
+                    <!-- Public release target. Change this one date to move the countdown. -->
+                    <span class="zt-foot" data-ztext-release="2026-09-29T00:00:00Z">
+                        <span class="zt-foot-label">Public release</span>
+                        <span class="zt-ticker">
+                            <b data-cd="d">--</b><span class="zt-u">d</span><span class="zt-gap"></span><b data-cd="h">--</b><span class="zt-c">:</span><b data-cd="m">--</b><span class="zt-c">:</span><b class="zt-sec" data-cd="s">--</b>
+                        </span>
+                        <span class="zt-go">
+                            Open
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </span>
+                    </span>
+                </a>
+
+                <div class="hidden lg:block transform hover:scale-105 transition-transform duration-500">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-btcz-gray-800 hover:border-btcz-gold transition-colors duration-300">
+                        <div class="relative pb-[56.25%] h-0">
+                            <iframe 
+                                src="https://www.youtube-nocookie.com/embed/ILOzg-9X7Jc?autoplay=0&rel=0&modestbranding=1" 
+                                title="BitcoinZ Introduction Video"
+                                class="absolute top-0 left-0 w-full h-full"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="absolute inset-0 bg-btcz-gold/10 pointer-events-none"></div>
                     </div>
-                    <div class="absolute inset-0 bg-btcz-gold/10 pointer-events-none"></div>
                 </div>
             </div>
         </div>
@@ -265,6 +301,293 @@ html {
         </div>
     </div>
 </section>
+
+<style>
+/* ---- Z-TEXT hero card -------------------------------------------------
+   Editorial layout: quiet wordmark, one strong headline, a monospace
+   release ticker. Self-contained; the pre-built Tailwind bundle has no
+   sm: variants so no utility classes are relied on here.               */
+/* Stacks the Z-TEXT tile above the intro video. The wide gap only applies
+   from lg up, which is the only place the video is visible at all. */
+.hero-side { display: flex; flex-direction: column; gap: 1rem; }
+
+.zt-card {
+    /* Z-TEXT's own brand green (their --color-accent-green) */
+    --zt: #10b981;
+    --zt-lite: #34d399;
+    --mx: 50%;
+    --my: 0%;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: block;
+    padding: 1.15rem 1.25rem 1rem;
+    border-radius: 1.1rem;
+    text-decoration: none;
+    background:
+        radial-gradient(120% 140% at 100% 0%, rgba(16, 185, 129, .2), transparent 55%),
+        linear-gradient(115deg, rgba(16, 185, 129, .12), rgba(3, 7, 18, .62) 62%),
+        rgba(17, 24, 39, .84);
+    /* calm at rest: one soft ambient shadow plus a lit top edge */
+    box-shadow:
+        0 14px 34px -20px rgba(0, 0, 0, .9),
+        inset 0 1px 0 rgba(255, 255, 255, .06);
+    transition: transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease;
+}
+.zt-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 22px 48px -18px rgba(16, 185, 129, .55),
+        inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+/* true 1px gradient hairline: lit at the top-left, dissolving bottom-right */
+.zt-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(52, 211, 153, .85), rgba(16, 185, 129, .28) 45%, rgba(16, 185, 129, .07));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    transition: background .35s ease;
+}
+.zt-card:hover::after {
+    background: linear-gradient(135deg, rgba(110, 231, 183, 1), rgba(16, 185, 129, .5) 45%, rgba(16, 185, 129, .16));
+}
+/* glow that follows the cursor across the card */
+.zt-spot {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(16rem 16rem at var(--mx) var(--my), rgba(52, 211, 153, .3), transparent 68%);
+    transition: opacity .4s ease;
+}
+.zt-card:hover .zt-spot { opacity: 1; }
+/* fine grid texture, keeps the panel from reading as flat colour */
+.zt-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(rgba(23, 184, 119, .16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 184, 119, .16) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: .16;
+    mask-image: radial-gradient(90% 80% at 100% 0%, #000 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(90% 80% at 100% 0%, #000 10%, transparent 70%);
+    pointer-events: none;
+}
+/* oversized bird, bleeding off the corner */
+.zt-watermark {
+    position: absolute;
+    right: -1.6rem;
+    bottom: -1.2rem;
+    width: 10.5rem;
+    height: auto;
+    z-index: -1;
+    opacity: .07;
+    transform: rotate(-9deg);
+    pointer-events: none;
+    transition: transform .5s cubic-bezier(.2,.7,.3,1), opacity .5s ease;
+}
+.zt-card:hover .zt-watermark { transform: rotate(-9deg) translate(-6px, -6px) scale(1.04); opacity: .1; }
+
+/* masthead */
+.zt-head { display: flex; align-items: center; gap: .5rem; margin-bottom: .85rem; }
+.zt-bird { width: 1.35rem; height: auto; flex: 0 0 auto; }
+.zt-word {
+    color: var(--zt-lite);
+    font-family: "Space Grotesk", "Montserrat", system-ui, sans-serif;
+    font-size: .8125rem;
+    font-weight: 700;
+    letter-spacing: .22em;
+}
+.zt-tag {
+    margin-left: auto;
+    padding: .2rem .5rem;
+    border: 1px solid rgba(23, 184, 119, .35);
+    border-radius: .35rem;
+    color: #7fb8a1;
+    font-size: .5625rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* headline */
+.zt-title {
+    display: block;
+    color: #FFFFFF;
+    /* real 700 weight - the previous 800 was synthesised by the browser */
+    font-family: "Space Grotesk", "Montserrat", system-ui, sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -.025em;
+    margin-bottom: .6rem;
+}
+
+/* claim strip */
+.zt-claims {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+    color: #93a5b1;
+    font-size: .6875rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+}
+.zt-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(23, 184, 119, .75); }
+
+/* hairline that fades out to the right */
+.zt-rule {
+    display: block;
+    height: 1px;
+    margin: .9rem 0 .75rem;
+    background: linear-gradient(90deg, rgba(23, 184, 119, .55), rgba(23, 184, 119, .04));
+}
+
+/* release ticker */
+.zt-foot { display: flex; align-items: baseline; gap: .75rem; }
+.zt-foot-label {
+    color: #6f8a7e;
+    font-size: .5625rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.zt-ticker {
+    display: flex;
+    align-items: baseline;
+    color: #FFFFFF;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -.02em;
+}
+.zt-ticker b { font-weight: 700; }
+.zt-sec { color: var(--zt-lite); }
+.zt-u { color: var(--zt-lite); font-size: .7rem; font-weight: 500; margin-left: .1em; }
+.zt-gap { width: .5rem; }
+/* colons blink once a second, the way a real clock does */
+.zt-c {
+    color: rgba(52, 211, 153, .7);
+    margin: 0 .04em;
+    animation: ztBlink 1s steps(1, end) infinite;
+}
+@keyframes ztBlink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: .25; } }
+.zt-go {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    color: var(--zt-lite);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    white-space: nowrap;
+}
+.zt-go svg { width: .95rem; height: .95rem; transition: transform .3s ease; }
+.zt-card:hover .zt-go svg { transform: translateX(4px); }
+
+/* released state */
+.zt-foot.is-live .zt-ticker,
+.zt-foot.is-live .zt-foot-label { display: none; }
+.zt-foot.is-live .zt-live-note {
+    color: #FFFFFF;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -.01em;
+}
+
+@media (min-width: 1024px) {
+    .hero-side { gap: 4.75rem; }   /* ~2cm clear of the video below */
+    .zt-card { padding: 1.3rem 1.45rem 1.15rem; }
+    .zt-title { font-size: 1.85rem; }
+    .zt-ticker { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .zt-card, .zt-watermark, .zt-c { animation: none; transition: none; }
+    .zt-c { opacity: 1; }
+    .zt-card:hover { transform: none; }
+    .zt-card:hover .zt-watermark { transform: rotate(-9deg); }
+    .zt-spot { display: none; }
+}
+</style>
+
+<script>
+(function () {
+    var root = document.querySelector('[data-ztext-release]');
+    if (!root) return;
+    var target = Date.parse(root.getAttribute('data-ztext-release'));
+    if (isNaN(target)) return;
+    var out = {
+        d: root.querySelector('[data-cd="d"]'),
+        h: root.querySelector('[data-cd="h"]'),
+        m: root.querySelector('[data-cd="m"]'),
+        s: root.querySelector('[data-cd="s"]')
+    };
+    var label = root.querySelector('.zt-foot-label');
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var timer;
+
+    function tick() {
+        var left = target - Date.now();
+        if (left <= 0) {
+            root.classList.add('is-live');
+            if (!root.querySelector('.zt-live-note')) {
+                var note = document.createElement('span');
+                note.className = 'zt-live-note';
+                note.textContent = 'Public release is here';
+                root.insertBefore(note, root.firstChild);
+            }
+            if (timer) clearInterval(timer);
+            return;
+        }
+        var sec = Math.floor(left / 1000);
+        out.d.textContent = Math.floor(sec / 86400);
+        out.h.textContent = pad(Math.floor(sec / 3600) % 24);
+        out.m.textContent = pad(Math.floor(sec / 60) % 60);
+        out.s.textContent = pad(sec % 60);
+    }
+
+    tick();
+    timer = setInterval(tick, 1000);
+})();
+
+/* Glow follows the cursor across the Z-TEXT card. Only two custom properties
+   are written, so the browser does the work and nothing reflows. */
+(function () {
+    var card = document.querySelector('.zt-card');
+    if (!card) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+
+    card.addEventListener('pointerleave', function () {
+        card.style.removeProperty('--mx');
+        card.style.removeProperty('--my');
+    }, { passive: true });
+})();
+</script>
 
 <!-- Get Started Section with Improved Readability -->
 <section class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
