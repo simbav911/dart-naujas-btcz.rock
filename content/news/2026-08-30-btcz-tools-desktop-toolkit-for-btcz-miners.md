@@ -2,7 +2,7 @@
 title: "BTCZ Tools: A Free Desktop Toolkit for BitcoinZ Miners"
 date: 2026-08-30T10:00:00Z
 description: "Everything a BTCZ miner checks daily, in one clean app - dashboard, mining tracker, profitability, pool and network explorers, history and a mining assistant. Free, open source, and now a standalone Windows .exe."
-image: "/images/news/btcz-tools/btcz-tools-hero.jpg"
+image: "/images/news/btcz-tools/btcz-tools-banner.jpg"
 draft: false
 subject: "Mining"
 author: "BitcoinZ Community"
