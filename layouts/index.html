@@ -439,120 +439,137 @@ html {
 <!-- Community Section with Enhanced Visibility -->
 <section id="community" class="section bg-btcz-gray-900 py-16 md:py-24 fade-in">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-btcz-gold to-white">
             {{ i18n "joinOurCommunity" | default "Join Our Community" }}
         </h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-            <!-- Discord -->
-            <a href="https://discord.gg/K59mxyf" target="_blank" rel="noopener noreferrer" 
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-discord text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Discord</span>
-            </a>
+        <p class="community-intro">Twelve places to talk BitcoinZ. Pick the one you already live in.</p>
 
-            <!-- Telegram -->
-            <a href="https://t.me/bitcoinzcommunity" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-telegram text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Telegram</span>
-            </a>
+        {{ $socials := slice
+            (dict "name" "Discord"     "slug" "discord"     "icon" "fa-brands fa-discord"   "url" "https://discord.gg/K59mxyf")
+            (dict "name" "Telegram"    "slug" "telegram"    "icon" "fa-brands fa-telegram"  "url" "https://t.me/bitcoinzcommunity")
+            (dict "name" "Twitter"     "slug" "twitter"     "icon" "fa-brands fa-twitter"   "url" "https://twitter.com/BTCZOfficial")
+            (dict "name" "GitHub"      "slug" "github"      "icon" "fa-brands fa-github"    "url" "https://github.com/btcz/bitcoinz")
+            (dict "name" "Reddit"      "slug" "reddit"      "icon" "fa-brands fa-reddit"    "url" "https://www.reddit.com/r/BTCZCommunity/")
+            (dict "name" "Instagram"   "slug" "instagram"   "icon" "fa-brands fa-instagram" "url" "https://www.instagram.com/bitcoinzofficial/")
+            (dict "name" "YouTube"     "slug" "youtube"     "icon" "fa-brands fa-youtube"   "url" "https://www.youtube.com/channel/UC2MBhoVK45Eqp2cMb2bFuUA")
+            (dict "name" "TikTok"      "slug" "tiktok"      "icon" "fa-brands fa-tiktok"    "url" "https://www.tiktok.com/@bitcoinz_community?lang=en")
+            (dict "name" "Pinterest"   "slug" "pinterest"   "icon" "fa-brands fa-pinterest" "url" "https://www.pinterest.co.uk/bitcoinzcommunity/bitcoinz-community/")
+            (dict "name" "BitcoinTalk" "slug" "bitcointalk" "icon" "fa-solid fa-b"          "url" "https://bitcointalk.org/index.php?topic=3086664.0")
+            (dict "name" "Floyx"       "slug" "floyx"       "icon" "fa-solid fa-hashtag"    "url" "https://www.floyx.com/profile/bitcoinz/posts")
+            (dict "name" "Radio"       "slug" "radio"       "icon" "fa-solid fa-radio"      "url" "https://www.radioking.com/radio/bitcoinz-radio")
+        }}
 
-            <!-- Twitter -->
-            <a href="https://twitter.com/BTCZOfficial" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-twitter text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Twitter</span>
+        <div class="community-grid">
+            {{ range $socials }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"
+               class="community-card community-{{ .slug }}" aria-label="BitcoinZ on {{ .name }}">
+                <span class="community-icon"><i class="{{ .icon }}" aria-hidden="true"></i></span>
+                <span class="community-name">{{ .name }}</span>
             </a>
-
-            <!-- GitHub -->
-            <a href="https://github.com/btcz/bitcoinz" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-github text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">GitHub</span>
-            </a>
-
-            <!-- Reddit -->
-            <a href="https://www.reddit.com/r/BTCZCommunity/" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-reddit text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Reddit</span>
-            </a>
-
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/bitcoinzofficial/" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-instagram text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Instagram</span>
-            </a>
-
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/channel/UC2MBhoVK45Eqp2cMb2bFuUA" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-youtube text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">YouTube</span>
-            </a>
-
-            <!-- TikTok -->
-            <a href="https://www.tiktok.com/@bitcoinz_community?lang=en" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-tiktok text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">TikTok</span>
-            </a>
-
-            <!-- Pinterest -->
-            <a href="https://www.pinterest.co.uk/bitcoinzcommunity/bitcoinz-community/" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-brands fa-pinterest text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Pinterest</span>
-            </a>
-
-            <!-- BitcoinTalk -->
-            <a href="https://bitcointalk.org/index.php?topic=3086664.0" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-solid fa-b text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">BitcoinTalk</span>
-            </a>
-
-            <!-- Floyx -->
-            <a href="https://www.floyx.com/profile/bitcoinz/posts" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-solid fa-hashtag text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Floyx</span>
-            </a>
-
-            <!-- Radio -->
-            <a href="https://www.radioking.com/radio/bitcoinz-radio" target="_blank" rel="noopener noreferrer"
-               class="group bg-btcz-gray-800 border border-btcz-gray-700 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:border-btcz-gold transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-                <div class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-btcz-gray-700 rounded-full flex items-center justify-center group-hover:bg-btcz-gold/10 transition-all duration-500">
-                    <i class="fa-solid fa-radio text-xl sm:text-2xl text-btcz-gold"></i>
-                </div>
-                <span class="text-sm sm:text-base text-btcz-gray-200">Radio</span>
-            </a>
+            {{ end }}
         </div>
     </div>
 </section>
+
+<style>
+/* Community links - self-contained so the section does not depend on the
+   pre-built Tailwind bundle (which has no sm: variants and no .w-8). */
+#community .community-intro {
+    color: #9CA3AF;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 34rem;
+    margin: 0 auto 2.5rem;
+}
+#community .community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+#community .community-card {
+    --brand: #FFD700;
+    --brand-fg: #111827;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .7rem;
+    padding: 1.25rem .5rem;
+    background: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease, background .3s ease;
+}
+#community .community-card:hover {
+    transform: translateY(-6px);
+    background: #232f45;
+    border-color: var(--brand);
+    box-shadow: 0 16px 34px -14px var(--brand);
+}
+#community .community-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111827;
+    border: 1px solid #374151;
+    color: #FFD700;
+    font-size: 1.35rem;
+    line-height: 1;
+    transition: transform .3s ease, background .3s ease, color .3s ease, border-color .3s ease;
+}
+#community .community-card:hover .community-icon {
+    background: var(--brand-bg, var(--brand));
+    border-color: transparent;
+    color: var(--brand-fg);
+    transform: scale(1.08);
+}
+#community .community-name {
+    color: #E5E7EB;
+    font-size: .8125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: color .3s ease;
+}
+#community .community-card:hover .community-name { color: #FFFFFF; }
+
+/* Brand accents, applied on hover only */
+#community .community-discord     { --brand: #5865F2; --brand-fg: #FFFFFF; }
+#community .community-telegram    { --brand: #26A5E4; --brand-fg: #FFFFFF; }
+#community .community-twitter     { --brand: #1D9BF0; --brand-fg: #FFFFFF; }
+#community .community-github      { --brand: #E6EDF3; --brand-fg: #0D1117; }
+#community .community-reddit      { --brand: #FF4500; --brand-fg: #FFFFFF; }
+#community .community-instagram   { --brand: #DD2A7B; --brand-fg: #FFFFFF;
+                                    --brand-bg: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4); }
+#community .community-youtube     { --brand: #FF0000; --brand-fg: #FFFFFF; }
+#community .community-tiktok      { --brand: #FE2C55; --brand-fg: #FFFFFF; }
+#community .community-pinterest   { --brand: #E60023; --brand-fg: #FFFFFF; }
+#community .community-bitcointalk { --brand: #1B75BB; --brand-fg: #FFFFFF; }
+#community .community-floyx       { --brand: #FFD700; --brand-fg: #111827; }
+#community .community-radio       { --brand: #FF5A00; --brand-fg: #FFFFFF; }
+
+@media (min-width: 640px) {
+    #community .community-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    #community .community-card { padding: 1.5rem .75rem; gap: .85rem; }
+    #community .community-icon { width: 3.5rem; height: 3.5rem; font-size: 1.5rem; }
+    #community .community-name { font-size: .9375rem; }
+}
+@media (min-width: 1024px) {
+    #community .community-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+    #community .community-card,
+    #community .community-icon { transition: none; }
+    #community .community-card:hover { transform: none; }
+    #community .community-card:hover .community-icon { transform: none; }
+}
+</style>
 
 <!--
   Config is inlined rather than loaded from /js/brevo-config.js. That file was
