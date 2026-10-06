@@ -1,16 +1,14 @@
 ---
-title: "BitcoinZ Blue - Official Light Wallet"
-description: "The official light wallet for BitcoinZ with instant sync, privacy features, and cross-platform support"
+title: "BitcoinZ Blue - No Longer Supported"
+description: "No longer supported or maintained. Use Z-TEXT, the official BitcoinZ wallet, instead."
 date: 2026-03-19T10:00:00Z
 type: "wallet"
 image: "images/wallets/btcz-blue.webp"
 icon: "images/wallets/icon_blue.png"
-official: true
-featured: true
-badge: "Official BitcoinZ Wallet"
-theme_color: "blue"
+discontinued: true
+discontinued_notice: "BitcoinZ Blue is no longer maintained. It will not receive updates or fixes, and support for it has ended. If you still have funds in it, make sure your seed phrase and private keys are backed up."
+replaced_by: "/wallets/z-text-wallet"
 features:
-  - "Official BitcoinZ Light Wallet"
   - "Instant Blockchain Sync"
   - "Shielded Transactions (z-addresses)"
   - "Cross-Platform Support"
@@ -56,7 +54,7 @@ draft: false
 
 ## About BitcoinZ Blue
 
-BitcoinZ Blue is the official light wallet for BitcoinZ, developed and supported by the BitcoinZ community. This modern, user-friendly wallet provides instant access to your BTCZ funds while maintaining the highest standards of privacy and security.
+BitcoinZ Blue was a light wallet for BitcoinZ, developed by the BitcoinZ community. **It is no longer supported or maintained**, and [Z-TEXT](/wallets/z-text-wallet/) is now the official BitcoinZ wallet. The description below is kept for reference.
 
 ### Bulletproof Security Architecture
 
@@ -130,7 +128,7 @@ BitcoinZ Blue implements bulletproof security technology that ensures your priva
 
 ## Version History
 
-### v2.2.0 (March 19, 2026) - Latest Release
+### v2.2.0 (March 19, 2026) - Final Release
 
 **Canopy Network Upgrade Support:**
 - Canopy activation at block 1,735,000 (mainnet) and 840,000 (testnet)
@@ -216,7 +214,9 @@ You must be at least 18 years old or the age of majority in your jurisdiction to
 ### 10. Acceptance
 By downloading and using BitcoinZ Blue, you confirm that you have read, understood, and agree to be bound by these terms and conditions.
 
-## Support
+## Resources
+
+BitcoinZ Blue is no longer supported. These links are kept for reference.
 
 - **GitHub Issues**: [Report Issues](https://github.com/z-bitcoinz/BitcoinZ_Blue/issues)
 - **Community Discord**: [Join BitcoinZ Discord](https://discord.com/invite/K59mxyf)

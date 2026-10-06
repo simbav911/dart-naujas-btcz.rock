@@ -9,21 +9,25 @@
         </div>
 
         <!-- Wallets Grid -->
+        {{/* Wallets that are no longer maintained go to the end of the list */}}
+        {{ $wallets := where .Site.RegularPages "Type" "wallet" }}
+        {{ $ended := where $wallets "Params.discontinued" true }}
+        {{ $supported := $wallets | complement $ended }}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {{ range where .Site.RegularPages "Type" "wallet" }}
+            {{ range ($supported | append $ended) }}
             <article class="group {{ if .Params.featured }}md:col-span-2 lg:col-span-3{{ end }}">
-                <div class="h-full {{ if .Params.official }}wallet-card-official{{ end }} bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 {{ if .Params.featured }}lg:flex{{ end }} {{ if eq .Params.theme_color "blue" }}hover:border-blue-400{{ else }}hover:border-btcz-gold{{ end }}">
+                <div class="h-full wallet-card {{ if .Params.discontinued }}wallet-card--ended{{ else if .Params.official }}wallet-card--official{{ end }} bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 {{ if .Params.featured }}lg:flex{{ end }} {{ if eq .Params.theme_color "blue" }}hover:border-blue-400{{ else }}hover:border-btcz-gold{{ end }}">
                     <!-- Wallet Image -->
                     <div class="relative bg-gradient-to-br from-btcz-gray-800 to-btcz-gray-900 p-8 {{ if .Params.featured }}lg:w-1/3 lg:flex lg:items-center lg:justify-center{{ end }}">
-                        {{ if .Params.official }}
-                        <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-                            <span class="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-blue-500/50 animate-pulse-slow">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                {{ with .Params.badge }}{{ . }}{{ else }}Official Wallet{{ end }}
-                            </span>
-                        </div>
+                        {{ if .Params.discontinued }}
+                        <span class="wallet-badge wallet-badge--ended">Support Ended</span>
+                        {{ else if .Params.official }}
+                        <span class="wallet-badge wallet-badge--official">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            {{ with .Params.badge }}{{ . }}{{ else }}Official Wallet{{ end }}
+                        </span>
                         {{ end }}
                         <div class="flex justify-center items-center h-32">
                             {{ $imageUrl := .Params.icon | default .Params.image }}
@@ -52,6 +56,15 @@
                             {{ .Description }}
                         </p>
 
+                        {{ if .Params.discontinued }}
+                        <!-- No download buttons here: a retired wallet only points to its replacement -->
+                        <div class="wallet-ended-note">
+                            <p>This wallet no longer receives updates or fixes.</p>
+                            {{ with .Params.replaced_by }}{{ with site.GetPage . }}
+                            <a href="{{ .RelPermalink }}">Use {{ .LinkTitle }} instead →</a>
+                            {{ end }}{{ end }}
+                        </div>
+                        {{ else }}
                         <!-- Features -->
                         <div class="space-y-2 mb-6">
                             {{ $themeColor := .Params.theme_color }}
@@ -67,17 +80,28 @@
 
                         <!-- Download Buttons -->
                         <div class="space-y-2 mb-6">
+                            {{ if .Params.downloads_page }}
+                            {{/* Builds live on the wallet's own site, so one button leads there */}}
+                            <div class="wallet-platforms">
+                                {{ range .Params.platforms }}<span>{{ .name }}</span>{{ end }}
+                            </div>
+                            <a href="{{ .Params.downloads_page }}" target="_blank" rel="noopener noreferrer" class="wallet-download-primary">
+                                Download at {{ (urls.Parse .Params.downloads_page).Host }}
+                            </a>
+                            {{ else }}
                             {{ range .Params.platforms }}
                             <a href="{{ .download_url }}" class="block w-full px-4 py-2 bg-btcz-gray-800 hover:bg-btcz-gold text-btcz-gray-200 hover:text-btcz-gray-900 rounded-lg transition-colors duration-300 text-center text-sm font-medium">
                                 Download for {{ .name }} {{ with .version }}(v{{ . }}){{ end }}
                             </a>
                             {{ end }}
+                            {{ end }}
                         </div>
+                        {{ end }}
 
                         <!-- Read More Link -->
                         <div class="flex items-center justify-between text-sm mt-6 pt-4 border-t border-btcz-gray-800">
                             <span class="text-btcz-gray-400">
-                                {{ len .Params.platforms }} Platform{{ if gt (len .Params.platforms) 1 }}s{{ end }}
+                                {{ if .Params.discontinued }}Support ended{{ else }}{{ len .Params.platforms }} Platform{{ if gt (len .Params.platforms) 1 }}s{{ end }}{{ end }}
                             </span>
                             <a href="{{ .RelPermalink }}" class="inline-flex items-center {{ if eq .Params.theme_color "blue" }}text-blue-400 hover:text-blue-300{{ else }}text-btcz-gold hover:text-white{{ end }} transition-colors duration-300">
                                 Read More
@@ -118,4 +142,83 @@
         </div>
     </div>
 </section>
+
+<style>
+/* Official and retired wallet cards. Plain CSS because the pre-built
+   Tailwind bundle does not include these colours. */
+.wallet-badge {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1rem;
+    white-space: nowrap;
+}
+.wallet-badge--official {
+    background: linear-gradient(90deg, #FFD700, #F59E0B);
+    color: #111827;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+}
+.wallet-badge--ended {
+    background: #7F1D1D;
+    border: 1px solid #EF4444;
+    color: #FECACA;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.wallet-card.wallet-card--official {
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 0 34px rgba(255, 215, 0, 0.14);
+}
+
+.wallet-card--ended img { filter: grayscale(1); opacity: 0.45; }
+.wallet-card--ended h2 { color: #9CA3AF; }
+.wallet-card.wallet-card--ended:hover { border-color: rgba(239, 68, 68, 0.6); }
+.wallet-ended-note {
+    margin-bottom: 1.5rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    border-radius: 0.5rem;
+    background: rgba(239, 68, 68, 0.08);
+    color: #FECACA;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+.wallet-ended-note a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #FFD700;
+    font-weight: 600;
+}
+.wallet-ended-note a:hover { color: #ffffff; }
+
+.wallet-platforms { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.wallet-platforms span {
+    padding: 0.2rem 0.6rem;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    color: #9CA3AF;
+    font-size: 0.75rem;
+}
+.wallet-download-primary {
+    display: block;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    background: #FFD700;
+    color: #111827;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: background 0.3s ease;
+}
+.wallet-download-primary:hover { background: #ffffff; }
+</style>
 {{ end }}
