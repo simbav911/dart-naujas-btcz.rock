@@ -73,9 +73,9 @@ ignoreLogs = ['warning-goldmark-raw-html']
     url = "/vaultz/"
     weight = 10
   [[menu.main]]
-    identifier = "vertex"
-    name = "Vertex"
-    url = "/vertex/"
+    identifier = "z-text"
+    name = "Z-TEXT"
+    url = "/z-text/"
     weight = 11
   [[menu.main]]
     identifier = "earn"

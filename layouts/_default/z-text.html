@@ -1,0 +1,610 @@
+{{ define "main" }}
+{{ $download := .Params.download_url }}
+{{ $wallet := site.GetPage "/wallets/z-text-wallet" }}
+{{/* The brand name must never break at its hyphen */}}
+{{ $nb := "<span class=\"zx-nb\">Z-TEXT</span>" }}
+
+{{/* How one message travels. Each step names the technology that does the work. */}}
+{{ $steps := slice
+    (dict "tag" "AES-256-GCM" "title" "You type"
+          "text" "The message is encrypted on your device with a key that only you and your contact share.")
+    (dict "tag" "zk-SNARKs" "title" "It becomes a transaction"
+          "text" "The encrypted text rides in the memo of a shielded BitcoinZ transaction. Sender, recipient, and amount are hidden.")
+    (dict "tag" "1 to 5 seconds" "title" "The network carries it"
+          "text" "BitcoinZ nodes relay it. Your contact's app picks it up from the network and never learns your IP address.")
+    (dict "tag" "On-chain" "title" "It stays"
+          "text" "The encrypted message settles on the blockchain. Your 24-word seed reads it back on any device.")
+}}
+
+{{ $features := slice
+    (dict "title" "No phone number. No email."
+          "text" "Your identity is a wallet seed, not a SIM card. There is nothing to register and nothing that ties the account to you."
+          "icon" "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z")
+    (dict "title" "Nothing to seize or switch off"
+          "text" "Messages are never stored on a Z-TEXT server. If the company behind the app vanished tomorrow, messaging would keep running on the public network."
+          "icon" "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01")
+    (dict "title" "Two locks on every message"
+          "text" "AES-256-GCM on your device, then a shielded transaction on top. Both layers have to be broken to read a single message."
+          "icon" "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z")
+    (dict "title" "Your IP stays yours"
+          "text" "There is no direct connection between you and your contact. Their app pulls the message from the network, so they never see where it came from."
+          "icon" "M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21")
+    (dict "title" "24 words bring everything back"
+          "text" "Lose the phone, keep the seed. Wallet, messages, contacts, and vault restore on any device. No cloud backup and no recovery form."
+          "icon" "M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z")
+    (dict "title" "A wallet inside the chat"
+          "text" "Send BTCZ in the middle of a conversation. Z-TEXT is also the official BitcoinZ wallet, and sending or receiving BTCZ needs no license."
+          "icon" "M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z")
+    (dict "title" "Spam has to pay"
+          "text" "A chat starts only after a mutual cryptographic handshake, and every message costs about $0.00003 on-chain. Invisible to you, too expensive for bots."
+          "icon" "M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636")
+    (dict "title" "Panic PIN and stealth mode"
+          "text" "An emergency PIN wipes keys, messages, and contacts in one action. Stealth mode re-skins the app so it does not look like a messenger."
+          "icon" "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z")
+    (dict "title" "Post-quantum handshake"
+          "text" "Since version 3.7.0 every contact handshake combines X25519 with ML-KEM-768 (NIST FIPS 203), protecting the key exchange against a future quantum computer."
+          "icon" "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z")
+}}
+
+{{ $compare := slice
+    (dict "what" "Who you are"              "them" "A phone number"                     "zt" "A 24-word seed that only you hold")
+    (dict "what" "Where messages travel"    "them" "Through the company's servers"      "zt" "Through BitcoinZ nodes")
+    (dict "what" "Where history lives"      "them" "Company servers or a cloud backup"  "zt" "Encrypted on the BitcoinZ blockchain")
+    (dict "what" "Who can close your account" "them" "The company"                      "zt" "No one. There is no account")
+    (dict "what" "What the operator sees"   "them" "Often who talks to whom, and when"  "zt" "That a shielded transaction was submitted")
+    (dict "what" "Getting back in"          "them" "An SMS code or a cloud backup"      "zt" "Your seed, on any device")
+    (dict "what" "Sending money"            "them" "A separate app"                     "zt" "Built in, in BTCZ")
+    (dict "what" "Stopping spam"            "them" "Filters and reports"                "zt" "Every message costs a fee")
+}}
+
+{{ $tiers := slice
+    (dict "name" "Default" "how" "Official lightd server"
+          "text" "The server sees that a shielded transaction was submitted. It cannot see the sender, the recipient, the amount, or the content.")
+    (dict "name" "Tor" "how" "Official lightd over Tor"
+          "text" "Same shielding, and the server operator no longer sees your IP address either.")
+    (dict "name" "Self-hosted" "how" "Your own lightd or full BitcoinZ node"
+          "text" "No third party is in the loop at all, including the company that makes Z-TEXT.")
+}}
+
+{{ $limits := slice
+    (dict "title" "Text only" "text" "No files, pictures, or videos. Z-TEXT carries encrypted text and BTCZ, nothing else.")
+    (dict "title" "Your seed is everything" "text" "There is no perfect forward secrecy. Anyone who gets your 24 words can read every message and spend your funds.")
+    (dict "title" "Messages are permanent" "text" "What settles on the blockchain cannot be deleted, by you or by anyone else.")
+    (dict "title" "Your provider sees the network" "text" "Your internet provider can tell that you connect to BitcoinZ, unless you add Tor or a VPN.")
+    (dict "title" "Sending needs a license" "text" "Sending messages requires a Z-TEXT license. Receiving messages and all wallet functions do not.")
+}}
+
+<div class="zx">
+
+    <!-- ========== HERO ========== -->
+    <section class="zx-hero">
+        <div class="zx-wrap zx-hero-grid">
+            <div>
+                <p class="zx-eyebrow"><span class="zx-dot"></span><span class="zx-nb">Z-TEXT</span> <span class="zx-eyebrow-sep">|</span> Built on BitcoinZ</p>
+                <h1 class="zx-h1">The messenger with <span class="zx-green">no server</span> to shut down.</h1>
+                <p class="zx-lead">
+                    <span class="zx-nb">Z-TEXT</span> sends every message as a shielded BitcoinZ transaction. No phone number, no email,
+                    and no company holding your conversations.
+                </p>
+                <div class="zx-actions">
+                    <a href="{{ $download }}" target="_blank" rel="noopener noreferrer" class="zx-btn zx-btn-primary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download <span class="zx-nb">Z-TEXT</span>
+                    </a>
+                    <a href="#different" class="zx-btn zx-btn-ghost">What makes it different</a>
+                </div>
+                <p class="zx-platforms">Android · Windows · macOS · Linux</p>
+            </div>
+            <div class="zx-hero-art">
+                <div class="zx-phone">
+                    <img src="{{ "images/news/ztext/ztext-conversation.png" | relURL }}" alt="A Z-TEXT chat: no account creation, just 24 words to write down" width="680" height="1348">
+                </div>
+            </div>
+        </div>
+
+        <div class="zx-wrap">
+            <dl class="zx-stats">
+                <div><dt>0</dt><dd>central message servers</dd></div>
+                <div><dt>24 words</dt><dd>restore every conversation</dd></div>
+                <div><dt>1 to 5 s</dt><dd>typical delivery</dd></div>
+                <div><dt>~$0.00003</dt><dd>network fee per message</dd></div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- ========== THE ONE IDEA ========== -->
+    <section id="different" class="zx-section">
+        <div class="zx-wrap">
+            <p class="zx-kicker">The one idea</p>
+            <h2 class="zx-h2">Every other messenger keeps a server. <span class="zx-nb">Z-TEXT</span> does not.</h2>
+            <p class="zx-sub">
+                Signal, WhatsApp, and Telegram all pass your messages through servers their company runs.
+                <span class="zx-nb">Z-TEXT</span> has none in the message path. A message is encrypted on your device and broadcast
+                as a shielded transaction on the BitcoinZ blockchain, the same way BTCZ itself is sent.
+            </p>
+
+            <ol class="zx-steps">
+                {{ range $i, $s := $steps }}
+                <li class="zx-step">
+                    <span class="zx-step-num">{{ add $i 1 }}</span>
+                    <span class="zx-tag">{{ $s.tag }}</span>
+                    <h3>{{ $s.title }}</h3>
+                    <p>{{ replace $s.text "Z-TEXT" $nb | safeHTML }}</p>
+                </li>
+                {{ end }}
+            </ol>
+        </div>
+    </section>
+
+    <!-- ========== WHAT THAT MAKES POSSIBLE ========== -->
+    <section class="zx-section zx-section-alt">
+        <div class="zx-wrap">
+            <p class="zx-kicker">Why it is unique</p>
+            <h2 class="zx-h2">What a blockchain messenger can do that a server cannot</h2>
+
+            <div class="zx-features">
+                {{ range $features }}
+                <article class="zx-feature">
+                    <span class="zx-feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="{{ .icon }}"/></svg>
+                    </span>
+                    <h3>{{ .title }}</h3>
+                    <p>{{ replace .text "Z-TEXT" $nb | safeHTML }}</p>
+                </article>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCREENS ========== -->
+    <section class="zx-section">
+        <div class="zx-wrap zx-screens">
+            <figure class="zx-screen">
+                <div class="zx-phone">
+                    <img src="{{ "images/news/ztext/ztext-payment.png" | relURL }}" alt="Attaching a BTCZ payment to a Z-TEXT conversation" width="706" height="1350" loading="lazy">
+                </div>
+                <figcaption>
+                    <h3>Money moves like a message</h3>
+                    <p>Attach BTCZ to a conversation and it arrives as part of the chat. The wallet is not an add-on. The messenger is built on it.</p>
+                    {{ with $wallet }}<a href="{{ .RelPermalink }}" class="zx-link"><span class="zx-nb">Z-TEXT</span> as a wallet →</a>{{ end }}
+                </figcaption>
+            </figure>
+            <figure class="zx-screen">
+                <div class="zx-phone">
+                    <img src="{{ "images/news/ztext/ztext-recovery.png" | relURL }}" alt="A Z-TEXT chat about restoring everything on a new phone from 24 words" width="700" height="1346" loading="lazy">
+                </div>
+                <figcaption>
+                    <h3>New phone, same conversations</h3>
+                    <p>Enter your 24 words and the app rescans the blockchain. Wallet, messages, and contacts come back exactly as you left them.</p>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ========== CHANNELS ========== -->
+    <section class="zx-section zx-section-alt">
+        <div class="zx-wrap zx-split">
+            <div>
+                <p class="zx-kicker">On-chain channels</p>
+                <h2 class="zx-h2">Reach everyone for the price of one transaction</h2>
+                <p class="zx-sub">
+                    A channel is a shared mailbox on the blockchain. You post once and every subscriber's app reads it.
+                    The cost is the same for 10 followers or 10,000, and reading is always free.
+                </p>
+            </div>
+            <ul class="zx-checks">
+                <li><strong>Impossible to deplatform.</strong> There is no server to seize and no account to suspend.</li>
+                <li><strong>No subscriber list to leak.</strong> zk-SNARKs hide who posted, and no central database of followers exists.</li>
+                <li><strong>You own your audience.</strong> Channels and their history restore from your seed on any device.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========== COMPARISON ========== -->
+    <section class="zx-section">
+        <div class="zx-wrap">
+            <p class="zx-kicker">Side by side</p>
+            <h2 class="zx-h2">An ordinary messenger, and <span class="zx-nb">Z-TEXT</span></h2>
+
+            <div class="zx-table-wrap">
+                <table class="zx-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><span class="zx-sr">Question</span></th>
+                            <th scope="col">Ordinary messenger</th>
+                            <th scope="col" class="zx-col-zt"><span class="zx-nb">Z-TEXT</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range $compare }}
+                        <tr>
+                            <th scope="row">{{ .what }}</th>
+                            <td>{{ .them }}</td>
+                            <td class="zx-col-zt">{{ .zt }}</td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+            <p class="zx-note">
+                <span class="zx-nb">Z-TEXT</span> publishes its own point-by-point comparison with Signal, Telegram, WhatsApp, and Session.
+                <a href="{{ .Params.compare_url }}" target="_blank" rel="noopener noreferrer" class="zx-link">See it on z-text.com →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== TRUST TIERS ========== -->
+    <section class="zx-section zx-section-alt">
+        <div class="zx-wrap">
+            <p class="zx-kicker">Trust model</p>
+            <h2 class="zx-h2">Choose how much you trust anyone</h2>
+            <p class="zx-sub">
+                Three ways to connect. Each one moves the trust boundary closer to you, and you can switch
+                between them without losing a single message.
+            </p>
+
+            <div class="zx-tiers">
+                {{ range $i, $t := $tiers }}
+                <article class="zx-tier">
+                    <span class="zx-tier-num">Tier {{ add $i 1 }}</span>
+                    <h3>{{ $t.name }}</h3>
+                    <p class="zx-tier-how">{{ $t.how }}</p>
+                    <p>{{ replace $t.text "Z-TEXT" $nb | safeHTML }}</p>
+                </article>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HONEST LIMITS ========== -->
+    <section class="zx-section">
+        <div class="zx-wrap zx-split">
+            <div>
+                <p class="zx-kicker zx-kicker-gold">The trade-offs</p>
+                <h2 class="zx-h2">What <span class="zx-nb">Z-TEXT</span> does not do</h2>
+                <p class="zx-sub">
+                    A design this different comes with real limits. <span class="zx-nb">Z-TEXT</span> publishes them, and so do we.
+                </p>
+                <a href="{{ .Params.security_url }}" target="_blank" rel="noopener noreferrer" class="zx-link">Read the full threat model →</a>
+            </div>
+            <ul class="zx-limits">
+                {{ range $limits }}
+                <li><strong>{{ .title }}.</strong> {{ replace .text "Z-TEXT" $nb | safeHTML }}</li>
+                {{ end }}
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========== WHY IT MATTERS FOR BITCOINZ ========== -->
+    <section class="zx-section zx-section-alt">
+        <div class="zx-wrap zx-btcz">
+            <img src="{{ "images/z-text/ztext-bird.png" | relURL }}" alt="" width="240" height="154" loading="lazy" aria-hidden="true">
+            <div>
+                <p class="zx-kicker zx-kicker-gold">Built on BitcoinZ</p>
+                <h2 class="zx-h2">Every conversation is activity on the BTCZ network</h2>
+                <p class="zx-sub">
+                    <span class="zx-nb">Z-TEXT</span> is not a separate token and not a layer-2 chain. It writes encrypted messages straight
+                    through BitcoinZ shielded transactions, so the privacy technology BitcoinZ has carried
+                    since 2017 now has an everyday use.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CLOSING CTA ========== -->
+    <section class="zx-section zx-cta-section">
+        <div class="zx-wrap">
+            <div class="zx-cta">
+                <h2 class="zx-h2">Get <span class="zx-nb">Z-TEXT</span></h2>
+                <p class="zx-sub">For Android, Windows, macOS, and Linux. Only download it from z-text.com.</p>
+                <div class="zx-actions zx-actions-center">
+                    <a href="{{ $download }}" target="_blank" rel="noopener noreferrer" class="zx-btn zx-btn-primary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download <span class="zx-nb">Z-TEXT</span>
+                    </a>
+                    <a href="{{ .Params.docs_url }}" target="_blank" rel="noopener noreferrer" class="zx-btn zx-btn-ghost">Documentation</a>
+                </div>
+                <p class="zx-cta-links">
+                    {{ with $wallet }}<a href="{{ .RelPermalink }}" class="zx-link">Wallet details</a>{{ end }}
+                    <a href="{{ .Params.packages_url }}" target="_blank" rel="noopener noreferrer" class="zx-link">Licenses</a>
+                    <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="zx-link">z-text.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+/* ---- Z-TEXT page -------------------------------------------------------
+   Self-contained: the pre-built Tailwind bundle has no responsive variants
+   and none of these colours, so nothing here relies on utility classes.   */
+.zx {
+    /* Z-TEXT's own brand green, with BitcoinZ gold as the second accent */
+    --zx-green: #10b981;
+    --zx-green-lite: #34d399;
+    --zx-gold: #FFD700;
+    --zx-ink: #F3F4F6;
+    --zx-text: #C7CDD6;
+    --zx-muted: #8B95A5;
+    --zx-line: rgba(52, 211, 153, 0.16);
+    --zx-panel: rgba(17, 24, 39, 0.72);
+    --zx-display: "Space Grotesk", "Montserrat", system-ui, sans-serif;
+    --zx-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: #05070b;
+    color: var(--zx-text);
+    overflow-x: hidden;
+}
+.zx-wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+.zx-section { padding: 4.5rem 0; }
+.zx-section-alt { background: #080b11; border-top: 1px solid rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+.zx-green { color: var(--zx-green-lite); }
+.zx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.zx-nb { white-space: nowrap; }
+
+/* ---- Type ---- */
+.zx-h1 {
+    margin: 0 0 1.25rem;
+    font-family: var(--zx-display);
+    font-size: clamp(2.4rem, 6vw, 4.25rem);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--zx-ink);
+    text-wrap: balance;
+}
+.zx-h2 {
+    margin: 0 0 1rem;
+    max-width: 22ch;
+    font-family: var(--zx-display);
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--zx-ink);
+    text-wrap: balance;
+}
+.zx-lead { margin: 0 0 2rem; max-width: 34rem; font-size: 1.2rem; line-height: 1.6; }
+.zx-sub { margin: 0 0 1.5rem; max-width: 44rem; font-size: 1.05rem; line-height: 1.7; }
+.zx-kicker, .zx-eyebrow {
+    margin: 0 0 1rem;
+    font-family: var(--zx-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--zx-green-lite);
+}
+.zx-kicker-gold { color: var(--zx-gold); }
+.zx-eyebrow { display: flex; align-items: center; gap: 0.6rem; color: var(--zx-ink); }
+.zx-eyebrow-sep { color: var(--zx-muted); }
+.zx-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--zx-green); box-shadow: 0 0 12px var(--zx-green); }
+.zx-link { color: var(--zx-green-lite); font-weight: 600; transition: color 0.2s ease; }
+.zx-link:hover { color: #ffffff; }
+.zx-note { margin: 1.5rem 0 0; color: var(--zx-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* ---- Hero ---- */
+.zx-hero {
+    position: relative;
+    padding: 4.5rem 0 3.5rem;
+    background:
+        radial-gradient(60rem 34rem at 85% 10%, rgba(16, 185, 129, 0.18), transparent 60%),
+        radial-gradient(40rem 26rem at 0% 100%, rgba(255, 215, 0, 0.06), transparent 60%);
+}
+.zx-hero-grid { display: grid; gap: 3rem; align-items: center; }
+.zx-hero-art { display: flex; justify-content: center; }
+/* The app screenshots have an opaque light backdrop. Cropping to the phone
+   frame and rounding the corners lets them sit on the dark page. */
+.zx-phone {
+    width: min(100%, 280px);
+    aspect-ratio: 612 / 1321;
+    overflow: hidden;
+    border-radius: 13% / 6%;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(16, 185, 129, 0.2);
+}
+.zx-phone img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.025); }
+.zx-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+.zx-actions-center { justify-content: center; }
+.zx-platforms { margin: 1.1rem 0 0; font-family: var(--zx-mono); font-size: 0.8rem; color: var(--zx-muted); }
+
+.zx-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.9rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 0.98rem;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.zx-btn svg { width: 1.2rem; height: 1.2rem; }
+.zx-btn:hover { transform: translateY(-2px); }
+.zx-btn-primary { background: var(--zx-green); color: #04130d; box-shadow: 0 12px 30px rgba(16, 185, 129, 0.28); }
+.zx-btn-primary:hover { background: var(--zx-green-lite); }
+.zx-btn-ghost { border: 1px solid rgba(255, 255, 255, 0.18); color: var(--zx-ink); }
+.zx-btn-ghost:hover { border-color: var(--zx-green-lite); }
+
+.zx-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    margin: 3.5rem 0 0;
+    border: 1px solid var(--zx-line);
+    border-radius: 1rem;
+    background: var(--zx-line);
+    overflow: hidden;
+}
+.zx-stats > div { padding: 1.4rem 1.25rem; background: #080b11; }
+.zx-stats dt { font-family: var(--zx-mono); font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 700; color: var(--zx-green-lite); }
+.zx-stats dd { margin: 0.35rem 0 0; font-size: 0.88rem; color: var(--zx-muted); }
+
+/* ---- Steps ---- */
+.zx-steps { display: grid; gap: 1rem; margin: 2.5rem 0 0; padding: 0; list-style: none; counter-reset: none; }
+.zx-step {
+    position: relative;
+    padding: 1.5rem 1.4rem 1.6rem;
+    border: 1px solid var(--zx-line);
+    border-radius: 1rem;
+    background: var(--zx-panel);
+}
+.zx-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.6rem;
+    border-radius: 50%;
+    background: var(--zx-green);
+    color: #04130d;
+    font-family: var(--zx-mono);
+    font-weight: 700;
+}
+.zx-tag {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--zx-line);
+    border-radius: 6px;
+    font-family: var(--zx-mono);
+    font-size: 0.7rem;
+    color: var(--zx-green-lite);
+    vertical-align: middle;
+}
+.zx-step h3, .zx-feature h3, .zx-tier h3, .zx-screen h3 {
+    margin: 1rem 0 0.5rem;
+    font-family: var(--zx-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--zx-ink);
+}
+.zx-step p, .zx-feature p, .zx-tier p, .zx-screen p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+
+/* ---- Features ---- */
+.zx-features { display: grid; gap: 1rem; margin-top: 2.5rem; }
+.zx-feature {
+    padding: 1.6rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1rem;
+    background: var(--zx-panel);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.zx-feature:hover { border-color: rgba(52, 211, 153, 0.5); transform: translateY(-3px); }
+.zx-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.7rem;
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--zx-green-lite);
+}
+.zx-feature-icon svg { width: 1.4rem; height: 1.4rem; }
+
+/* ---- Screens ---- */
+.zx-screens { display: grid; gap: 2rem; }
+.zx-screen {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+    margin: 0;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1.25rem;
+    background: var(--zx-panel);
+}
+.zx-screen .zx-phone { width: min(100%, 200px); margin: 0 auto; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55); }
+.zx-screen h3 { margin-top: 0; font-size: 1.35rem; }
+.zx-screen .zx-link { display: inline-block; margin-top: 1rem; }
+
+/* ---- Split blocks, lists ---- */
+.zx-split { display: grid; gap: 2rem; align-items: start; }
+.zx-checks, .zx-limits { display: grid; gap: 0.85rem; margin: 0; padding: 0; list-style: none; }
+.zx-checks li, .zx-limits li {
+    position: relative;
+    padding: 1.1rem 1.2rem 1.1rem 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 0.85rem;
+    background: var(--zx-panel);
+    font-size: 0.97rem;
+    line-height: 1.6;
+}
+.zx-checks li strong, .zx-limits li strong { color: var(--zx-ink); }
+.zx-checks li::before, .zx-limits li::before {
+    content: "";
+    position: absolute;
+    left: 1.2rem;
+    top: 1.45rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+}
+.zx-checks li::before { background: var(--zx-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.7); }
+.zx-limits li::before { background: transparent; border: 2px solid var(--zx-gold); }
+
+/* ---- Comparison table ---- */
+.zx-table-wrap { margin-top: 2rem; border: 1px solid var(--zx-line); border-radius: 1rem; overflow: hidden; }
+.zx-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.9rem; line-height: 1.45; }
+.zx-table th, .zx-table td { padding: 0.9rem 0.75rem; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+.zx-table tbody tr:last-child th, .zx-table tbody tr:last-child td { border-bottom: 0; }
+.zx-table thead th { background: #0b0f16; font-family: var(--zx-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--zx-muted); }
+.zx-table tbody th { font-weight: 600; color: var(--zx-ink); }
+.zx-table td { color: var(--zx-muted); }
+.zx-table .zx-col-zt { background: rgba(16, 185, 129, 0.08); color: var(--zx-ink); }
+.zx-table thead .zx-col-zt { color: var(--zx-green-lite); }
+
+/* ---- Trust tiers ---- */
+.zx-tiers { display: grid; gap: 1rem; margin-top: 2rem; }
+.zx-tier { padding: 1.6rem 1.5rem; border: 1px solid var(--zx-line); border-radius: 1rem; background: var(--zx-panel); }
+.zx-tier-num { font-family: var(--zx-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--zx-muted); }
+.zx-tier h3 { margin-top: 0.5rem; font-size: 1.4rem; }
+.zx-tier-how { margin: 0 0 0.75rem !important; font-family: var(--zx-mono); font-size: 0.8rem !important; color: var(--zx-green-lite); }
+
+/* ---- Built on BitcoinZ ---- */
+.zx-btcz { display: grid; gap: 2rem; align-items: center; }
+.zx-btcz img { width: 150px; height: auto; opacity: 0.9; }
+.zx-btcz .zx-h2 { max-width: 26ch; }
+
+/* ---- Closing CTA ---- */
+.zx-cta {
+    padding: 3.5rem 1.5rem;
+    border: 1px solid var(--zx-line);
+    border-radius: 1.5rem;
+    background:
+        radial-gradient(40rem 18rem at 50% 0%, rgba(16, 185, 129, 0.2), transparent 65%),
+        #080b11;
+    text-align: center;
+}
+.zx-cta .zx-h2, .zx-cta .zx-sub { margin-left: auto; margin-right: auto; }
+.zx-cta-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.75rem; margin: 2rem 0 0; font-size: 0.95rem; }
+
+/* ---- Wider screens ---- */
+@media (min-width: 720px) {
+    .zx-stats { grid-template-columns: repeat(4, 1fr); }
+    .zx-steps { grid-template-columns: repeat(2, 1fr); }
+    .zx-features { grid-template-columns: repeat(2, 1fr); }
+    .zx-screens { grid-template-columns: repeat(2, 1fr); }
+    .zx-tiers { grid-template-columns: repeat(3, 1fr); }
+    .zx-table { font-size: 1rem; }
+    .zx-table th, .zx-table td { padding: 1.05rem 1.4rem; }
+    .zx-btcz { grid-template-columns: auto 1fr; gap: 3rem; }
+}
+@media (min-width: 1000px) {
+    .zx-hero { padding-top: 6rem; }
+    .zx-hero-grid { grid-template-columns: 1.25fr 0.75fr; }
+    .zx-steps { grid-template-columns: repeat(4, 1fr); }
+    .zx-features { grid-template-columns: repeat(3, 1fr); }
+    .zx-screen { grid-template-columns: 200px 1fr; padding: 2.25rem; }
+    .zx-split { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .zx-section { padding: 6rem 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .zx-btn, .zx-feature { transition: none; }
+    .zx-btn:hover, .zx-feature:hover { transform: none; }
+}
+
+/* Header sharp corners, as on the other full-bleed pages */
+header.glass-effect,
+header .price-ticker-container,
+header .price-ticker { border-radius: 0 !important; }
+</style>
+{{ end }}
