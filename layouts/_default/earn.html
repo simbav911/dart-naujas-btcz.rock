@@ -60,9 +60,9 @@
                 </a>
                 {{ end }}
                 {{ with $primaryAwareness }}
-                <a href="{{ .Params.cta_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-secondary">
+                <a href="{{ .RelPermalink }}" class="earn-btn earn-btn-secondary">
                     <span class="earn-btn-content">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                         Get BTCZ Awareness
                     </span>
                 </a>
@@ -113,6 +113,14 @@
                                     {{ end }}
                                 </span>
                             </a>
+                            {{ if .Params.cta_secondary_url }}
+                            <a href="{{ .Params.cta_secondary_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-secondary earn-btn-compact">
+                                <span class="earn-btn-content">
+                                    {{ .Params.cta_secondary_label }}
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </span>
+                            </a>
+                            {{ end }}
                             <a href="{{ .RelPermalink }}" class="earn-text-link">How it works →</a>
                         </div>
                     </div>
@@ -144,7 +152,8 @@
                 <div class="earn-rail-grid">
                     {{ range $items }}
                     {{ $accent := default "#FFD700" .Params.accent_color }}
-                    <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-tile" style="--accent: {{ $accent }};">
+                    {{ $multi := .Params.cta_secondary_url }}
+                    <a href="{{ if $multi }}{{ .RelPermalink }}{{ else }}{{ .Params.cta_url }}{{ end }}" {{ if and .Params.cta_external (not $multi) }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-tile" style="--accent: {{ $accent }};">
                         <div class="earn-tile-media">
                             {{ with .Params.thumbnail }}
                             <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
@@ -161,7 +170,7 @@
                             </div>
                             {{ end }}
                             <div class="earn-tile-cta">
-                                <span>{{ .Params.cta_label }}</span>
+                                <span>{{ if $multi }}Get the app{{ else }}{{ .Params.cta_label }}{{ end }}</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                             </div>
                         </div>

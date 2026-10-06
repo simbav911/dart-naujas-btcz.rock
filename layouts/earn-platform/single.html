@@ -40,6 +40,14 @@
                                 {{ end }}
                             </span>
                         </a>
+                        {{ if .Params.cta_secondary_url }}
+                        <a href="{{ .Params.cta_secondary_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-secondary">
+                            <span class="earn-btn-content">
+                                {{ .Params.cta_secondary_label }}
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </span>
+                        </a>
+                        {{ end }}
                         <a href="#details" class="earn-text-link">How it works ↓</a>
                     </div>
                 </div>
@@ -69,17 +77,27 @@
                 <div class="earn-final-cta-eyebrow">READY?</div>
                 <h3 class="earn-final-cta-title">Stack BTCZ with <span style="color: #FFD700;">{{ .Title }}</span></h3>
                 <p class="earn-final-cta-sub">{{ .Description }}</p>
-                <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-btn earn-btn-primary">
-                    <span class="earn-btn-shimmer"></span>
-                    <span class="earn-btn-content">
-                        {{ .Params.cta_label }}
-                        {{ if .Params.cta_external }}
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                        {{ else }}
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        {{ end }}
-                    </span>
-                </a>
+                <div class="earn-final-cta-actions">
+                    <a href="{{ .Params.cta_url }}" {{ if .Params.cta_external }}target="_blank" rel="noopener noreferrer"{{ end }} class="earn-btn earn-btn-primary">
+                        <span class="earn-btn-shimmer"></span>
+                        <span class="earn-btn-content">
+                            {{ .Params.cta_label }}
+                            {{ if .Params.cta_external }}
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            {{ else }}
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            {{ end }}
+                        </span>
+                    </a>
+                    {{ if .Params.cta_secondary_url }}
+                    <a href="{{ .Params.cta_secondary_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-secondary">
+                        <span class="earn-btn-content">
+                            {{ .Params.cta_secondary_label }}
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </span>
+                    </a>
+                    {{ end }}
+                </div>
             </div>
         </div>
     </section>
@@ -266,7 +284,7 @@
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.01em;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
     cursor: pointer;
     text-decoration: none;
     isolation: isolate;
@@ -291,6 +309,18 @@
     transition: left 0.7s ease;
 }
 .earn-btn-primary:hover .earn-btn-shimmer { left: 140%; }
+.earn-btn-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+.earn-btn-secondary:hover {
+    background: rgba(255, 215, 0, 0.12);
+    border-color: rgba(255, 215, 0, 0.7);
+    transform: translateY(-2px);
+}
 .earn-text-link { color: #FBBF24; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
 .earn-text-link:hover { color: #ffffff; }
 .earn-badge-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
@@ -330,6 +360,7 @@
 .earn-final-cta-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; font-weight: 700; color: #FFD700; margin-bottom: 0.75rem; }
 .earn-final-cta-title { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: #ffffff; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
 .earn-final-cta-sub { color: #CBD5E1; margin: 0 0 1.5rem; font-size: 1rem; }
+.earn-final-cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 
 /* Header sharp corners */
 header.glass-effect,

@@ -40,6 +40,8 @@ BTCZ Awareness is available for download on the Apple App Store for **iPhone, iP
 
 **[Download BTCZ Awareness on the App Store](https://apps.apple.com/si/app/btczawareness/id6755697719)**
 
+**Update:** BTCZ Awareness is now available on Android too — **[Get it on Google Play](https://play.google.com/store/apps/details?id=com.btcz.awareness)**
+
 ## Join the Movement
 
 BTCZ Awareness represents the BitcoinZ community's commitment to growing the ecosystem through creativity and engagement. By rewarding users for learning, sharing, and playing, the app brings new people into the BitcoinZ world while giving existing community members another reason to stay active.

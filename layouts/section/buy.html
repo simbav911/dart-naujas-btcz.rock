@@ -11,8 +11,10 @@
         <!-- Exchange Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {{ range (where .Site.RegularPages "Type" "exchange").ByDate.Reverse }}
+            {{ $downloads := .Params.download_links }}
             <article class="group">
-                <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="block h-full">
+                {{/* A card with several store links can't be one big link, so it gets a button per store instead */}}
+                {{ if $downloads }}<div class="block h-full">{{ else }}<a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="block h-full">{{ end }}
                     <div class="relative h-full bg-btcz-gray-900 border-2 border-btcz-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-btcz-gold hover:-translate-y-1">
 
                         <!-- Exchange Logo/Image -->
@@ -111,16 +113,28 @@
                                 <span class="text-btcz-gray-400">
                                     {{ if .Params.kyc_required }}KYC Required{{ else }}No KYC Required{{ end }}
                                 </span>
+                                {{ if not $downloads }}
                                 <span class="inline-flex items-center text-btcz-gold group-hover:text-white transition-colors duration-300">
                                     {{ if .Params.is_app }}Download App{{ else }}Visit Exchange{{ end }}
                                     <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
                                 </span>
+                                {{ end }}
                             </div>
+                            {{ with $downloads }}
+                            <div class="grid grid-cols-2 gap-2 mt-4 text-sm">
+                                {{ range . }}
+                                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-3 py-2 border border-btcz-gray-800 rounded-lg text-btcz-gold font-medium transition-colors duration-300 hover:border-btcz-gold hover:text-white">
+                                    {{ with .icon }}<i class="fa-brands {{ . }} mr-2" aria-hidden="true"></i>{{ end }}
+                                    {{ .label }}
+                                </a>
+                                {{ end }}
+                            </div>
+                            {{ end }}
                         </div>
                     </div>
-                </a>
+                {{ if $downloads }}</div>{{ else }}</a>{{ end }}
             </article>
             {{ end }}
         </div>

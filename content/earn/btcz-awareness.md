@@ -1,6 +1,6 @@
 ---
 title: "BTCZ Awareness"
-description: "Play quizzes, complete daily tasks, watch fun facts, and earn real BTCZ rewards on iOS and macOS."
+description: "Play quizzes, complete daily tasks, watch fun facts, and earn real BTCZ rewards on iOS, Android, and macOS."
 type: "earn-platform"
 logo: "/images/exchanges/btczawareness.jpeg"
 thumbnail: "/images/news/btcz-awareness-app/btcz-awareness-app-hero.jpeg"
@@ -8,16 +8,18 @@ hero_image: "/images/news/btcz-awareness-app/btcz-awareness-app-hero.jpeg"
 accent_color: "#F59E0B"
 category: "learn"
 reward_type: "Per quiz"
-badges: ["iOS", "macOS", "Free", "No KYC"]
+badges: ["iOS", "Android", "macOS", "Free", "No KYC"]
 cta_label: "Download on the App Store"
 cta_url: "https://apps.apple.com/si/app/btczawareness/id6755697719"
 cta_external: true
+cta_secondary_label: "Get it on Google Play"
+cta_secondary_url: "https://play.google.com/store/apps/details?id=com.btcz.awareness"
 spotlight: true
 weight: 10
 draft: false
 ---
 
-**BTCZ Awareness** is the official play-to-earn app for **iPhone, iPad, and Mac (Apple Silicon)**. Learn about BitcoinZ, complete daily tasks, challenge friends, and stack real BTCZ — all in one app.
+**BTCZ Awareness** is the official play-to-earn app for **iPhone, iPad, Mac (Apple Silicon), and Android**. Learn about BitcoinZ, complete daily tasks, challenge friends, and stack real BTCZ — all in one app.
 
 ## How you earn {#features}
 
@@ -39,4 +41,4 @@ draft: false
 
 ## Available now
 
-BTCZ Awareness is live on the **Apple App Store** for iPhone, iPad, and Mac with Apple Silicon. Download, sign in, and start stacking today.
+BTCZ Awareness is live on the **[Apple App Store](https://apps.apple.com/si/app/btczawareness/id6755697719)** for iPhone, iPad, and Mac with Apple Silicon, and on **[Google Play](https://play.google.com/store/apps/details?id=com.btcz.awareness)** for Android. Download, sign in, and start stacking today.
