@@ -11,7 +11,7 @@
     (dict "tag" "zk-SNARKs" "title" "It becomes a transaction"
           "text" "The encrypted text rides in the memo of a shielded BitcoinZ transaction. Sender, recipient, and amount are hidden.")
     (dict "tag" "1 to 5 seconds" "title" "The network carries it"
-          "text" "BitcoinZ nodes relay it. Your contact's app picks it up from the network and never learns your IP address.")
+          "text" "BitcoinZ nodes around the world relay it. Your contact's app picks it up from the network and never learns your IP address.")
     (dict "tag" "On-chain" "title" "It stays"
           "text" "The encrypted message settles on the blockchain. Your 24-word seed reads it back on any device.")
 }}
@@ -21,7 +21,7 @@
           "text" "Your identity is a wallet seed, not a SIM card. There is nothing to register and nothing that ties the account to you."
           "icon" "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z")
     (dict "title" "Nothing to seize or switch off"
-          "text" "Messages are never stored on a Z-TEXT server. If the company behind the app vanished tomorrow, messaging would keep running on the public network."
+          "text" "No central server holds your messages. They travel through BitcoinZ nodes spread across the world, so if the company behind the app vanished tomorrow, messaging would keep running."
           "icon" "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01")
     (dict "title" "Two locks on every message"
           "text" "AES-256-GCM on your device, then a shielded transaction on top. Both layers have to be broken to read a single message."
@@ -48,7 +48,7 @@
 
 {{ $compare := slice
     (dict "what" "Who you are"              "them" "A phone number"                     "zt" "A 24-word seed that only you hold")
-    (dict "what" "Where messages travel"    "them" "Through the company's servers"      "zt" "Through BitcoinZ nodes")
+    (dict "what" "Where messages travel"    "them" "Through the company's servers"      "zt" "Through BitcoinZ nodes worldwide")
     (dict "what" "Where history lives"      "them" "Company servers or a cloud backup"  "zt" "Encrypted on the BitcoinZ blockchain")
     (dict "what" "Who can close your account" "them" "The company"                      "zt" "No one. There is no account")
     (dict "what" "What the operator sees"   "them" "Often who talks to whom, and when"  "zt" "That a shielded transaction was submitted")
@@ -81,10 +81,10 @@
         <div class="zx-wrap zx-hero-grid">
             <div>
                 <p class="zx-eyebrow"><span class="zx-dot"></span><span class="zx-nb">Z-TEXT</span> <span class="zx-eyebrow-sep">|</span> Built on BitcoinZ</p>
-                <h1 class="zx-h1">The messenger with <span class="zx-green">no server</span> to shut down.</h1>
+                <h1 class="zx-h1">The messenger with <span class="zx-green">no central servers</span>.</h1>
                 <p class="zx-lead">
-                    <span class="zx-nb">Z-TEXT</span> sends every message as a shielded BitcoinZ transaction. No phone number, no email,
-                    and no company holding your conversations.
+                    <span class="zx-nb">Z-TEXT</span> runs on BitcoinZ nodes spread across the world. Every message is a shielded
+                    BitcoinZ transaction. No phone number, no email, and no company holding your conversations.
                 </p>
                 <div class="zx-actions">
                     <a href="{{ $download }}" target="_blank" rel="noopener noreferrer" class="zx-btn zx-btn-primary">
@@ -116,11 +116,12 @@
     <section id="different" class="zx-section">
         <div class="zx-wrap">
             <p class="zx-kicker">The one idea</p>
-            <h2 class="zx-h2">Every other messenger keeps a server. <span class="zx-nb">Z-TEXT</span> does not.</h2>
+            <h2 class="zx-h2">Other messengers run on company servers. <span class="zx-nb">Z-TEXT</span> runs on BitcoinZ nodes worldwide.</h2>
             <p class="zx-sub">
                 Signal, WhatsApp, and Telegram all pass your messages through servers their company runs.
-                <span class="zx-nb">Z-TEXT</span> has none in the message path. A message is encrypted on your device and broadcast
-                as a shielded transaction on the BitcoinZ blockchain, the same way BTCZ itself is sent.
+                <span class="zx-nb">Z-TEXT</span> has no central server in the message path. A message is encrypted on your device and
+                broadcast as a shielded transaction to the BitcoinZ network, where independent nodes spread
+                across the world relay it, the same way BTCZ itself is sent.
             </p>
 
             <ol class="zx-steps">
@@ -140,7 +141,7 @@
     <section class="zx-section zx-section-alt">
         <div class="zx-wrap">
             <p class="zx-kicker">Why it is unique</p>
-            <h2 class="zx-h2">What a blockchain messenger can do that a server cannot</h2>
+            <h2 class="zx-h2">What a blockchain messenger can do that a central server cannot</h2>
 
             <div class="zx-features">
                 {{ range $features }}
@@ -193,7 +194,7 @@
                 </p>
             </div>
             <ul class="zx-checks">
-                <li><strong>Impossible to deplatform.</strong> There is no server to seize and no account to suspend.</li>
+                <li><strong>Impossible to deplatform.</strong> There is no central server to seize and no account to suspend.</li>
                 <li><strong>No subscriber list to leak.</strong> zk-SNARKs hide who posted, and no central database of followers exists.</li>
                 <li><strong>You own your audience.</strong> Channels and their history restore from your seed on any device.</li>
             </ul>

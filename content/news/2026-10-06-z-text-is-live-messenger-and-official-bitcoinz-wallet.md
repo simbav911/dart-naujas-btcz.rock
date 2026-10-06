@@ -17,9 +17,9 @@ type: "news"
 
 We [first wrote about Z-TEXT in February](/news/2026-02-25-ztext-encrypted-blockchain-messenger/), when it was still in developer testing. It has since been released to the public, and anyone can install it.
 
-## A messenger with no server
+## A messenger with no central servers
 
-Most messengers pass your messages through servers that their company runs. Z-TEXT has none in the message path. Each message is encrypted on your device and sent as a shielded BitcoinZ transaction, the same way BTCZ itself moves.
+Most messengers pass your messages through servers that their company runs. Z-TEXT has no central server in the message path. It runs on BitcoinZ nodes spread across the world. Each message is encrypted on your device and sent as a shielded BitcoinZ transaction, the same way BTCZ itself moves.
 
 That one design choice changes a lot:
 
@@ -42,7 +42,7 @@ Z-TEXT is also a full BTCZ wallet, and it is now the official one: stable, fast,
 
 ## More than chat
 
-- **On-chain channels.** Broadcast to any number of subscribers for the price of a single transaction. There is no server to seize and no account to suspend.
+- **On-chain channels.** Broadcast to any number of subscribers for the price of a single transaction. There is no central server to seize and no account to suspend.
 - **Panic PIN and stealth mode.** An emergency PIN wipes keys, messages, and contacts in one action. Stealth mode re-skins the app so it does not look like a messenger.
 - **Post-quantum handshake.** Every contact handshake combines X25519 with ML-KEM-768, protecting the key exchange against a future quantum computer.
 - **On-chain vault.** A password manager whose entries are encrypted on your device and restore from your seed.
