@@ -118,21 +118,27 @@
             {{ end }}
         </header>
 
-        {{ if and (eq .Type "wallet") .Params.downloads_page }}
-        <!-- Wallets that publish builds on their own site get one download button up top -->
+        {{ $webApp := .Params.web_app }}
+        {{ $walletSite := or $webApp .Params.downloads_page }}
+        {{ if and (eq .Type "wallet") $walletSite }}
+        <!-- Wallets that publish builds on their own site, or run in the browser, get one button up top -->
         <div class="wallet-cta">
-            <a href="{{ .Params.downloads_page }}" target="_blank" rel="noopener noreferrer" class="wallet-cta-btn">
+            <a href="{{ $walletSite }}" target="_blank" rel="noopener noreferrer" class="wallet-cta-btn">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {{ if $webApp }}
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    {{ else }}
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                    {{ end }}
                 </svg>
-                Download {{ .LinkTitle }}
+                {{ if $webApp }}Open{{ else }}Download{{ end }} {{ .LinkTitle }}
             </a>
             {{ with .Params.platforms }}
             <div class="wallet-cta-platforms">
                 {{ range . }}<span>{{ .name }}</span>{{ end }}
             </div>
             {{ end }}
-            <p class="wallet-cta-note">Opens {{ (urls.Parse .Params.downloads_page).Host }}, the official download page.</p>
+            <p class="wallet-cta-note">Opens {{ (urls.Parse $walletSite).Host }}{{ if $webApp }}. Nothing to install.{{ else }}, the official download page.{{ end }}</p>
         </div>
         {{ end }}
 
@@ -148,7 +154,7 @@
 
         <!-- Wallet Download Section -->
         {{ if eq .Type "wallet" }}
-            {{ if and .Params.platforms (not .Params.downloads_page) }}
+            {{ if and .Params.platforms (not $walletSite) }}
             <!-- GitHub Release Link -->
             {{ if .Params.releases_page }}
             <div class="text-center mb-8 mt-16">

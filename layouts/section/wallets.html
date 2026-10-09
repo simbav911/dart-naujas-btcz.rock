@@ -80,13 +80,15 @@
 
                         <!-- Download Buttons -->
                         <div class="space-y-2 mb-6">
-                            {{ if .Params.downloads_page }}
-                            {{/* Builds live on the wallet's own site, so one button leads there */}}
+                            {{ $webApp := .Params.web_app }}
+                            {{ $walletSite := or $webApp .Params.downloads_page }}
+                            {{ if $walletSite }}
+                            {{/* Builds live on the wallet's own site, or the wallet runs in the browser, so one button leads there */}}
                             <div class="wallet-platforms">
                                 {{ range .Params.platforms }}<span>{{ .name }}</span>{{ end }}
                             </div>
-                            <a href="{{ .Params.downloads_page }}" target="_blank" rel="noopener noreferrer" class="wallet-download-primary">
-                                Download at {{ (urls.Parse .Params.downloads_page).Host }}
+                            <a href="{{ $walletSite }}" target="_blank" rel="noopener noreferrer" class="wallet-download-primary">
+                                {{ if $webApp }}Open{{ else }}Download{{ end }} at {{ (urls.Parse $walletSite).Host }}
                             </a>
                             {{ else }}
                             {{ range .Params.platforms }}

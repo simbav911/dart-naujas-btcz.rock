@@ -4,6 +4,7 @@ description: "A lightweight and secure desktop wallet for BitcoinZ cryptocurrenc
 date: 2024-01-09T10:00:00Z
 type: "wallet"
 image: "images/wallets/electrum.png"
+icon: "images/wallets/electrum-btcz.png"
 gallery:
   - "images/wallets/electrum.png"
 features:
@@ -13,11 +14,13 @@ features:
   - "Secure private key management"
 platforms:
   - name: "Windows"
-    download_url: "https://github.com/btcz-electrum/electrum-btcz/releases/download/v3.1.3b6/electrum-btcz-3.1.3b6-setup-win64.exe"
-    version: "3.1.3b6"
+    download_url: "https://github.com/ezzygarmyz/electrum-btcz/releases/download/v1.0.2/electrum-btcz-1.0.2-setup-x64.exe"
+    version: "1.0.2"
+    sha256_installer: "d2e2a751f28253e0f18656063ddca99c180a4975de61fc29ee69a8bcc221d0d2"
   - name: "Linux"
-    download_url: "https://github.com/btcz-electrum/electrum-btcz/releases/download/v3.1.3b6/electrum-btcz-3.1.3b6_linux.zip"
-    version: "3.1.3b6"
+    download_url: "https://github.com/ezzygarmyz/electrum-btcz/releases/download/v1.0.1/electrum-btcz-portable-1.0.1-linux.zip"
+    version: "1.0.1"
+releases_page: "https://github.com/ezzygarmyz/electrum-btcz/releases"
 requirements:
   - "64-bit operating system"
   - "Internet connection"
@@ -28,6 +31,10 @@ draft: false
 ## Lightweight Desktop Wallet Solution
 
 BitcoinZ Electrum Wallet is a lightweight, user-friendly desktop wallet specifically designed for BitcoinZ cryptocurrency. This open-source wallet provides a secure and efficient way to manage your BTCZ tokens across multiple platforms.
+
+Builds are now published at [github.com/ezzygarmyz/electrum-btcz](https://github.com/ezzygarmyz/electrum-btcz), which continues the original btcz-electrum project. Its version numbers restarted at 1.0, so v1.0.2 (March 2026) is newer than the old 3.1.3 builds from 2021.
+
+Prefer not to install anything? Use the [BitcoinZ Electrum Web Wallet](/wallets/bitcoinz-electrum-web-wallet/) in your browser.
 
 ### Security Features
 - Secure private key management
@@ -84,7 +91,7 @@ For optimal security and usage:
 ## Support and Resources
 
 For assistance and information:
-- Visit the BitcoinZ Electrum GitHub repository
+- Visit the [BitcoinZ Electrum GitHub repository](https://github.com/ezzygarmyz/electrum-btcz)
 - Check the documentation
 - Join the BitcoinZ community channels
 - Report issues through GitHub
