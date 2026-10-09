@@ -7,7 +7,6 @@
     (dict "key" "compete" "title" "Compete to Earn" "subtitle" "PvP duels and community events with prizes."   "color" "#EF4444")
 }}
 {{ $primaryAwareness := index (where $platforms ".File.BaseFileName" "btcz-awareness") 0 }}
-{{ $primaryPlay := index (where $platforms ".File.BaseFileName" "playbtcz") 0 }}
 <div class="min-h-screen earn-bg">
     <div class="earn-bg-layer-1"></div>
     <div class="earn-bg-layer-2"></div>
@@ -21,7 +20,7 @@
                 <span class="earn-h1-shine">Earn BTCZ</span>
             </h1>
             <p class="earn-subhead">
-                Pick your way and stack real <span class="earn-orange">BitcoinZ</span>. Play modern checkers, run quizzes, win at poker, compete in trivia.
+                Pick your way and stack real <span class="earn-orange">BitcoinZ</span>. Run quizzes, win at poker, compete in trivia.
                 <span class="earn-emphasis">Free.</span> Skill-based. <span class="earn-emphasis">No KYC.</span>
             </p>
 
@@ -50,17 +49,9 @@
 
             <!-- Primary CTAs -->
             <div class="earn-hero-cta-row">
-                {{ with $primaryPlay }}
-                <a href="{{ .Params.cta_url }}" target="_blank" rel="noopener noreferrer" class="earn-btn earn-btn-primary">
-                    <span class="earn-btn-shimmer"></span>
-                    <span class="earn-btn-content">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        Play PlayBTCZ
-                    </span>
-                </a>
-                {{ end }}
                 {{ with $primaryAwareness }}
-                <a href="{{ .RelPermalink }}" class="earn-btn earn-btn-secondary">
+                <a href="{{ .RelPermalink }}" class="earn-btn earn-btn-primary">
+                    <span class="earn-btn-shimmer"></span>
                     <span class="earn-btn-content">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                         Get BTCZ Awareness
@@ -78,11 +69,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="earn-section-head">
                 <div class="earn-section-eyebrow">FEATURED</div>
-                <h2 class="earn-h2">The flagships</h2>
-                <p class="earn-section-sub">The two biggest ways to stack BTCZ right now.</p>
+                <h2 class="earn-h2">{{ if eq (len $spotlight) 1 }}The flagship{{ else }}The flagships{{ end }}</h2>
+                <p class="earn-section-sub">{{ if eq (len $spotlight) 1 }}The biggest way to stack BTCZ right now.{{ else }}The biggest ways to stack BTCZ right now.{{ end }}</p>
             </div>
 
-            <div class="earn-spotlight-grid">
+            <div class="earn-spotlight-grid{{ if eq (len $spotlight) 1 }} earn-spotlight-grid--single{{ end }}">
                 {{ range $spotlight }}
                 {{ $accent := default "#FFD700" .Params.accent_color }}
                 <article class="earn-spotlight" style="--accent: {{ $accent }};">
@@ -449,6 +440,8 @@
 @media (min-width: 1024px) {
     .earn-spotlight-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
 }
+/* A lone featured platform sits centered instead of filling half the row */
+.earn-spotlight-grid--single { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
 
 .earn-spotlight {
     position: relative;

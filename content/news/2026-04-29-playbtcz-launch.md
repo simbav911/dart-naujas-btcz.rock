@@ -3,7 +3,7 @@ title: "PlayBTCZ Is Live — Play Modern Checkers, Win Real BTCZ"
 date: 2026-04-29T07:00:00+02:00
 description: "PlayBTCZ.xyz brings online checkers to the BitcoinZ ecosystem. Play Spanish or International draughts, win matches, and stack real BTCZ — free, no KYC, no buy-ins."
 image: "/images/news/playbtcz/playbtcz-hero.jpg"
-draft: false
+draft: true
 author: "BitcoinZ Community"
 categories: ["Announcements"]
 tags: ["play-to-earn", "checkers", "rewards", "community", "playbtcz"]
