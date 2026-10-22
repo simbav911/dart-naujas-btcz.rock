@@ -3,6 +3,7 @@ title: "Security Audit — Supply Integrity"
 description: "An independent line-by-line review of the BitcoinZ full node found no way to counterfeit or inflate the coin. The supply rules are sound."
 date: 2026-06-09
 draft: false
+correction: "**Correction, 22 October 2026:** this review missed a bug. Blocks received from other nodes were accepted without verifying the zero-knowledge proofs of their Sprout transactions. It was exploited on 20 June (block 1,789,967) and on 21 October 2026 (block 1,860,181). Release 2.3.1 fixes it. [Read what happened →](/news/2026-10-22-counterfeit-block-1860181-every-coin-traced/)"
 layout: security-audit
 verdict: "No way to counterfeit or inflate BitcoinZ was found"
 auditDate: "June 2026"

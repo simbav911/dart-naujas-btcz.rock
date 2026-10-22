@@ -3,6 +3,7 @@ title: "Security Audit — Full Technical Report"
 description: "The detailed engineering report behind the BitcoinZ supply-integrity audit: scope, methodology, every finding, and recommended hardening."
 date: 2026-06-09
 draft: false
+correction: "**Correction, 22 October 2026:** this review missed a bug. Blocks received from other nodes were accepted without verifying the zero-knowledge proofs of their Sprout transactions. It was exploited on 20 June (block 1,789,967) and on 21 October 2026 (block 1,860,181). Release 2.3.1 fixes it. [Read what happened →](/news/2026-10-22-counterfeit-block-1860181-every-coin-traced/)"
 layout: security-audit
 eyebrow: "Full Technical Report"
 auditDate: "June 2026"

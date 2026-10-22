@@ -6,6 +6,8 @@ subject: "Security"
 image: "images/news/report-the-bug.jpg"
 ---
 
+> **Correction, 22 October 2026:** this review missed a bug. Blocks received from other nodes were accepted without verifying the zero-knowledge proofs of their Sprout transactions. It was exploited on 20 June (block 1,789,967) and on 21 October 2026 (block 1,860,181). Release 2.3.1 fixes it. [Read what happened →](/news/2026-10-22-counterfeit-block-1860181-every-coin-traced/)
+
 An independent security review of the BitcoinZ **full node** — the software that enforces the network's rules — has found **no way to counterfeit or inflate BitcoinZ**. The coin's supply integrity holds.
 
 ## Why we checked

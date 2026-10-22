@@ -11,6 +11,10 @@
                 {{ .Params.backLabel | default "Back to Home" }}
             </a>
 
+            {{ with .Params.correction }}
+            <div class="audit-correction" role="note">{{ . | markdownify }}</div>
+            {{ end }}
+
             <!-- Verdict Hero -->
             <div class="audit-hero glass-effect rounded-3xl">
                 <div class="audit-shield" aria-hidden="true">
@@ -90,6 +94,15 @@
     padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 500;
 }
 .audit-chip code { color: #FFE680; font-size: 0.82rem; }
+
+/* Correction notice */
+.audit-correction {
+    background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #FECACA; border-radius: 1rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+    font-size: 1rem; line-height: 1.6;
+}
+.audit-correction strong { color: #FFFFFF; }
+.audit-correction a { color: #FFD700; text-decoration: underline; }
 
 /* Report prose */
 .audit-prose h2 {
