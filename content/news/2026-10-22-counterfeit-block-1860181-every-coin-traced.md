@@ -15,9 +15,17 @@ On 21 October 2026 at 14:17 UTC, block 1,860,181 created **105,000,000,000 BTCZ 
 
 <!--more-->
 
+## Where things stand
+
+- **The network runs on 2.3.1 and the bug is fixed.** The counterfeit block is gone, and blocks are coming at the normal pace again (block 1,860,239 at the time of writing).
+- **Mining pool:** a 2.3.1 solo pool with no fee is open to everyone at `stratum+tcp://144.91.117.181:3333` (Equihash 144,5). Use your own BTCZ t-address as the username, and every block you find pays you directly.
+- **Electrum server:** a 2.3.1 Electrum server for BTCZ wallets runs at `144.91.117.181`, port `50001` (TCP) or `50002` (SSL, self-signed certificate).
+- **Z-TEXT** works normally on the valid chain.
+- **The wBTCZ bridge:** what happens to the 150M wBTCZ minted against counterfeit deposits, for example whether they are burned, has not been decided yet. We will announce it separately.
+
 ## What you need to do
 
-- **Node, pool and exchange operators:** upgrade to [BitcoinZ 2.3.1](https://github.com/btcz/bitcoinz/releases/tag/2.3.1) if you have not already. Older nodes still accept the counterfeit block.
+- **Everyone running BitcoinZ software must upgrade to [BitcoinZ 2.3.1](https://github.com/btcz/bitcoinz/releases/tag/2.3.1):** nodes, mining pools, exchanges, wallet backends, explorers and Electrum servers. Older versions accept the counterfeit block, so they cannot be trusted to follow the valid chain.
 - **Wallet users:** your coins on the valid chain are not affected. Most transparent transactions from that afternoon were confirmed again on the valid chain. Shielded transactions created between 14:17 UTC and the switch, including Z-TEXT messages, could not be carried over. If a shielded payment or message you sent then never arrived, send it again.
 
 ## In short
@@ -25,7 +33,7 @@ On 21 October 2026 at 14:17 UTC, block 1,860,181 created **105,000,000,000 BTCZ 
 - On 21 October 2026 at 14:17, block 1,860,181 created **105,000,000,000 BTCZ from nothing**. It used five Sprout JoinSplit transactions with all-zero proofs that a block-validation bug let through.
 - Release **2.3.1** fixes the bug and removes the block, so on the valid chain these coins never existed. If you run a node, pool or exchange wallet and have not upgraded, upgrade to 2.3.1.
 - The attacker deposited **510,000,000** counterfeit BTCZ into the wBTCZ bridge. The bridge credited three of the deposits and minted **150,000,000 wBTCZ** on BSC.
-- The attacker sold the 150M wBTCZ on PancakeSwap for **2,892.18 USDT** and sent the USDT to a deposit address at a centralized exchange. The exchange has been notified.
+- The attacker sold the 150M wBTCZ on PancakeSwap for **2,892.18 USDT** and sent the USDT to a deposit address at an exchange, possibly HitBTC (see section 6). HitBTC has been notified.
 - **Every counterfeit coin is accounted for.** Apart from the 510M sent to the bridge, none went to SafeTrade, WhiteBIT or any other exchange, and none went into the shielded pool.
 - The same person carried out the **June 2026** Sprout theft (block 1,789,967, 56,305,778 BTCZ).
 
@@ -177,7 +185,9 @@ The attacker's address sold all of it through the PancakeSwap pairs wBTCZ/USDT (
 
 </div>
 
-`0xb3d3944b…` is a deposit address: it received the USDT once and was swept into `0xe647b0db…`, the hot wallet of a centralized exchange. The exchange has been notified. It will share information only on an official request from law enforcement.
+`0xb3d3944b…` is a deposit address: it received the USDT once and was swept into the hot wallet `0xe647b0db…`. We found that this hot wallet possibly belongs to HitBTC: the public [Safe Protocol Library](https://github.com/cryptousersecurity/safeprotocollib) dataset labels it as the HitBTC BSC hot wallet. We cannot confirm this ourselves, and HitBTC does not disclose account information to third parties.
+
+HitBTC has been notified and will discuss the case only with the police. Officers handling a report should send their official request to HitBTC's legal team at legal@hitbtc.com.
 
 ### 7. Where the counterfeit coins ended up
 
@@ -235,6 +245,6 @@ In October, `t1KgEFB…` received 200,000,000 (tx `d41f14e039d91f9b72fc56abff742
 
 ### If you lost funds or have information
 
-- If you lost funds because of these transactions, file a report with your local police and cite this report and the transaction IDs above.
+- If you lost funds because of these transactions, file a report with your local police and cite this report and the transaction IDs above. The police can request the exchange's records from HitBTC's legal team at legal@hitbtc.com.
 - If you run an exchange or service and any of these addresses appear in your records, keep those records. Law enforcement may ask for them.
 - If you know who controls these addresses, contact the BitcoinZ team on [Discord](https://discord.gg/K59mxyf) or [Telegram](https://t.me/bitcoinzcommunity).
